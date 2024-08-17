@@ -1,3 +1,17 @@
-[gd_scene format=3 uid="uid://blc3f7cw0shyl"]
+[gd_scene load_steps=3 format=3 uid="uid://blc3f7cw0shyl"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_0ygok"]
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_di480"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[node name="Level" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_0ygok")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_di480")
