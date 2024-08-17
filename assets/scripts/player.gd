@@ -8,6 +8,9 @@ extends CharacterBody3D
 @export var gravity: float = 50.0
 @export var jump_strength: float = 15.0
 
+@onready var _spring_arm: SpringArm3D = $SpringArm3D
+@onready var _model: MeshInstance3D = $MeshInstance3D
+
 func _ready():
 	pass
 
@@ -29,6 +32,12 @@ func _physics_process(delta: float):
 	velocity.x = velocity_xz.x
 	velocity.z = velocity_xz.y
 	
+	velocity = velocity.rotated(Vector3.UP, _spring_arm.rotation.y).normalized()
+	
+	if velocity.length() > 0.2:
+		var look_direction = Vector2(velocity.z, velocity.x)
+		_model.rotation.y = look_direction.angle()
+	
 	# Handle y: jumping and gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -38,3 +47,8 @@ func _physics_process(delta: float):
 			velocity.y = jump_strength
 		
 	move_and_slide()
+	
+	
+func _process(delta: float) -> void:
+	_spring_arm.position = position
+	

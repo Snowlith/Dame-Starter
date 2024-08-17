@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=5 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_gp66p"]
+[ext_resource type="Script" path="res://scenes/spring_arm_3d.gd" id="2_7tno2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mkx6k"]
 
@@ -19,5 +20,10 @@ mesh = SubResource("CapsuleMesh_mkx6k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_lb0yt")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+spring_length = 7.0
+margin = 0.2
+script = ExtResource("2_7tno2")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+current = true
