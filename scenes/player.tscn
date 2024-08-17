@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=4 format=3 uid="uid://d0ukggfx40yvy"]
+
+[ext_resource type="Script" path="res://assets/scripts/new_script.gd" id="1_gp66p"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mkx6k"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lb0yt"]
 
 [node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_gp66p")
+speed = 26.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

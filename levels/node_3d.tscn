@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://blc3f7cw0shyl"]
+[gd_scene load_steps=4 format=3 uid="uid://blc3f7cw0shyl"]
+
+[ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_j5yp8"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0ygok"]
 size = Vector2(20, 20)
@@ -15,3 +17,13 @@ mesh = SubResource("PlaneMesh_0ygok")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_di480")
+
+[node name="Player" parent="." instance=ExtResource("1_j5yp8")]
+transform = Transform3D(0.983293, 0.18203, 0, -0.18203, 0.983293, 0, 0, 0, 1, -5.90341, 9.53674e-07, 7.6008)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0131075, 0.64974, -0.760044, -0.0112038, 0.760157, 0.649643, 0.999851, 1.79779e-07, 0.0172433, -12.6384, 3.69688, 6.21594)
+fov = 89.4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.637881, 0, -0.770135, -0.48998, 0.771502, 0.405837, 0.594161, 0.636226, -0.492127, -3.16452, 4.54743, 4.08545)
