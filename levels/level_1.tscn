@@ -1,0 +1,132 @@
+[gd_scene load_steps=18 format=3 uid="uid://djdll5upj75nl"]
+
+[ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_o4rjg"]
+[ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/wall.tscn" id="2_860kj"]
+[ext_resource type="PackedScene" uid="uid://cj2wnyx63da7i" path="res://assets/models/coinsLarge.gltf.glb" id="3_4nht0"]
+[ext_resource type="PackedScene" uid="uid://dmlajcxvquwxg" path="res://assets/models/lootSackA.gltf.glb" id="4_5riqi"]
+[ext_resource type="PackedScene" uid="uid://lvrshdq5koal" path="res://assets/models/lootSackB.gltf.glb" id="5_0dx1a"]
+[ext_resource type="PackedScene" uid="uid://bxufd6ft34nk2" path="res://assets/models/pillar.gltf.glb" id="6_jh5cx"]
+[ext_resource type="PackedScene" uid="uid://bxjis3peggqxc" path="res://assets/models/pillar_broken.gltf.glb" id="7_oayfj"]
+[ext_resource type="PackedScene" uid="uid://ce3orp64thp2a" path="res://assets/models/potA.gltf.glb" id="8_fj3bg"]
+[ext_resource type="PackedScene" uid="uid://don6h1jpkbiek" path="res://assets/models/potA_decorated.gltf.glb" id="9_lo3xf"]
+[ext_resource type="PackedScene" uid="uid://burruay2fmyio" path="res://assets/models/pots.gltf.glb" id="10_rgh4a"]
+[ext_resource type="PackedScene" uid="uid://qygidfbv0lue" path="res://assets/models/torchWall.gltf.glb" id="11_83q3j"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ufhv6"]
+sky_material = SubResource("ProceduralSkyMaterial_ghnw3")
+
+[sub_resource type="Environment" id="Environment_s5wev"]
+background_mode = 2
+sky = SubResource("Sky_ufhv6")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nvom"]
+albedo_color = Color(0.371001, 0.124844, 0.069521, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5c6b"]
+albedo_color = Color(1, 0.486275, 0.0313726, 1)
+emission_enabled = true
+emission = Color(0.741176, 0.266667, 0, 1)
+backlight = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6oa6q"]
+material = SubResource("StandardMaterial3D_l5c6b")
+radius = 0.1
+
+[node name="Level1" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s5wev")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(32, 0.001, 32)
+material = SubResource("StandardMaterial3D_8nvom")
+
+[node name="Player" parent="." instance=ExtResource("1_o4rjg")]
+
+[node name="wall" parent="." instance=ExtResource("2_860kj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.770031, 0.000499725, -3.02975)
+
+[node name="wall2" parent="." instance=ExtResource("2_860kj")]
+transform = Transform3D(0.724027, 0, -0.689771, 0, 1, 0, 0.689771, 0, 0.724027, 4.82387, 0.000499725, -1.79981)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0969, 2.42002, -3.06259)
+use_collision = true
+size = Vector3(2.43652, 1, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.38196, 0.429758, -3.37607)
+use_collision = true
+size = Vector3(2.43652, 0.991089, 1.62695)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80188, 0.889261, -2.24593)
+use_collision = true
+size = Vector3(2.43652, 1.9101, 1.62695)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.65598, 1.44195, -1.20281)
+use_collision = true
+size = Vector3(2.43652, 3.01547, 1.62695)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(0.922908, 0, -0.38502, 0, 1, 0, 0.38502, 0, 0.922908, 4.9719, 2.05674, 2.55225)
+use_collision = true
+size = Vector3(1.44385, 4.32317, 1.62695)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(0.769154, 0, 0.639063, 0, 1, 0, -0.639063, 0, 0.769154, 0.187119, 2.05674, 2.89679)
+use_collision = true
+size = Vector3(1.44385, 4.32317, 1.62695)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="."]
+transform = Transform3D(0.769154, 0, 0.639063, 0, 1, 0, -0.639063, 0, 0.769154, -3.53104, 1.54064, 0.591514)
+use_collision = true
+size = Vector3(1.44385, 3.29098, 1.62695)
+
+[node name="coinsLarge_gltf" parent="." instance=ExtResource("3_4nht0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45188, 3.18613, 0.454476)
+
+[node name="lootSackA_gltf" parent="." instance=ExtResource("4_5riqi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.77383, 0.000500679, -0.362302)
+
+[node name="lootSackB_gltf" parent="." instance=ExtResource("5_0dx1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25902, 0.000500679, -0.904521)
+
+[node name="pillar_gltf" parent="." instance=ExtResource("6_jh5cx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.50086, 0.000498772, -2.99885)
+
+[node name="pillar_broken_gltf" parent="." instance=ExtResource("7_oayfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.86491, 0.000500202, -1.81421)
+
+[node name="potA_gltf" parent="." instance=ExtResource("8_fj3bg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79746, 0.000499725, -2.02365)
+
+[node name="potA_decorated_gltf" parent="." instance=ExtResource("9_lo3xf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23204, 0.000498772, -2.06774)
+
+[node name="pots_gltf" parent="." instance=ExtResource("10_rgh4a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4005, 0.000500202, 1.16987)
+
+[node name="torchWall_gltf" parent="." instance=ExtResource("11_83q3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.80488, 2.07434, -2.27975)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="torchWall_gltf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.836714, 0.581434)
+amount = 3
+speed_scale = 2.86
+randomness = 0.42
+mesh = SubResource("SphereMesh_6oa6q")
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 1, 0)

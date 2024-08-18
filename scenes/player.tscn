@@ -1,32 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=6 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_gp66p"]
-[ext_resource type="PackedScene" uid="uid://2l00crq4pv10" path="res://assets/characters/character_knight.gltf" id="2_at74x"]
-[ext_resource type="Script" path="res://assets/scripts/camera_rig.gd" id="3_dipsr"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lb0yt"]
+height = 2.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp5m6"]
+height = 1.6
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_be8k7"]
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
-physics_interpolation_mode = 1
 script = ExtResource("1_gp66p")
-speed = 10.0
+speed = 7.0
 
-[node name="character_knight" parent="." instance=ExtResource("2_at74x")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_6nc5s")
+
+[node name="StandCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("CapsuleShape3D_lb0yt")
 
-[node name="CameraRig" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-script = ExtResource("3_dipsr")
+[node name="CrouchCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_fp5m6")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig"]
-transform = Transform3D(0.906307, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906307, -0.280856, 1.5387, 0.266911)
-spring_length = 4.0
-margin = 0.2
+[node name="ShapeCast3D" type="ShapeCast3D" parent="CrouchCollider"]
+shape = SubResource("SphereShape3D_be8k7")
+target_position = Vector3(0, 0.9, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="Camera3D" type="Camera3D" parent="CameraRig/SpringArm3D"]
-transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 0, 0, 0)
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.96966, 0)
+cull_mask = 1048573
 current = true
-fov = 85.0
