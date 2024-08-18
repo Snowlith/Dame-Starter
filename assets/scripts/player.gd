@@ -19,7 +19,8 @@ func _physics_process(delta: float):
 	
 	# Get input
 	input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
+	input_vector = input_vector.rotated(_spring_arm.rotation.y)
+
 	# Handle x & z: walking
 	var velocity_xz := Vector2(velocity.x, velocity.z)
 	
@@ -32,7 +33,6 @@ func _physics_process(delta: float):
 	velocity.x = velocity_xz.x
 	velocity.z = velocity_xz.y
 	
-	velocity = velocity.rotated(Vector3.UP, _spring_arm.rotation.y).normalized()
 	
 	if velocity.length() > 0.2:
 		var look_direction = Vector2(velocity.z, velocity.x)
