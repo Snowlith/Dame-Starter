@@ -8,7 +8,7 @@ extends CharacterBody3D
 @export var gravity: float = 50.0
 @export var jump_strength: float = 15.0
 
-@onready var _spring_arm: SpringArm3D = $SpringArm3D
+@onready var camera_rig: Node3D = $CameraRig
 @onready var _model: Node3D = $character_knight
 
 func _ready():
@@ -19,7 +19,7 @@ func _physics_process(delta: float):
 	
 	# Get input
 	input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	input_vector = input_vector.rotated(-_spring_arm.rotation.y)
+	input_vector = input_vector.rotated(-camera_rig.rotation.y)
 
 	# Handle x & z: walking
 	var velocity_xz := Vector2(velocity.x, velocity.z)
@@ -48,8 +48,4 @@ func _physics_process(delta: float):
 			velocity.y = jump_strength
 		
 	move_and_slide()
-	
-	
-func _process(delta: float) -> void:
-	_spring_arm.position = position
 	

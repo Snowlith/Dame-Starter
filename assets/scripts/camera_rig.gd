@@ -1,12 +1,11 @@
-extends SpringArm3D
-
+extends Node3D
 
 @export var mouse_sensitivity := 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	set_as_top_level(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$SpringArm3D.add_excluded_object(get_parent())
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -15,6 +14,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		rotation_degrees.y -= event.relative.x * mouse_sensitivity
 		rotation_degrees.y = wrapf(rotation_degrees.y, 0.0, 360.0)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
