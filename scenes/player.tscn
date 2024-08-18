@@ -1,20 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_gp66p"]
-[ext_resource type="Script" path="res://scenes/spring_arm_3d.gd" id="2_7tno2"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_mkx6k"]
+[ext_resource type="Script" path="res://assets/scripts/spring_arm_3d.gd" id="2_7tno2"]
+[ext_resource type="PackedScene" uid="uid://2l00crq4pv10" path="res://assets/characters/character_knight.gltf" id="2_at74x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lb0yt"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 physics_interpolation_mode = 1
 script = ExtResource("1_gp66p")
 speed = 26.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_mkx6k")
+[node name="character_knight" parent="." instance=ExtResource("2_at74x")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
