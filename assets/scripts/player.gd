@@ -28,7 +28,7 @@ extends CharacterBody3D
 @export var bob_frequency: float = 2.4
 @export var bob_amplitude: float = 0.08
 
-@onready var cam := $Camera3D
+@onready var cam := $SmoothCamera3D
 
 @onready var stand_col := $StandCollider
 @onready var crouch_col := $CrouchCollider
@@ -39,7 +39,6 @@ var current_sprint_time := max_sprint_time
 var is_sprinting := false
 var is_crouching := false
 
-var cam_start_pos: Vector3
 var crouch_offset_pos: Vector3
 var bob_offset_pos: Vector3
 
@@ -48,24 +47,21 @@ var bob_time: float = 0
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	shape_cast.add_exception(self)
-	
 	cam.fov = fov
-	cam_start_pos = cam.position
 	_reset_crouch()
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * sensitivity)
 		cam.rotate_x(-event.relative.y * sensitivity)
-		cam.rotation.x = clamp(cam.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		cam.rotation.x = clamp(cam.rotation.x, deg_to_rad(-89.9), deg_to_rad(89.9))
 
 func _process(delta: float):
 	crouch_offset_pos = _get_crouch_offset(delta)
 	bob_offset_pos = _get_headbob_offset(delta)
-	
-	cam.position = cam_start_pos + crouch_offset_pos + bob_offset_pos
-	
-	cam.fov = _get_fov_offset(delta)
+
+	cam.update_camera(delta, crouch_offset_pos + bob_offset_pos)
+	#cam.fov = _get_fov_offset(delta)
 
 func _physics_process(delta: float):
 	var input_vector := Vector2.ZERO
