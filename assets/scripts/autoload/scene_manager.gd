@@ -101,6 +101,7 @@ func _start_transition(transition: PackedScene):
 		return
 		
 	add_child(current_transition)
+	@warning_ignore("redundant_await")
 	await current_transition.fade_out()
 
 func _end_transition():

@@ -19,17 +19,7 @@ extends CharacterBody3D
 @export var crouch_offset_y: float = 0.5
 @export var crouch_speed: float = 10
 
-@export_group("Camera")
-@export var sensitivity: float = 1
-@export var fov: float = 80
-@export var fov_speed_change: float = 0.6
-@export var fov_settle_speed: float = 15
-
-@export_subgroup("Headbob")
-@export var bob_frequency: float = 2.4
-@export var bob_amplitude: float = 0.08
-
-@onready var cam: SmoothCamera3D = $SmoothCamera3D
+@onready var cam: FPSCamera3D = $FPSCamera3D
 
 @onready var stand_col: CollisionShape3D = $StandCollider
 @onready var crouch_col: CollisionShape3D = $CrouchCollider
@@ -40,29 +30,14 @@ var is_sprinting := false
 var is_crouching := false
 
 var crouch_offset_pos: Vector3
-var bob_offset_pos: Vector3
-var bob_time: float = 0
 
 func _ready():
 	add_to_group(SceneManager.PLAYER)
 	_reset_crouch()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	shape_cast.add_exception(self)
-	cam.fov = fov
 
 ## Input & physics
 
-func _unhandled_input(event: InputEvent):
-	# Cast to most specific type, makes this type safe
-	var mouse_event := event as InputEventMouseMotion
-	if mouse_event:
-		# Camera rotation
-		var look_dir: Vector2 = mouse_event.relative * 0.001
-		
-		rotation.y -= look_dir.x * sensitivity
-		cam.rotation.x = clamp(cam.rotation.x - look_dir.y * sensitivity, deg_to_rad(-89), deg_to_rad(89))
-		
-		
 func _physics_process(delta: float):
 	var input_vector := Vector2.ZERO
 	
@@ -136,39 +111,12 @@ func _reset_crouch() -> void:
 ## Visual effects
 
 func _process(delta: float):
-	crouch_offset_pos = _get_crouch_offset(delta)
-	bob_offset_pos = _get_headbob_offset(delta)
+	_update_crouch_offset(delta)
+	cam.update_camera(delta, crouch_offset_pos)
 
-	cam.update_camera(delta, crouch_offset_pos + bob_offset_pos)
-	cam.fov = _get_fov_offset(delta)
-
-func _get_headbob_offset(delta: float) -> Vector3:
-	var offset := Vector3.ZERO
-	bob_time += delta * velocity.length() * int(is_on_floor())
-	
-	offset.x = cos(bob_time * bob_frequency / 2) * bob_amplitude
-	offset.y = sin(bob_time * bob_frequency) * bob_amplitude
-	return offset
-
-func _get_crouch_offset(delta: float) -> Vector3:
-	var offset := Vector3.ZERO
+func _update_crouch_offset(delta: float) -> Vector3:
 	if is_crouching:
-		offset.y = lerp(crouch_offset_pos.y, -crouch_offset_y, crouch_speed * delta)
+		crouch_offset_pos.y = lerp(crouch_offset_pos.y, -crouch_offset_y, crouch_speed * delta)
 	else:
-		offset.y = lerp(crouch_offset_pos.y, 0.0, crouch_speed * delta)
-	return offset
-
-func _get_fov_offset(delta: float) -> float:
-	var vel_length = velocity.length()
-	var target_fov = fov
-	# Skip fov calculations when velocity is zero
-	if not is_equal_approx(vel_length, 0):
-		var dir_normalized = get_look_dir().normalized()
-		var vel_dot = dir_normalized.dot(velocity.normalized()) * vel_length
-		target_fov += fov_speed_change * vel_dot
-	return lerp(cam.fov, target_fov, fov_settle_speed * delta)
-
-## Helper functions
-
-func get_look_dir() -> Vector3:
-	return -cam.global_transform.basis.z
+		crouch_offset_pos.y = lerp(crouch_offset_pos.y, 0.0, crouch_speed * delta)
+	return crouch_offset_pos

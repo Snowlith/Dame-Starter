@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dmjnim27xtopm"]
+[gd_scene load_steps=16 format=3 uid="uid://dmjnim27xtopm"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
 [ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/wall.tscn" id="2_38hdq"]
@@ -28,6 +28,9 @@ albedo_color = Color(0.371001, 0.124844, 0.069521, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_c8vph"]
 height = 0.850027
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ha7ss"]
+height = 1.41089
 
 [node name="Level2" type="Node3D"]
 
@@ -139,3 +142,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36642, 4.0005, 1.83998)
 
 [node name="PillarBroken6" parent="." instance=ExtResource("9_ucjje")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.77644, 4.0005, 3.29804)
+
+[node name="LoadingZone2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75616, -4.76837e-07, 5.40919)
+script = ExtResource("7_pwgd1")
+target_scene_path = "res://levels/level_1.tscn"
+target_id = "start"
+displacement = Vector3(1, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LoadingZone2"]
+shape = SubResource("CylinderShape3D_ha7ss")

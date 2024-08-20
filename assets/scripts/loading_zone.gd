@@ -11,9 +11,9 @@ class_name LoadingZone
 
 func _ready() -> void:
 	add_to_group(SceneManager.LOADING_ZONE)
-	body_entered.connect(func(body: Node3D) -> void: enter(body))
+	body_entered.connect(_on_body_entered)
 
-func enter(body: Node3D) -> void:
+func _on_body_entered(body: Node3D) -> void:
 	if not target_scene_path:
 		return
 	if not body.is_in_group(SceneManager.PLAYER):
@@ -21,7 +21,7 @@ func enter(body: Node3D) -> void:
 	
 	var data = TransitionData.new(target_scene_path)
 	data.player = body
-	data.transition = transition
+	data.transition = transition 
 	data.id = target_id
 	
 	SceneManager.change_scene(data)
