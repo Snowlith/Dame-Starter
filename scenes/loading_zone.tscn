@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcbry5lclplbf"]
+
+[ext_resource type="Script" path="res://assets/scripts/loading_zone.gd" id="1_afpfo"]
+
+[node name="LoadingZone" type="Area3D"]
+script = ExtResource("1_afpfo")

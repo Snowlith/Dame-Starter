@@ -5,11 +5,8 @@ extends Area3D
 func _ready() -> void:
 	body_entered.connect(func(body: Node3D) -> void: enter(body))
 
-
-
-
 func enter(body: Node3D) -> void:
-	if not body.is_in_group("Player"):
+	if not body.is_in_group(SceneManager.PLAYER):
 		return
 	var player := body as CharacterBody3D
 	player.velocity.y = 50  # Boost the player upward by setting the y velocity

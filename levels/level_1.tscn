@@ -1,17 +1,20 @@
-[gd_scene load_steps=19 format=3 uid="uid://djdll5upj75nl"]
+[gd_scene load_steps=23 format=3 uid="uid://djdll5upj75nl"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_o4rjg"]
 [ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/wall.tscn" id="2_860kj"]
 [ext_resource type="PackedScene" uid="uid://cj2wnyx63da7i" path="res://assets/models/coinsLarge.gltf.glb" id="3_4nht0"]
 [ext_resource type="PackedScene" uid="uid://dmlajcxvquwxg" path="res://assets/models/lootSackA.gltf.glb" id="4_5riqi"]
 [ext_resource type="PackedScene" uid="uid://lvrshdq5koal" path="res://assets/models/lootSackB.gltf.glb" id="5_0dx1a"]
-[ext_resource type="PackedScene" uid="uid://bxufd6ft34nk2" path="res://assets/models/pillar.gltf.glb" id="6_jh5cx"]
-[ext_resource type="PackedScene" uid="uid://bxjis3peggqxc" path="res://assets/models/pillar_broken.gltf.glb" id="7_oayfj"]
 [ext_resource type="PackedScene" uid="uid://ce3orp64thp2a" path="res://assets/models/potA.gltf.glb" id="8_fj3bg"]
 [ext_resource type="PackedScene" uid="uid://don6h1jpkbiek" path="res://assets/models/potA_decorated.gltf.glb" id="9_lo3xf"]
 [ext_resource type="PackedScene" uid="uid://burruay2fmyio" path="res://assets/models/pots.gltf.glb" id="10_rgh4a"]
 [ext_resource type="PackedScene" uid="uid://qygidfbv0lue" path="res://assets/models/torchWall.gltf.glb" id="11_83q3j"]
-[ext_resource type="PackedScene" path="res://scenes/jump_pad.tscn" id="12_n1oka"]
+[ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/pillar.tscn" id="12_kwogh"]
+[ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/jump_pad.tscn" id="12_n1oka"]
+[ext_resource type="PackedScene" uid="uid://dj866322oetir" path="res://scenes/scaffold_small_medium_railing.tscn" id="13_7ultf"]
+[ext_resource type="PackedScene" uid="uid://dcbry5lclplbf" path="res://scenes/loading_zone.tscn" id="13_c4g1q"]
+[ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/pillar_broken.tscn" id="14_87aqa"]
+[ext_resource type="PackedScene" uid="uid://cpgphoi4b7t0y" path="res://scenes/scaffold_stairs.tscn" id="15_ihvpa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -39,6 +42,10 @@ backlight = Color(1, 0, 0, 1)
 material = SubResource("StandardMaterial3D_l5c6b")
 radius = 0.1
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cvt37"]
+height = 0.670723
+radius = 0.793863
+
 [node name="Level1" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -56,60 +63,19 @@ material = SubResource("StandardMaterial3D_8nvom")
 [node name="Player" parent="." instance=ExtResource("1_o4rjg")]
 
 [node name="wall" parent="." instance=ExtResource("2_860kj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.770031, 0.000499725, -3.02975)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82893, 0.000499725, -3.02975)
 
 [node name="wall2" parent="." instance=ExtResource("2_860kj")]
-transform = Transform3D(0.724027, 0, -0.689771, 0, 1, 0, 0.689771, 0, 0.724027, 4.82387, 0.000499725, -1.79981)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0969, 2.42002, -3.06259)
-use_collision = true
-size = Vector3(2.43652, 1, 1)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.38196, 0.429758, -3.37607)
-use_collision = true
-size = Vector3(2.43652, 0.991089, 1.62695)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80188, 0.889261, -2.24593)
-use_collision = true
-size = Vector3(2.43652, 1.9101, 1.62695)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.65598, 1.44195, -1.20281)
-use_collision = true
-size = Vector3(2.43652, 3.01547, 1.62695)
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="."]
-transform = Transform3D(0.922908, 0, -0.38502, 0, 1, 0, 0.38502, 0, 0.922908, 4.9719, 2.05674, 2.55225)
-use_collision = true
-size = Vector3(1.44385, 4.32317, 1.62695)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
-transform = Transform3D(0.769154, 0, 0.639063, 0, 1, 0, -0.639063, 0, 0.769154, 0.187119, 2.05674, 2.89679)
-use_collision = true
-size = Vector3(1.44385, 4.32317, 1.62695)
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="."]
-transform = Transform3D(0.769154, 0, 0.639063, 0, 1, 0, -0.639063, 0, 0.769154, -3.53104, 1.54064, 0.591514)
-use_collision = true
-size = Vector3(1.44385, 3.29098, 1.62695)
+transform = Transform3D(0.724027, 0, -0.689771, 0, 1, 0, 0.689771, 0, 0.724027, 6.29721, 0.000499725, -1.26712)
 
 [node name="coinsLarge_gltf" parent="." instance=ExtResource("3_4nht0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45188, 3.18613, 0.454476)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.83768, 4.0951, 8.44358)
 
 [node name="lootSackA_gltf" parent="." instance=ExtResource("4_5riqi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.77383, 0.000500679, -0.362302)
 
 [node name="lootSackB_gltf" parent="." instance=ExtResource("5_0dx1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25902, 0.000500679, -0.904521)
-
-[node name="pillar_gltf" parent="." instance=ExtResource("6_jh5cx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.50086, 0.000498772, -2.99885)
-
-[node name="pillar_broken_gltf" parent="." instance=ExtResource("7_oayfj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.86491, 0.000500202, -1.81421)
 
 [node name="potA_gltf" parent="." instance=ExtResource("8_fj3bg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79746, 0.000499725, -2.02365)
@@ -133,4 +99,58 @@ direction = Vector3(0, 1, 0)
 gravity = Vector3(0, 1, 0)
 
 [node name="Area3D" parent="." instance=ExtResource("12_n1oka")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58281, 0.000500679, 2.8862)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.90434, 0.000500679, 1.43905)
+
+[node name="LoadingZone" parent="." instance=ExtResource("13_c4g1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.02543, 3.90155, 8.13969)
+target_scene_path = "res://levels/level_2.tscn"
+displacement = Vector3(1, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LoadingZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0721188, 0.365649, 0.0714136)
+shape = SubResource("CylinderShape3D_cvt37")
+
+[node name="Pillar" parent="." instance=ExtResource("12_kwogh")]
+transform = Transform3D(0.904366, 0, -0.426758, 0, 1, 0, 0.426758, 0, 0.904366, 4.35972, 0.000499725, -2.83308)
+
+[node name="Pillar2" parent="." instance=ExtResource("12_kwogh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40937, 0.000499725, -3.032)
+
+[node name="Pillar3" parent="." instance=ExtResource("12_kwogh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.701118, 0.000499725, -3.01898)
+
+[node name="ScaffoldSmallMediumRailing" parent="." instance=ExtResource("13_7ultf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45307, 0.000500202, -3.04819)
+
+[node name="ScaffoldSmallMediumRailing2" parent="." instance=ExtResource("13_7ultf")]
+transform = Transform3D(-0.412166, 0, 0.911109, 0, 1, 0, -0.911109, 0, -0.412166, 9.97762, 0.000500202, -0.032057)
+
+[node name="ScaffoldSmallMediumRailing3" parent="." instance=ExtResource("13_7ultf")]
+transform = Transform3D(-0.412166, 0, 0.911109, 0, 1, 0, -0.911109, 0, -0.412166, 9.97762, 1.90486, -0.032057)
+
+[node name="Pillar4" parent="." instance=ExtResource("12_kwogh")]
+transform = Transform3D(0.728981, 0, -0.684534, 0, 1, 0, 0.684534, 0, 0.728981, 8.1953, 0.000500202, 0.612406)
+
+[node name="PillarBroken" parent="." instance=ExtResource("14_87aqa")]
+transform = Transform3D(0.312003, 0, -0.950081, 0, 1, 0, 0.950081, 0, 0.312003, 8.36291, -1.85894, 1.93939)
+
+[node name="PillarBroken2" parent="." instance=ExtResource("14_87aqa")]
+transform = Transform3D(-0.380054, 0, -0.924964, 0, 1, 0, 0.924964, 0, -0.380054, -5.71878, 0.000500202, -2.89622)
+
+[node name="Pillar5" parent="." instance=ExtResource("12_kwogh")]
+transform = Transform3D(0.951347, 0, -0.30812, 0, 1, 0, 0.30812, 0, 0.951347, -8.39806, 0.000500679, 0.0958438)
+
+[node name="Pillar6" parent="." instance=ExtResource("12_kwogh")]
+transform = Transform3D(0.938547, 0, 0.345151, 0, 1, 0, -0.345151, 0, 0.938547, -7.65149, 0.000499725, 5.56725)
+
+[node name="Pillar7" parent="." instance=ExtResource("12_kwogh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90051, 0.000499725, 8.35703)
+
+[node name="PillarBroken3" parent="." instance=ExtResource("14_87aqa")]
+transform = Transform3D(0.861186, 0, -0.50829, 0, 1, 0, 0.50829, 0, 0.861186, -1.37237, -0.0124817, 8.59606)
+
+[node name="ScaffoldStairs" parent="." instance=ExtResource("15_ihvpa")]
+transform = Transform3D(-0.716862, 0, -0.697215, 0, 1, 0, 0.697215, 0, -0.716862, 6.6524, -0.307216, -3.02556)
+
+[node name="ScaffoldStairs2" parent="." instance=ExtResource("15_ihvpa")]
+transform = Transform3D(-0.716862, 0, -0.697215, 0, 1, 0, 0.697215, 0, -0.716862, 8.17991, 1.27625, -1.47465)

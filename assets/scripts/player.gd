@@ -44,6 +44,7 @@ var bob_offset_pos: Vector3
 var bob_time: float = 0
 
 func _ready():
+	add_to_group(SceneManager.PLAYER)
 	_reset_crouch()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	shape_cast.add_exception(self)

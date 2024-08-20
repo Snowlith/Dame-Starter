@@ -13,7 +13,7 @@ height = 1.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_be8k7"]
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_gp66p")
 speed = 7.0
 

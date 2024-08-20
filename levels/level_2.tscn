@@ -1,0 +1,141 @@
+[gd_scene load_steps=15 format=3 uid="uid://dmjnim27xtopm"]
+
+[ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
+[ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/wall.tscn" id="2_38hdq"]
+[ext_resource type="PackedScene" uid="uid://ckcb51q5a4kr6" path="res://scenes/chest_common.tscn" id="3_dl6ii"]
+[ext_resource type="PackedScene" uid="uid://cj2wnyx63da7i" path="res://assets/models/coinsLarge.gltf.glb" id="4_uavvb"]
+[ext_resource type="PackedScene" uid="uid://cyw12r04k7pmr" path="res://assets/models/coinsMedium.gltf.glb" id="5_ilrdl"]
+[ext_resource type="PackedScene" uid="uid://bstmf88bd2cvj" path="res://assets/models/coinsSmall.gltf.glb" id="6_my6jb"]
+[ext_resource type="Script" path="res://assets/scripts/loading_zone.gd" id="7_pwgd1"]
+[ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/pillar.tscn" id="8_1cc51"]
+[ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/pillar_broken.tscn" id="9_ucjje"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ufhv6"]
+sky_material = SubResource("ProceduralSkyMaterial_ghnw3")
+
+[sub_resource type="Environment" id="Environment_s5wev"]
+background_mode = 2
+sky = SubResource("Sky_ufhv6")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nvom"]
+albedo_color = Color(0.371001, 0.124844, 0.069521, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c8vph"]
+height = 0.850027
+
+[node name="Level2" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s5wev")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(32, 0.001, 32)
+material = SubResource("StandardMaterial3D_8nvom")
+
+[node name="Player" parent="." instance=ExtResource("1_l0ynh")]
+
+[node name="wall" parent="." instance=ExtResource("2_38hdq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.51341, 0.000499725, -2.11717)
+
+[node name="wall2" parent="." instance=ExtResource("2_38hdq")]
+transform = Transform3D(0.138136, 0, -0.990413, 0, 1, 0, 0.990413, 0, 0.138136, -9.23439, 0.000500679, 0.758025)
+
+[node name="wall4" parent="." instance=ExtResource("2_38hdq")]
+transform = Transform3D(0.138136, 0, -0.990413, 0, 1, 0, 0.990413, 0, 0.138136, -4.63239, 0.000500679, 0.48853)
+
+[node name="wall3" parent="." instance=ExtResource("2_38hdq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.96903, 0.000499725, 3.26497)
+
+[node name="chest_common" parent="." instance=ExtResource("3_dl6ii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.78446, 0.000500202, 1.87062)
+
+[node name="chest_common2" parent="." instance=ExtResource("3_dl6ii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.63914, 0.000500202, -0.524442)
+
+[node name="coinsLarge_gltf" parent="." instance=ExtResource("4_uavvb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.46948, 0.000499725, 0.748206)
+
+[node name="coinsMedium_gltf" parent="." instance=ExtResource("5_ilrdl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.84727, 0.000500202, 2.12634)
+
+[node name="coinsSmall_gltf" parent="." instance=ExtResource("6_my6jb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34949, 0.000500202, -0.830144)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3791, 1.12461, 0.784391)
+light_color = Color(1, 0.576471, 0.113725, 1)
+light_energy = 4.65
+light_indirect_energy = 1.385
+light_volumetric_fog_energy = 2.025
+light_size = 0.493
+
+[node name="LoadingZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.55836, 0, 0.729423)
+script = ExtResource("7_pwgd1")
+target_scene_path = "res://levels/win_screen.tscn"
+displacement = Vector3(1, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LoadingZone"]
+shape = SubResource("CylinderShape3D_c8vph")
+
+[node name="Pillar" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
+
+[node name="Pillar2" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.37005, 0.000499725, 3.10521)
+
+[node name="Pillar3" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.06779, 0.000499725, 3.23937)
+
+[node name="Pillar4" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.65358, 0.000498772, -1.84724)
+
+[node name="Pillar5" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6729, 0.000500679, -6.05347)
+
+[node name="Pillar6" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0926609, 0.000499725, -7.98629)
+
+[node name="Pillar7" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19584, 0.000499725, -5.04461)
+
+[node name="Pillar8" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80377, 0.000499725, 0.191578)
+
+[node name="Pillar9" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85088, 0.000499725, 4.72355)
+
+[node name="Pillar10" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50408, 0.000499725, 6.8274)
+
+[node name="PillarBroken" parent="." instance=ExtResource("9_ucjje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935301, 0.000499725, 6.34804)
+
+[node name="PillarBroken2" parent="." instance=ExtResource("9_ucjje")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.235457, -1.84805, 5.276)
+
+[node name="PillarBroken3" parent="." instance=ExtResource("9_ucjje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64686, 0.000499725, -0.707771)
+
+[node name="PillarBroken4" parent="." instance=ExtResource("9_ucjje")]
+transform = Transform3D(0.392706, 0, 0.919664, 0, 1, 0, -0.919664, 0, 0.392706, -1.27514, -0.210059, -8.8312)
+
+[node name="Pillar11" parent="." instance=ExtResource("8_1cc51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33122, 4.0005, 3.18548)
+
+[node name="PillarBroken5" parent="." instance=ExtResource("9_ucjje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36642, 4.0005, 1.83998)
+
+[node name="PillarBroken6" parent="." instance=ExtResource("9_ucjje")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.77644, 4.0005, 3.29804)
