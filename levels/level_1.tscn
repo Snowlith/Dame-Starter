@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://djdll5upj75nl"]
+[gd_scene load_steps=19 format=3 uid="uid://djdll5upj75nl"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_o4rjg"]
 [ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/wall.tscn" id="2_860kj"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://don6h1jpkbiek" path="res://assets/models/potA_decorated.gltf.glb" id="9_lo3xf"]
 [ext_resource type="PackedScene" uid="uid://burruay2fmyio" path="res://assets/models/pots.gltf.glb" id="10_rgh4a"]
 [ext_resource type="PackedScene" uid="uid://qygidfbv0lue" path="res://assets/models/torchWall.gltf.glb" id="11_83q3j"]
+[ext_resource type="PackedScene" path="res://scenes/jump_pad.tscn" id="12_n1oka"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -130,3 +131,6 @@ randomness = 0.42
 mesh = SubResource("SphereMesh_6oa6q")
 direction = Vector3(0, 1, 0)
 gravity = Vector3(0, 1, 0)
+
+[node name="Area3D" parent="." instance=ExtResource("12_n1oka")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58281, 0.000500679, 2.8862)

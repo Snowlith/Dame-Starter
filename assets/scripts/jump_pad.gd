@@ -11,5 +11,5 @@ func _ready() -> void:
 func enter(body: Node3D) -> void:
 	if not body.is_in_group("Player"):
 		return
-	var player: CharacterBody3D = body
+	var player := body as CharacterBody3D
 	player.velocity.y = 50  # Boost the player upward by setting the y velocity
