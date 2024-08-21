@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://k1pr1c5k0a8u"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6a404"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ctcg3"]
+noise = SubResource("FastNoiseLite_6a404")
+
+[resource]
+albedo_color = Color(0.371001, 0.124844, 0.069521, 1)
+emission_enabled = true
+heightmap_texture = SubResource("NoiseTexture2D_ctcg3")
+uv1_scale = Vector3(3.74, 0.1, 0.1)

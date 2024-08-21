@@ -1,5 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://dmjnim27xtopm"]
+[gd_scene load_steps=22 format=3 uid="uid://dmjnim27xtopm"]
 
+[ext_resource type="Material" uid="uid://k1pr1c5k0a8u" path="res://assets/materials/dirt.tres" id="1_h6d5s"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
 [ext_resource type="PackedScene" uid="uid://c0cx8nh2110ik" path="res://scenes/structures/wall.tscn" id="2_38hdq"]
 [ext_resource type="PackedScene" uid="uid://ckcb51q5a4kr6" path="res://scenes/props/chest_common.tscn" id="3_dl6ii"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cybrjcvxj235o" path="res://scenes/props/barrel.tscn" id="11_v6fh7"]
 [ext_resource type="PackedScene" uid="uid://bqbc0ld7u2wl2" path="res://scenes/props/physics_barrel.tscn" id="12_32ywm"]
 [ext_resource type="PackedScene" uid="uid://jpoqjcl1cw5i" path="res://scenes/props/bookcase_filled.tscn" id="13_h582k"]
+[ext_resource type="PackedScene" uid="uid://ciwhtsnhpyvw3" path="res://scenes/props/coins_large.tscn" id="15_h2www"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -27,14 +29,15 @@ sky = SubResource("Sky_ufhv6")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nvom"]
-albedo_color = Color(0.371001, 0.124844, 0.069521, 1)
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_c8vph"]
 height = 0.850027
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ha7ss"]
 height = 1.41089
+
+[sub_resource type="PrismMesh" id="PrismMesh_o68hm"]
+left_to_right = -0.3
+size = Vector3(8.34, 4.48, 5.03)
 
 [node name="Level2" type="Node3D"]
 
@@ -47,10 +50,11 @@ environment = SubResource("Environment_s5wev")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 use_collision = true
-size = Vector3(32, 0.001, 32)
-material = SubResource("StandardMaterial3D_8nvom")
+size = Vector3(247.466, 0.001, 348.75)
+material = ExtResource("1_h6d5s")
 
 [node name="Player" parent="." instance=ExtResource("1_l0ynh")]
+speed = 30.0
 
 [node name="wall" parent="." instance=ExtResource("2_38hdq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.51341, 0.000499725, -2.11717)
@@ -80,12 +84,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.84727, 0.000500202, 2.1263
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34949, 0.000500202, -0.830144)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3791, 1.12461, 0.784391)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15073, 0.944257, 0.416809)
 light_color = Color(1, 0.576471, 0.113725, 1)
 light_energy = 4.65
 light_indirect_energy = 1.385
 light_volumetric_fog_energy = 2.025
 light_size = 0.493
+omni_range = 2.23352
 
 [node name="LoadingZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.55836, 0, 0.729423)
@@ -197,3 +202,20 @@ transform = Transform3D(0.000610904, -0.704262, -0.709939, 0, 0.70994, -0.704263
 
 [node name="BookcaseFilled" parent="." instance=ExtResource("13_h582k")]
 transform = Transform3D(-0.183042, 0, 0.983105, 0, 1, 0, -0.983105, 0, -0.183042, -3.82934, 0.000499725, 0.746915)
+
+[node name="CoinsLarge" parent="." instance=ExtResource("15_h2www")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.39283, 0.000499725, -2.0453)
+
+[node name="CoinsLarge2" parent="." instance=ExtResource("15_h2www")]
+transform = Transform3D(0.383038, 0, -0.923733, 0, 1, 0, 0.923733, 0, 0.383038, -2.43214, 0.000499725, -1.57288)
+
+[node name="CoinsLarge3" parent="." instance=ExtResource("15_h2www")]
+transform = Transform3D(0.383038, 0, -0.923733, 0, 1, 0, 0.923733, 0, 0.383038, -2.43214, 0.000499725, -2.83863)
+
+[node name="CoinsLarge4" parent="." instance=ExtResource("15_h2www")]
+transform = Transform3D(0.603514, 0, 0.797352, 0, 1, 0, -0.797352, 0, 0.603514, -1.56008, 0.000499725, -2.34091)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.173854, 0, 0.984771, 0, 1, 0, -0.984771, 0, 0.173854, 0, 2.206, -26.6385)
+use_collision = true
+mesh = SubResource("PrismMesh_o68hm")

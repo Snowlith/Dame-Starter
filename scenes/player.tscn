@@ -45,6 +45,6 @@ fov = 80.0
 script = ExtResource("2_kaij3")
 
 [node name="hammer_common_gltf" parent="FPSCamera3D" instance=ExtResource("4_a2tbb")]
-transform = Transform3D(0.111989, 0, -0.993709, 0, 1, 0, 0.993709, 0, 0.111989, 0.560025, -0.581594, -0.698452)
+transform = Transform3D(0.111989, 0, -0.58132, 0, 1, 0, 0.993709, 0, 0.0655137, 0.475, -0.582, -0.698)
 
 [node name="Inventory_UI" parent="." instance=ExtResource("4_sk7lt")]
