@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cybrjcvxj235o" path="res://scenes/props/barrel.tscn" id="11_v6fh7"]
 [ext_resource type="PackedScene" uid="uid://bqbc0ld7u2wl2" path="res://scenes/props/physics_barrel.tscn" id="12_32ywm"]
 [ext_resource type="PackedScene" uid="uid://jpoqjcl1cw5i" path="res://scenes/props/bookcase_filled.tscn" id="13_h582k"]
-[ext_resource type="PackedScene" uid="uid://ciwhtsnhpyvw3" path="res://scenes/props/coins_large.tscn" id="15_h2www"]
+[ext_resource type="PackedScene" path="res://scenes/props/coins_large.tscn" id="15_h2www"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
