@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@export var inventory: Inventory
+
 @export_group("Physics")
 @export var speed: float = 10.0
 @export var acceleration: float = 10.0
