@@ -1,14 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://dmjnim27xtopm"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
-[ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/wall.tscn" id="2_38hdq"]
-[ext_resource type="PackedScene" uid="uid://ckcb51q5a4kr6" path="res://scenes/chest_common.tscn" id="3_dl6ii"]
+[ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/props/wall.tscn" id="2_38hdq"]
+[ext_resource type="PackedScene" uid="uid://ckcb51q5a4kr6" path="res://scenes/props/chest_common.tscn" id="3_dl6ii"]
 [ext_resource type="PackedScene" uid="uid://cj2wnyx63da7i" path="res://assets/models/coinsLarge.gltf.glb" id="4_uavvb"]
 [ext_resource type="PackedScene" uid="uid://cyw12r04k7pmr" path="res://assets/models/coinsMedium.gltf.glb" id="5_ilrdl"]
 [ext_resource type="PackedScene" uid="uid://bstmf88bd2cvj" path="res://assets/models/coinsSmall.gltf.glb" id="6_my6jb"]
 [ext_resource type="Script" path="res://assets/scripts/loading_zone.gd" id="7_pwgd1"]
-[ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/pillar.tscn" id="8_1cc51"]
-[ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/pillar_broken.tscn" id="9_ucjje"]
+[ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/props/pillar.tscn" id="8_1cc51"]
+[ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/props/pillar_broken.tscn" id="9_ucjje"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

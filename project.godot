@@ -17,13 +17,13 @@ config/icon="res://assets/textures/icon.svg"
 
 [autoload]
 
-SceneManager="*res://scenes/scene_manager.tscn"
+SceneManager="*res://scenes/misc/scene_manager.tscn"
 
 [file_customization]
 
 folder_colors={
 "res://assets/": "red",
-"res://components/": "yellow",
+"res://items/": "yellow",
 "res://levels/": "green",
 "res://scenes/": "purple"
 }

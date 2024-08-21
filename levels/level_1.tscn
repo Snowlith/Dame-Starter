@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://djdll5upj75nl"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_o4rjg"]
-[ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/wall.tscn" id="2_860kj"]
+[ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/props/wall.tscn" id="2_860kj"]
 [ext_resource type="PackedScene" uid="uid://cj2wnyx63da7i" path="res://assets/models/coinsLarge.gltf.glb" id="3_4nht0"]
 [ext_resource type="PackedScene" uid="uid://dmlajcxvquwxg" path="res://assets/models/lootSackA.gltf.glb" id="4_5riqi"]
 [ext_resource type="PackedScene" uid="uid://lvrshdq5koal" path="res://assets/models/lootSackB.gltf.glb" id="5_0dx1a"]
@@ -9,12 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://don6h1jpkbiek" path="res://assets/models/potA_decorated.gltf.glb" id="9_lo3xf"]
 [ext_resource type="PackedScene" uid="uid://burruay2fmyio" path="res://assets/models/pots.gltf.glb" id="10_rgh4a"]
 [ext_resource type="PackedScene" uid="uid://qygidfbv0lue" path="res://assets/models/torchWall.gltf.glb" id="11_83q3j"]
-[ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/pillar.tscn" id="12_kwogh"]
-[ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/jump_pad.tscn" id="12_n1oka"]
-[ext_resource type="PackedScene" uid="uid://dj866322oetir" path="res://scenes/scaffold_small_medium_railing.tscn" id="13_7ultf"]
-[ext_resource type="PackedScene" uid="uid://dcbry5lclplbf" path="res://scenes/loading_zone.tscn" id="13_c4g1q"]
-[ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/pillar_broken.tscn" id="14_87aqa"]
-[ext_resource type="PackedScene" uid="uid://cpgphoi4b7t0y" path="res://scenes/scaffold_stairs.tscn" id="15_ihvpa"]
+[ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/props/pillar.tscn" id="12_kwogh"]
+[ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/props/jump_pad.tscn" id="12_n1oka"]
+[ext_resource type="PackedScene" uid="uid://dj866322oetir" path="res://scenes/props/scaffold_small_medium_railing.tscn" id="13_7ultf"]
+[ext_resource type="PackedScene" uid="uid://dcbry5lclplbf" path="res://scenes/misc/loading_zone.tscn" id="13_c4g1q"]
+[ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/props/pillar_broken.tscn" id="14_87aqa"]
+[ext_resource type="PackedScene" uid="uid://cpgphoi4b7t0y" path="res://scenes/props/scaffold_stairs.tscn" id="15_ihvpa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

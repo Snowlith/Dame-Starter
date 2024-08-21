@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://blc3f7cw0shyl"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_j5yp8"]
-[ext_resource type="PackedScene" uid="uid://ckcb51q5a4kr6" path="res://scenes/chest_common.tscn" id="2_e05ga"]
-[ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/wall.tscn" id="3_3g2xd"]
+[ext_resource type="PackedScene" uid="uid://ckcb51q5a4kr6" path="res://scenes/props/chest_common.tscn" id="2_e05ga"]
+[ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/props/wall.tscn" id="3_3g2xd"]
 [ext_resource type="PackedScene" uid="uid://b5ky3csog5lv3" path="res://scenes/wall_corner.tscn" id="4_37ei6"]
 [ext_resource type="PackedScene" uid="uid://b1mfpck55jwip" path="res://scenes/wall_door.tscn" id="5_0s3ok"]
-[ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/jump_pad.tscn" id="6_8bgp4"]
+[ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/props/jump_pad.tscn" id="6_8bgp4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgd08"]
 albedo_color = Color(0.344661, 0.0347412, 0.119421, 1)
