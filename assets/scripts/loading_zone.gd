@@ -4,7 +4,7 @@ class_name LoadingZone
 @export_file("*.tscn") var target_scene_path: String
 
 @export var target_id: String
-@export var displacement := Vector3(2, 0, 0)
+@export var displacement := Vector3(0, 0, 2)
 @export var transition: PackedScene = null
 
 # TODO: make player face the same direction as loading zone when spawned
@@ -27,4 +27,10 @@ func _on_body_entered(body: Node3D) -> void:
 	SceneManager.change_scene(data)
 
 func spawn(node: Node3D) -> void:
+	var spawn_dir = -transform.basis.get_euler()
 	node.position = position + displacement
+	for child in node.get_children():
+		var cam := child as FPSCamera3D
+		if cam:
+			cam.set_look_dir(Vector3(0, -1, -1))
+			print(Vector3.FORWARD)

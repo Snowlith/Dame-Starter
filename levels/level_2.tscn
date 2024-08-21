@@ -148,7 +148,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75616, -4.76837e-07, 5.409
 script = ExtResource("7_pwgd1")
 target_scene_path = "res://levels/level_1.tscn"
 target_id = "start"
-displacement = Vector3(1, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LoadingZone2"]
 shape = SubResource("CylinderShape3D_ha7ss")

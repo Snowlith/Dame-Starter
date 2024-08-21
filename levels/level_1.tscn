@@ -155,3 +155,6 @@ transform = Transform3D(-0.716862, 0, -0.697215, 0, 1, 0, 0.697215, 0, -0.716862
 
 [node name="ScaffoldStairs2" parent="." instance=ExtResource("15_ihvpa")]
 transform = Transform3D(-0.716862, 0, -0.697215, 0, 1, 0, 0.697215, 0, -0.716862, 8.17991, 1.27625, -1.47465)
+
+[node name="ScaffoldStairs3" parent="." instance=ExtResource("15_ihvpa")]
+transform = Transform3D(-0.95475, 0, 0.297408, 0, 1, 0, -0.297408, 0, -0.95475, -1.22533, -0.462859, 6.55565)

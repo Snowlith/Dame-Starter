@@ -68,6 +68,13 @@ func update_camera(delta: float, offset: Vector3):
 func get_look_dir() -> Vector3:
 	return -global_transform.basis.z
 
+func set_look_dir(dir: Vector3) -> void:
+	var yaw = atan2(dir.x, dir.z)
+	var pitch = asin(dir.y)
+
+	player.rotation.y = yaw
+	rotation.x = clamp(pitch, deg_to_rad(-89), deg_to_rad(89))
+
 ## Visual effects
 	
 func _update_headbob_offset(delta: float) -> Vector3:
