@@ -17,7 +17,7 @@ config/icon="res://assets/textures/icon.svg"
 
 [autoload]
 
-SceneManager="*res://scenes/misc/scene_manager.tscn"
+SceneManager="*res://assets/scripts/autoload/scene_manager.tscn"
 
 [file_customization]
 

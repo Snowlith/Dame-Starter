@@ -1,14 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://dmjnim27xtopm"]
+[gd_scene load_steps=20 format=3 uid="uid://dmjnim27xtopm"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
-[ext_resource type="PackedScene" uid="uid://bafjwid3ap1af" path="res://scenes/props/wall.tscn" id="2_38hdq"]
+[ext_resource type="PackedScene" uid="uid://c0cx8nh2110ik" path="res://scenes/structures/wall.tscn" id="2_38hdq"]
 [ext_resource type="PackedScene" uid="uid://ckcb51q5a4kr6" path="res://scenes/props/chest_common.tscn" id="3_dl6ii"]
 [ext_resource type="PackedScene" uid="uid://cj2wnyx63da7i" path="res://assets/models/coinsLarge.gltf.glb" id="4_uavvb"]
 [ext_resource type="PackedScene" uid="uid://cyw12r04k7pmr" path="res://assets/models/coinsMedium.gltf.glb" id="5_ilrdl"]
 [ext_resource type="PackedScene" uid="uid://bstmf88bd2cvj" path="res://assets/models/coinsSmall.gltf.glb" id="6_my6jb"]
 [ext_resource type="Script" path="res://assets/scripts/loading_zone.gd" id="7_pwgd1"]
-[ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/props/pillar.tscn" id="8_1cc51"]
-[ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/props/pillar_broken.tscn" id="9_ucjje"]
+[ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/structures/pillar.tscn" id="8_1cc51"]
+[ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/structures/pillar_broken.tscn" id="9_ucjje"]
+[ext_resource type="PackedScene" uid="uid://b1mfpck55jwip" path="res://scenes/structures/wall_door.tscn" id="10_skcrg"]
+[ext_resource type="PackedScene" uid="uid://cybrjcvxj235o" path="res://scenes/props/barrel.tscn" id="11_v6fh7"]
+[ext_resource type="PackedScene" uid="uid://bqbc0ld7u2wl2" path="res://scenes/props/physics_barrel.tscn" id="12_32ywm"]
+[ext_resource type="PackedScene" uid="uid://jpoqjcl1cw5i" path="res://scenes/props/bookcase_filled.tscn" id="13_h582k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -151,3 +155,45 @@ target_id = "start"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LoadingZone2"]
 shape = SubResource("CylinderShape3D_ha7ss")
+
+[node name="WallDoor" parent="." instance=ExtResource("10_skcrg")]
+transform = Transform3D(-0.566349, 0, -0.824166, 0, 1, 0, 0.824166, 0, -0.566349, -10.1173, 0.000499725, -7.81591)
+
+[node name="Barrel" parent="." instance=ExtResource("11_v6fh7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83718, 0.000499725, -3.37598)
+
+[node name="Barrel2" parent="." instance=ExtResource("11_v6fh7")]
+transform = Transform3D(0.226583, 0, 0.973992, 0, 1, 0, -0.973992, 0, 0.226583, -5.76232, 0.000499725, -3.37598)
+
+[node name="Barrel3" parent="." instance=ExtResource("11_v6fh7")]
+transform = Transform3D(-0.17339, 0, 0.984853, 0, 1, 0, -0.984853, 0, -0.17339, -5.29233, 0.96029, -3.37598)
+
+[node name="Barrel4" parent="." instance=ExtResource("11_v6fh7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.49395, 0.000500202, -3.31432)
+
+[node name="Barrel5" parent="." instance=ExtResource("11_v6fh7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.62339, 0.000500679, -3.32623)
+
+[node name="Barrel6" parent="." instance=ExtResource("11_v6fh7")]
+transform = Transform3D(-0.999707, 0, 0.024188, 0, 1, 0, -0.024188, 0, -0.999707, -6.22167, 1.0005, -3.363)
+
+[node name="Barrel7" parent="." instance=ExtResource("11_v6fh7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.80096, 2.0005, -3.32704)
+
+[node name="Barrel8" parent="." instance=ExtResource("11_v6fh7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.05965, 0.000500202, -3.23774)
+
+[node name="PhysicsBarrel" parent="." instance=ExtResource("12_32ywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76158, 0.000499725, -1.68969)
+
+[node name="PhysicsBarrel2" parent="." instance=ExtResource("12_32ywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81087, 1.0005, -1.78586)
+
+[node name="PhysicsBarrel3" parent="." instance=ExtResource("12_32ywm")]
+transform = Transform3D(1, 0, 0, 0, 0.716399, 0.69769, 0, -0.69769, 0.716399, 1.87435, 5.18192, -1.22642)
+
+[node name="PhysicsBarrel4" parent="." instance=ExtResource("12_32ywm")]
+transform = Transform3D(0.000610904, -0.704262, -0.709939, 0, 0.70994, -0.704263, 1, 0.000430237, 0.000433705, 1.87435, 6.29696, -1.22642)
+
+[node name="BookcaseFilled" parent="." instance=ExtResource("13_h582k")]
+transform = Transform3D(-0.183042, 0, 0.983105, 0, 1, 0, -0.983105, 0, -0.183042, -3.82934, 0.000499725, 0.746915)

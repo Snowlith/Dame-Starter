@@ -40,6 +40,7 @@ _data = {
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_vo2e4")
+fade_speed = 2.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

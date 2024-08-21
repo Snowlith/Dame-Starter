@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_gp66p"]
 [ext_resource type="Resource" uid="uid://gymjvb1ckvxu" path="res://assets/inventory/playerinv.tres" id="2_i0xy5"]
 [ext_resource type="Script" path="res://assets/scripts/fps_camera3D.gd" id="2_kaij3"]
+[ext_resource type="PackedScene" uid="uid://b0igsrqvcmgui" path="res://assets/models/hammer_common.gltf.glb" id="4_a2tbb"]
 [ext_resource type="PackedScene" uid="uid://jpgudqsikxpt" path="res://assets/inventory/inventory_ui.tscn" id="4_sk7lt"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
@@ -14,9 +15,6 @@ height = 2.2
 height = 1.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_be8k7"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_r84n5"]
-radius = 0.1
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_gp66p")
@@ -46,9 +44,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92171, 0)
 fov = 80.0
 script = ExtResource("2_kaij3")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="FPSCamera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.645264, -0.754962, -0.911571)
-mesh = SubResource("SphereMesh_r84n5")
-skeleton = NodePath("../..")
+[node name="hammer_common_gltf" parent="FPSCamera3D" instance=ExtResource("4_a2tbb")]
+transform = Transform3D(0.111989, 0, -0.993709, 0, 1, 0, 0.993709, 0, 0.111989, 0.560025, -0.581594, -0.698452)
 
 [node name="Inventory_UI" parent="." instance=ExtResource("4_sk7lt")]

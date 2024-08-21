@@ -44,10 +44,11 @@ func _physics_process(delta: float):
 	var input_vector := Vector2.ZERO
 	
 	# Get the normalized input vector (movement direction) rotated towards direction faced
-	input_vector = Input.get_vector("left", "right", "up", "down").rotated(-rotation.y)
-	
-	is_crouching = _handle_crouch(Input.is_action_pressed("crouch"))
-	is_sprinting = _handle_sprint(Input.is_action_pressed("sprint"), input_vector, delta)
+	if not SceneManager.in_transition:
+		input_vector = Input.get_vector("left", "right", "up", "down").rotated(-rotation.y)
+		
+		is_crouching = _handle_crouch(Input.is_action_pressed("crouch"))
+		is_sprinting = _handle_sprint(Input.is_action_pressed("sprint"), input_vector, delta)
 	
 	# Handle x & z: walking
 	var velocity_xz := Vector2(velocity.x, velocity.z)
