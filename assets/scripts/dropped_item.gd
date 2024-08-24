@@ -10,6 +10,9 @@ func _ready() -> void:
 		despawn()
 	mesh_instance.mesh = item.mesh
 
+func _process(delta) -> void:
+	mesh_instance.rotate_y(delta)
+
 func despawn() -> void:
 	get_parent().remove_child(self)
 	queue_free()

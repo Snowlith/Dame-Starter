@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dmjnim27xtopm"]
+[gd_scene load_steps=36 format=3 uid="uid://dmjnim27xtopm"]
 
 [ext_resource type="Material" uid="uid://k1pr1c5k0a8u" path="res://assets/materials/dirt.tres" id="1_h6d5s"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
@@ -42,15 +42,52 @@ height = 1.41089
 left_to_right = -0.3
 size = Vector3(8.34, 4.48, 5.03)
 
-[sub_resource type="TorusMesh" id="TorusMesh_2ksld"]
-inner_radius = 0.16
-outer_radius = 0.491
+[sub_resource type="Gradient" id="Gradient_l6vhl"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i08yq"]
+noise_type = 3
+frequency = 0.103
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ds8cy"]
+color_ramp = SubResource("Gradient_l6vhl")
+noise = SubResource("FastNoiseLite_i08yq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rjo08"]
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = SubResource("NoiseTexture2D_ds8cy")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sofuv"]
+material = SubResource("StandardMaterial3D_rjo08")
+height = 20.587
+
+[sub_resource type="Resource" id="Resource_cfwod"]
+script = ExtResource("17_a7lp3")
+name = ""
+texture = ExtResource("18_qx2d7")
+mesh = SubResource("CapsuleMesh_sofuv")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n8kqg"]
+noise_type = 2
+seed = 3
+frequency = 0.0511
+fractal_octaves = 8
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ciqnj"]
+noise = SubResource("FastNoiseLite_n8kqg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tytiq"]
+albedo_color = Color(0, 1, 0, 1)
+albedo_texture = SubResource("NoiseTexture2D_ciqnj")
+
+[sub_resource type="BoxMesh" id="BoxMesh_cmtj8"]
+material = SubResource("StandardMaterial3D_tytiq")
 
 [sub_resource type="Resource" id="Resource_h1bg6"]
 script = ExtResource("17_a7lp3")
 name = ""
 texture = ExtResource("18_qx2d7")
-mesh = SubResource("TorusMesh_2ksld")
+mesh = SubResource("BoxMesh_cmtj8")
 
 [node name="Level2" type="Node3D"]
 
@@ -235,6 +272,10 @@ mesh = SubResource("PrismMesh_o68hm")
 
 [node name="DroppedItem" parent="." instance=ExtResource("16_wmjhu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.899, 1, -4.277)
+item = SubResource("Resource_cfwod")
+
+[node name="DroppedItem3" parent="." instance=ExtResource("16_wmjhu")]
+transform = Transform3D(0.719606, 0.694382, 0, -0.648898, 0.67247, 0.355972, 0.24718, -0.256159, 0.934497, -1.77324, 0.736522, -4.277)
 item = SubResource("Resource_h1bg6")
 
 [node name="DroppedItem2" parent="." instance=ExtResource("16_wmjhu")]
