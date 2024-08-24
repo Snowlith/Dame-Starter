@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dmjnim27xtopm"]
+[gd_scene load_steps=27 format=3 uid="uid://dmjnim27xtopm"]
 
 [ext_resource type="Material" uid="uid://k1pr1c5k0a8u" path="res://assets/materials/dirt.tres" id="1_h6d5s"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
@@ -14,7 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://cybrjcvxj235o" path="res://scenes/props/barrel.tscn" id="11_v6fh7"]
 [ext_resource type="PackedScene" uid="uid://bqbc0ld7u2wl2" path="res://scenes/props/physics_barrel.tscn" id="12_32ywm"]
 [ext_resource type="PackedScene" uid="uid://jpoqjcl1cw5i" path="res://scenes/props/bookcase_filled.tscn" id="13_h582k"]
-[ext_resource type="PackedScene" path="res://scenes/props/coins_large.tscn" id="15_h2www"]
+[ext_resource type="PackedScene" uid="uid://ciwhtsnhpyvw3" path="res://scenes/props/coins_large.tscn" id="15_h2www"]
+[ext_resource type="PackedScene" uid="uid://dmx15ltemey01" path="res://scenes/misc/dropped_item.tscn" id="16_wmjhu"]
+[ext_resource type="Script" path="res://assets/inventory/item.gd" id="17_a7lp3"]
+[ext_resource type="Texture2D" uid="uid://cw13dnw88n6n8" path="res://assets/textures/dfj.png" id="18_qx2d7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,6 +41,16 @@ height = 1.41089
 [sub_resource type="PrismMesh" id="PrismMesh_o68hm"]
 left_to_right = -0.3
 size = Vector3(8.34, 4.48, 5.03)
+
+[sub_resource type="TorusMesh" id="TorusMesh_2ksld"]
+inner_radius = 0.16
+outer_radius = 0.491
+
+[sub_resource type="Resource" id="Resource_h1bg6"]
+script = ExtResource("17_a7lp3")
+name = ""
+texture = ExtResource("18_qx2d7")
+mesh = SubResource("TorusMesh_2ksld")
 
 [node name="Level2" type="Node3D"]
 
@@ -219,3 +232,7 @@ transform = Transform3D(0.603514, 0, 0.797352, 0, 1, 0, -0.797352, 0, 0.603514, 
 transform = Transform3D(0.173854, 0, 0.984771, 0, 1, 0, -0.984771, 0, 0.173854, 0, 2.206, -26.6385)
 use_collision = true
 mesh = SubResource("PrismMesh_o68hm")
+
+[node name="DroppedItem" parent="." instance=ExtResource("16_wmjhu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.899, 1, -4.277)
+item = SubResource("Resource_h1bg6")

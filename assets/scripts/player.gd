@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var inventory: Inventory
+
 
 @export_group("Physics")
 @export var speed: float = 10.0
@@ -123,3 +123,4 @@ func _update_crouch_offset(delta: float) -> Vector3:
 	else:
 		crouch_offset_pos.y = lerp(crouch_offset_pos.y, 0.0, crouch_speed * delta)
 	return crouch_offset_pos
+	
