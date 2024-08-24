@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=23 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://assets/scripts/fps_camera3D.gd" id="2_kaij3"]
 [ext_resource type="PackedScene" uid="uid://b0igsrqvcmgui" path="res://assets/models/hammer_common.gltf.glb" id="4_a2tbb"]
 [ext_resource type="PackedScene" uid="uid://t2ps5fa3fnki" path="res://assets/inventory/inventory.tscn" id="4_yvou1"]
+[ext_resource type="Script" path="res://inventory_slot.gd" id="5_hl40d"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
@@ -14,6 +15,58 @@ height = 2.2
 height = 1.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_be8k7"]
+
+[sub_resource type="Resource" id="Resource_yaucq"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_beow8"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_n6soq"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_m07km"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_0sy4m"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_5m7ti"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_bl76h"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_6v0su"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_ni454"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_gdtth"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_fqyx0"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_1ffuq"]
+script = ExtResource("5_hl40d")
+amount = 0
+
+[sub_resource type="Resource" id="Resource_6iuxp"]
+script = ExtResource("5_hl40d")
+amount = 0
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_gp66p")
@@ -46,3 +99,4 @@ script = ExtResource("2_kaij3")
 transform = Transform3D(0.111989, 0, -0.58132, 0, 1, 0, 0.993709, 0, 0.0655137, 0.475, -0.582, -0.698)
 
 [node name="Inventory" parent="." instance=ExtResource("4_yvou1")]
+slots = Array[ExtResource("5_hl40d")]([SubResource("Resource_yaucq"), SubResource("Resource_beow8"), SubResource("Resource_n6soq"), SubResource("Resource_m07km"), SubResource("Resource_0sy4m"), SubResource("Resource_5m7ti"), SubResource("Resource_bl76h"), SubResource("Resource_6v0su"), SubResource("Resource_ni454"), SubResource("Resource_gdtth"), SubResource("Resource_fqyx0"), SubResource("Resource_1ffuq"), SubResource("Resource_6iuxp")])

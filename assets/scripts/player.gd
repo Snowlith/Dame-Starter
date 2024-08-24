@@ -46,7 +46,7 @@ func _ready():
 func _physics_process(delta: float):
 	var input_vector := Vector2.ZERO
 	
-	if not SceneManager.in_transition:
+	if not SceneManager.in_transition or not SceneManager.in_menu:
 		# Get the normalized input vector (movement direction) rotated towards direction faced
 		input_vector = Input.get_vector("left", "right", "up", "down").rotated(-rotation.y)
 		

@@ -2,7 +2,6 @@ extends Area3D
 
 class_name Inventory
 
-signal update
 
 var is_open = false
 
@@ -22,9 +21,10 @@ func insert(item: Item):
 		if !emptyslots.is_empty():
 			emptyslots[0].item = item
 			emptyslots[0].amount = 1
-	update.emit()
+	update_ui()
 	
 func _ready() -> void:
+	update_ui()
 	close()
 	ui.visible = false
 	area_entered.connect(_on_area_entered)
@@ -34,6 +34,7 @@ func _on_area_entered(area: Area3D):
 	if not dropped_item:
 		return
 	insert(dropped_item.item)
+	print(slots)
 	dropped_item.despawn()
 
 func update_ui():
@@ -43,8 +44,10 @@ func update_ui():
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		if is_open:
+			SceneManager.in_menu = false
 			close()
 		else:
+			SceneManager.in_menu = true
 			open()
 
 func open():
