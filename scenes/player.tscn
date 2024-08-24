@@ -97,13 +97,14 @@ target_position = Vector3(0, 0.9, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="FPSCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92171, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
+cull_mask = 1048573
 fov = 80.0
 script = ExtResource("2_kaij3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FPSCamera3D"]
-transform = Transform3D(0.0811145, 0, -0.182813, 0, 0.2, 0, 0.182813, 0, 0.0811145, 0.300827, -0.237711, -0.290309)
-mesh = ExtResource("3_qkvbo")
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="FPSCamera3D"]
+remote_path = NodePath("../../SubViewportContainer/SubViewport/Camera3D")
+update_scale = false
 
 [node name="Inventory" parent="." instance=ExtResource("4_yvou1")]
 slots = Array[ExtResource("5_hl40d")]([SubResource("Resource_yaucq"), SubResource("Resource_beow8"), SubResource("Resource_n6soq"), SubResource("Resource_m07km"), SubResource("Resource_0sy4m"), SubResource("Resource_5m7ti"), SubResource("Resource_bl76h"), SubResource("Resource_6v0su"), SubResource("Resource_ni454"), SubResource("Resource_gdtth"), SubResource("Resource_fqyx0"), SubResource("Resource_1ffuq"), SubResource("Resource_6iuxp")])
@@ -111,3 +112,30 @@ slots = Array[ExtResource("5_hl40d")]([SubResource("Resource_yaucq"), SubResourc
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12004, 0)
 shape = SubResource("CylinderShape3D_n44de")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 637.0
+offset_top = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
+cull_mask = 1048574
+fov = 60.8124
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(0.526436, 0, -0.850215, 0, 1, 0, 0.850215, 0, 0.526436, 0.182522, -0.524637, -0.619076)
+layers = 2
+mesh = ExtResource("3_qkvbo")
+skeleton = NodePath("../../../../FPSCamera3D")

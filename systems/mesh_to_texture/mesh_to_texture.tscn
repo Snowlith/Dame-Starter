@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://pu0lfvpqn3l0"]
 
-[ext_resource type="Script" path="res://systems/mesh_to_icon/mesh_to_icon.gd" id="1_xr7mh"]
+[ext_resource type="Script" path="res://systems/mesh_to_texture/mesh_to_texture.gd" id="1_kvn2a"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x6x0n"]
 viewport_path = NodePath("SubViewport")
@@ -19,7 +19,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="MeshToIcon" type="Node3D"]
-script = ExtResource("1_xr7mh")
+script = ExtResource("1_kvn2a")
 item_dir = "res://items"
 icon_dir = "res://items/icons"
 
