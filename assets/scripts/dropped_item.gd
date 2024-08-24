@@ -13,3 +13,4 @@ func _ready() -> void:
 func despawn() -> void:
 	get_parent().remove_child(self)
 	queue_free()
+#poo
