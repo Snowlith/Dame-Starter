@@ -103,7 +103,6 @@ height = 1.0
 radius = 0.423391
 
 [node name="PhysicsBarrel" type="RigidBody3D"]
-mass = 0.2
 
 [node name="barrel" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)

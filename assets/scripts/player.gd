@@ -21,6 +21,7 @@ extends CharacterBody3D
 
 @export_subgroup("Quality of Life")
 @export var coyote_time: float = 0.2
+@export var object_push_force: float = 20
 
 @onready var cam: FPSCamera3D = $FPSCamera3D
 
@@ -68,8 +69,13 @@ func _physics_process(delta: float):
 	
 	# Handle y: jumping and gravity
 	_handle_jump(Input.is_action_just_pressed("jump"), delta)
-		
-	move_and_slide()
+	
+	# Physics interaction
+	if move_and_slide():
+		for i in get_slide_collision_count():
+			var col = get_slide_collision(i)
+			if col.get_collider() is RigidBody3D:
+				col.get_collider().apply_force(col.get_normal() * -object_push_force)
 	
 func _get_speed() -> float:
 	if is_sprinting:
