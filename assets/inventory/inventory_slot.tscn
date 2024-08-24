@@ -1,18 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://cu4a3g4md3w4a"]
 
-[ext_resource type="Texture2D" uid="uid://cpe3820lf2rqa" path="res://assets/textures/shittierinventoryslot.png" id="1_21dv0"]
-[ext_resource type="Script" path="res://assets/inventory/inventory_ui_slot.gd" id="1_uue5p"]
+[ext_resource type="Script" path="res://assets/inventory/inventory_slot.gd" id="1_qvp1a"]
 
-[node name="inventory_ui_slot" type="Panel"]
+[sub_resource type="LabelSettings" id="LabelSettings_o828c"]
+font_color = Color(1, 0, 0, 1)
+
+[node name="InventorySlot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(32, 32)
 offset_right = 32.0
 offset_bottom = 32.0
-script = ExtResource("1_uue5p")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_21dv0")
-centered = false
+script = ExtResource("1_qvp1a")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(32, 32)
@@ -34,5 +32,6 @@ offset_right = 112.0
 offset_bottom = 112.0
 scale = Vector2(0.25, 0.25)
 text = "99"
+label_settings = SubResource("LabelSettings_o828c")
 horizontal_alignment = 2
 vertical_alignment = 2

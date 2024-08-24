@@ -4,9 +4,12 @@ class_name Inventory
 
 
 var is_open = false
-
+@onready var bg_container: Control = $NinePatchRect/BGContainer
+@onready var slot_container: Control = $NinePatchRect/SlotContainer
+@export var cell_number: int = 12
 @export var slots: Array[InventorySlot]
-@onready var ui_slots: Array = $NinePatchRect/GridContainer.get_children()
+@export var bg: PackedScene
+@export var slot: PackedScene
 @onready var ui: Control = $NinePatchRect
 
 
@@ -24,6 +27,7 @@ func insert(item: Item):
 	update_ui()
 	
 func _ready() -> void:
+	create_ui()
 	update_ui()
 	close()
 	ui.visible = false
@@ -38,6 +42,7 @@ func _on_area_entered(area: Area3D):
 	dropped_item.despawn()
 
 func update_ui():
+	var ui_slots: Array = slot_container.get_children()
 	for i in range(min(ui_slots.size(), slots.size())):
 		ui_slots[i].update(slots[i])
 	
@@ -57,3 +62,11 @@ func open():
 func close():
 	ui.visible = false
 	is_open = false
+	
+func create_ui():
+	for i in range(cell_number):
+		var cell = bg.instantiate()
+		bg_container.add_child(cell)
+		
+		
+	

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cksrnnex3ynqf"]
 
 [ext_resource type="Texture2D" uid="uid://dp6fvb2i0ymjl" path="res://assets/textures/shittyinventory.png" id="1_dh8o6"]
-[ext_resource type="PackedScene" uid="uid://cu4a3g4md3w4a" path="res://assets/inventory/inventory_ui_slot.tscn" id="2_ubdab"]
+[ext_resource type="PackedScene" uid="uid://cu4a3g4md3w4a" path="res://assets/inventory/inventory_slot.tscn" id="2_ubdab"]
 
 [node name="NinePatchRect" type="NinePatchRect"]
 anchors_preset = 8
