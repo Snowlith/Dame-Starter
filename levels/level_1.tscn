@@ -9,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://don6h1jpkbiek" path="res://assets/models/potA_decorated.gltf.glb" id="9_lo3xf"]
 [ext_resource type="PackedScene" uid="uid://burruay2fmyio" path="res://assets/models/pots.gltf.glb" id="10_rgh4a"]
 [ext_resource type="PackedScene" uid="uid://qygidfbv0lue" path="res://assets/models/torchWall.gltf.glb" id="11_83q3j"]
+[ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="11_xu2kq"]
 [ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/structures/pillar.tscn" id="12_kwogh"]
-[ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/misc/jump_pad.tscn" id="12_n1oka"]
+[ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/interactable/jump_pad.tscn" id="12_n1oka"]
 [ext_resource type="PackedScene" uid="uid://dj866322oetir" path="res://scenes/structures/scaffold_small_medium_railing.tscn" id="13_7ultf"]
-[ext_resource type="PackedScene" uid="uid://dcbry5lclplbf" path="res://scenes/misc/loading_zone.tscn" id="13_c4g1q"]
 [ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/structures/pillar_broken.tscn" id="14_87aqa"]
 [ext_resource type="PackedScene" uid="uid://cpgphoi4b7t0y" path="res://scenes/structures/scaffold_stairs.tscn" id="15_ihvpa"]
 
@@ -101,8 +101,9 @@ gravity = Vector3(0, 1, 0)
 [node name="Area3D" parent="." instance=ExtResource("12_n1oka")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.90434, 0.000500679, 1.43905)
 
-[node name="LoadingZone" parent="." instance=ExtResource("13_c4g1q")]
+[node name="LoadingZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.02543, 3.90155, 8.13969)
+script = ExtResource("11_xu2kq")
 target_scene_path = "res://levels/level_2.tscn"
 target_id = "start"
 displacement = Vector3(1.545, 0, 0)

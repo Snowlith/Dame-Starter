@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://orqpaa0qsdm7"]
-
-[ext_resource type="Script" path="res://assets/scripts/autoload/scene_manager.gd" id="1_bemho"]
-[ext_resource type="PackedScene" uid="uid://cod2d5se4drn8" path="res://assets/transitions/fade_transition.tscn" id="2_4m8vw"]
-
-[node name="SceneManager" type="Node"]
-script = ExtResource("1_bemho")
-default_transition = ExtResource("2_4m8vw")

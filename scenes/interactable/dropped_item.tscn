@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmx15ltemey01"]
 
-[ext_resource type="Script" path="res://assets/scripts/dropped_item.gd" id="1_hfu6m"]
+[ext_resource type="Script" path="res://systems/inventory/dropped_item.gd" id="1_hfu6m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ptbes"]
 radius = 0.269109

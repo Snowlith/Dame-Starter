@@ -2,39 +2,38 @@ extends Area3D
 
 class_name Inventory
 
+@export var size: int = 12
+@export var slots: Array[InventorySlot]
 
-var is_open = false
+@export var bg_scene: PackedScene
+@export var slot_scene: PackedScene
+
+@onready var nine_patch_rect: Control = $NinePatchRect
 @onready var bg_container: Control = $NinePatchRect/BGContainer
 @onready var slot_container: Control = $NinePatchRect/SlotContainer
-@export var cell_number: int = 12
-@export var slots: Array[InventorySlot]
-@export var bg: PackedScene
-@export var slot: PackedScene
-@onready var ui: Control = $NinePatchRect
 
-
+var is_open = false
 
 func insert(item: Item):
 	print(item)
-	var itemslots = slots.filter(func(slot): return slot.item == item)
-	if not itemslots.is_empty():
-		itemslots[0].amount += 1
+	var occupied_slots = slots.filter(func(slot): return slot.item == item)
+	if not occupied_slots.is_empty():
+		occupied_slots[0].amount += 1
 	else:
-		var emptyslots = slots.filter(func(slot): return slot.item == null)
-		if !emptyslots.is_empty():
-			emptyslots[0].item = item
-			emptyslots[0].amount = 1
+		var empty_slots = slots.filter(func(slot): return slot.item == null)
+		if not empty_slots.is_empty():
+			empty_slots[0].item = item
+			empty_slots[0].amount = 1
 	update_ui()
 	
 func _ready() -> void:
 	create_ui()
 	update_ui()
 	close()
-	ui.visible = false
 	area_entered.connect(_on_area_entered)
 	
 func _on_area_entered(area: Area3D):
-	var dropped_item:= area as DroppedItem
+	var dropped_item := area as DroppedItem
 	if not dropped_item:
 		return
 	insert(dropped_item.item)
@@ -49,23 +48,23 @@ func update_ui():
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		if is_open:
-			SceneManager.in_menu = false
 			close()
 		else:
-			SceneManager.in_menu = true
 			open()
 
 func open():
-	ui.visible = true
+	SceneManager.in_menu = true
+	nine_patch_rect.visible = true
 	is_open = true
 
 func close():
-	ui.visible = false
+	SceneManager.in_menu = false
+	nine_patch_rect.visible = false
 	is_open = false
 	
 func create_ui():
-	for i in range(cell_number):
-		var cell = bg.instantiate()
+	for i in range(size):
+		var cell = bg_scene.instantiate()
 		bg_container.add_child(cell)
 		
 		

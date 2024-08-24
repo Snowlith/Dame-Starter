@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://7gepbj547uc5"]
 
-[ext_resource type="Script" path="res://assets/scripts/jump_pad.gd" id="1_6ymft"]
+[ext_resource type="Script" path="res://scripts/jump_pad.gd" id="1_6ymft"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pyql"]
 albedo_color = Color(0.109804, 1, 0.113725, 1)

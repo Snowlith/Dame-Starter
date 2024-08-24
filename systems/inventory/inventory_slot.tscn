@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cu4a3g4md3w4a"]
 
-[ext_resource type="Script" path="res://assets/inventory/inventory_slot.gd" id="1_qvp1a"]
+[ext_resource type="Script" path="res://systems/inventory/inventory_slot.gd" id="1_qvp1a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_o828c"]
 font_color = Color(1, 0, 0, 1)

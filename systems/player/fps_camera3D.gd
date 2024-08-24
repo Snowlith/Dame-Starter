@@ -29,7 +29,6 @@ var use_interp: bool = true
 func _ready():
 	SceneManager.in_menu = false
 
-	
 	default_fov = fov
 	start_pos = position
 	

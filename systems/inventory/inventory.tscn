@@ -1,18 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://t2ps5fa3fnki"]
+[gd_scene load_steps=5 format=3 uid="uid://t2ps5fa3fnki"]
 
-[ext_resource type="Script" path="res://assets/inventory/inventory.gd" id="1_rrfv4"]
+[ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="1_rrfv4"]
 [ext_resource type="Texture2D" uid="uid://dp6fvb2i0ymjl" path="res://assets/textures/shittyinventory.png" id="2_esyh3"]
-[ext_resource type="PackedScene" uid="uid://cns3igco5nndv" path="res://assets/inventory/inventory_bg.tscn" id="2_g6dxg"]
-[ext_resource type="PackedScene" uid="uid://cu4a3g4md3w4a" path="res://assets/inventory/inventory_slot.tscn" id="3_lwgw0"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_vi4fb"]
-height = 1.69376
-radius = 1.2948
+[ext_resource type="PackedScene" uid="uid://cns3igco5nndv" path="res://systems/inventory/inventory_bg.tscn" id="2_g6dxg"]
+[ext_resource type="PackedScene" uid="uid://cu4a3g4md3w4a" path="res://systems/inventory/inventory_slot.tscn" id="3_lwgw0"]
 
 [node name="Inventory" type="Area3D"]
 script = ExtResource("1_rrfv4")
-bg = ExtResource("2_g6dxg")
-slot = ExtResource("3_lwgw0")
+bg_scene = ExtResource("2_g6dxg")
+slot_scene = ExtResource("3_lwgw0")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchors_preset = 8
@@ -62,7 +58,3 @@ grow_vertical = 2
 scale = Vector2(4, 4)
 columns = 4
 metadata/_edit_group_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CylinderShape3D_vi4fb")
