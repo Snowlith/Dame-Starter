@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://p1fug3l5lj25"]
+
+[ext_resource type="ArrayMesh" uid="uid://c8hvkeda0hcen" path="res://assets/meshes/axe_common.tres" id="1_020uj"]
+[ext_resource type="Script" path="res://systems/inventory/item.gd" id="2_204t8"]
+
+[resource]
+script = ExtResource("2_204t8")
+name = "AxeCommon"
+mesh = ExtResource("1_020uj")

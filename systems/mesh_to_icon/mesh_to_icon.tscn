@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://pu0lfvpqn3l0"]
+
+[ext_resource type="Script" path="res://systems/mesh_to_icon/mesh_to_icon.gd" id="1_xr7mh"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_x6x0n"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k4g8e"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_6p630"]
+sky_material = SubResource("ProceduralSkyMaterial_k4g8e")
+
+[sub_resource type="Environment" id="Environment_x1vci"]
+background_mode = 2
+sky = SubResource("Sky_6p630")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="MeshToIcon" type="Node3D"]
+script = ExtResource("1_xr7mh")
+item_dir = "res://items"
+icon_dir = "res://items/icons"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_x6x0n")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport"]
+transform = Transform3D(0.294211, 0.134756, 0.946193, -0.416424, 0.909171, 0, -0.860251, -0.394017, 0.323604, 0, -0.151319, 0)
+skeleton = NodePath("../../Sprite2D")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.707, 0, 0.707)
+fov = 50.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.20295, 0, 0.85821)
+visible = false
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27222, 0, -1.4156)
+visible = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource("Environment_x1vci")

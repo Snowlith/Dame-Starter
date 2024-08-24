@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=25 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/player/fps_camera3D.gd" id="2_kaij3"]
-[ext_resource type="PackedScene" uid="uid://b0igsrqvcmgui" path="res://assets/models/hammer_common.gltf.glb" id="4_a2tbb"]
+[ext_resource type="ArrayMesh" uid="uid://c8hvkeda0hcen" path="res://assets/meshes/axe_common.tres" id="3_qkvbo"]
 [ext_resource type="PackedScene" uid="uid://t2ps5fa3fnki" path="res://systems/inventory/inventory.tscn" id="4_yvou1"]
 [ext_resource type="Script" path="res://systems/inventory/slot.gd" id="5_hl40d"]
+[ext_resource type="Resource" uid="uid://bvshluuj1ro6i" path="res://items/arrow.tres" id="6_l0cew"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
@@ -18,6 +19,7 @@ height = 1.6
 
 [sub_resource type="Resource" id="Resource_yaucq"]
 script = ExtResource("5_hl40d")
+item = ExtResource("6_l0cew")
 amount = 0
 
 [sub_resource type="Resource" id="Resource_beow8"]
@@ -99,8 +101,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92171, 0)
 fov = 80.0
 script = ExtResource("2_kaij3")
 
-[node name="hammer_common_gltf" parent="FPSCamera3D" instance=ExtResource("4_a2tbb")]
-transform = Transform3D(0.111989, 0, -0.58132, 0, 1, 0, 0.993709, 0, 0.0655137, 0.475, -0.582, -0.698)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FPSCamera3D"]
+transform = Transform3D(0.0811145, 0, -0.182813, 0, 0.2, 0, 0.182813, 0, 0.0811145, 0.300827, -0.237711, -0.290309)
+mesh = ExtResource("3_qkvbo")
 
 [node name="Inventory" parent="." instance=ExtResource("4_yvou1")]
 slots = Array[ExtResource("5_hl40d")]([SubResource("Resource_yaucq"), SubResource("Resource_beow8"), SubResource("Resource_n6soq"), SubResource("Resource_m07km"), SubResource("Resource_0sy4m"), SubResource("Resource_5m7ti"), SubResource("Resource_bl76h"), SubResource("Resource_6v0su"), SubResource("Resource_ni454"), SubResource("Resource_gdtth"), SubResource("Resource_fqyx0"), SubResource("Resource_1ffuq"), SubResource("Resource_6iuxp")])

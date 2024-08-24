@@ -5,16 +5,16 @@ class_name FPSCamera3D
 @export var sensitivity: float = 1.5
 
 @export_subgroup("Dynamic FOV")
-@export var fov_speed_change: float = 0.6
+@export var fov_speed_change: float = 0.5
 @export var fov_settle_speed: float = 15
 
 @export_subgroup("Headbob")
 @export var bob_frequency: float = 2.4
 @export var bob_amplitude: float = 0.08
 
-var default_fov: float
+var player
 
-var player: CharacterBody3D
+var default_fov: float
 
 var start_pos: Vector3
 
@@ -27,12 +27,12 @@ var bob_time: float = 0
 var use_interp: bool = true
 
 func _ready():
+	player = get_parent() as CharacterBody3D
+	
 	SceneManager.in_menu = false
 
 	default_fov = fov
 	start_pos = position
-	
-	player = get_parent() as CharacterBody3D
 	
 	# Copy the target transform
 	new_transform = player.global_transform
@@ -79,14 +79,13 @@ func set_look_dir(dir: Vector3) -> void:
 
 ## Visual effects
 	
-func _update_headbob_offset(delta: float) -> Vector3:
+func _update_headbob_offset(delta: float) -> void:
 	bob_time += delta * player.velocity.length() * int(player.is_on_floor())
 	
 	bob_offset_pos.x = cos(bob_time * bob_frequency / 2) * bob_amplitude
 	bob_offset_pos.y = sin(bob_time * bob_frequency) * bob_amplitude
-	return bob_offset_pos
 
-func _update_fov_offset(delta: float) -> float:
+func _update_fov_offset(delta: float) -> void:
 	var vel_length = player.velocity.length()
 	var target_fov = default_fov
 	# Skip fov calculations when velocity is zero
@@ -94,5 +93,4 @@ func _update_fov_offset(delta: float) -> float:
 		var dir_normalized = get_look_dir().normalized()
 		var vel_dot = dir_normalized.dot(player.velocity.normalized()) * vel_length
 		target_fov += fov_speed_change * vel_dot
-	fov = lerp(fov, target_fov, fov_settle_speed * delta)
-	return fov
+	fov = clamp(lerp(fov, target_fov, fov_settle_speed * delta), default_fov-15, default_fov+15)

@@ -117,3 +117,7 @@ func _end_transition():
 		current_transition.fade_in()
 	
 	in_transition = false
+
+func _physics_process(_delta):
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
