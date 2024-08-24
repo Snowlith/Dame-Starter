@@ -6,6 +6,14 @@ var current_scene_path: String
 var current_transition: Transition
 
 var in_transition: bool = false
+var in_menu: bool = false:
+	set(value):
+		in_menu = value
+		if value:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 const PLAYER = "player"
 const LOADING_ZONE = "loading_zone"

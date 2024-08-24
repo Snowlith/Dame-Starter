@@ -236,3 +236,7 @@ mesh = SubResource("PrismMesh_o68hm")
 [node name="DroppedItem" parent="." instance=ExtResource("16_wmjhu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.899, 1, -4.277)
 item = SubResource("Resource_h1bg6")
+
+[node name="DroppedItem2" parent="." instance=ExtResource("16_wmjhu")]
+transform = Transform3D(0.684634, 0.566892, -0.458159, -0.350403, 0.807154, 0.4751, 0.639135, -0.16473, 0.751246, 2, 1, -6)
+item = SubResource("Resource_h1bg6")

@@ -27,7 +27,8 @@ var bob_time: float = 0
 var use_interp: bool = true
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	SceneManager.in_menu = false
+
 	
 	default_fov = fov
 	start_pos = position
@@ -40,6 +41,8 @@ func _ready():
 
 func _unhandled_input(event: InputEvent):
 	# Cast to most specific type, makes this type safe
+	if SceneManager.in_menu:
+		return
 	var mouse_event := event as InputEventMouseMotion
 	if mouse_event:
 		# Camera rotation
