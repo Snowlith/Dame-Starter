@@ -6,8 +6,10 @@ var current_scene_path: String
 var current_transition: Transition
 
 var in_transition: bool = false
-var in_menu: bool = false:
+var in_menu: bool = true:
 	set(value):
+		if value == in_menu:
+			return
 		in_menu = value
 		if value:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

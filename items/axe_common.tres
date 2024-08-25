@@ -7,3 +7,5 @@
 script = ExtResource("2_204t8")
 name = "AxeCommon"
 mesh = ExtResource("1_020uj")
+rarity = 1
+icon_orientation = "Front"
