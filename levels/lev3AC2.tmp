@@ -58,6 +58,7 @@ size = Vector3(247.466, 0.001, 348.75)
 material = ExtResource("1_h6d5s")
 
 [node name="Player" parent="." instance=ExtResource("1_l0ynh")]
+speed = 30.0
 
 [node name="wall" parent="." instance=ExtResource("2_38hdq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.51341, 0.000499725, -2.11717)
