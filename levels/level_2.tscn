@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dmjnim27xtopm"]
+[gd_scene load_steps=28 format=3 uid="uid://dmjnim27xtopm"]
 
 [ext_resource type="Material" uid="uid://k1pr1c5k0a8u" path="res://assets/materials/dirt.tres" id="1_h6d5s"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://jpoqjcl1cw5i" path="res://scenes/props/bookcase_filled.tscn" id="13_h582k"]
 [ext_resource type="PackedScene" uid="uid://ciwhtsnhpyvw3" path="res://scenes/props/coins_large.tscn" id="15_h2www"]
 [ext_resource type="PackedScene" uid="uid://dmx15ltemey01" path="res://scenes/interactable/dropped_item.tscn" id="16_wmjhu"]
-[ext_resource type="Resource" uid="uid://dmwsgvv8nu2gh" path="res://items/artifact.tres" id="17_0ybq0"]
 [ext_resource type="Resource" uid="uid://bvshluuj1ro6i" path="res://items/arrow.tres" id="18_s6dxo"]
 [ext_resource type="Resource" uid="uid://b116xj7wt67xg" path="res://items/crossbow_rare.tres" id="18_ttwfn"]
 [ext_resource type="Resource" uid="uid://i7en6370r25t" path="res://items/bookcaseFilled_broken.tres" id="19_4vf1b"]
@@ -227,10 +226,6 @@ transform = Transform3D(0.603514, 0, 0.797352, 0, 1, 0, -0.797352, 0, 0.603514, 
 transform = Transform3D(0.173854, 0, 0.984771, 0, 1, 0, -0.984771, 0, 0.173854, 0, 2.206, -26.6385)
 use_collision = true
 mesh = SubResource("PrismMesh_o68hm")
-
-[node name="DroppedItem" parent="." instance=ExtResource("16_wmjhu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.899, 1, -4.277)
-item = ExtResource("17_0ybq0")
 
 [node name="DroppedItem4" parent="." instance=ExtResource("16_wmjhu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.01402, 1, -2.94224)

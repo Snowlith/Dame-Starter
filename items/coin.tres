@@ -7,5 +7,5 @@
 script = ExtResource("1_e33sl")
 name = "Coin"
 mesh = ExtResource("1_pmy7x")
-rarity = 1
+rarity = "Rare"
 icon_orientation = "Front"

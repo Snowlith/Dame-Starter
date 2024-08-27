@@ -7,4 +7,5 @@
 script = ExtResource("1_uq3qc")
 name = "Artifact"
 mesh = ExtResource("1_0rfpu")
-rarity = 3
+rarity = "Dame"
+icon_orientation = "Front"

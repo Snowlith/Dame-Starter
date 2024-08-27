@@ -7,5 +7,5 @@
 script = ExtResource("2_nh4eo")
 name = "Arrow"
 mesh = ExtResource("1_6ban7")
-rarity = 1
+rarity = "Common"
 icon_orientation = "Angled"
