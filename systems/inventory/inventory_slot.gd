@@ -8,7 +8,6 @@ func update(item: Item):
 		item_visual.visible = false
 		amount_text.visible = false
 	else:
-		item_visual.visible = true
 		item_visual.texture = load(item.get_icon_path())
-		print(item_visual.texture)
+		item_visual.visible = true
 		amount_text.visible = true

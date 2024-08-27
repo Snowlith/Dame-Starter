@@ -14,7 +14,7 @@ class_name Inventory
 var is_open = false
 
 func insert(item: Item):
-	print(item)
+	print("inserted " + str(item))
 	var index = items.find(null)
 	if (index == -1):
 		return
@@ -39,12 +39,8 @@ func _on_area_entered(area: Area3D):
 
 func update_ui():
 	var ui_slots: Array = slot_container.get_children()
-	for i in range (size):
-		print(i)
-		var item = items[i]
-		var slot = ui_slots[i]
-		slot.update(item)
-		
+	for i in range(size):
+		ui_slots[i].update(items[i])
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("inventory"):
@@ -72,6 +68,4 @@ func clear():
 	items.clear()
 	for i in range (size):
 		items.append(null)
-		
-	print(items)
 		

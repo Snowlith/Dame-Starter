@@ -10,6 +10,6 @@ var icon_dir = "res://items/icons/"
 @export_enum("Front", "Angled") var icon_orientation: String = "Front"
 
 func get_icon_path():
-	print(resource_name.get_file())
-	return icon_dir + resource_name.get_file().trim_suffix('.tres') + (".png")
+	var filename = resource_path.split("/")[-1]
+	return icon_dir + filename.trim_suffix(".tres") + ".png"
 	

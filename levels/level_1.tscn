@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://djdll5upj75nl"]
+[gd_scene load_steps=26 format=3 uid="uid://djdll5upj75nl"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_o4rjg"]
 [ext_resource type="PackedScene" uid="uid://c0cx8nh2110ik" path="res://scenes/structures/wall.tscn" id="2_860kj"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://dj866322oetir" path="res://scenes/structures/scaffold_small_medium_railing.tscn" id="13_7ultf"]
 [ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/structures/pillar_broken.tscn" id="14_87aqa"]
 [ext_resource type="PackedScene" uid="uid://cpgphoi4b7t0y" path="res://scenes/structures/scaffold_stairs.tscn" id="15_ihvpa"]
+[ext_resource type="PackedScene" uid="uid://dmx15ltemey01" path="res://scenes/interactable/dropped_item.tscn" id="17_pj44o"]
+[ext_resource type="Resource" uid="uid://p1fug3l5lj25" path="res://items/axe_common.tres" id="18_6finp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -162,3 +164,7 @@ transform = Transform3D(-0.716862, 0, -0.697215, 0, 1, 0, 0.697215, 0, -0.716862
 
 [node name="ScaffoldStairs3" parent="." instance=ExtResource("15_ihvpa")]
 transform = Transform3D(-0.95475, 0, 0.297408, 0, 1, 0, -0.297408, 0, -0.95475, -1.22533, 6.91907, 6.55565)
+
+[node name="DroppedItem" parent="." instance=ExtResource("17_pj44o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.86806, 0.000499725, 2.42865)
+item = ExtResource("18_6finp")
