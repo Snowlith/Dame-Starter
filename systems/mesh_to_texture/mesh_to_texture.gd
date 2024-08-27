@@ -22,19 +22,12 @@ func _ready():
 		var mesh_instance = get_mesh_instance(item)
 		mesh_instance.mesh = item.mesh
 		mesh_instance.visible = true
-		adjust_camera(item.mesh, item.icon_orientation)
+		adjust_camera(item.mesh)
 		await RenderingServer.frame_post_draw
-		#call_deferred("save_image", get_resource_name(item))
 		save_image(item)
 		mesh_instance.visible = false
 	
-	#sub_viewport.tree_exiting.connect(fuck)
-	#mesh_instance_3d.mesh = target_mesh
-	#call_deferred("save_image")
 	get_tree().quit()
- 
-func fuck():
-	print("fuck")
 
 func get_mesh_instance(item):
 	match item.icon_orientation:
@@ -45,15 +38,17 @@ func get_mesh_instance(item):
 	return mesh_front
 		
 
-func adjust_camera(mesh, orientation):
-	if mesh:
-		cam.transform.origin = default_cam_pos
-		var aabb: AABB = mesh.get_aabb()
-		var size: Vector3 = aabb.size
-		var max_dimension = max(size.x, size.y, size.z)
+func adjust_camera(mesh):
+	if not mesh:
+		return
 		
-		# Move camera back based on the size
-		cam.transform.origin *= max_dimension * 1.7
+	cam.transform.origin = default_cam_pos
+	var aabb: AABB = mesh.get_aabb()
+	var size: Vector3 = aabb.size
+	var max_dimension = max(size.x, size.y, size.z)
+	
+	# Move camera back based on the size
+	cam.transform.origin *= max_dimension * 1.7
 
 func save_image(item):
 	var image = sub_viewport.get_viewport().get_texture().get_image()
