@@ -14,7 +14,6 @@ class_name Inventory
 var is_open = false
 
 func insert(item: Item):
-	print("inserted " + str(item))
 	var index = items.find(null)
 	if (index == -1):
 		return
@@ -22,7 +21,8 @@ func insert(item: Item):
 	update_ui()
 	
 func _ready() -> void:
-	clear()
+	add_nulls()
+	
 	create_ui()
 	update_ui()
 	close()
@@ -34,7 +34,6 @@ func _on_area_entered(area: Area3D):
 	if not dropped_item:
 		return
 	insert(dropped_item.item)
-	print(items)
 	dropped_item.despawn()
 
 func update_ui():
@@ -61,11 +60,26 @@ func close():
 	
 func create_ui():
 	for i in range(size):
-		var itemCell = slot_scene.instantiate()
-		slot_container.add_child(itemCell)
+		var item_cell = slot_scene.instantiate()
+		item_cell.current_inventory = self
+		slot_container.add_child(item_cell)
 
 func clear():
 	items.clear()
-	for i in range (size):
+	for i in range(size):
 		items.append(null)
-		
+
+func add_nulls():
+	for i in range(size - items.size()):
+		items.append(null)
+
+func switch_slots(slot_1, slot_2):
+	var ui_slots: Array = slot_container.get_children()
+	var index_1 = ui_slots.find(slot_1)
+	var index_2 = ui_slots.find(slot_2)
+	var temp = slot_1.current_item
+	slot_1.update(slot_2.current_item)
+	slot_2.update(temp)
+	
+	items[index_1] = slot_1.current_item
+	items[index_2] = slot_2.current_item

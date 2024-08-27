@@ -9,3 +9,4 @@ name = "AxeCommon"
 mesh = ExtResource("1_020uj")
 rarity = 1
 icon_orientation = "Front"
+color = Color(1, 0, 0, 1)
