@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dmjnim27xtopm"]
+[gd_scene load_steps=29 format=3 uid="uid://dmjnim27xtopm"]
 
 [ext_resource type="Material" uid="uid://k1pr1c5k0a8u" path="res://assets/materials/dirt.tres" id="1_h6d5s"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bstmf88bd2cvj" path="res://assets/models/coinsSmall.gltf.glb" id="6_my6jb"]
 [ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="7_pwgd1"]
 [ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/structures/pillar.tscn" id="8_1cc51"]
+[ext_resource type="PackedScene" uid="uid://c5w10rjrtwlt7" path="res://transitions/game_transition.tscn" id="9_dk5kx"]
 [ext_resource type="PackedScene" uid="uid://dcvcjej086uj2" path="res://scenes/structures/pillar_broken.tscn" id="9_ucjje"]
 [ext_resource type="PackedScene" uid="uid://b1mfpck55jwip" path="res://scenes/structures/wall_door.tscn" id="10_skcrg"]
 [ext_resource type="PackedScene" uid="uid://cybrjcvxj235o" path="res://scenes/props/barrel.tscn" id="11_v6fh7"]
@@ -18,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://dmx15ltemey01" path="res://scenes/interactable/dropped_item.tscn" id="16_wmjhu"]
 [ext_resource type="Resource" uid="uid://dmwsgvv8nu2gh" path="res://items/artifact.tres" id="17_0ybq0"]
 [ext_resource type="Resource" uid="uid://bvshluuj1ro6i" path="res://items/arrow.tres" id="18_s6dxo"]
+[ext_resource type="Resource" uid="uid://b116xj7wt67xg" path="res://items/crossbow_rare.tres" id="18_ttwfn"]
+[ext_resource type="Resource" uid="uid://i7en6370r25t" path="res://items/bookcaseFilled_broken.tres" id="19_4vf1b"]
 [ext_resource type="Resource" uid="uid://cphom06ek2kw2" path="res://items/coin.tres" id="19_lg0wv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
@@ -98,8 +101,10 @@ omni_range = 2.23352
 [node name="LoadingZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.55836, 0, 0.729423)
 script = ExtResource("7_pwgd1")
-target_scene_path = "res://levels/win_screen.tscn"
+target_scene_path = "res://levels/level_3.tscn"
+target_id = "level_3"
 displacement = Vector3(1, 0, 0)
+transition = ExtResource("9_dk5kx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LoadingZone"]
 shape = SubResource("CylinderShape3D_c8vph")
@@ -226,6 +231,14 @@ mesh = SubResource("PrismMesh_o68hm")
 [node name="DroppedItem" parent="." instance=ExtResource("16_wmjhu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.899, 1, -4.277)
 item = ExtResource("17_0ybq0")
+
+[node name="DroppedItem4" parent="." instance=ExtResource("16_wmjhu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.01402, 1, -2.94224)
+item = ExtResource("18_ttwfn")
+
+[node name="DroppedItem5" parent="." instance=ExtResource("16_wmjhu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.19503, 1, -2.20239)
+item = ExtResource("19_4vf1b")
 
 [node name="DroppedItem3" parent="." instance=ExtResource("16_wmjhu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77324, 0.736522, -4.277)

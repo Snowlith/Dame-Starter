@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://djdll5upj75nl"]
+[gd_scene load_steps=24 format=3 uid="uid://djdll5upj75nl"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_o4rjg"]
 [ext_resource type="PackedScene" uid="uid://c0cx8nh2110ik" path="res://scenes/structures/wall.tscn" id="2_860kj"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://burruay2fmyio" path="res://assets/models/pots.gltf.glb" id="10_rgh4a"]
 [ext_resource type="PackedScene" uid="uid://qygidfbv0lue" path="res://assets/models/torchWall.gltf.glb" id="11_83q3j"]
 [ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="11_xu2kq"]
+[ext_resource type="PackedScene" uid="uid://bqkkfyrt8jks2" path="res://transitions/dame_transition.tscn" id="12_1ryre"]
 [ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/structures/pillar.tscn" id="12_kwogh"]
 [ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/interactable/jump_pad.tscn" id="12_n1oka"]
 [ext_resource type="PackedScene" uid="uid://dj866322oetir" path="res://scenes/structures/scaffold_small_medium_railing.tscn" id="13_7ultf"]
@@ -108,6 +109,7 @@ script = ExtResource("11_xu2kq")
 target_scene_path = "res://levels/level_2.tscn"
 target_id = "start"
 displacement = Vector3(1.545, 0, 0)
+transition = ExtResource("12_1ryre")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="LoadingZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0721188, 0.365649, 0.0714136)
@@ -159,4 +161,4 @@ transform = Transform3D(-0.716862, 0, -0.697215, 0, 1, 0, 0.697215, 0, -0.716862
 transform = Transform3D(-0.716862, 0, -0.697215, 0, 1, 0, 0.697215, 0, -0.716862, 8.17991, 1.27625, -1.47465)
 
 [node name="ScaffoldStairs3" parent="." instance=ExtResource("15_ihvpa")]
-transform = Transform3D(-0.95475, 0, 0.297408, 0, 1, 0, -0.297408, 0, -0.95475, -1.22533, -0.462859, 6.55565)
+transform = Transform3D(-0.95475, 0, 0.297408, 0, 1, 0, -0.297408, 0, -0.95475, -1.22533, 6.91907, 6.55565)
