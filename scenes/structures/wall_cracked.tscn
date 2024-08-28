@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8rlqlaexjf37"]
+
+[ext_resource type="ArrayMesh" uid="uid://6fbgjkylugb2" path="res://assets/meshes/wall_cracked.tres" id="1_1tcax"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_488fx"]
+points = PackedVector3Array(2, 4, 0.5, 2, 0, 0.5, 2, 4, -0.5, -2, 4, 0.5, 2, 0, -0.5, -2, 0, 0.5, -2, 4, -0.5, -2, 0, -0.5)
+
+[node name="WallCracked" type="StaticBody3D"]
+
+[node name="WallCracked" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_1tcax")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_488fx")

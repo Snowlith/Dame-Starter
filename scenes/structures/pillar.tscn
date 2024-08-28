@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5iu1i3ami62t"]
+
+[ext_resource type="ArrayMesh" path="res://assets/meshes/pillar.tres" id="1_kha1g"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jfxb3"]
+points = PackedVector3Array(-0.750012, 0, -0.276331, -0.276343, 0, -0.75, -0.750012, 0, 0.276184, -0.750012, 3.99961, -0.276331, 0.276172, 0, -0.75, -0.276343, 4, -0.75, -0.276343, 0, 0.75, -0.750012, 3.99961, 0.276184, 0.749988, 0, -0.276331, 0.276172, 4, -0.75, -0.276343, 4, 0.75, 0.276172, 0, 0.75, 0.749988, 0, 0.276184, 0.749988, 3.99961, -0.276331, 0.276172, 4, 0.75, 0.749988, 3.99961, 0.276184)
+
+[node name="Pillar" type="StaticBody3D"]
+
+[node name="Pillar" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_kha1g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_jfxb3")
