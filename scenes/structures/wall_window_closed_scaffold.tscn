@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxv42slptncfr"]
+
+[ext_resource type="ArrayMesh" uid="uid://caor6rycbsvr3" path="res://assets/meshes/wall_window_closed_scaffold.tres" id="1_lvsxn"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ltv24"]
+points = PackedVector3Array(2, 4, 0.5, 2, 0, 0.5, 2, 4, -0.5, -2, 4, 0.5, 2, 0, -0.5, -2, 0, 0.5, -2, 4, -0.5, -2, 0, -0.5)
+
+[node name="WallWindowClosedScaffold" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_lvsxn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_ltv24")
