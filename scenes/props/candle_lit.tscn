@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw8cux68xx5cd"]
+[gd_scene load_steps=2 format=3 uid="uid://ctxanahcurmry"]
 
-[ext_resource type="ArrayMesh" path="res://assets/meshes/candle_lit.tres" id="1_r0oah"]
+[ext_resource type="ArrayMesh" uid="uid://c0odqrfeqr6bp" path="res://assets/meshes/candle_lit.tres" id="1_r0oah"]
 
 [node name="CandleLit" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_r0oah")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.911514, 0)
+light_color = Color(0.64173, 0.614806, 0.298144, 1)
+omni_range = 1.89474
