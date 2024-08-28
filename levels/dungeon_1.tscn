@@ -1,6 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqerhorutoio7"]
+[gd_scene load_steps=17 format=3 uid="uid://dqerhorutoio7"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_kah3k"]
+[ext_resource type="PackedScene" uid="uid://cswdoghugcwnx" path="res://scenes/terrain/floor_tile_large.tscn" id="2_n3gr5"]
+[ext_resource type="PackedScene" uid="uid://c4yqqgxjk04jl" path="res://scenes/structures/wall_scaffold.tscn" id="3_toukb"]
+[ext_resource type="PackedScene" uid="uid://cr6k20nh6nepg" path="res://scenes/structures/wall_window_closed.tscn" id="4_6i66a"]
+[ext_resource type="PackedScene" uid="uid://cxv42slptncfr" path="res://scenes/structures/wall_window_closed_scaffold.tscn" id="5_2s5rp"]
+[ext_resource type="PackedScene" uid="uid://c5iu1i3ami62t" path="res://scenes/structures/pillar.tscn" id="6_ijvyg"]
+[ext_resource type="PackedScene" uid="uid://cn1eahugx35by" path="res://scenes/terrain/floor_dirt_large.tscn" id="7_uiia7"]
+[ext_resource type="PackedScene" uid="uid://cka6pdjfmdc0" path="res://scenes/terrain/floor_dirt_small_corner.tscn" id="8_qo7hp"]
+[ext_resource type="PackedScene" uid="uid://dgwtmuqf87igg" path="res://scenes/terrain/floor_tile_small.tscn" id="9_pqot0"]
+[ext_resource type="PackedScene" uid="uid://bdbkfyrffdiep" path="res://scenes/terrain/floor_dirt_small_b.tscn" id="10_cgree"]
+[ext_resource type="PackedScene" uid="uid://cpwvusvv6svo" path="res://scenes/terrain/floor_dirt_small_a.tscn" id="11_mv1hs"]
+[ext_resource type="PackedScene" uid="uid://bom53ml5vbsov" path="res://scenes/structures/wall_corner_scaffold.tscn" id="12_v34k8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -15,10 +26,10 @@ sky = SubResource("Sky_ufhv6")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nvom"]
-albedo_color = Color(0.371001, 0.124844, 0.069521, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0gfl"]
+albedo_color = Color(0.07, 0.07, 0.07, 1)
 
-[node name="LevelTemplate" type="Node3D"]
+[node name="Dungeon1" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -27,9 +38,74 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_s5wev")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-use_collision = true
-size = Vector3(32, 0.001, 32)
-material = SubResource("StandardMaterial3D_8nvom")
-
 [node name="Player" parent="." instance=ExtResource("1_kah3k")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(32, 0.001, 32)
+material = SubResource("StandardMaterial3D_a0gfl")
+
+[node name="FloorTileLarge" parent="." instance=ExtResource("2_n3gr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="FloorTileLarge2" parent="." instance=ExtResource("2_n3gr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+
+[node name="FloorTileLarge3" parent="." instance=ExtResource("2_n3gr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+
+[node name="FloorTileLarge4" parent="." instance=ExtResource("2_n3gr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="FloorTileLarge5" parent="." instance=ExtResource("2_n3gr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
+
+[node name="WallScaffold" parent="." instance=ExtResource("3_toukb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)
+
+[node name="WallScaffold2" parent="." instance=ExtResource("3_toukb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="WallWindowClosed" parent="." instance=ExtResource("4_6i66a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="WallScaffold3" parent="." instance=ExtResource("3_toukb")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, -6)
+
+[node name="WallWindowClosed3" parent="." instance=ExtResource("4_6i66a")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, -6)
+
+[node name="WallWindowClosedScaffold" parent="." instance=ExtResource("5_2s5rp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
+
+[node name="Pillar" parent="." instance=ExtResource("6_ijvyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -7)
+
+[node name="FloorTileLarge6" parent="." instance=ExtResource("2_n3gr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, -10)
+
+[node name="FloorDirtLarge" parent="." instance=ExtResource("7_uiia7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="FloorDirtSmallCorner" parent="." instance=ExtResource("8_qo7hp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+
+[node name="FloorDirtLarge2" parent="." instance=ExtResource("7_uiia7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
+
+[node name="FloorTileSmall" parent="." instance=ExtResource("9_pqot0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -7)
+
+[node name="FloorTileSmall2" parent="." instance=ExtResource("9_pqot0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -7)
+
+[node name="FloorTileSmall3" parent="." instance=ExtResource("9_pqot0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -7)
+
+[node name="FloorDirtSmallB" parent="." instance=ExtResource("10_cgree")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
+
+[node name="FloorDirtSmallA" parent="." instance=ExtResource("11_mv1hs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+
+[node name="WallCornerScaffold" parent="." instance=ExtResource("12_v34k8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 2)

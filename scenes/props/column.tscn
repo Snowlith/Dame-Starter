@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c64d8k5xq28so"]
+
+[ext_resource type="ArrayMesh" path="res://assets/meshes/column.tres" id="1_3mygi"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_eqfkh"]
+points = PackedVector3Array(-0.35, 0, -0.35, 0.349931, 0, -0.35, -0.35, 0, 0.35, -0.35, 1.19992, -0.35, 0.35, 0, 0.349931, 0.349931, 1.19992, -0.35, -0.35, 1.19992, 0.35, -2.98023e-08, 1.4, -2.98023e-08, 0.35, 1.19992, 0.349931)
+
+[node name="Column" type="StaticBody3D"]
+
+[node name="Column" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_3mygi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_eqfkh")
