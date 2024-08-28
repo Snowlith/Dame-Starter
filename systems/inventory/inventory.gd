@@ -13,6 +13,11 @@ class_name Inventory
 
 var is_open = false
 
+func has_item(item: Item):
+	if not item:
+		return false
+	return item in items
+	
 func insert(item: Item):
 	var index = items.find(null)
 	if (index == -1):

@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cu4a3g4md3w4a"]
+[gd_scene load_steps=4 format=3 uid="uid://cu4a3g4md3w4a"]
 
 [ext_resource type="Script" path="res://systems/inventory/inventory_slot.gd" id="1_qvp1a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_o828c"]
 font_size = 26
 font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_13sfg"]
+font_color = Color(0, 0, 1, 1)
 
 [node name="InventorySlot" type="CenterContainer"]
 custom_minimum_size = Vector2(128, 128)
@@ -16,7 +19,7 @@ script = ExtResource("1_qvp1a")
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="RarityText" type="Label" parent="."]
 visible = false
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
@@ -28,3 +31,10 @@ vertical_alignment = 2
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
+
+[node name="AmountText" type="Label" parent="."]
+visible = false
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_13sfg")
+vertical_alignment = 2

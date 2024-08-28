@@ -1,7 +1,8 @@
 extends Control
 
 @onready var item_visual: TextureRect = $TextureRect
-@onready var amount_text: Label = $Label
+@onready var rarity_text: Label = $RarityText
+@onready var amount_text: Label = $AmountText
 
 var current_inventory: Inventory
 var current_item: Item
@@ -39,10 +40,14 @@ func update(item: Item):
 	if current_item:
 		texture = load(current_item.get_icon_path())
 		item_visual.texture = texture
-		amount_text.visible = true
-		amount_text.text = item.rarity
+		rarity_text.visible = true
+		rarity_text.text = item.rarity
 	else:
 		texture = null
 		item_visual.texture = texture
-		amount_text.visible = false
-		amount_text.text = ""
+		rarity_text.visible = false
+		rarity_text.text = ""
+		
+func _on_mouse_entered():
+	print("poo")
+	rarity_text.visible = true
