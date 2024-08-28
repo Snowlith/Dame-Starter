@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw8cux68xx5cd"]
+
+[ext_resource type="ArrayMesh" path="res://assets/meshes/candle_lit.tres" id="1_r0oah"]
+
+[node name="CandleLit" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_r0oah")

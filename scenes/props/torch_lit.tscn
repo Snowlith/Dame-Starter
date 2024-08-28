@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://1ut5q4rhuhkw"]
+
+[ext_resource type="ArrayMesh" path="res://assets/meshes/torch_lit.tres" id="1_lujx7"]
+
+[node name="TorchLit" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_lujx7")
