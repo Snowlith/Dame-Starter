@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://ciwhtsnhpyvw3"]
+[gd_scene load_steps=4 format=4 uid="uid://bdsu7hirw8sok"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yslgb"]
 resource_name = "Gold"
