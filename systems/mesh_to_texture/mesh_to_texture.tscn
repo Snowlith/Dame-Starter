@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://pu0lfvpqn3l0"]
 
 [ext_resource type="Script" path="res://systems/mesh_to_texture/mesh_to_texture.gd" id="1_kvn2a"]
-[ext_resource type="ArrayMesh" uid="uid://c7pik05yasr58" path="res://assets/meshes/artifact.tres" id="2_0a46k"]
+[ext_resource type="ArrayMesh" uid="uid://c7pik05yasr58" path="res://assets/old_meshes/artifact.tres" id="2_0a46k"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x6x0n"]
 viewport_path = NodePath("SubViewportContainer/SubViewport")

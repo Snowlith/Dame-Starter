@@ -1,14 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://djdll5upj75nl"]
+[gd_scene load_steps=17 format=3 uid="uid://djdll5upj75nl"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_o4rjg"]
 [ext_resource type="PackedScene" uid="uid://c0cx8nh2110ik" path="res://scenes/structures/wall.tscn" id="2_860kj"]
-[ext_resource type="PackedScene" uid="uid://cj2wnyx63da7i" path="res://assets/models/coinsLarge.gltf.glb" id="3_4nht0"]
-[ext_resource type="PackedScene" uid="uid://dmlajcxvquwxg" path="res://assets/models/lootSackA.gltf.glb" id="4_5riqi"]
-[ext_resource type="PackedScene" uid="uid://lvrshdq5koal" path="res://assets/models/lootSackB.gltf.glb" id="5_0dx1a"]
-[ext_resource type="PackedScene" uid="uid://ce3orp64thp2a" path="res://assets/models/potA.gltf.glb" id="8_fj3bg"]
-[ext_resource type="PackedScene" uid="uid://don6h1jpkbiek" path="res://assets/models/potA_decorated.gltf.glb" id="9_lo3xf"]
-[ext_resource type="PackedScene" uid="uid://burruay2fmyio" path="res://assets/models/pots.gltf.glb" id="10_rgh4a"]
-[ext_resource type="PackedScene" uid="uid://qygidfbv0lue" path="res://assets/models/torchWall.gltf.glb" id="11_83q3j"]
 [ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="11_xu2kq"]
 [ext_resource type="PackedScene" uid="uid://bqkkfyrt8jks2" path="res://transitions/dame_transition.tscn" id="12_1ryre"]
 [ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/structures/pillar.tscn" id="12_kwogh"]
@@ -34,16 +27,6 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nvom"]
 albedo_color = Color(0.371001, 0.124844, 0.069521, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5c6b"]
-albedo_color = Color(1, 0.486275, 0.0313726, 1)
-emission_enabled = true
-emission = Color(0.741176, 0.266667, 0, 1)
-backlight = Color(1, 0, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_6oa6q"]
-material = SubResource("StandardMaterial3D_l5c6b")
-radius = 0.1
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cvt37"]
 height = 0.670723
@@ -71,36 +54,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82893, 0.000499725, -3.029
 
 [node name="wall2" parent="." instance=ExtResource("2_860kj")]
 transform = Transform3D(0.724027, 0, -0.689771, 0, 1, 0, 0.689771, 0, 0.724027, 6.29721, 0.000499725, -1.26712)
-
-[node name="coinsLarge_gltf" parent="." instance=ExtResource("3_4nht0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.83768, 4.0951, 8.44358)
-
-[node name="lootSackA_gltf" parent="." instance=ExtResource("4_5riqi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.77383, 0.000500679, -0.362302)
-
-[node name="lootSackB_gltf" parent="." instance=ExtResource("5_0dx1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25902, 0.000500679, -0.904521)
-
-[node name="potA_gltf" parent="." instance=ExtResource("8_fj3bg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79746, 0.000499725, -2.02365)
-
-[node name="potA_decorated_gltf" parent="." instance=ExtResource("9_lo3xf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23204, 0.000498772, -2.06774)
-
-[node name="pots_gltf" parent="." instance=ExtResource("10_rgh4a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4005, 0.000500202, 1.16987)
-
-[node name="torchWall_gltf" parent="." instance=ExtResource("11_83q3j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.80488, 2.07434, -2.27975)
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="torchWall_gltf"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.836714, 0.581434)
-amount = 3
-speed_scale = 2.86
-randomness = 0.42
-mesh = SubResource("SphereMesh_6oa6q")
-direction = Vector3(0, 1, 0)
-gravity = Vector3(0, 1, 0)
 
 [node name="Area3D" parent="." instance=ExtResource("12_n1oka")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.90434, 0.000500679, 1.43905)

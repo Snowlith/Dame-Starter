@@ -1,12 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://dmjnim27xtopm"]
+[gd_scene load_steps=25 format=3 uid="uid://dmjnim27xtopm"]
 
 [ext_resource type="Material" uid="uid://k1pr1c5k0a8u" path="res://assets/materials/dirt.tres" id="1_h6d5s"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_l0ynh"]
 [ext_resource type="PackedScene" uid="uid://c0cx8nh2110ik" path="res://scenes/structures/wall.tscn" id="2_38hdq"]
 [ext_resource type="PackedScene" uid="uid://ckcb51q5a4kr6" path="res://scenes/props/chest_common.tscn" id="3_dl6ii"]
-[ext_resource type="PackedScene" uid="uid://cj2wnyx63da7i" path="res://assets/models/coinsLarge.gltf.glb" id="4_uavvb"]
-[ext_resource type="PackedScene" uid="uid://cyw12r04k7pmr" path="res://assets/models/coinsMedium.gltf.glb" id="5_ilrdl"]
-[ext_resource type="PackedScene" uid="uid://bstmf88bd2cvj" path="res://assets/models/coinsSmall.gltf.glb" id="6_my6jb"]
 [ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="7_pwgd1"]
 [ext_resource type="PackedScene" uid="uid://c3nnojas0ib4x" path="res://scenes/structures/pillar.tscn" id="8_1cc51"]
 [ext_resource type="PackedScene" uid="uid://c5w10rjrtwlt7" path="res://transitions/game_transition.tscn" id="9_dk5kx"]
@@ -78,15 +75,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.78446, 0.000500202, 1.8706
 
 [node name="chest_common2" parent="." instance=ExtResource("3_dl6ii")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.63914, 0.000500202, -0.524442)
-
-[node name="coinsLarge_gltf" parent="." instance=ExtResource("4_uavvb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.46948, 0.000499725, 0.748206)
-
-[node name="coinsMedium_gltf" parent="." instance=ExtResource("5_ilrdl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.84727, 0.000500202, 2.12634)
-
-[node name="coinsSmall_gltf" parent="." instance=ExtResource("6_my6jb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.34949, 0.000500202, -0.830144)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15073, 0.944257, 0.416809)

@@ -33,4 +33,3 @@ func spawn(node: Node3D) -> void:
 		var cam := child as FPSCamera3D
 		if cam:
 			cam.set_look_dir(spawn_dir)
-			print(Vector3.FORWARD)

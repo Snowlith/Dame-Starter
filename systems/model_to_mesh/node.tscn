@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvygjn0sauj3h"]
+
+[ext_resource type="Script" path="res://systems/model_to_mesh/model_to_mesh.gd" id="1_b1xrn"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_b1xrn")
+import_dir = "res://assets/models"
+export_dir = "res://assets/meshes"

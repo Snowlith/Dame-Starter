@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cf2vxnag22xoy"]
+[gd_scene load_steps=23 format=3 uid="uid://cf2vxnag22xoy"]
 
 [ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="1_ha5du"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_lljmm"]
@@ -12,13 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://de5rwq3ipxpd5" path="res://scenes/structures/wall_end.tscn" id="10_gejwj"]
 [ext_resource type="PackedScene" uid="uid://dmx15ltemey01" path="res://scenes/interactable/dropped_item.tscn" id="11_0scx7"]
 [ext_resource type="Resource" uid="uid://dmwsgvv8nu2gh" path="res://items/artifact.tres" id="12_k654d"]
-[ext_resource type="PackedScene" uid="uid://kgixdn7anur" path="res://assets/models/bricks.gltf.glb" id="14_31m7a"]
-[ext_resource type="PackedScene" uid="uid://burruay2fmyio" path="res://assets/models/pots.gltf.glb" id="16_pylly"]
 [ext_resource type="PackedScene" uid="uid://cybrjcvxj235o" path="res://scenes/props/barrel.tscn" id="17_o37ye"]
-[ext_resource type="PackedScene" uid="uid://b38qu6hqjk2q3" path="res://assets/models/potionMedium_green.gltf.glb" id="17_owavg"]
 [ext_resource type="PackedScene" uid="uid://b1mfpck55jwip" path="res://scenes/structures/wall_door.tscn" id="18_0kac6"]
 [ext_resource type="Script" path="res://scripts/locked_door.gd" id="19_gbbm1"]
-[ext_resource type="PackedScene" uid="uid://dcgh7nsc7rl3v" path="res://assets/models/plate.gltf.glb" id="20_uecs2"]
 [ext_resource type="PackedScene" uid="uid://cpgphoi4b7t0y" path="res://scenes/structures/scaffold_stairs.tscn" id="20_xfjkn"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mjj0n"]
@@ -265,21 +261,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5593, -1.26041, -8.50974)
 [node name="DroppedItem" parent="." instance=ExtResource("11_0scx7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9429, 2.52929, -30.2778)
 item = ExtResource("12_k654d")
-
-[node name="bricks_gltf" parent="." instance=ExtResource("14_31m7a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.89826, 0.0152669, -6.47918)
-
-[node name="bricks_gltf2" parent="." instance=ExtResource("14_31m7a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.89826, 6.65472, -15.1327)
-
-[node name="pots_gltf" parent="." instance=ExtResource("16_pylly")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.724, 6.65472, -15.2599)
-
-[node name="potionMedium_green_gltf" parent="." instance=ExtResource("17_owavg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0154, 6.65171, -15.751)
-
-[node name="plate_gltf" parent="." instance=ExtResource("20_uecs2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9512, 2.29569, -30.2693)
 
 [node name="ScaffoldSmallMediumRailing3" parent="." instance=ExtResource("4_pbgct")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.93833, 2.60716, -10.4339)
