@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdbkfyrffdiep"]
+
+[ext_resource type="ArrayMesh" uid="uid://15jio40phs00" path="res://assets/meshes/floor_dirt_small_B.tres" id="1_gmhig"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ya6d8"]
+points = PackedVector3Array(-1, -0.1, -1, -1, -0.1, 1, -1, 0.05, -1, 1, -0.1, -1, -1, 0.05, 1, 1, -0.1, 1, 1, 0.05, -1, 1, 0.05, 1)
+
+[node name="FloorDirtSmallB" type="StaticBody3D"]
+
+[node name="FloorTileSmall" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_gmhig")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_ya6d8")
