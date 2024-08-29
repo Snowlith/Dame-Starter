@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://iro8sgat8bs2"]
+[gd_scene load_steps=11 format=3 uid="uid://hbuvslviqh1i"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_a5vy2"]
 [ext_resource type="PackedScene" uid="uid://ccc0cqa1qp8cw" path="res://scenes/structures/stairs_wood_decorated.tscn" id="2_tqca8"]
