@@ -20,18 +20,18 @@
 [ext_resource type="PackedScene" uid="uid://cxahdvi347yhw" path="res://scenes/terrain/rubble_large.tscn" id="18_y1mws"]
 [ext_resource type="PackedScene" uid="uid://cu5681j1o8ypn" path="res://scenes/props/box_small.tscn" id="19_udugv"]
 [ext_resource type="PackedScene" uid="uid://ctxanahcurmry" path="res://scenes/props/candle_lit.tscn" id="20_c3f5j"]
-[ext_resource type="PackedScene" path="res://scenes/props/plate.tscn" id="21_6wotg"]
+[ext_resource type="PackedScene" uid="uid://bk3fvhvb6dqqi" path="res://scenes/props/plate.tscn" id="21_6wotg"]
 [ext_resource type="PackedScene" uid="uid://c64d8k5xq28so" path="res://scenes/props/column.tscn" id="22_a4hgx"]
 [ext_resource type="PackedScene" uid="uid://m5nn3o6gyaxk" path="res://scenes/props/barrier.tscn" id="23_71lse"]
-[ext_resource type="PackedScene" path="res://scenes/props/candle.tscn" id="24_fii4f"]
-[ext_resource type="PackedScene" path="res://scenes/props/banner_blue.tscn" id="25_r7egh"]
-[ext_resource type="PackedScene" path="res://scenes/props/bottle_a_brown.tscn" id="26_qepae"]
-[ext_resource type="PackedScene" path="res://scenes/props/torch.tscn" id="27_md4dn"]
+[ext_resource type="PackedScene" uid="uid://d0y8bif4yygct" path="res://scenes/props/candle.tscn" id="24_fii4f"]
+[ext_resource type="PackedScene" uid="uid://baqge4v4em13f" path="res://scenes/props/banner_blue.tscn" id="25_r7egh"]
+[ext_resource type="PackedScene" uid="uid://b266vx5g2mcgx" path="res://scenes/props/bottle_a_brown.tscn" id="26_qepae"]
+[ext_resource type="PackedScene" uid="uid://yoowxqdr1vwf" path="res://scenes/props/torch.tscn" id="27_md4dn"]
 [ext_resource type="PackedScene" uid="uid://ccc0cqa1qp8cw" path="res://scenes/structures/stairs_wood_decorated.tscn" id="28_duncg"]
 [ext_resource type="PackedScene" uid="uid://oo04tdyw77nw" path="res://scenes/structures/stairs_wood.tscn" id="29_ote7u"]
 [ext_resource type="PackedScene" uid="uid://dm001diiqonl2" path="res://scenes/structures/wall_window_open_scaffold.tscn" id="30_3tfa5"]
-[ext_resource type="PackedScene" path="res://scenes/props/coin_stack_large.tscn" id="31_cwwwm"]
-[ext_resource type="PackedScene" path="res://scenes/props/coin_stack_small.tscn" id="32_w67kr"]
+[ext_resource type="PackedScene" uid="uid://i2fuyfeimvsa" path="res://scenes/props/coin_stack_large.tscn" id="31_cwwwm"]
+[ext_resource type="PackedScene" uid="uid://wc03s716uy5q" path="res://scenes/props/coin_stack_small.tscn" id="32_w67kr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -305,6 +305,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8, 7.
 [node name="Pillar27" parent="." instance=ExtResource("6_ijvyg")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8, 11.603, -4)
 
+[node name="Pillar34" parent="." instance=ExtResource("6_ijvyg")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8, 11.603, -7.95062)
+
 [node name="Pillar28" parent="." instance=ExtResource("6_ijvyg")]
 transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, -8, 11.603, -4)
 
@@ -361,6 +364,9 @@ transform = Transform3D(-0.109457, 0, -0.993992, 0, 1, 0, 0.993992, 0, -0.109457
 
 [node name="RubbleHalf4" parent="." instance=ExtResource("17_vs8g7")]
 transform = Transform3D(-0.584575, 0, -0.811339, 0, 1, 0, 0.811339, 0, -0.584575, -10.5926, 1.98212, -6.48179)
+
+[node name="RubbleHalf5" parent="." instance=ExtResource("17_vs8g7")]
+transform = Transform3D(-0.584575, 0, -0.811339, 0, 1, 0, 0.811339, 0, -0.584575, -10.5926, 1.27671, -7.93118)
 
 [node name="RubbleLarge" parent="." instance=ExtResource("18_y1mws")]
 transform = Transform3D(-0.377356, 0, -0.926068, 0, 1, 0, 0.926068, 0, -0.377356, -10.5386, 0, 0.178498)
