@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/player/fps_camera3D.gd" id="2_kaij3"]
-[ext_resource type="ArrayMesh" uid="uid://c8hvkeda0hcen" path="res://assets/old_meshes/axe_common.tres" id="3_qkvbo"]
+[ext_resource type="ArrayMesh" uid="uid://c0odqrfeqr6bp" path="res://assets/meshes/candle_lit.tres" id="4_lmaeg"]
 [ext_resource type="PackedScene" uid="uid://t2ps5fa3fnki" path="res://systems/inventory/inventory.tscn" id="4_yvou1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
@@ -79,8 +79,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
 cull_mask = 1048574
 fov = 60.8124
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D"]
-transform = Transform3D(0.526436, 0, -0.850215, 0, 1, 0, 0.850215, 0, 0.526436, 0.182522, -0.524637, -0.619076)
+[node name="CandleLit" type="Node3D" parent="SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.454557, -1.78744)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D/CandleLit"]
 layers = 2
-mesh = ExtResource("3_qkvbo")
-skeleton = NodePath("../../../../FPSCamera3D")
+mesh = ExtResource("4_lmaeg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Camera3D/CandleLit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.911514, 0)
+light_color = Color(0.64173, 0.614806, 0.298144, 1)
+omni_range = 5.03354

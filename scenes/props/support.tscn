@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx538glhlduck"]
+
+[ext_resource type="ArrayMesh" uid="uid://c3q5v58nwggqm" path="res://assets/meshes/shelves.tres" id="1_rve44"]
+
+[node name="Support" type="Node3D"]
+
+[node name="Shelves" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0.496336, 1, -1.79665)
+mesh = ExtResource("1_rve44")

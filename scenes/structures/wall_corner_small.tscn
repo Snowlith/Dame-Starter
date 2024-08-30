@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://g0svunjurfbk"]
+
+[ext_resource type="ArrayMesh" uid="uid://do0onsi4bxfl0" path="res://assets/meshes/wall_corner_small.tres" id="1_s7xkw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rrxoe"]
+size = Vector3(1.5, 4, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6ot1e"]
+size = Vector3(0.5, 4, 1)
+
+[node name="WallCornerSmall" type="StaticBody3D"]
+
+[node name="WallCornerSmall" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_s7xkw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 2, 0)
+shape = SubResource("BoxShape3D_rrxoe")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2, 0.75)
+shape = SubResource("BoxShape3D_6ot1e")

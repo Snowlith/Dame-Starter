@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4cyaff4u0uki"]
+
+[ext_resource type="ArrayMesh" uid="uid://brpehgx6bwnto" path="res://assets/meshes/wall_Tsplit.tres" id="1_t35oc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w63xa"]
+size = Vector3(4, 4, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4tjfp"]
+size = Vector3(1, 4, 1.5)
+
+[node name="WallTsplit" type="StaticBody3D"]
+
+[node name="WallTsplit" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_t35oc")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_w63xa")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1.25)
+shape = SubResource("BoxShape3D_4tjfp")
