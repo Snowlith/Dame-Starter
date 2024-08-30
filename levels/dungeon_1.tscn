@@ -212,6 +212,9 @@ transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 7, 3.8
 [node name="FloorWoodSmall2" parent="." instance=ExtResource("13_5b54w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4, -9)
 
+[node name="FloorWoodSmall19" parent="." instance=ExtResource("13_5b54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4, -9)
+
 [node name="FloorWoodSmall15" parent="." instance=ExtResource("13_5b54w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4, -13)
 
