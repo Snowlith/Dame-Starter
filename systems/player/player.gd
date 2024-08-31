@@ -29,7 +29,17 @@ extends CharacterBody3D
 @onready var crouch_col: CollisionShape3D = $CrouchCollider
 @onready var shape_cast: ShapeCast3D = $CrouchCollider/ShapeCast3D
 
-var current_sprint_time := max_sprint_time
+# UI
+@onready var sprint_bar: ProgressBar = $SprintBar
+
+var current_sprint_time: float = max_sprint_time:
+	set(value):
+		value = clamp(value, 0, max_sprint_time)
+		if value == current_sprint_time:
+			return
+		current_sprint_time = value
+		sprint_bar.value = current_sprint_time / max_sprint_time
+
 var current_coyote_time: float = 0
 
 var is_sprinting := false
@@ -98,13 +108,14 @@ func _handle_crouch(crouch_input: bool) -> void:
 
 func _handle_sprint(sprint_input: bool, input_vector: Vector2, delta: float) -> void:
 	# When not sprinting, recharge sprint time
+	# NOTE: Sprint time is clamped in get()
+	var is_zero = input_vector == Vector2.ZERO
 	is_sprinting = false
-	if not sprint_input or is_crouching or is_on_wall():
-		if input_vector == Vector2.ZERO:
+	if not sprint_input or is_crouching or is_on_wall() or is_zero:
+		if is_zero:
 			current_sprint_time += stand_recharge_rate * delta
 		else:
 			current_sprint_time += walk_recharge_rate * delta
-		current_sprint_time = clamp(current_sprint_time, 0, max_sprint_time)
 		return
 	
 	# When sprinting, drain sprint time

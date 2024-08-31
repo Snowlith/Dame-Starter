@@ -9,7 +9,6 @@
 [node name="Inventory" type="Area3D"]
 script = ExtResource("1_rrfv4")
 items = Array[ExtResource("2_1fcvf")]([ExtResource("3_r73uu")])
-slot_scene = ExtResource("3_lwgw0")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1
@@ -49,3 +48,46 @@ offset_bottom = 269.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 6
+
+[node name="InventorySlot" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot8" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot9" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot10" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot11" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="InventorySlot12" parent="NinePatchRect/SlotContainer" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+
+[node name="HandSlot" parent="NinePatchRect" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+offset_left = 771.0
+offset_top = 415.0
+offset_right = 899.0
+offset_bottom = 543.0

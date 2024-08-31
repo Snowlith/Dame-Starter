@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/player/fps_camera3D.gd" id="2_kaij3"]
-[ext_resource type="ArrayMesh" uid="uid://c0odqrfeqr6bp" path="res://assets/meshes/candle_lit.tres" id="4_lmaeg"]
 [ext_resource type="PackedScene" uid="uid://t2ps5fa3fnki" path="res://systems/inventory/inventory.tscn" id="4_yvou1"]
+[ext_resource type="Material" uid="uid://exj1wl8ifrmf" path="res://assets/materials/viewmodel_noclip.tres" id="5_7hay0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
@@ -43,50 +43,30 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="FPSCamera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
-cull_mask = 1048573
 fov = 80.0
 script = ExtResource("2_kaij3")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="FPSCamera3D"]
-remote_path = NodePath("../../SubViewportContainer/SubViewport/Camera3D")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.169091, 0.00701022, -1.13915)
+remote_path = NodePath("../../Inventory/HeldItem")
 update_scale = false
 
-[node name="Inventory" parent="." instance=ExtResource("4_yvou1")]
+[node name="Inventory" parent="." node_paths=PackedStringArray("held_item") instance=ExtResource("4_yvou1")]
+held_item = NodePath("HeldItem")
+viewmodel_mat_override = ExtResource("5_7hay0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12004, 0)
 shape = SubResource("CylinderShape3D_n44de")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -512.0
-offset_top = -512.0
-grow_horizontal = 0
-grow_vertical = 0
-mouse_filter = 2
+[node name="HeldItem" type="MeshInstance3D" parent="Inventory"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.169091, 1.90632, -1.13915)
+top_level = true
+cast_shadow = 0
+skeleton = NodePath("")
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
-cull_mask = 1048574
-fov = 60.8124
-
-[node name="CandleLit" type="Node3D" parent="SubViewportContainer/SubViewport/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.454557, -1.78744)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D/CandleLit"]
-layers = 2
-mesh = ExtResource("4_lmaeg")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Camera3D/CandleLit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.911514, 0)
-light_color = Color(0.64173, 0.614806, 0.298144, 1)
-omni_range = 5.03354
+[node name="SprintBar" type="ProgressBar" parent="."]
+offset_right = 94.0
+offset_bottom = 27.0
+max_value = 1.0
+value = 1.0

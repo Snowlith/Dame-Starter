@@ -1,13 +1,18 @@
 extends Control
+class_name Slot
 
 @onready var item_visual: TextureRect = $TextureRect
 @onready var rarity_text: Label = $RarityText
 @onready var amount_text: Label = $AmountText
 
-var current_inventory: Inventory
 var current_item: Item
-
 var texture
+
+signal item_dropped(slot, previous_owner)
+signal item_changed
+
+func _ready():
+	add_to_group(Inventory.SLOT)
 
 func _get_drag_data(_pos):
 	if not current_item:
@@ -15,7 +20,7 @@ func _get_drag_data(_pos):
 	var texture_rect = TextureRect.new()
 	texture_rect.texture = texture
 	texture_rect.expand = true
-	var rect_size = Vector2(80.0, 50.0)
+	var rect_size = Vector2(80.0, 80.0)
 	texture_rect.size = rect_size
 	
 	var preview = Control.new()
@@ -30,12 +35,13 @@ func _can_drop_data(_pos, data):
 	return true
 
 func _drop_data(_pos, prev_owner):
-	current_inventory.switch_slots(self, prev_owner)
+	item_dropped.emit(self, prev_owner)
 
 func update(item: Item):
 	if current_item == item:
 		return
 	current_item = item
+	item_changed.emit()
 	
 	if current_item:
 		texture = load(current_item.get_icon_path())
@@ -47,7 +53,3 @@ func update(item: Item):
 		item_visual.texture = texture
 		rarity_text.visible = false
 		rarity_text.text = ""
-		
-func _on_mouse_entered():
-	print("poo")
-	rarity_text.visible = true

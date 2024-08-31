@@ -2,16 +2,39 @@ extends Area3D
 
 class_name Inventory
 
-@export var size: int = 12
 @export var items: Array[Item]
+@export var held_item: MeshInstance3D
+@export var viewmodel_mat_override: Material
 
-@export var slot_scene: PackedScene
-
+@onready var hand_slot: Slot = $NinePatchRect/HandSlot
 @onready var nine_patch_rect: Control = $NinePatchRect
-@onready var slot_container: Control = $NinePatchRect/SlotContainer
 
+var slots: Array[Slot]
+var size: int
 
 var is_open = false
+
+const SLOT = "inv_slot"
+	
+func _ready() -> void:
+	close()
+	# Gets too wide scene tree
+	for slot: Slot in get_tree().get_nodes_in_group(SLOT):
+		if not slot:
+			continue
+		slots.append(slot)
+	size = slots.size()
+	
+	items.resize(size)
+	_update()
+	
+	for slot in slots:
+		slot.item_dropped.connect(switch_slots)
+	hand_slot.item_changed.connect(update_hand)
+	
+	area_entered.connect(_on_area_entered)
+	
+	print(hand_slot)
 
 func has_item(item: Item):
 	if not item:
@@ -23,16 +46,7 @@ func insert(item: Item):
 	if (index == -1):
 		return
 	items[index] = item
-	update_ui()
-	
-func _ready() -> void:
-	add_nulls()
-	
-	create_ui()
-	update_ui()
-	close()
-	
-	area_entered.connect(_on_area_entered)
+	_update()
 	
 func _on_area_entered(area: Area3D):
 	var dropped_item := area as DroppedItem
@@ -41,10 +55,12 @@ func _on_area_entered(area: Area3D):
 	insert(dropped_item.item)
 	dropped_item.despawn()
 
-func update_ui():
-	var ui_slots: Array = slot_container.get_children()
-	for i in range(size):
-		ui_slots[i].update(items[i])
+func _update():
+	for i in slots.size():
+		var slot: Slot = slots[i]
+		if not slot:
+			continue
+		slot.update(items[i])
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("inventory"):
@@ -52,6 +68,10 @@ func _process(delta: float) -> void:
 			close()
 		else:
 			open()
+
+func update_hand():
+	held_item.mesh = hand_slot.current_item.mesh
+	held_item.material_override = viewmodel_mat_override
 
 func open():
 	SceneManager.in_menu = true
@@ -62,26 +82,10 @@ func close():
 	SceneManager.in_menu = false
 	nine_patch_rect.visible = false
 	is_open = false
-	
-func create_ui():
-	for i in range(size):
-		var item_cell = slot_scene.instantiate()
-		item_cell.current_inventory = self
-		slot_container.add_child(item_cell)
-
-func clear():
-	items.clear()
-	for i in range(size):
-		items.append(null)
-
-func add_nulls():
-	for i in range(size - items.size()):
-		items.append(null)
 
 func switch_slots(slot_1, slot_2):
-	var ui_slots: Array = slot_container.get_children()
-	var index_1 = ui_slots.find(slot_1)
-	var index_2 = ui_slots.find(slot_2)
+	var index_1 = slots.find(slot_1)
+	var index_2 = slots.find(slot_2)
 	var temp = slot_1.current_item
 	slot_1.update(slot_2.current_item)
 	slot_2.update(temp)
