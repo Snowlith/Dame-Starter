@@ -3,8 +3,7 @@ extends Area3D
 class_name Inventory
 
 @export var items: Array[Item]
-@export var held_item: MeshInstance3D
-@export var viewmodel_mat_override: Material
+@export var view_model: MeshInstance3D
 
 @onready var hand_slot: Slot = $NinePatchRect/HandSlot
 @onready var nine_patch_rect: Control = $NinePatchRect
@@ -15,6 +14,8 @@ var size: int
 var is_open = false
 
 const SLOT = "inv_slot"
+
+# TODO: add item stacks
 	
 func _ready() -> void:
 	close()
@@ -70,8 +71,13 @@ func _process(delta: float) -> void:
 			open()
 
 func update_hand():
-	held_item.mesh = hand_slot.current_item.mesh
-	held_item.material_override = viewmodel_mat_override
+	if not view_model:
+		return
+	if hand_slot.current_item:
+		print(hand_slot)
+		view_model.mesh = hand_slot.current_item.mesh
+	else:
+		view_model.mesh = null
 
 func open():
 	SceneManager.in_menu = true

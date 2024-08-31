@@ -6,8 +6,8 @@ const float M_PI = 3.14159265359;
 uniform sampler2D albedo_texture: source_color;
 
 void vertex() {
-    // recreate the camera projection matrix with our custom fov value 
-    float scale = 1.0 / tan(fov * 0.5 * M_PI / 180.0); 
+    // recreate the camera projection matrix with our custom fov value
+    float scale = 1.0 / tan(fov * 0.5 * M_PI / 180.0);
     PROJECTION_MATRIX[0][0] = -scale / (VIEWPORT_SIZE.x / -VIEWPORT_SIZE.y);
     PROJECTION_MATRIX[1][1] = -scale;
 }

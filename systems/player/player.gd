@@ -5,8 +5,8 @@ extends CharacterBody3D
 @export var acceleration: float = 10.0
 @export var friction: float = 18.0
 
-@export var gravity: float = 50.0
-@export var jump_strength: float = 15.0
+@export var gravity: float = 40.0
+@export var jump_strength: float = 13.0
 
 @export_subgroup("Sprinting")
 @export var max_sprint_time: float = 4.0

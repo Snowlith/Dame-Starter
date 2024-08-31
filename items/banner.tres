@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bo86p7ey7o8ci"]
+
+[ext_resource type="Script" path="res://systems/inventory/item.gd" id="1_3kuuq"]
+[ext_resource type="ArrayMesh" uid="uid://bga3b6pn8u5yh" path="res://assets/meshes/banner_blue.tres" id="1_6iaa6"]
+
+[resource]
+script = ExtResource("1_3kuuq")
+name = "Banner"
+mesh = ExtResource("1_6iaa6")
+rarity = "Common"
+icon_orientation = "Front"

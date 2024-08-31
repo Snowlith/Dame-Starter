@@ -11,6 +11,8 @@ var texture
 signal item_dropped(slot, previous_owner)
 signal item_changed
 
+# TODO: Remove the ability to move nulls around
+
 func _ready():
 	add_to_group(Inventory.SLOT)
 

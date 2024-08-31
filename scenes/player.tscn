@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=11 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/player/fps_camera3D.gd" id="2_kaij3"]
 [ext_resource type="PackedScene" uid="uid://t2ps5fa3fnki" path="res://systems/inventory/inventory.tscn" id="4_yvou1"]
 [ext_resource type="Material" uid="uid://exj1wl8ifrmf" path="res://assets/materials/viewmodel_noclip.tres" id="5_7hay0"]
+[ext_resource type="Script" path="res://systems/inventory/view_model.gd" id="6_6qend"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
@@ -20,6 +21,7 @@ height = 2.17288
 radius = 0.829099
 
 [node name="Player" type="CharacterBody3D"]
+floor_snap_length = 0.2
 script = ExtResource("1_gp66p")
 speed = 7.0
 
@@ -47,23 +49,22 @@ fov = 80.0
 script = ExtResource("2_kaij3")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="FPSCamera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.169091, 0.00701022, -1.13915)
-remote_path = NodePath("../../Inventory/HeldItem")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.446998, -0.86123)
+remote_path = NodePath("../../Inventory/ViewModel")
 update_scale = false
 
-[node name="Inventory" parent="." node_paths=PackedStringArray("held_item") instance=ExtResource("4_yvou1")]
-held_item = NodePath("HeldItem")
-viewmodel_mat_override = ExtResource("5_7hay0")
+[node name="Inventory" parent="." node_paths=PackedStringArray("view_model") instance=ExtResource("4_yvou1")]
+view_model = NodePath("ViewModel")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12004, 0)
 shape = SubResource("CylinderShape3D_n44de")
 
-[node name="HeldItem" type="MeshInstance3D" parent="Inventory"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.169091, 1.90632, -1.13915)
+[node name="ViewModel" type="MeshInstance3D" parent="Inventory"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.523012, 1.45231, -0.86123)
 top_level = true
-cast_shadow = 0
-skeleton = NodePath("")
+script = ExtResource("6_6qend")
+shader_material = ExtResource("5_7hay0")
 
 [node name="SprintBar" type="ProgressBar" parent="."]
 offset_right = 94.0

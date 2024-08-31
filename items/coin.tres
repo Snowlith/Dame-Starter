@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cphom06ek2kw2"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c3r10f2hvu4ek"]
 
+[ext_resource type="ArrayMesh" uid="uid://w3rnyeel6ebr" path="res://assets/meshes/coin.tres" id="1_8pwct"]
 [ext_resource type="Script" path="res://systems/inventory/item.gd" id="1_e33sl"]
-[ext_resource type="ArrayMesh" uid="uid://chigafv2i2p68" path="res://assets/old_meshes/coin.tres" id="1_pmy7x"]
 
 [resource]
 script = ExtResource("1_e33sl")
 name = "Coin"
-mesh = ExtResource("1_pmy7x")
-rarity = "Rare"
-icon_orientation = "Front"
+mesh = ExtResource("1_8pwct")
+rarity = "Common"
+icon_orientation = "Top"

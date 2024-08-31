@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6y5qb22vy374"
-path="res://.godot/imported/axe_common.png-aeb4fe8dc71f18f7ed6e706cb5b1757b.ctex"
+uid="uid://d0hphdsmqhuvl"
+path="res://.godot/imported/alcohol.png-04cf5820870d2590f0df1ef96fe8b6e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/icons/axe_common.png"
-dest_files=["res://.godot/imported/axe_common.png-aeb4fe8dc71f18f7ed6e706cb5b1757b.ctex"]
+source_file="res://items/icons/alcohol.png"
+dest_files=["res://.godot/imported/alcohol.png-04cf5820870d2590f0df1ef96fe8b6e8.ctex"]
 
 [params]
 

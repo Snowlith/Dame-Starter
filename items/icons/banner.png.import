@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bau330bcst8qi"
-path="res://.godot/imported/bookcaseFilled_broken.png-5b14b71c7db6a3121e2401ce5dcb2495.ctex"
+uid="uid://co1k1fvj7m868"
+path="res://.godot/imported/banner.png-4cea8fa08cab330e44a327a7825e3051.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/icons/bookcaseFilled_broken.png"
-dest_files=["res://.godot/imported/bookcaseFilled_broken.png-5b14b71c7db6a3121e2401ce5dcb2495.ctex"]
+source_file="res://items/icons/banner.png"
+dest_files=["res://.godot/imported/banner.png-4cea8fa08cab330e44a327a7825e3051.ctex"]
 
 [params]
 

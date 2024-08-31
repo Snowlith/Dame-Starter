@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c5w10rjrtwlt7"]
 
 [ext_resource type="Script" path="res://transitions/transition_in_out.gd" id="1_v6bom"]
-[ext_resource type="Texture2D" uid="uid://o8t224o2h0nt" path="res://items/icons/coin.png" id="2_iiuch"]
+[ext_resource type="Texture2D" uid="uid://o8t224o2h0nt" path="res://assets/textures/coin.png" id="2_iiuch"]
 
 [sub_resource type="Animation" id="Animation_aaqir"]
 length = 0.001

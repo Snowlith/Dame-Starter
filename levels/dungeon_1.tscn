@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dqerhorutoio7"]
+[gd_scene load_steps=45 format=3 uid="uid://dqerhorutoio7"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_kah3k"]
 [ext_resource type="PackedScene" uid="uid://cswdoghugcwnx" path="res://scenes/terrain/floor_tile_large.tscn" id="2_n3gr5"]
@@ -37,7 +37,10 @@
 [ext_resource type="PackedScene" uid="uid://g0svunjurfbk" path="res://scenes/structures/wall_corner_small.tscn" id="35_fm3u3"]
 [ext_resource type="PackedScene" uid="uid://dh4gutjvyitim" path="res://scenes/structures/wall_half.tscn" id="36_8byr1"]
 [ext_resource type="PackedScene" uid="uid://dmx15ltemey01" path="res://scenes/interactable/dropped_item.tscn" id="37_fmq0f"]
-[ext_resource type="Resource" uid="uid://cphom06ek2kw2" path="res://items/coin.tres" id="38_gfh7t"]
+[ext_resource type="Resource" uid="uid://c3r10f2hvu4ek" path="res://items/coin.tres" id="38_d8csr"]
+[ext_resource type="Resource" uid="uid://bo86p7ey7o8ci" path="res://items/banner.tres" id="39_wrcbb"]
+[ext_resource type="Resource" uid="uid://l4muv2qyrao" path="res://items/alcohol.tres" id="40_fcilk"]
+[ext_resource type="Resource" uid="uid://8j4qjx5ewdge" path="res://items/keyring.tres" id="41_sjq1i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v6f72"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -843,8 +846,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 12, 2)
 
 [node name="DroppedItem" parent="." instance=ExtResource("37_fmq0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90637, 0.0499854, -2.88673)
-item = ExtResource("38_gfh7t")
+item = ExtResource("38_d8csr")
 
 [node name="DroppedItem2" parent="." instance=ExtResource("37_fmq0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522119, 0.0499854, -2.03546)
-item = ExtResource("38_gfh7t")
+item = ExtResource("39_wrcbb")
+
+[node name="DroppedItem3" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522119, 0.0499854, -4.00718)
+item = ExtResource("40_fcilk")
+
+[node name="DroppedItem4" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.33848, 0.0499859, -1.42945)
+item = ExtResource("41_sjq1i")

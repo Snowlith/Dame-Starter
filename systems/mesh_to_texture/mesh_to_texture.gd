@@ -6,10 +6,8 @@ extends Node3D
 @onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
 @onready var cam: Camera3D = $SubViewportContainer/SubViewport/Camera3D
 
-@onready var mesh_front: MeshInstance3D = $SubViewportContainer/SubViewport/MeshFront
-@onready var mesh_angled: MeshInstance3D = $SubViewportContainer/SubViewport/MeshAngled
-
 var default_cam_pos
+var default_mesh_instance_pos
 
 func _ready():
 	default_cam_pos = cam.transform.origin
@@ -22,7 +20,8 @@ func _ready():
 		var mesh_instance = get_mesh_instance(item)
 		mesh_instance.mesh = item.mesh
 		mesh_instance.visible = true
-		adjust_camera(item.mesh)
+		adjust_scene(mesh_instance)
+		
 		await RenderingServer.frame_post_draw
 		save_image(item)
 		mesh_instance.visible = false
@@ -30,22 +29,23 @@ func _ready():
 	get_tree().quit()
 
 func get_mesh_instance(item):
-	match item.icon_orientation:
-			"Front":
-				return mesh_front
-			"Angled":
-				return mesh_angled
-	return mesh_front
-		
+	var mesh_instance = sub_viewport.get_node_or_null(item.icon_orientation)
+	if mesh_instance:
+		return mesh_instance
+	return $SubViewportContainer/SubViewport/Front
 
-func adjust_camera(mesh):
+func adjust_scene(mesh_instance):
+	var mesh = mesh_instance.mesh
 	if not mesh:
 		return
-		
+	mesh_instance.transform.origin = Vector3.ZERO
+	
 	cam.transform.origin = default_cam_pos
 	var aabb: AABB = mesh.get_aabb()
+	var center = aabb.position + aabb.size * 0.5
 	var size: Vector3 = aabb.size
 	var max_dimension = max(size.x, size.y, size.z)
+	mesh_instance.transform.origin -= center
 	
 	# Move camera back based on the size
 	cam.transform.origin *= max_dimension * 1.7

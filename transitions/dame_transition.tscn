@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqkkfyrt8jks2"]
 
 [ext_resource type="Script" path="res://transitions/transition_in_out.gd" id="1_cpekh"]
-[ext_resource type="Texture2D" uid="uid://l4tcepf07u5t" path="res://items/icons/arrow.png" id="2_sr700"]
+[ext_resource type="Texture2D" uid="uid://l4tcepf07u5t" path="res://assets/textures/arrow.png" id="2_sr700"]
 
 [sub_resource type="Animation" id="Animation_aaqir"]
 length = 0.001

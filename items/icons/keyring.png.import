@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5sa3y102bx4c"
-path="res://.godot/imported/crossbow_rare.png-fa0ab529af673c2101c690d5c7f07856.ctex"
+uid="uid://febkhgqsrnfe"
+path="res://.godot/imported/keyring.png-dc9ef48ae6d61783ef0dffe590e56782.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/icons/crossbow_rare.png"
-dest_files=["res://.godot/imported/crossbow_rare.png-fa0ab529af673c2101c690d5c7f07856.ctex"]
+source_file="res://items/icons/keyring.png"
+dest_files=["res://.godot/imported/keyring.png-dc9ef48ae6d61783ef0dffe590e56782.ctex"]
 
 [params]
 

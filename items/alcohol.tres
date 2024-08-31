@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://l4muv2qyrao"]
+
+[ext_resource type="ArrayMesh" uid="uid://bg28leieensqp" path="res://assets/meshes/bottle_A_labeled_brown.tres" id="1_cmonr"]
+[ext_resource type="Script" path="res://systems/inventory/item.gd" id="1_fsumi"]
+
+[resource]
+script = ExtResource("1_fsumi")
+name = "Alcohol"
+mesh = ExtResource("1_cmonr")
+rarity = "Common"
+icon_orientation = "Angled"

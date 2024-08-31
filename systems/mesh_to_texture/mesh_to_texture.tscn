@@ -37,17 +37,19 @@ handle_input_locally = false
 size = Vector2i(128, 128)
 render_target_update_mode = 4
 
-[node name="MeshFront" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.151319, 0)
+[node name="Front" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
 visible = false
 mesh = ExtResource("2_0a46k")
-skeleton = NodePath("../../../Sprite2D")
 
-[node name="MeshAngled" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(0.650347, 0.252925, -0.716295, -0.264477, 0.959337, 0.098617, 0.712111, 0.125308, 0.690794, 0, -0.151319, 0)
+[node name="Angled" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.650347, 0.252925, -0.716295, -0.264477, 0.959337, 0.098617, 0.712111, 0.125308, 0.690794, 0, 0, 0)
 visible = false
 mesh = ExtResource("2_0a46k")
-skeleton = NodePath("../../../Sprite2D")
+
+[node name="Top" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = ExtResource("2_0a46k")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
