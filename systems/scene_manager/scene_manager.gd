@@ -16,7 +16,6 @@ var in_menu: bool = true:
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-
 const PLAYER = "player"
 const LOADING_ZONE = "loading_zone"
 

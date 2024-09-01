@@ -5,23 +5,54 @@ class_name Slot
 @onready var rarity_text: Label = $RarityText
 @onready var amount_text: Label = $AmountText
 
-var current_item: Item
+# NOTE: Don't add right click to split stack, do it with a context menu
+
+var item: Item:
+	set(value):
+		if item == value:
+			return
+		item = value
+		
+		if item:
+			texture = load(item.get_icon_path())
+			amount_text.text = str(amount)
+			amount_text.visible = item.is_stackable
+		else:
+			texture = null
+			amount_text.visible = false
+			
+		item_visual.texture = texture
+		item_changed.emit()
+
+var amount: int = 1:
+	set(value):
+		if amount == value:
+			return
+		amount = value
+		amount_text.text = str(amount)
+		
+		if amount <= 0:
+			item = null
+		
 var texture
 
 signal item_dropped(slot, previous_owner)
 signal item_changed
 
-# TODO: Remove the ability to move nulls around
-
 func _ready():
 	add_to_group(Inventory.SLOT)
 
+## Dragging
+
 func _get_drag_data(_pos):
-	if not current_item:
+	if not item:
 		return
+	
+	# Make drag preview
 	var texture_rect = TextureRect.new()
 	texture_rect.texture = texture
 	texture_rect.expand = true
+	
 	var rect_size = Vector2(80.0, 80.0)
 	texture_rect.size = rect_size
 	
@@ -38,20 +69,3 @@ func _can_drop_data(_pos, data):
 
 func _drop_data(_pos, prev_owner):
 	item_dropped.emit(self, prev_owner)
-
-func update(item: Item):
-	if current_item == item:
-		return
-	current_item = item
-	item_changed.emit()
-	
-	if current_item:
-		texture = load(current_item.get_icon_path())
-		item_visual.texture = texture
-		rarity_text.visible = true
-		rarity_text.text = item.rarity
-	else:
-		texture = null
-		item_visual.texture = texture
-		rarity_text.visible = false
-		rarity_text.text = ""

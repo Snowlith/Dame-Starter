@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dqerhorutoio7"]
+[gd_scene load_steps=46 format=3 uid="uid://dqerhorutoio7"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_kah3k"]
 [ext_resource type="PackedScene" uid="uid://cswdoghugcwnx" path="res://scenes/terrain/floor_tile_large.tscn" id="2_n3gr5"]
@@ -41,6 +41,7 @@
 [ext_resource type="Resource" uid="uid://bo86p7ey7o8ci" path="res://items/banner.tres" id="39_wrcbb"]
 [ext_resource type="Resource" uid="uid://l4muv2qyrao" path="res://items/alcohol.tres" id="40_fcilk"]
 [ext_resource type="Resource" uid="uid://8j4qjx5ewdge" path="res://items/keyring.tres" id="41_sjq1i"]
+[ext_resource type="PackedScene" uid="uid://bd88oygf4w224" path="res://scenes/interactable/locked_door.tscn" id="42_w5uvb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v6f72"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -358,6 +359,9 @@ transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -8, 4,
 [node name="Wall" parent="." instance=ExtResource("15_pi6cm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4, -8)
 
+[node name="Wall18" parent="." instance=ExtResource("15_pi6cm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4, -8)
+
 [node name="WallCracked" parent="." instance=ExtResource("16_n5fdf")]
 transform = Transform3D(0.889687, 0, -0.45657, 0, 1, 0, 0.45657, 0, 0.889687, -8, 0, 2.07394)
 
@@ -386,7 +390,7 @@ transform = Transform3D(-0.176054, 0, 0.98438, 0, 1, 0, -0.98438, 0, -0.176054, 
 transform = Transform3D(0.0812601, 0, -0.996693, 0, 1, 0, 0.996693, 0, 0.0812601, -11.3195, 3.65344, 2.6045)
 
 [node name="RubbleLarge4" parent="." instance=ExtResource("18_y1mws")]
-transform = Transform3D(0.454768, 0, 0.89061, 0, 1, 0, -0.89061, 0, 0.454768, -13.7395, 3.65344, -2.36646)
+transform = Transform3D(-0.00075531, -0.310473, 0.950582, 0.156636, 0.938812, 0.306753, -0.987656, 0.149127, 0.047922, -12.3883, 3.65344, -2.49534)
 
 [node name="RubbleLarge5" parent="." instance=ExtResource("18_y1mws")]
 transform = Transform3D(0.73969, 0, 0.672948, 0, 1, 0, -0.672948, 0, 0.73969, -11.6175, 4.09123, -7.65451)
@@ -549,6 +553,9 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11, 8
 
 [node name="Pillar6" parent="." instance=ExtResource("6_ijvyg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6567, 1.63643, -4.10162)
+
+[node name="Pillar10" parent="." instance=ExtResource("6_ijvyg")]
+transform = Transform3D(0.850747, 0, 0.525576, 0, 1, 0, -0.525576, 0, 0.850747, -11.1287, 4.08903, -6.5521)
 
 [node name="Pillar7" parent="." instance=ExtResource("6_ijvyg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
@@ -845,17 +852,81 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 12, 2)
 
 [node name="DroppedItem" parent="." instance=ExtResource("37_fmq0f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90637, 0.0499854, -2.88673)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3188, 12.2783, -1.93046)
 item = ExtResource("38_d8csr")
+amount = 16
+
+[node name="DroppedItem9" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3188, 12.2783, -1.93046)
+item = ExtResource("38_d8csr")
+amount = 16
+
+[node name="DroppedItem10" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3188, 12.2783, -2.93046)
+item = ExtResource("38_d8csr")
+amount = 16
+
+[node name="DroppedItem11" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3188, 12.2783, -1.93046)
+item = ExtResource("38_d8csr")
+amount = 16
+
+[node name="DroppedItem12" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3188, 12.2783, -1.93046)
+item = ExtResource("38_d8csr")
+amount = 16
+
+[node name="DroppedItem13" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2244, 12.2783, -2.70554)
+item = ExtResource("38_d8csr")
+amount = 16
 
 [node name="DroppedItem2" parent="." instance=ExtResource("37_fmq0f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522119, 0.0499854, -2.03546)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522119, 0.0499854, 2.56106)
 item = ExtResource("39_wrcbb")
 
+[node name="DroppedItem14" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52212, 0.0499854, 2.56106)
+item = ExtResource("39_wrcbb")
+amount = 2
+
 [node name="DroppedItem3" parent="." instance=ExtResource("37_fmq0f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522119, 0.0499854, -4.00718)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522119, 0.0499854, -8.73089)
 item = ExtResource("40_fcilk")
 
+[node name="DroppedItem5" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33686, 0.0499854, -8.73089)
+item = ExtResource("40_fcilk")
+amount = 2
+
+[node name="DroppedItem6" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16345, 0.0499854, -8.73089)
+item = ExtResource("40_fcilk")
+amount = 3
+
+[node name="DroppedItem7" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96554, 0.0499854, -8.73089)
+item = ExtResource("40_fcilk")
+amount = 4
+
 [node name="DroppedItem4" parent="." instance=ExtResource("37_fmq0f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.33848, 0.0499859, -1.42945)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3939, 8.23688, -6.70769)
 item = ExtResource("41_sjq1i")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="DroppedItem4"]
+light_color = Color(1, 0.7655, 0.33, 1)
+light_energy = 0.556
+
+[node name="DroppedItem8" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.51829, -0.195709, -6.79495)
+item = ExtResource("41_sjq1i")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="DroppedItem8"]
+light_color = Color(1, 0.7655, 0.33, 1)
+light_energy = 0.556
+
+[node name="LockedDoor" parent="." instance=ExtResource("42_w5uvb")]
+transform = Transform3D(-0.0167021, 0, 0.999861, 0, 1, 0, -0.999861, 0, -0.0167021, -7.87709, 8.02349, -9.62698)
+
+[node name="LockedDoor2" parent="." instance=ExtResource("42_w5uvb")]
+transform = Transform3D(-0.438261, 0, 0.898848, 0, 1, 0, -0.898848, 0, -0.438261, -7.42193, -0.165878, -0.519367)

@@ -7,7 +7,7 @@ font_size = 26
 font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_13sfg"]
-font_color = Color(0, 0, 1, 1)
+font_size = 28
 
 [node name="InventorySlot" type="CenterContainer"]
 custom_minimum_size = Vector2(128, 128)
@@ -34,7 +34,9 @@ layout_mode = 2
 
 [node name="AmountText" type="Label" parent="."]
 visible = false
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
-text = "99"
+text = "0"
 label_settings = SubResource("LabelSettings_13sfg")
+horizontal_alignment = 2
 vertical_alignment = 2
