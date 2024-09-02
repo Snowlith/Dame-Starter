@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bx538glhlduck"]
 
-[ext_resource type="ArrayMesh" uid="uid://c3q5v58nwggqm" path="res://assets/meshes/shelves.tres" id="1_rve44"]
+[ext_resource type="ArrayMesh" uid="uid://c3q5v58nwggqm" path="res://assets/old_meshes_2/shelves.tres" id="1_rve44"]
 
 [node name="Support" type="Node3D"]
 

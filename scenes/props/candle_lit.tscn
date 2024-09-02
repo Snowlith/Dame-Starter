@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ctxanahcurmry"]
 
-[ext_resource type="ArrayMesh" uid="uid://c0odqrfeqr6bp" path="res://assets/meshes/candle_lit.tres" id="1_r0oah"]
+[ext_resource type="ArrayMesh" uid="uid://c0odqrfeqr6bp" path="res://assets/old_meshes_2/candle_lit.tres" id="1_r0oah"]
 
 [node name="CandleLit" type="Node3D"]
 

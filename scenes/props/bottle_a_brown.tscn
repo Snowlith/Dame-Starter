@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b266vx5g2mcgx"]
 
-[ext_resource type="ArrayMesh" path="res://assets/meshes/bottle_A_brown.tres" id="1_l2hb4"]
+[ext_resource type="ArrayMesh" uid="uid://bdiwdfbpiyrja" path="res://assets/old_meshes_2/bottle_A_brown.tres" id="1_l2hb4"]
 
 [node name="BottleABrown" type="Node3D"]
 

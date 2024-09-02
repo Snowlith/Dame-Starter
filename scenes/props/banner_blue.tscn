@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://baqge4v4em13f"]
 
-[ext_resource type="ArrayMesh" uid="uid://bga3b6pn8u5yh" path="res://assets/meshes/banner_blue.tres" id="1_2ftsx"]
+[ext_resource type="ArrayMesh" uid="uid://bga3b6pn8u5yh" path="res://assets/old_meshes_2/banner_blue.tres" id="1_2ftsx"]
 
 [node name="BannerBlue" type="Node3D"]
 

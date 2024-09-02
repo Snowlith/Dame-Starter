@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cswdoghugcwnx"]
 
-[ext_resource type="ArrayMesh" uid="uid://3t012wob5ui" path="res://assets/meshes/floor_tile_large.tres" id="1_bg218"]
+[ext_resource type="ArrayMesh" uid="uid://3t012wob5ui" path="res://assets/old_meshes_2/floor_tile_large.tres" id="1_bg218"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hk15g"]
 points = PackedVector3Array(-2, -0.1, -2, -2, -0.1, 2, -2, 0.0499853, -2, 2, -0.1, -2, -2, 0.0499853, 2, 2, -0.1, 2, 0, 0.05, 0, 2, 0.0499853, -2, 2, 0.0499853, 2)

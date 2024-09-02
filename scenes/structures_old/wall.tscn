@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://rtul7h75858q"]
+
+[ext_resource type="ArrayMesh" uid="uid://bsh04omvpi8mq" path="res://assets/old_meshes_2/wall.tres" id="1_36ehj"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ltv24"]
+points = PackedVector3Array(2, 4, 0.5, 2, 0, 0.5, 2, 4, -0.5, -2, 4, 0.5, 2, 0, -0.5, -2, 0, 0.5, -2, 4, -0.5, -2, 0, -0.5)
+
+[node name="Wall" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_36ehj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_ltv24")

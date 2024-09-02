@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://hbuvslviqh1i"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_a5vy2"]
-[ext_resource type="PackedScene" uid="uid://ccc0cqa1qp8cw" path="res://scenes/structures/stairs_wood_decorated.tscn" id="2_tqca8"]
-[ext_resource type="PackedScene" uid="uid://c4yqqgxjk04jl" path="res://scenes/structures/wall_scaffold.tscn" id="3_rtwuu"]
-[ext_resource type="PackedScene" uid="uid://cxv42slptncfr" path="res://scenes/structures/wall_window_closed_scaffold.tscn" id="4_orpi8"]
-[ext_resource type="PackedScene" uid="uid://rtul7h75858q" path="res://scenes/structures/wall.tscn" id="5_s3rnc"]
-[ext_resource type="PackedScene" uid="uid://dw1m06gsnojg0" path="res://scenes/structures/wall_window_open.tscn" id="6_m7lav"]
+[ext_resource type="PackedScene" uid="uid://ccc0cqa1qp8cw" path="res://scenes/structures_old/stairs_wood_decorated.tscn" id="2_tqca8"]
+[ext_resource type="PackedScene" uid="uid://c4yqqgxjk04jl" path="res://scenes/structures_old/wall_scaffold.tscn" id="3_rtwuu"]
+[ext_resource type="PackedScene" uid="uid://cxv42slptncfr" path="res://scenes/structures_old/wall_window_closed_scaffold.tscn" id="4_orpi8"]
+[ext_resource type="PackedScene" uid="uid://rtul7h75858q" path="res://scenes/structures_old/wall.tscn" id="5_s3rnc"]
+[ext_resource type="PackedScene" uid="uid://dw1m06gsnojg0" path="res://scenes/structures_old/wall_window_open.tscn" id="6_m7lav"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

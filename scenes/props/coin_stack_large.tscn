@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://i2fuyfeimvsa"]
 
-[ext_resource type="ArrayMesh" path="res://assets/meshes/coin_stack_large.tres" id="1_rmocv"]
+[ext_resource type="ArrayMesh" uid="uid://bd6gto25ghy7" path="res://assets/old_meshes_2/coin_stack_large.tres" id="1_rmocv"]
 
 [node name="CoinStackLarge" type="Node3D"]
 

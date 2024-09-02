@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgahyjv1e5bwi"]
+
+[ext_resource type="ArrayMesh" uid="uid://dqhnlnuj1r3te" path="res://assets/old_meshes_2/wall_doorway.tres" id="1_j38w0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nv7mu"]
+size = Vector3(4, 1.2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xbdle"]
+size = Vector3(1, 2.8, 1)
+
+[node name="WallDoorway" type="StaticBody3D"]
+
+[node name="WallDoorway" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_j38w0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0)
+shape = SubResource("BoxShape3D_nv7mu")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.4, 0)
+shape = SubResource("BoxShape3D_xbdle")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.4, 0)
+shape = SubResource("BoxShape3D_xbdle")

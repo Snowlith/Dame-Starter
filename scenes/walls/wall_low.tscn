@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=4 uid="uid://bcgbg6agahwgt"]
+
+[ext_resource type="Material" uid="uid://yuqkqurcy4mb" path="res://assets/materials/colormap.tres" id="1_nrrcl"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o83em"]
+_surfaces = [{
+"aabb": AABB(-0.05, 0, -1, 0.1, 1.2, 2),
+"format": 34359742465,
+"index_count": 30,
+"index_data": PackedByteArray("AAACAAEAAwABAAIABAABAAUAAwAFAAEABgAHAAAAAgAAAAcABwAFAAIAAwACAAUABwAGAAUABAAFAAYA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("0sxMvT7NzDAAAIC/0sxMvT7NzDAAAIA/zMxMvZqZmT8AAIC/zMxMvZqZmT8AAIA/x8xMPQAAAAAAAIA/zMxMPZqZmT8AAIA/x8xMPQAAAAAAAIC/zMxMPZqZmT8AAIC/")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8sc75"]
+resource_name = "Root Scene_wall-low"
+_surfaces = [{
+"aabb": AABB(-0.05, 0, -1, 0.1, 1.2, 2),
+"attribute_data": PackedByteArray("AAAYP83MbD8AABg/zcxsPwAAGD8zM1M/AAAYPzMzUz8AABg/zcxsPwAAGD8zM1M/AAAYP83MbD8AABg/MzNTPwAAGD/NzGw/AAAYP83MbD8AABg/MzNTPwAAGD8zM1M/AADwPjMzUz8AAPA+MzNTPwAA8D4zM1M/AADwPjMzUz8AALA+MzNTPwAAsD4zM1M/AACwPs3MbD8AALA+zcxsPw=="),
+"format": 34359742487,
+"index_count": 30,
+"index_data": PackedByteArray("AAACAAEAAwABAAIABAAGAAUABwAFAAYACAAKAAkACwAJAAoADAAOAA0ADwANAA4AEAASABEAEwARABIA"),
+"material": ExtResource("1_nrrcl"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("0sxMvT7NzDAAAIC/0sxMvT7NzDAAAIA/zMxMvZqZmT8AAIC/zMxMvZqZmT8AAIA/x8xMPQAAAAAAAIA/zMxMPZqZmT8AAIA/0sxMvT7NzDAAAIA/zMxMvZqZmT8AAIA/x8xMPQAAAAAAAIC/0sxMvT7NzDAAAIC/zMxMPZqZmT8AAIC/zMxMvZqZmT8AAIC/zMxMPZqZmT8AAIC/zMxMvZqZmT8AAIC/zMxMPZqZmT8AAIA/zMxMvZqZmT8AAIA/zMxMPZqZmT8AAIC/zMxMPZqZmT8AAIA/x8xMPQAAAAAAAIC/x8xMPQAAAAAAAIA/AAD/f////78AAP9/////vwAA/3////+/AAD/f////7//f/9/////P/9//3////8//3//f////z//f/9/////P/////////+//////////7//////////v/////////+//3///////7//f///////v/9///////+//3///////7////9/////v////3////+/////f////7////9/////vw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_o83em")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_66kxa"]
+points = PackedVector3Array(-0.05, 0, -1, 0.0499902, 0, -1, -0.05, 0, 1, -0.05, 1.2, -1, 0.05, 1.2, -1, 0.0499902, 0, 1, -0.05, 1.2, 1, 0.05, 1.2, 1)
+
+[node name="WallLow" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.62921e-07, 0, 1.62921e-07, 1, 0, 0, 0)
+mesh = SubResource("ArrayMesh_8sc75")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_66kxa")

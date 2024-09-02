@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmyopvfi107fl"]
+
+[ext_resource type="ArrayMesh" uid="uid://ch03pnpmv13ct" path="res://assets/old_meshes_2/wall_half_endcap.tres" id="1_qp61l"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3mmah"]
+points = PackedVector3Array(-2, 0, -0.5, 0, 0, -0.5, -2, 0, 0.5, -2, 4, -0.5, 0, 0, 0.5, 0, 4, -0.5, -2, 4, 0.5, 0, 4, 0.5)
+
+[node name="WallHalfEndcap" type="StaticBody3D"]
+
+[node name="WallHalfEndcap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = ExtResource("1_qp61l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_3mmah")

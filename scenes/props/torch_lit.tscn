@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://1ut5q4rhuhkw"]
 
-[ext_resource type="ArrayMesh" path="res://assets/meshes/torch_lit.tres" id="1_lujx7"]
+[ext_resource type="ArrayMesh" uid="uid://dao3vl4sqwhtj" path="res://assets/old_meshes_2/torch_lit.tres" id="1_lujx7"]
 
 [node name="TorchLit" type="Node3D"]
 

@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccc0cqa1qp8cw"]
+
+[ext_resource type="ArrayMesh" uid="uid://dogooxx6wxwe0" path="res://assets/old_meshes_2/stairs_wood_decorated.tres" id="1_ug30s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_krsp2"]
+size = Vector3(3.09277, 7.2168, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lqvoy"]
+size = Vector3(3.00879, 4.1189, 0.663147)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g41yj"]
+size = Vector3(3.15852, 2.11462, 1.93019)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8xs6"]
+size = Vector3(0.324753, 3.33148, 0.272003)
+
+[node name="StairsWood" type="StaticBody3D"]
+
+[node name="StairsWood" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_ug30s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.563641, 0.82602, 0, -0.82602, 0.563641, 0, 1.62772, 3.38449)
+shape = SubResource("BoxShape3D_krsp2")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99678, 0.338892)
+shape = SubResource("BoxShape3D_lqvoy")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0137103, 0.994646, 1.52565)
+shape = SubResource("BoxShape3D_g41yj")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50047, 1.69793, 0.534464)
+shape = SubResource("BoxShape3D_a8xs6")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47019, 1.69793, 0.547118)
+shape = SubResource("BoxShape3D_a8xs6")

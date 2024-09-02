@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://djlwu1o67iedu"]
 
-[ext_resource type="ArrayMesh" uid="uid://c243uto7ldiy5" path="res://assets/meshes/floor_wood_small.tres" id="1_h1pkq"]
+[ext_resource type="ArrayMesh" uid="uid://c243uto7ldiy5" path="res://assets/old_meshes_2/floor_wood_small.tres" id="1_h1pkq"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wdlj7"]
 points = PackedVector3Array(-1, -0.1, -1, -1, -0.1, 1, -1, 0.05, -1, 1, -0.1, -1, -1, 0.05, 1, 1, -0.1, 1, 1, 0.05, -1, 1, 0.05, 1)

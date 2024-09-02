@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://yoowxqdr1vwf"]
 
-[ext_resource type="ArrayMesh" path="res://assets/meshes/torch.tres" id="1_ndysi"]
+[ext_resource type="ArrayMesh" uid="uid://m63p72es8r8m" path="res://assets/old_meshes_2/torch.tres" id="1_ndysi"]
 
 [node name="Torch" type="Node3D"]
 

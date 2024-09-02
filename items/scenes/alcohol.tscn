@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://buyxtl8ixy78n"]
 
-[ext_resource type="ArrayMesh" uid="uid://bg28leieensqp" path="res://assets/meshes/bottle_A_labeled_brown.tres" id="1_kt3jk"]
+[ext_resource type="ArrayMesh" uid="uid://bg28leieensqp" path="res://assets/old_meshes_2/bottle_A_labeled_brown.tres" id="1_kt3jk"]
 [ext_resource type="Script" path="res://items/scenes/alcohol.gd" id="2_f5g0y"]
 
 [sub_resource type="Animation" id="Animation_r8yyf"]
