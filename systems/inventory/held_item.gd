@@ -10,6 +10,8 @@ var item: Item:
 			return
 		item = value
 		if item:
+			if view_model:
+				remove_child(view_model)
 			view_model = item.get_view_model()
 			add_child(view_model)
 			visible = true

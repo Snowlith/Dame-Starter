@@ -88,3 +88,10 @@ offset_left = 771.0
 offset_top = 415.0
 offset_right = 899.0
 offset_bottom = 543.0
+
+[node name="HandSlot2" parent="NinePatchRect" instance=ExtResource("3_lwgw0")]
+layout_mode = 2
+offset_left = 14.0
+offset_top = 415.0
+offset_right = 142.0
+offset_bottom = 543.0

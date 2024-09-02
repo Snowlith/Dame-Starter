@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c3r10f2hvu4ek"]
 
 [ext_resource type="Script" path="res://systems/inventory/item.gd" id="1_e33sl"]
-[ext_resource type="PackedScene" uid="uid://buyxtl8ixy78n" path="res://items/scenes/alcohol.tscn" id="2_fsanx"]
+[ext_resource type="PackedScene" uid="uid://bicnmrdb3qscl" path="res://items/scenes/coin.tscn" id="2_b87dj"]
 
 [resource]
 script = ExtResource("1_e33sl")
 name = "Coin"
-view_model = ExtResource("2_fsanx")
+view_model = ExtResource("2_b87dj")
 is_stackable = true
 rarity = "Common"
 icon_orientation = "Top"
