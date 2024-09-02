@@ -7,6 +7,7 @@ extends CharacterBody3D
 
 @export var gravity: float = 40.0
 @export var jump_strength: float = 13.0
+@export var object_push_force: float = 20
 
 @export_subgroup("Sprinting")
 @export var max_sprint_time: float = 4.0
@@ -21,7 +22,6 @@ extends CharacterBody3D
 
 @export_subgroup("Quality of Life")
 @export var coyote_time: float = 0.2
-@export var object_push_force: float = 20
 
 @onready var cam: FPSCamera3D = $FPSCamera3D
 
@@ -31,6 +31,9 @@ extends CharacterBody3D
 
 # UI
 @onready var sprint_bar: ProgressBar = $SprintBar
+
+# TODO: add direction change penalty in the air
+
 
 var current_sprint_time: float = max_sprint_time:
 	set(value):

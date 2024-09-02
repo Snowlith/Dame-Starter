@@ -3,7 +3,7 @@ extends Area3D
 class_name Inventory
 
 @export var items: Array[Item]
-@export var view_model: MeshInstance3D
+@export var held_item: HeldItem
 
 @onready var hand_slot: Slot = $NinePatchRect/HandSlot
 @onready var nine_patch_rect: Control = $NinePatchRect
@@ -11,13 +11,18 @@ class_name Inventory
 var slots: Array[Slot] = []
 var size: int
 
-var is_open = false
+var is_open = true:
+	set(value):
+		if is_open == value:
+			return
+		is_open = value
+		SceneManager.in_menu = is_open
+		nine_patch_rect.visible = is_open
 
 const SLOT = "inv_slot"
 const SLOT_CAPACITY: int = 16
 
 func _ready() -> void:
-	# Gets too wide scene tree
 	for slot: Slot in get_tree().get_nodes_in_group(SLOT):
 		if not slot:
 			continue
@@ -25,7 +30,9 @@ func _ready() -> void:
 	size = slots.size()
 	items.resize(size)
 	
-	for slot in slots:
+	for i in size:
+		var slot: Slot = slots[i]
+		slot.item = items[i]
 		slot.item_dropped.connect(swap_slots)
 	hand_slot.item_changed.connect(update_hand)
 	area_entered.connect(_on_area_entered)
@@ -48,41 +55,37 @@ func count(item: Item) -> int:
 
 func insert(item: Item, amount: int = 1) -> int:
 	if amount <= 0 or not item:
-		print("Attempted to add null or zero items")
 		return 0
-	
 	var remaining_amount = amount
 
-	# Try inserting into existing stacks first
+	# Try inserting into existing slots
 	if item.is_stackable:
-		remaining_amount = _insert_into_existing_stacks(item, remaining_amount)
+		remaining_amount = _insert_into_existing_slots(item, remaining_amount)
 
-	# Then try inserting into new slots if there is still an amount left to add
+	# Try inserting into empty slots
 	if remaining_amount > 0:
 		remaining_amount = _insert_into_empty_slots(item, remaining_amount)
 	return amount - remaining_amount
 	
 func remove(item: Item, amount: int = 1) -> int:
 	if amount <= 0 or not item:
-		print("Attempted to remove null or zero items")
 		return 0
 	var remaining_amount = amount
 	print(item, amount)
-	remaining_amount = _remove_from_existing_stacks(item, remaining_amount)
+	remaining_amount = _remove_from_existing_slots(item, remaining_amount)
 	return amount - remaining_amount
 
 func can_insert(item: Item, amount: int) -> bool:
 	var total_capacity = 0
 	if item.is_stackable:
-		for i in range(items.size()):
-			var existing_item = items[i]
-			if existing_item and existing_item == item:
-				total_capacity += SLOT_CAPACITY - slots[i].amount
+		for i in items.size():
+			if not items[i] or items[i] != item:
+				continue
+			total_capacity += SLOT_CAPACITY - slots[i].amount
 		total_capacity += count(null) * SLOT_CAPACITY
 	else:
 		total_capacity = count(null)
 	return total_capacity >= amount
-
 	
 func _on_area_entered(area: Area3D):
 	var dropped_item := area as DroppedItem
@@ -97,31 +100,21 @@ func _on_area_entered(area: Area3D):
 		# Only take as many items as possible
 		var items_taken = insert(dropped_item.item, dropped_item.amount)
 		dropped_item.amount -= items_taken
-
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("inventory"):
-		if is_open:
-			close()
-		else:
-			open()
+		is_open = not is_open
 
 func update_hand():
-	if not view_model:
+	if not held_item:
 		return
-	if hand_slot.item:
-		view_model.mesh = hand_slot.item.mesh
-	else:
-		view_model.mesh = null
+	print("hand updated")
+	held_item.item = hand_slot.item
 
 func open():
-	SceneManager.in_menu = true
-	nine_patch_rect.visible = true
 	is_open = true
 
 func close():
-	SceneManager.in_menu = false
-	nine_patch_rect.visible = false
 	is_open = false
 
 func swap_slots(slot_1, slot_2):
@@ -143,39 +136,49 @@ func swap_slots(slot_1, slot_2):
 	
 ## Stacking helper methods
 
-func _insert_into_existing_stacks(item: Item, remaining_amount: int) -> int:
+func _insert_into_existing_slots(item: Item, remaining_amount: int) -> int:
 	for i in items.size():
-		var existing_item = items[i]
-		if existing_item and existing_item == item and slots[i].amount < SLOT_CAPACITY:
-			var available_space = SLOT_CAPACITY - slots[i].amount
-			var amount_to_add = min(remaining_amount, available_space)
-			slots[i].amount += amount_to_add
-			remaining_amount -= amount_to_add
-			if remaining_amount <= 0:
-				return 0
+		# Skip when null or items don't match
+		if not items[i] or items[i] != item:
+			continue
+		# Skip full slots
+		if slots[i].amount >= SLOT_CAPACITY:
+			continue
+		var available_space = SLOT_CAPACITY - slots[i].amount
+		var amount_to_add = min(remaining_amount, available_space)
+		slots[i].amount += amount_to_add
+		remaining_amount -= amount_to_add
+		if remaining_amount <= 0:
+			return 0
 	return remaining_amount
 
 func _insert_into_empty_slots(item: Item, remaining_amount: int) -> int:
 	for i in items.size():
-		if items[i] == null:
-			items[i] = item
-			var amount_to_add = min(remaining_amount, SLOT_CAPACITY)
-			slots[i].item = item
-			slots[i].amount = amount_to_add
-			remaining_amount -= amount_to_add
-			if remaining_amount <= 0:
-				return 0
+		# Only consider empty slots
+		if items[i]:
+			continue
+		items[i] = item
+		var amount_to_add = min(remaining_amount, SLOT_CAPACITY)
+		slots[i].item = item
+		slots[i].amount = amount_to_add
+		remaining_amount -= amount_to_add
+		if remaining_amount <= 0:
+			return 0
 	return remaining_amount
 
-func _remove_from_existing_stacks(item: Item, remaining_amount: int) -> int:
+func _remove_from_existing_slots(item: Item, remaining_amount: int) -> int:
 	for i in items.size():
-		if items[i] and items[i] == item:
-			var slot = slots[i]
-			if slot.amount > remaining_amount:
-				slot.amount -= remaining_amount
-				return 0
-			else:
-				remaining_amount -= slot.amount
-				slot.amount = 0
-				items[i] = null
+		# Skip if null or items don't match
+		if not items[i] or items[i] != item:
+			continue
+		var slot = slots[i]
+		# Partly deplete slot
+		if slot.amount > remaining_amount:
+			slot.amount -= remaining_amount
+			return 0
+		else:
+			# Completely deplete slot
+			remaining_amount -= slot.amount
+			slot.amount = 0
+			items[i] = null
 	return remaining_amount

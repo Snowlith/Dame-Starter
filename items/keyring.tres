@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://8j4qjx5ewdge"]
 
-[ext_resource type="ArrayMesh" uid="uid://bbvilmt24igw0" path="res://assets/meshes/keyring_hanging.tres" id="1_ek7pp"]
 [ext_resource type="Script" path="res://systems/inventory/item.gd" id="2_01k4v"]
+[ext_resource type="PackedScene" uid="uid://buyxtl8ixy78n" path="res://items/scenes/alcohol.tscn" id="2_pk650"]
 
 [resource]
 script = ExtResource("2_01k4v")
 name = "Keyring"
-mesh = ExtResource("1_ek7pp")
+view_model = ExtResource("2_pk650")
 is_stackable = false
 rarity = "Common"
 icon_orientation = "Front"

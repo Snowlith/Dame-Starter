@@ -9,6 +9,8 @@ extends Node3D
 var default_cam_pos
 var default_mesh_instance_pos
 
+# TODO: use scenes instead of meshes
+
 func _ready():
 	default_cam_pos = cam.transform.origin
 	if not item_dir:

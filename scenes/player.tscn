@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=14 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/player/fps_camera3D.gd" id="2_kaij3"]
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
 [ext_resource type="PackedScene" uid="uid://t2ps5fa3fnki" path="res://systems/inventory/inventory.tscn" id="4_yvou1"]
 [ext_resource type="Material" uid="uid://exj1wl8ifrmf" path="res://assets/materials/viewmodel_noclip.tres" id="5_7hay0"]
-[ext_resource type="Script" path="res://systems/inventory/view_model.gd" id="6_6qend"]
+[ext_resource type="Script" path="res://systems/inventory/item.gd" id="5_lbbs6"]
+[ext_resource type="Script" path="res://systems/inventory/held_item.gd" id="6_6qend"]
+[ext_resource type="Resource" uid="uid://bo86p7ey7o8ci" path="res://items/banner.tres" id="6_af37w"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
@@ -24,7 +26,8 @@ radius = 0.829099
 [node name="Player" type="CharacterBody3D"]
 floor_snap_length = 0.2
 script = ExtResource("1_gp66p")
-speed = 7.0
+speed = 5.0
+sprint_speed_multiplier = 1.6
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -51,7 +54,7 @@ script = ExtResource("2_kaij3")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="FPSCamera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.446998, -0.86123)
-remote_path = NodePath("../../Inventory/ViewModel")
+remote_path = NodePath("../../Inventory/HeldItem")
 update_scale = false
 
 [node name="Crosshair" type="TextureRect" parent="FPSCamera3D"]
@@ -70,15 +73,16 @@ grow_vertical = 2
 texture = ExtResource("3_ey6jl")
 expand_mode = 1
 
-[node name="Inventory" parent="." node_paths=PackedStringArray("view_model") instance=ExtResource("4_yvou1")]
-view_model = NodePath("ViewModel")
+[node name="Inventory" parent="." node_paths=PackedStringArray("held_item") instance=ExtResource("4_yvou1")]
+items = Array[ExtResource("5_lbbs6")]([ExtResource("6_af37w")])
+held_item = NodePath("HeldItem")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12004, 0)
 shape = SubResource("CylinderShape3D_n44de")
 
-[node name="ViewModel" type="MeshInstance3D" parent="Inventory"]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.523012, 1.45231, -0.86123)
+[node name="HeldItem" type="Node3D" parent="Inventory"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.523012, 1.45231, -0.86123)
 top_level = true
 script = ExtResource("6_6qend")
 shader_material = ExtResource("5_7hay0")
