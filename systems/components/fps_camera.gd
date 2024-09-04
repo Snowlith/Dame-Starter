@@ -1,5 +1,5 @@
 extends Camera3D
-class_name FPSCamera3D
+class_name FPSCamera
 
 @export_group("Camera")
 @export var sensitivity: float = 1.5
@@ -12,7 +12,7 @@ class_name FPSCamera3D
 @export var bob_frequency: float = 2.4
 @export var bob_amplitude: float = 0.08
 
-var player
+var player: CharacterBody3D
 
 var default_fov: float
 
@@ -28,6 +28,8 @@ var use_interp: bool = true
 
 func _ready():
 	player = get_parent() as CharacterBody3D
+	if not player:
+		queue_free()
 	
 	SceneManager.in_menu = false
 

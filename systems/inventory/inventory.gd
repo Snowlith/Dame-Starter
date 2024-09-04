@@ -1,15 +1,18 @@
 extends Area3D
 
 class_name Inventory
-
-@export var items: Array[Item]
 @export var held_item: HeldItem
 
 @onready var hand_slot: Slot = $NinePatchRect/HandSlot
 @onready var nine_patch_rect: Control = $NinePatchRect
 
+var items: Array[Item]
 var slots: Array[Slot] = []
 var size: int
+
+# TODO: add ability to add items through editor
+# exposing items does not allow for stacks
+# needs custom class
 
 var is_open = true:
 	set(value):
@@ -71,7 +74,6 @@ func remove(item: Item, amount: int = 1) -> int:
 	if amount <= 0 or not item:
 		return 0
 	var remaining_amount = amount
-	print(item, amount)
 	remaining_amount = _remove_from_existing_slots(item, remaining_amount)
 	return amount - remaining_amount
 
@@ -108,7 +110,6 @@ func _process(delta: float) -> void:
 func update_hand():
 	if not held_item:
 		return
-	print("hand updated")
 	held_item.item = hand_slot.item
 
 func open():

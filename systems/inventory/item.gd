@@ -21,7 +21,6 @@ func get_icon_path():
 
 func get_view_model() -> Node3D:
 	var scene = view_model.instantiate()
-	print(scene)
 	return scene
 
 # TODO: use scenes instead of meshes

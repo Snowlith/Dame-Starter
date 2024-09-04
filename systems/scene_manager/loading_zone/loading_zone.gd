@@ -30,6 +30,6 @@ func spawn(node: Node3D) -> void:
 	var spawn_dir = -transform.basis.z.normalized()
 	node.position = position + displacement
 	for child in node.get_children():
-		var cam := child as FPSCamera3D
+		var cam := child as FPSCamera
 		if cam:
 			cam.set_look_dir(spawn_dir)

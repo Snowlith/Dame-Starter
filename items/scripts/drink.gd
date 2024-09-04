@@ -1,5 +1,7 @@
 extends MeshInstance3D
 
+@export var health_gain: int
+
 @onready var anim_player = $AnimationPlayer
 
 var is_held

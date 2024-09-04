@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://buyxtl8ixy78n"]
 
 [ext_resource type="ArrayMesh" uid="uid://bg28leieensqp" path="res://assets/old_meshes_2/bottle_A_labeled_brown.tres" id="1_kt3jk"]
-[ext_resource type="Script" path="res://items/scenes/alcohol.gd" id="2_f5g0y"]
+[ext_resource type="Script" path="res://items/scripts/drink.gd" id="2_f5g0y"]
 
 [sub_resource type="Animation" id="Animation_r8yyf"]
 length = 0.001
@@ -68,6 +68,7 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
 mesh = ExtResource("1_kt3jk")
 script = ExtResource("2_f5g0y")
+health_gain = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

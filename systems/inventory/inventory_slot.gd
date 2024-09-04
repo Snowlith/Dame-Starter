@@ -39,8 +39,8 @@ var texture
 signal item_dropped(slot, previous_owner)
 signal item_changed
 
+# Before ready
 func _init():
-	# Init is before ready
 	add_to_group(Inventory.SLOT)
 
 ## Dragging

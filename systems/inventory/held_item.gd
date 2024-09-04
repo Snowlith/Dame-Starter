@@ -3,6 +3,10 @@ class_name HeldItem
 
 @export var shader_material: ShaderMaterial
 
+# NOTE: when we use albedo, we dont need a texture on the shader mat
+
+@onready var health
+
 var view_model: Node3D
 var item: Item:
 	set(value):
