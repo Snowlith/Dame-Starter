@@ -5,7 +5,7 @@ class_name HeldItem
 
 # NOTE: when we use albedo, we dont need a texture on the shader mat
 
-@onready var health
+@onready var health: Health = $"../Health"
 
 var view_model: Node3D
 var item: Item:
@@ -17,6 +17,7 @@ var item: Item:
 			if view_model:
 				remove_child(view_model)
 			view_model = item.get_view_model()
+			view_model.item_owner = get_parent()
 			add_child(view_model)
 			visible = true
 			if not shader_material:

@@ -18,8 +18,8 @@ func _process(delta):
 		anim_player.play("inspect")
 		await anim_player.animation_finished
 		for child in item_owner.get_children():
-			var inv = child as Health
+			var inv = child as FPSController
 			if not inv:
 				continue
-			inv.current_health += 10
+			inv.queue_impulse(Vector3.UP, 30)
 		

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c4jbtqkntckfh"]
+
+[ext_resource type="Script" path="res://systems/inventory/item.gd" id="1_3vs3l"]
+[ext_resource type="PackedScene" uid="uid://3spw7gnj8ftp" path="res://items/scenes/dame_drink.tscn" id="2_lkbov"]
+
+[resource]
+script = ExtResource("1_3vs3l")
+name = "Dame Drink"
+view_model = ExtResource("2_lkbov")
+is_stackable = false
+rarity = "Dame"
+icon_orientation = "Angled"

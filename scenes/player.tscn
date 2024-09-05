@@ -93,6 +93,14 @@ script = ExtResource("4_ot0fo")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_1205x")
 
+[node name="HealthBar" type="ProgressBar" parent="Health"]
+modulate = Color(0.15, 1, 0.220833, 1)
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 108.0
+offset_bottom = 41.0
+show_percentage = false
+
 [node name="Inventory" parent="." node_paths=PackedStringArray("held_item") instance=ExtResource("4_yvou1")]
 held_item = NodePath("../HeldItem")
 

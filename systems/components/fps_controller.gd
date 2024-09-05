@@ -6,11 +6,15 @@ class_name FPSController
 @export var friction: float = 18.0
 
 @export var gravity: float = 40.0
+@export var air_control_scalar: float = 0.5
+
 @export var object_push_force: float = 20
 
 @onready var crouch: Crouch = $Crouch
 @onready var sprint: Sprint = $Sprint
 @onready var jump: Jump = $Jump
+
+var queued_impulses: Array[Vector3]
 
 var cb: CharacterBody3D
 
@@ -22,6 +26,11 @@ func _ready():
 	if not cb:
 		queue_free()
 
+func queue_impulse(dir: Vector3, scalar: float):
+	if dir.is_normalized:
+		queued_impulses.append(dir * scalar)
+	queued_impulses.append(dir.normalized() * scalar)
+	
 func _physics_process(delta: float):
 	var input_vector := Vector2.ZERO
 	
@@ -40,11 +49,19 @@ func _physics_process(delta: float):
 	var velocity_xz := Vector2(cb.velocity.x, cb.velocity.z)
 	
 	if input_vector != Vector2.ZERO:
-		# If moving, interpolate toward desired speed in the direction faced
-		velocity_xz = velocity_xz.lerp(input_vector * _get_speed(), acceleration * delta)
+		if cb.is_on_floor():
+			# Regular acceleration on the ground
+			velocity_xz = velocity_xz.lerp(input_vector * _get_speed(), acceleration * delta)
+		else:
+			# Air strafing: use player's rotation to determine desired direction
+			velocity_xz = velocity_xz.lerp(input_vector * _get_speed(), acceleration * air_control_scalar * delta)
 	else:
-		# If not moving, interpolate toward stop
-		velocity_xz = velocity_xz.lerp(Vector2.ZERO, friction * delta)
+		if cb.is_on_floor():
+			# Regular acceleration on the ground
+			velocity_xz = velocity_xz.lerp(Vector2.ZERO, friction * delta)
+		else:
+			# Air strafing: use player's rotation to determine desired direction
+			velocity_xz = velocity_xz.lerp(Vector2.ZERO, friction * air_control_scalar * delta)
 	
 	cb.velocity.x = velocity_xz.x
 	cb.velocity.z = velocity_xz.y
@@ -52,6 +69,10 @@ func _physics_process(delta: float):
 	# Handle y: jumping and gravity
 	if not cb.is_on_floor() and not jump.active:
 		cb.velocity.y -= gravity * delta
+	
+	for impulse in queued_impulses:
+		cb.velocity += impulse
+	queued_impulses.clear()
 	
 	# Physics interaction
 	if cb.move_and_slide():

@@ -6,7 +6,7 @@ class_name FPSCamera
 
 @export_subgroup("Dynamic FOV")
 @export var fov_speed_change: float = 0.5
-@export var fov_settle_speed: float = 15
+@export var fov_settle_speed: float = 10
 
 @export_subgroup("Headbob")
 @export var bob_frequency: float = 2.4
@@ -52,7 +52,7 @@ func _unhandled_input(event: InputEvent):
 		player.rotation.y -= look_dir.x * sensitivity
 		rotation.x = clamp(rotation.x - look_dir.y * sensitivity, deg_to_rad(-89), deg_to_rad(89))
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Update the transform, lagging old_transform one physics frame behind
 	old_transform = new_transform
 	new_transform = player.transform
@@ -88,11 +88,19 @@ func _update_headbob_offset(delta: float) -> void:
 	bob_offset_pos.y = sin(bob_time * bob_frequency) * bob_amplitude
 
 func _update_fov_offset(delta: float) -> void:
-	var vel_length = player.velocity.length()
+	# Horizontal look direction and player velocity
+	var look_dir_xz = Vector2(get_look_dir().x, get_look_dir().z).normalized()
+	var velocity_xz = Vector2(player.velocity.x, player.velocity.z)
+	var vel_length = velocity_xz.length()
+
+	# Default target FOV
 	var target_fov = default_fov
-	# Skip fov calculations when velocity is zero
-	if not is_equal_approx(vel_length, 0):
-		var dir_normalized = get_look_dir().normalized()
-		var vel_dot = dir_normalized.dot(player.velocity.normalized()) * vel_length
+
+	# Adjust FOV based on the velocity's alignment with the look direction
+	if vel_length > 0.0:
+		var velocity_normalized = velocity_xz.normalized()
+		var vel_dot = look_dir_xz.dot(velocity_normalized) * vel_length
 		target_fov += fov_speed_change * vel_dot
-	fov = clamp(lerp(fov, target_fov, fov_settle_speed * delta), default_fov-15, default_fov+15)
+
+	# Smoothly interpolate the FOV and clamp it
+	fov = clamp(lerp(fov, target_fov, fov_settle_speed * delta), default_fov - 15, default_fov + 15)

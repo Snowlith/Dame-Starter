@@ -1,6 +1,6 @@
 extends Area3D
-
 class_name Inventory
+
 @export var held_item: HeldItem
 
 @onready var hand_slot: Slot = $NinePatchRect/HandSlot
@@ -103,7 +103,7 @@ func _on_area_entered(area: Area3D):
 		var items_taken = insert(dropped_item.item, dropped_item.amount)
 		dropped_item.amount -= items_taken
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		is_open = not is_open
 
