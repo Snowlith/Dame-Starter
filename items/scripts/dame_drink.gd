@@ -6,8 +6,6 @@ extends Node3D
 
 var item_owner
 
-# TODO: maybe 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not item_owner or SceneManager.in_menu:

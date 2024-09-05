@@ -18,7 +18,7 @@ var queued_impulses: Array[Vector3]
 
 var cb: CharacterBody3D
 
-# TODO: add direction change penalty in the air
+# TODO: zero velocity when applying impulse
 
 
 func _ready():
@@ -69,6 +69,7 @@ func _physics_process(delta: float):
 	# Handle y: jumping and gravity
 	if not cb.is_on_floor() and not jump.active:
 		cb.velocity.y -= gravity * delta
+	
 	
 	for impulse in queued_impulses:
 		cb.velocity += impulse

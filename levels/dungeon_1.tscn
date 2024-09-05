@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dqerhorutoio7"]
+[gd_scene load_steps=49 format=3 uid="uid://dqerhorutoio7"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_kah3k"]
 [ext_resource type="PackedScene" uid="uid://cswdoghugcwnx" path="res://scenes/terrain/floor_tile_large.tscn" id="2_n3gr5"]
@@ -44,6 +44,7 @@
 [ext_resource type="PackedScene" uid="uid://bd88oygf4w224" path="res://scenes/interactable/locked_door.tscn" id="42_w5uvb"]
 [ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/interactable/jump_pad.tscn" id="43_grl8w"]
 [ext_resource type="Resource" uid="uid://c4jbtqkntckfh" path="res://items/dame_drink.tres" id="44_kbcb3"]
+[ext_resource type="Resource" uid="uid://iix130w3gndu" path="res://items/gun.tres" id="45_ggv3k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v6f72"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -68,7 +69,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_kah3k")]
-transform = Transform3D(0.187741, 0, 0.982219, 0, 1, 0, -0.982219, 0, 0.187741, 1.96559, 0.853058, -9.76361)
+transform = Transform3D(0.187741, 0, 0.982219, 0, 1, 0, -0.982219, 0, 0.187741, 1.96559, 0.853058, -5.50252)
 
 [node name="FloorTileLarge" parent="." instance=ExtResource("2_n3gr5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
@@ -903,3 +904,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86724, 0.0499859, -1.93159
 [node name="DroppedItem15" parent="." instance=ExtResource("37_fmq0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3721, 12.05, -4.4226)
 item = ExtResource("44_kbcb3")
+
+[node name="DroppedItem16" parent="." instance=ExtResource("37_fmq0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58466, 0.0499854, -2.92704)
+item = ExtResource("45_ggv3k")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://iix130w3gndu"]
+
+[ext_resource type="Script" path="res://systems/inventory/item.gd" id="1_ji1h5"]
+[ext_resource type="PackedScene" uid="uid://ch686mym4jaw4" path="res://items/scenes/gun.tscn" id="2_2etdt"]
+
+[resource]
+script = ExtResource("1_ji1h5")
+name = ""
+view_model = ExtResource("2_2etdt")
+is_stackable = true
+rarity = "Common"
+icon_orientation = "Front"
