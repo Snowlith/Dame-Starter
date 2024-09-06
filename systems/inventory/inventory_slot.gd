@@ -1,6 +1,9 @@
 extends Control
 class_name Slot
 
+# TODO: THIS
+var icon_dir = "res://items/icons/"
+
 @onready var item_visual: TextureRect = $TextureRect
 @onready var rarity_text: Label = $RarityText
 @onready var amount_text: Label = $AmountText
@@ -15,7 +18,7 @@ var item: Item:
 		
 		if item:
 			texture = load(item.get_icon_path())
-			amount_text.text = str(amount)
+			amount_text.text = str(item.amount)
 			amount_text.visible = item.is_stackable
 		else:
 			texture = null
@@ -23,16 +26,6 @@ var item: Item:
 			
 		item_visual.texture = texture
 		item_changed.emit()
-
-var amount: int = 1:
-	set(value):
-		if amount == value:
-			return
-		amount = value
-		amount_text.text = str(amount)
-		
-		if amount <= 0:
-			item = null
 		
 var texture
 

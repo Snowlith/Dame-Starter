@@ -6,5 +6,5 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_la4vo")
-shader_parameter/fov = 70.0
+shader_parameter/fov = 60.0
 shader_parameter/albedo_texture = ExtResource("2_0bgse")

@@ -31,7 +31,7 @@ floor_snap_length = 0.2
 script = ExtResource("1_gp66p")
 
 [node name="Hand" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, 1.32897, -0.86123)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, 1.45231, -0.86123)
 top_level = true
 script = ExtResource("6_6qend")
 shader_material = ExtResource("5_7hay0")
@@ -42,7 +42,7 @@ fov = 80.0
 script = ExtResource("2_kaij3")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="FPSCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.570339, -0.86123)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.446998, -0.86123)
 remote_path = NodePath("../../Hand")
 update_scale = false
 
