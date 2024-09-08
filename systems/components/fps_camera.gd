@@ -30,8 +30,6 @@ func _ready():
 	player = get_parent() as CharacterBody3D
 	if not player:
 		queue_free()
-	
-	SceneManager.in_menu = false
 
 	default_fov = fov
 	start_pos = position
@@ -41,8 +39,7 @@ func _ready():
 	old_transform = player.global_transform
 
 func _unhandled_input(event: InputEvent):
-	# Cast to most specific type, makes this type safe
-	if SceneManager.in_menu:
+	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
 	var mouse_event := event as InputEventMouseMotion
 	if mouse_event:

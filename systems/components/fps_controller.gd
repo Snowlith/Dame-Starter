@@ -14,6 +14,8 @@ class_name FPSController
 @onready var sprint: Sprint = $Sprint
 @onready var jump: Jump = $Jump
 
+var input: Dictionary = {"left": 0, "right": 0, "up": 0, "down": 0}
+
 var queued_impulses: Array[Vector3]
 
 var cb: CharacterBody3D
@@ -30,20 +32,26 @@ func queue_impulse(dir: Vector3, scalar: float):
 	if dir.is_normalized:
 		queued_impulses.append(dir * scalar)
 	queued_impulses.append(dir.normalized() * scalar)
+
+func _unhandled_key_input(event):
+	if event.is_echo():
+		return
+		
+	for key in input.keys():
+		if event.is_action(key):
+			input[key] = int(event.is_pressed())
+			return
 	
 func _physics_process(delta: float):
 	var input_vector := Vector2.ZERO
 	
-	if not SceneManager.in_transition or not SceneManager.in_menu:
-		# Get the normalized input vector (movement direction) rotated towards direction faced
-		input_vector = Input.get_vector("left", "right", "up", "down")
-		input_vector = input_vector.rotated(-cb.rotation.y)
-		
-		crouch.handle(Input.is_action_pressed("crouch"))
-		var sprint_input = Input.is_action_pressed("sprint") and not crouch.active
-		sprint.handle(sprint_input, cb, input_vector, delta)
-		
-		jump.handle(Input.is_action_just_pressed("jump"), cb, delta)
+	input_vector = Vector2(input["right"] - input["left"], input["down"] - input["up"]).normalized()
+	input_vector = input_vector.rotated(-cb.rotation.y)
+	
+	crouch.handle()
+	if crouch.active:
+		sprint.input = false
+	sprint.handle(cb, input_vector, delta)
 	
 	# Handle x & z: walking
 	var velocity_xz := Vector2(cb.velocity.x, cb.velocity.z)
@@ -67,9 +75,8 @@ func _physics_process(delta: float):
 	cb.velocity.z = velocity_xz.y
 	
 	# Handle y: jumping and gravity
-	if not cb.is_on_floor() and not jump.active:
+	if not jump.handle(cb, delta):
 		cb.velocity.y -= gravity * delta
-	
 	
 	for impulse in queued_impulses:
 		cb.velocity += impulse

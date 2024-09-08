@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cndplneop53kh"
-path="res://.godot/imported/coin.png-a2185d81c51e3615d0293c91c41f2138.ctex"
+uid="uid://newxm6x57kk2"
+path="res://.godot/imported/dame_drink.tscn.png-48e2760ce1d60b9410d98f47c9edcca6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/coin.png"
-dest_files=["res://.godot/imported/coin.png-a2185d81c51e3615d0293c91c41f2138.ctex"]
+source_file="res://items/icons/dame_drink.tscn.png"
+dest_files=["res://.godot/imported/dame_drink.tscn.png-48e2760ce1d60b9410d98f47c9edcca6.ctex"]
 
 [params]
 

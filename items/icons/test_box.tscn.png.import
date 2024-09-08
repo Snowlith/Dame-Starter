@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://febkhgqsrnfe"
-path="res://.godot/imported/keyring.png-dc9ef48ae6d61783ef0dffe590e56782.ctex"
+uid="uid://d36gvf3xq7n65"
+path="res://.godot/imported/test_box.tscn.png-d9368b07d754d8a37a49edcc50ffed82.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/icons/keyring.png"
-dest_files=["res://.godot/imported/keyring.png-dc9ef48ae6d61783ef0dffe590e56782.ctex"]
+source_file="res://items/icons/test_box.tscn.png"
+dest_files=["res://.godot/imported/test_box.tscn.png-d9368b07d754d8a37a49edcc50ffed82.ctex"]
 
 [params]
 

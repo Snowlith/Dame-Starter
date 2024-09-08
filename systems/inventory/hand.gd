@@ -3,7 +3,6 @@ class_name Hand
 
 @export var shader_material: ShaderMaterial
 
-# TODO: make input handling better: use input()
 # NOTE: when we use albedo, we dont need a texture on the shader mat
 
 var item: Item:
@@ -34,13 +33,3 @@ func set_material_override_rec(node):
 		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	for child in node.get_children():
 		set_material_override_rec(child)
-
-func _process(delta):
-	if not item or SceneManager.in_menu:
-		return
-	if Input.is_action_just_pressed("primary attack"):
-		item.primary_attack()
-	if Input.is_action_just_pressed("secondary attack"):
-		item.secondary_attack()
-	if Input.is_action_just_pressed("inspect"):
-		item.inspect()

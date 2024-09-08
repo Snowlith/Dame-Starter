@@ -6,21 +6,13 @@ var current_scene_path: String
 var current_transition: Transition
 
 var in_transition: bool = false
-var in_menu: bool = true:
-	set(value):
-		if value == in_menu:
-			return
-		in_menu = value
-		if value:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 const PLAYER = "player"
 const LOADING_ZONE = "loading_zone"
 
+# TODO: centralize disabled actions from menu and loading zone
+
 func _ready() -> void:
-	# find current scene name
 	current_scene_path = ProjectSettings.get_setting("application/run/main_scene")
 
 func change_scene(data: TransitionData) -> void:
@@ -118,7 +110,7 @@ func _end_transition():
 		current_transition.fade_in()
 	
 	in_transition = false
-
-func _physics_process(_delta):
-	if Input.is_action_just_pressed("quit"):
+	
+func _unhandled_key_input(event):
+	if event.is_action_pressed("quit"):
 		get_tree().quit()

@@ -106,6 +106,7 @@ _data = {
 
 [node name="Gun" type="Node3D"]
 script = ExtResource("1_d271n")
+icon_orientation = "Angled"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, -0.332)
@@ -120,6 +121,8 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 0.973694, 0.227858, 0, -0.227858, 0.973694, -0.000873263, 0.14044, -0.478319)
 mesh = SubResource("BoxMesh_nv5gq")
 skeleton = NodePath("../..")
+
+[node name="ViewModelStack" type="Node3D" parent="."]
 
 [node name="Area3D" type="Area3D" parent="."]
 

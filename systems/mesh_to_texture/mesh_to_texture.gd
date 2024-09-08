@@ -16,46 +16,68 @@ func _ready():
 	if not item_dir:
 		return
 	for filename in DirAccess.get_files_at(item_dir):
-		var item: Item = load(item_dir + "/" + filename)
-		if not item.mesh:
+		var item_scene := load(item_dir + "/" + filename).instantiate() as Item
+		if not item_scene:
 			continue
-		var mesh_instance = get_mesh_instance(item)
-		mesh_instance.mesh = item.mesh
-		mesh_instance.visible = true
-		adjust_scene(mesh_instance)
+		print("")
+		item_scene.process_mode = PROCESS_MODE_DISABLED
+		var rig = get_rig(item_scene)
+		rig.add_child(item_scene)
+		adjust_scene(item_scene)
+		
 		
 		await RenderingServer.frame_post_draw
-		save_image(item)
-		mesh_instance.visible = false
+		await get_tree().create_timer(.5).timeout
+		save_image(item_scene)
+		rig.remove_child(item_scene)
 	
 	get_tree().quit()
 
-func get_mesh_instance(item):
-	var mesh_instance = sub_viewport.get_node_or_null(item.icon_orientation)
-	if mesh_instance:
-		return mesh_instance
+func get_rig(item):
+	var rig = sub_viewport.get_node_or_null(item.icon_orientation)
+	if rig:
+		return rig
 	return $SubViewportContainer/SubViewport/Front
 
-func adjust_scene(mesh_instance):
-	var mesh = mesh_instance.mesh
-	if not mesh:
-		return
-	mesh_instance.transform.origin = Vector3.ZERO
+func adjust_scene(scene_root: Node3D):
+	var combined_aabb = get_combined_aabb(scene_root)
 	
-	cam.transform.origin = default_cam_pos
-	var aabb: AABB = mesh.get_aabb()
-	var center = aabb.position + aabb.size * 0.5
-	var size: Vector3 = aabb.size
-	var max_dimension = max(size.x, size.y, size.z)
-	mesh_instance.transform.origin -= center
+	if combined_aabb.size == Vector3.ZERO:
+		return # No valid AABB found
+
+	var center = combined_aabb.position + combined_aabb.size * 0.5
+	var size = combined_aabb.size
+	var max_dimension = combined_aabb.get_longest_axis_size()
+
+	# Adjust the scene position
+	scene_root.transform.origin -= center
 	
-	# Move camera back based on the size
-	cam.transform.origin *= max_dimension * 1.7
+	# Adjust camera position based on AABB
+	cam.transform.origin = default_cam_pos * max_dimension * 1.7
+
+func get_combined_aabb(scene_root: Node3D) -> AABB:
+	var combined_aabb: AABB
+	var found_aabb = false
+	
+	# Iterate through all MeshInstance3D nodes in the scene
+	for child in scene_root.get_children():
+		if child is MeshInstance3D:
+			var mesh = child.mesh
+			if mesh:
+				var aabb = mesh.get_aabb() * child.transform
+				if not found_aabb:
+					combined_aabb = aabb
+					found_aabb = true
+				else:
+					combined_aabb = combined_aabb.merge(aabb)
+					
+	return combined_aabb
 
 func save_image(item):
 	var image = sub_viewport.get_viewport().get_texture().get_image()
-	var image_path = icon_dir + "/%s.png" % get_resource_name(item)
+	var image_path = icon_dir + "/%s.png" % get_item_name(item)
 	image.save_png(image_path)
 	
-func get_resource_name(resource: Resource):
-	return resource.resource_path.get_file().trim_suffix('.tres')
+func get_item_name(item: Item):
+	return item.scene_file_path.split('/')[-1]
+	#.trim_suffix('.tscn')

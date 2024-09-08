@@ -1,12 +1,14 @@
 extends StaticBody3D
 
-@export var key_item: Item
+@export var key: PackedScene
 @onready var area: Area3D = $Area3D
 
+var key_item: Item
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	area.body_entered.connect(_on_body_entered)
+	key_item = key.instantiate() as Item
 
 func _on_body_entered(body: Node3D):
 	var children = body.get_children()

@@ -2,19 +2,31 @@ extends Item
 
 @export var health_gain: int
 
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
-
+func _unhandled_input(event):
+	if event.is_action_pressed("primary attack"):
+		primary_attack()
+	if event.is_action_pressed("inspect"):
+		inspect()
 
 func primary_attack():
 	if anim_player.is_playing():
 		return
 	anim_player.play("drink")
 	await anim_player.animation_finished
+	var inv: Inventory
+	var c: FPSController
+	
 	for child in user.get_children():
-		var c = child as FPSController
-		if not c:
+		if child as Inventory:
+			inv = child
 			continue
-		c.queue_impulse(Vector3.UP, 30)
+		if child as FPSController:
+			c = child
+			continue
+	if inv:
+		inv.remove(self)
+	if c:
+		c.queue_impulse(Vector3.UP, 15)
 
 func inspect():
 	if anim_player.is_playing():

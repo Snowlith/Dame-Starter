@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://7utl1sq37pk7"]
+
+[ext_resource type="Script" path="res://items/scripts/healing_potion.gd" id="1_hbdog"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rguwk"]
+size = Vector3(1.715, 1.77, 1.88)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mvbdk"]
+radius = 0.798596
+
+[node name="TestBox" type="Node3D"]
+script = ExtResource("1_hbdog")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.984068, 0.90697, 1.02695)
+mesh = SubResource("BoxMesh_rguwk")
+
+[node name="ViewModelStack" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_mvbdk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

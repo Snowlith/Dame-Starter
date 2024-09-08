@@ -1,6 +1,10 @@
 extends Item
 
-@onready var anim_player = $AnimationPlayer
+func _unhandled_input(event):
+	if event.is_action_pressed("primary attack"):
+		primary_attack()
+	if event.is_action_pressed("inspect"):
+		inspect()
 
 func primary_attack():
 	if anim_player.is_playing():

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgdx1v18hacto"
-path="res://.godot/imported/dame_drink.png-5647664693278c82adcdd3f940398fd3.ctex"
+uid="uid://febkhgqsrnfe"
+path="res://.godot/imported/keyring.png-4178c5e6fc081f5a649d6a80f0e2bae9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/icons/dame_drink.png"
-dest_files=["res://.godot/imported/dame_drink.png-5647664693278c82adcdd3f940398fd3.ctex"]
+source_file="res://assets/textures/keyring.png"
+dest_files=["res://.godot/imported/keyring.png-4178c5e6fc081f5a649d6a80f0e2bae9.ctex"]
 
 [params]
 

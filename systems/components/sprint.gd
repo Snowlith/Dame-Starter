@@ -18,7 +18,17 @@ var time_left: float = duration:
 
 var active: bool = false
 
-func handle(input: bool, cb: CharacterBody3D, input_vector: Vector2, delta: float) -> void:
+var input: bool = false
+
+func _unhandled_key_input(event):
+	if event.is_echo():
+		return
+	if event.is_action_pressed("sprint"):
+		input = true
+	elif event.is_action_released("sprint"):
+		input = false
+
+func handle(cb: CharacterBody3D, input_vector: Vector2, delta: float) -> void:
 	var is_zero = input_vector == Vector2.ZERO
 	active = false
 	if not input or cb.is_on_wall() or is_zero:

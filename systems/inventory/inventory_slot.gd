@@ -1,7 +1,6 @@
 extends Control
 class_name Slot
 
-# TODO: THIS
 var icon_dir = "res://items/icons/"
 
 @onready var item_visual: TextureRect = $TextureRect
@@ -14,11 +13,12 @@ var item: Item:
 	set(value):
 		if item == value:
 			return
+		
 		item = value
 		
 		if item:
-			texture = load(item.get_icon_path())
-			amount_text.text = str(item.amount)
+			texture = load(get_icon_path())
+			amount_text.text = str(amount)
 			amount_text.visible = item.is_stackable
 		else:
 			texture = null
@@ -26,6 +26,17 @@ var item: Item:
 			
 		item_visual.texture = texture
 		item_changed.emit()
+
+var amount: int:
+	set(value):
+		if amount == value:
+			return
+		amount = value
+		if amount <= 0:
+			item = null
+		amount_text.text = str(amount)
+		
+		
 		
 var texture
 
@@ -35,6 +46,11 @@ signal item_changed
 # Before ready
 func _init():
 	add_to_group(Inventory.SLOT)
+
+func get_icon_path():
+	if not item:
+		return ""
+	return icon_dir + item.scene_file_path.split('/')[-1] + '.png'
 
 ## Dragging
 

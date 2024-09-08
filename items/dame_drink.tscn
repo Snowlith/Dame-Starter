@@ -63,7 +63,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_tjchj"]
 resource_name = "inspect"
-length = 3.2
+length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -71,10 +71,10 @@ tracks/0/path = NodePath("MeshInstance3D:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.733333, 1.06667, 1.46667, 2.06667, 2.23333, 2.6, 2.86667, 3.13333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333, 0.533333, 0.933333, 1.65333, 1.7, 1.93334, 2.16667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.447, 0.289, 0.176), Vector3(-0.447, 0.289, 0.176), Vector3(-0.447, 0.289, 0.176), Vector3(-0.446965, 0.444852, -0.514008), Vector3(-0.225186, 0.444852, -0.514008), Vector3(-0.116303, 0.444852, -0.339988), Vector3(-0.116303, 0.444852, -0.339988), Vector3(-0.0581514, 0.222426, -0.169994), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(-0.447, 0.289, 0.176), Vector3(-0.648972, 0.419581, 0.255524), Vector3(-0.648972, 0.419581, 0.255524), Vector3(-0.648972, 0.419581, 0.255524), Vector3(-0.648972, 0.419581, 0.255524), Vector3(-0.447, 0.289, 0.176), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -83,10 +83,10 @@ tracks/1/path = NodePath("MeshInstance3D:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.733333, 1.06667, 1.46667, 2.06667, 2.23333, 2.6, 2.86667, 3.13333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333, 0.533333, 0.933333, 1.63333, 1.7, 1.93334, 2.16667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-2.42934e-09, 0.611755, -0.645353), Vector3(-2.42934e-09, 0.611755, -0.645353), Vector3(-2.42934e-09, 0.611755, -0.645353), Vector3(1.38429, 1.46056, 2.11349), Vector3(1.38429, 0.855558, 2.11349), Vector3(1.38429, 0.223905, 2.11349), Vector3(1.38429, 0.223905, 2.11349), Vector3(0.37699, -0.612933, 0.209858), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(-2.42934e-09, 0.611755, -0.645353), Vector3(-0.672286, 0.10804, -0.556386), Vector3(-0.672286, 0.10804, -0.556386), Vector3(-0.672286, 0.10804, -0.556386), Vector3(-0.672286, 0.10804, -0.556386), Vector3(-2.42934e-09, 0.611755, -0.645353), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4lyfn"]
@@ -100,6 +100,9 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
 script = ExtResource("1_jsmfm")
 health_gain = 10
+icon_orientation = "Angled"
+
+[node name="ViewModelStack" type="Node3D" parent="."]
 
 [node name="Area3D" type="Area3D" parent="."]
 monitoring = false
@@ -108,14 +111,15 @@ monitoring = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.388879, 0)
 shape = SubResource("CapsuleShape3D_n270q")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_xrqoh")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_4lyfn")
 }
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("2_xrqoh")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.427308, 7.47131e-08)

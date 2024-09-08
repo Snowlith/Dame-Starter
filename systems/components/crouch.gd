@@ -8,18 +8,28 @@ class_name Crouch
 @export var visual_offset_y: float = 0.5
 @export var visual_speed: float = 10
 
+var input: bool = false
 var active: bool = false
 
 var offset_pos: Vector3
+
+func _unhandled_key_input(event):
+	if event.is_echo():
+		return
+	if event.is_action_pressed("crouch"):
+		input = true
+	elif event.is_action_released("crouch"):
+		input = false
 
 func _ready():
 	_reset_crouch()
 	shape_cast.add_exception(stand_col.get_parent())
 
 func _reset_crouch() -> void:
-	handle(false)
+	input = false
+	handle()
 
-func handle(input: bool) -> void:
+func handle() -> void:
 	# Keep crouching when banging head on ceiling
 	if active and not input:
 		if shape_cast and shape_cast.is_colliding():

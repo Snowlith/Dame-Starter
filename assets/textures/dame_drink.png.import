@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://co1k1fvj7m868"
-path="res://.godot/imported/banner.png-4cea8fa08cab330e44a327a7825e3051.ctex"
+uid="uid://cgdx1v18hacto"
+path="res://.godot/imported/dame_drink.png-1025b118dc362df41aeea6c2e8805f17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/icons/banner.png"
-dest_files=["res://.godot/imported/banner.png-4cea8fa08cab330e44a327a7825e3051.ctex"]
+source_file="res://assets/textures/dame_drink.png"
+dest_files=["res://.godot/imported/dame_drink.png-1025b118dc362df41aeea6c2e8805f17.ctex"]
 
 [params]
 

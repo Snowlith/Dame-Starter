@@ -97,9 +97,14 @@ _data = {
 }
 
 [node name="SmallHealthPotion" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
 script = ExtResource("1_756wq")
 health_gain = 10
+icon_orientation = "Angled"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_yaak7")
+
+[node name="ViewModelStack" type="Node3D" parent="."]
 
 [node name="Area3D" type="Area3D" parent="."]
 monitoring = false
@@ -107,9 +112,6 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.388879, 0)
 shape = SubResource("CapsuleShape3D_n270q")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_yaak7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3

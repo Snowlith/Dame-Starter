@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bhq7g0qesynk1"]
+[gd_scene load_steps=21 format=3 uid="uid://bhq7g0qesynk1"]
 
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="1_ubu3x"]
 [ext_resource type="PackedScene" uid="uid://cn1eahugx35by" path="res://scenes/terrain/floor_dirt_large.tscn" id="2_cdt3e"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://c4cyaff4u0uki" path="res://scenes/structures_old/wall_tsplit.tscn" id="11_yrmfk"]
 [ext_resource type="PackedScene" uid="uid://c64d8k5xq28so" path="res://scenes/props/column.tscn" id="12_i1lxk"]
 [ext_resource type="PackedScene" uid="uid://bx538glhlduck" path="res://scenes/props/support.tscn" id="13_dmsmy"]
+[ext_resource type="PackedScene" uid="uid://cu5681j1o8ypn" path="res://scenes/props/box_small.tscn" id="14_r2jqc"]
+[ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="15_ysolj"]
+[ext_resource type="PackedScene" uid="uid://bqkkfyrt8jks2" path="res://transitions/dame_transition.tscn" id="16_tcj0o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ghnw3"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -26,6 +29,10 @@ background_mode = 2
 sky = SubResource("Sky_ufhv6")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rya40"]
+height = 6.24201
+radius = 0.826679
 
 [node name="LevelTemplate" type="Node3D"]
 
@@ -653,3 +660,41 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.365
 
 [node name="Support12" parent="." instance=ExtResource("13_dmsmy")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.36586, 3.53542, -8)
+
+[node name="BoxSmall" parent="." instance=ExtResource("14_r2jqc")]
+transform = Transform3D(0.954381, 0, -0.298591, 0, 1, 0, 0.298591, 0, 0.954381, -0.355756, -7.95001, -9.64038)
+
+[node name="BoxSmall2" parent="." instance=ExtResource("14_r2jqc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.528894, -7.95001, -9.36371)
+
+[node name="BoxSmall3" parent="." instance=ExtResource("14_r2jqc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00818372, -6.89655, -9.77804)
+
+[node name="Column5" parent="." instance=ExtResource("12_i1lxk")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 12.2935, -6.95001, 9.7747)
+
+[node name="Column6" parent="." instance=ExtResource("12_i1lxk")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 10.2935, -5.95001, 9.7747)
+
+[node name="Column7" parent="." instance=ExtResource("12_i1lxk")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.29346, -4.95001, 9.7747)
+
+[node name="Column8" parent="." instance=ExtResource("12_i1lxk")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 11.1392, -3.60182, 10.3404)
+
+[node name="Column9" parent="." instance=ExtResource("12_i1lxk")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 9.13924, -2.60182, 10.3404)
+
+[node name="Column10" parent="." instance=ExtResource("12_i1lxk")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 7.13924, -1.60182, 10.3404)
+
+[node name="LoadingZone" type="Area3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -7.97271, 9.34577)
+script = ExtResource("15_ysolj")
+target_scene_path = "res://levels/dungeon_1.tscn"
+target_id = "room"
+displacement = Vector3(0, 0, -2)
+transition = ExtResource("16_tcj0o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LoadingZone"]
+shape = SubResource("CylinderShape3D_rya40")

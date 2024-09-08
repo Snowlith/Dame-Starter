@@ -5,24 +5,31 @@ class_name Inventory
 
 @onready var hand_slot: Slot = $NinePatchRect/HandSlot
 @onready var nine_patch_rect: Control = $NinePatchRect
+@onready var color_rect: Control = $ColorRect
 
+var disabled_actions: Array[String] = ["jump", "crouch", "sprint", "left", "right", "up", "down", "inspect"]
 var items: Array[Item]
-var slots: Array[Slot] = []
+var slots: Array[Slot]
 var size: int
 
-# TODO: FIX BUGS
+# TODO: add method that priority removes from hand slot for depleting consumables
 # TODO: add ability to add items through editor
 # exposing items does not allow for stacks
 # needs custom class
-# TODO: look through this script for oversights, very prone to bugs
 
 var is_open = true:
 	set(value):
 		if is_open == value:
 			return
+			
 		is_open = value
-		SceneManager.in_menu = is_open
+		color_rect.visible = is_open
 		nine_patch_rect.visible = is_open
+		
+		if is_open:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 const SLOT = "inv_slot"
 const SLOT_CAPACITY: int = 16
@@ -45,7 +52,12 @@ func _ready() -> void:
 	close()
 
 func has(item: Item):
-	return item and item in items
+	if not item:
+		return false
+	for new_item in items:
+		if are_same(new_item, item):
+			return true
+	return false
 
 func count(item: Item) -> int:
 	if not item:
@@ -83,9 +95,9 @@ func can_insert(item: Item, amount: int) -> bool:
 	var total_capacity = 0
 	if item.is_stackable:
 		for i in items.size():
-			if not items[i] or items[i] != item:
+			if not items[i] or not are_same(item, items[i]):
 				continue
-			total_capacity += SLOT_CAPACITY - item.amount
+			total_capacity += SLOT_CAPACITY - slots[i].amount
 		total_capacity += count(null) * SLOT_CAPACITY
 	else:
 		total_capacity = count(null)
@@ -96,17 +108,18 @@ func _on_area_entered(area: Area3D):
 	if not item:
 		return
 	# Check if there is enough space for all items
-	if can_insert(item, item.amount):
+	if can_insert(item, item.stack_size):
 		item.get_parent().remove_child(item)
-		insert(item, item.amount)
+		insert(item, item.stack_size)
 	else:
 		# Only take as many items as possible
-		var items_taken = insert(item, item.amount)
-		item.amount -= items_taken
-	
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("inventory"):
-		is_open = not is_open
+		var items_taken = insert(item, item.stack_size)
+		item.stack_size -= items_taken
+		
+func are_same(item_1: Item, item_2: Item):
+	if not item_1 or not item_2:
+		return false
+	return item_1.scene_file_path == item_2.scene_file_path
 
 func update_hand():
 	if not held_item:
@@ -124,33 +137,44 @@ func swap_slots(slot_1, slot_2):
 	var index_2 = slots.find(slot_2)
 	
 	var temp_item = slot_1.item
+	var temp_amount = slot_1.amount
 	
 	slot_1.item = slot_2.item
+	slot_1.amount = slot_2.amount
 	
 	slot_2.item = temp_item
+	slot_2.amount = temp_amount
 	
 	items[index_1] = slot_1.item
 	items[index_2] = slot_2.item
+
+func _input(event: InputEvent):
+	if event.is_action_pressed("inventory") and not event.is_echo():
+		is_open = not is_open
+	if is_open:
+		for action in disabled_actions:
+			if event.is_action_pressed(action):
+				get_viewport().set_input_as_handled()
+				return
 	
 ## Stacking helper methods
 
 func _insert_into_existing_slots(item: Item, remaining_amount: int) -> int:
 	for i in items.size():
 		# Skip when null or items don't match
-		if not items[i] or items[i] != item:
+		if not items[i] or not are_same(item, items[i]):
 			continue
 		# Skip full slots
-		if item.amount >= SLOT_CAPACITY:
+		if slots[i].amount >= SLOT_CAPACITY:
 			continue
-		var available_space = SLOT_CAPACITY - item.amount
+		var available_space = SLOT_CAPACITY - slots[i].amount
 		var amount_to_add = min(remaining_amount, available_space)
-		item.amount += amount_to_add
+		slots[i].amount += amount_to_add
 		remaining_amount -= amount_to_add
 		if remaining_amount <= 0:
 			return 0
 	return remaining_amount
 
-# DOES NOT WORK
 func _insert_into_empty_slots(item: Item, remaining_amount: int) -> int:
 	for i in items.size():
 		# Only consider empty slots
@@ -159,26 +183,25 @@ func _insert_into_empty_slots(item: Item, remaining_amount: int) -> int:
 		items[i] = item
 		var amount_to_add = min(remaining_amount, SLOT_CAPACITY)
 		slots[i].item = item
-		item.amount = amount_to_add
+		slots[i].amount = amount_to_add
 		remaining_amount -= amount_to_add
 		if remaining_amount <= 0:
 			return 0
 	return remaining_amount
 
-# DOES NOT WORK
 func _remove_from_existing_slots(item: Item, remaining_amount: int) -> int:
 	for i in items.size():
 		# Skip if null or items don't match
-		if not items[i] or items[i] != item:
+		if not items[i] or not are_same(item, items[i]):
 			continue
-		var slot = slots[i]
 		# Partly deplete slot
-		if slot.amount > remaining_amount:
-			slot.amount -= remaining_amount
+		if slots[i].amount > remaining_amount:
+			slots[i].amount -= remaining_amount
 			return 0
 		else:
 			# Completely deplete slot
-			remaining_amount -= slot.amount
-			item.amount = 0
+			remaining_amount -= slots[i].amount
+			slots[i].amount = 0
+			# redundant
 			items[i] = null
 	return remaining_amount
