@@ -40,7 +40,7 @@ var amount: int:
 		
 var texture
 
-signal item_dropped(slot, previous_owner)
+signal item_switched(slot, previous_owner)
 signal item_changed
 
 # Before ready
@@ -55,7 +55,7 @@ func get_icon_path():
 ## Dragging
 
 func _get_drag_data(_pos):
-	if not item:
+	if not item or not item.allow_unequip:
 		return
 	
 	# Make drag preview
@@ -75,7 +75,11 @@ func _get_drag_data(_pos):
 	return self
 
 func _can_drop_data(_pos, data):
+	if item:
+		return item.allow_unequip
 	return true
 
 func _drop_data(_pos, prev_owner):
-	item_dropped.emit(self, prev_owner)
+	if item and not item.allow_unequip:
+		return
+	item_switched.emit(self, prev_owner)

@@ -99,10 +99,7 @@ _data = {
 [node name="DameDrink" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
 script = ExtResource("1_jsmfm")
-health_gain = 10
 icon_orientation = "Angled"
-
-[node name="ViewModelStack" type="Node3D" parent="."]
 
 [node name="Area3D" type="Area3D" parent="."]
 monitoring = false
@@ -118,7 +115,6 @@ libraries = {
 }
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("2_xrqoh")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

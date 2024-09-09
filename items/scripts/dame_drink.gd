@@ -1,11 +1,13 @@
 extends Item
 
-@export var health_gain: int
-
 func _unhandled_input(event):
+	if event.is_echo():
+		return
 	if event.is_action_pressed("primary attack"):
-		primary_attack()
-	if event.is_action_pressed("inspect"):
+		allow_unequip = false
+		await primary_attack()
+		allow_unequip = true
+	elif event.is_action_pressed("inspect"):
 		inspect()
 
 func primary_attack():
@@ -24,7 +26,7 @@ func primary_attack():
 			c = child
 			continue
 	if inv:
-		inv.remove(self)
+		inv.remove_from(inv.hand_slot)
 	if c:
 		c.queue_impulse(Vector3.UP, 15)
 

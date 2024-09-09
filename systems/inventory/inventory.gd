@@ -12,7 +12,8 @@ var items: Array[Item]
 var slots: Array[Slot]
 var size: int
 
-# TODO: add method that priority removes from hand slot for depleting consumables
+# TODO: account for item currently in use when checking whether has
+# TODO: rework item renaming
 # TODO: add ability to add items through editor
 # exposing items does not allow for stacks
 # needs custom class
@@ -45,11 +46,40 @@ func _ready() -> void:
 	for i in size:
 		var slot: Slot = slots[i]
 		#slot.item = items[i]
-		slot.item_dropped.connect(swap_slots)
+		slot.item_switched.connect(swap_slots)
 	hand_slot.item_changed.connect(update_hand)
+	color_rect.item_dropped.connect(drop)
 	area_entered.connect(_on_area_entered)
 	
 	close()
+
+func drop(slot: Slot):
+	var item = slot.item
+	item.stack_size = slot.amount
+	remove_from(slot, slot.amount)
+	var existing_items = get_tree().current_scene.get_children().filter(func(child):
+		return child is Item and are_same(item, child))
+	
+	var spawn_location = global_position + Vector3.FORWARD.rotated(Vector3.UP, global_rotation.y) * 2
+	
+	for existing_item in existing_items:
+		if spawn_location.distance_to(existing_item.global_transform.origin) < 1.0:
+			# If nearby, combine the stacks
+			existing_item.stack_size += item.stack_size
+			item.queue_free()
+			return
+	
+	# failed combine
+	item.name = generate_word("abcdefghijklmnopqrstuvwxyz", 10)
+	get_tree().current_scene.add_child(item)
+	item.user = null
+	item.transform.origin = spawn_location
+
+func generate_word(chars, length):
+	var word: String
+	for i in range(length):
+		word += chars[randi() % len(chars)]
+	return word
 
 func has(item: Item):
 	if not item:
@@ -90,6 +120,10 @@ func remove(item: Item, amount: int = 1) -> int:
 	var remaining_amount = amount
 	remaining_amount = _remove_from_existing_slots(item, remaining_amount)
 	return amount - remaining_amount
+
+func remove_from(slot: Slot, amount: int = 1):
+	slot.amount = clamp(slot.amount - amount, 0, slot.amount)
+	items[slots.find(slot)] = null
 
 func can_insert(item: Item, amount: int) -> bool:
 	var total_capacity = 0
@@ -202,6 +236,5 @@ func _remove_from_existing_slots(item: Item, remaining_amount: int) -> int:
 			# Completely deplete slot
 			remaining_amount -= slots[i].amount
 			slots[i].amount = 0
-			# redundant
 			items[i] = null
 	return remaining_amount

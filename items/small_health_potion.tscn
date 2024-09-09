@@ -104,8 +104,6 @@ icon_orientation = "Angled"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_yaak7")
 
-[node name="ViewModelStack" type="Node3D" parent="."]
-
 [node name="Area3D" type="Area3D" parent="."]
 monitoring = false
 

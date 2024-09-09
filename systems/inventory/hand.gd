@@ -12,6 +12,7 @@ var item: Item:
 		
 		if item:
 			item.user = null
+			remove_material_override_rec(item)
 			remove_child(item)
 		
 		item = new_item
@@ -33,3 +34,10 @@ func set_material_override_rec(node):
 		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	for child in node.get_children():
 		set_material_override_rec(child)
+
+func remove_material_override_rec(node):
+	if node is MeshInstance3D:
+		node.material_override = null
+		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+	for child in node.get_children():
+		remove_material_override_rec(child)

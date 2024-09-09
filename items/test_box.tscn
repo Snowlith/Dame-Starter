@@ -15,8 +15,6 @@ script = ExtResource("1_hbdog")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.984068, 0.90697, 1.02695)
 mesh = SubResource("BoxMesh_rguwk")
 
-[node name="ViewModelStack" type="Node3D" parent="."]
-
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

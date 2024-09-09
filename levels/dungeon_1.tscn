@@ -845,7 +845,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86724, 0.0499859, -1.93159
 
 [node name="SmallHealthPotion" parent="." instance=ExtResource("39_pr8uc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.122708, 0.0499854, -3.05705)
-stack_size = 3
+stack_size = 4
 
 [node name="SmallHealthPotion2" parent="." instance=ExtResource("39_pr8uc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.122708, 0.0499854, -4.46211)

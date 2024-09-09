@@ -122,8 +122,6 @@ transform = Transform3D(1, 0, 0, 0, 0.973694, 0.227858, 0, -0.227858, 0.973694, 
 mesh = SubResource("BoxMesh_nv5gq")
 skeleton = NodePath("../..")
 
-[node name="ViewModelStack" type="Node3D" parent="."]
-
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
