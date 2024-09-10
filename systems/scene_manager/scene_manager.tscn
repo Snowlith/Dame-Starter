@@ -6,3 +6,24 @@
 [node name="SceneManager" type="Node"]
 script = ExtResource("1_bemho")
 default_transition = ExtResource("2_4m8vw")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Scene"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -46.0
+offset_top = 23.0
+offset_bottom = 46.0
+grow_horizontal = 0
+text = "FPS"
+horizontal_alignment = 2

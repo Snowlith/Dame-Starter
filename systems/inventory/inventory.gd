@@ -12,7 +12,8 @@ var items: Array[Item]
 var slots: Array[Slot]
 var size: int
 
-# TODO: account for item currently in use when checking whether has
+# NOTE: potential memory leak since items are not being queue freed always? needs testing
+# NOTE: account for item currently being consumed when designing shops and locked doors
 # TODO: rework item renaming
 # TODO: add ability to add items through editor
 # exposing items does not allow for stacks
@@ -66,17 +67,22 @@ func drop(slot: Slot):
 		if spawn_location.distance_to(existing_item.global_transform.origin) < 1.0:
 			# If nearby, combine the stacks
 			existing_item.stack_size += item.stack_size
+			
+			# Cannot queue free since they can be the same but split
 			item.queue_free()
 			return
 	
 	# failed combine
-	item.name = generate_word("abcdefghijklmnopqrstuvwxyz", 10)
+	while get_tree().current_scene.has_node(str(item.name)):
+		item.name = generate_name("abcdefghijklmnopqrstuvwxyz", 10)
+		print(item.name)
+		
 	get_tree().current_scene.add_child(item)
 	item.user = null
 	item.transform.origin = spawn_location
 
-func generate_word(chars, length):
-	var word: String
+func generate_name(chars, length):
+	var word: String = ""
 	for i in range(length):
 		word += chars[randi() % len(chars)]
 	return word
@@ -123,7 +129,8 @@ func remove(item: Item, amount: int = 1) -> int:
 
 func remove_from(slot: Slot, amount: int = 1):
 	slot.amount = clamp(slot.amount - amount, 0, slot.amount)
-	items[slots.find(slot)] = null
+	var index = slots.find(slot)
+	items[index] = null
 
 func can_insert(item: Item, amount: int) -> bool:
 	var total_capacity = 0
@@ -207,6 +214,7 @@ func _insert_into_existing_slots(item: Item, remaining_amount: int) -> int:
 		remaining_amount -= amount_to_add
 		if remaining_amount <= 0:
 			return 0
+			# Queue free item?
 	return remaining_amount
 
 func _insert_into_empty_slots(item: Item, remaining_amount: int) -> int:
@@ -214,9 +222,9 @@ func _insert_into_empty_slots(item: Item, remaining_amount: int) -> int:
 		# Only consider empty slots
 		if items[i]:
 			continue
-		items[i] = item
+		items[i] = item.duplicate()
 		var amount_to_add = min(remaining_amount, SLOT_CAPACITY)
-		slots[i].item = item
+		slots[i].item = items[i]
 		slots[i].amount = amount_to_add
 		remaining_amount -= amount_to_add
 		if remaining_amount <= 0:
@@ -236,5 +244,6 @@ func _remove_from_existing_slots(item: Item, remaining_amount: int) -> int:
 			# Completely deplete slot
 			remaining_amount -= slots[i].amount
 			slots[i].amount = 0
+			items[i].queue_free()
 			items[i] = null
 	return remaining_amount

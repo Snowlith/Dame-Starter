@@ -2,7 +2,13 @@ extends Node
 
 @export var default_transition: PackedScene
 
-var current_scene_path: String
+var current_scene_path: String:
+	set(value):
+		if current_scene_path == value:
+			return
+		current_scene_path = value
+		label.text = current_scene_path
+		
 var current_transition: Transition
 
 var in_transition: bool = false
@@ -10,16 +16,20 @@ var in_transition: bool = false
 const PLAYER = "player"
 const LOADING_ZONE = "loading_zone"
 
+@onready var label = $Label
+@onready var label_2 = $Label2
+
 # TODO: centralize disabled actions from menu and loading zone
 
+func _process(delta):
+	label_2.text = str(Engine.get_frames_per_second())
+
 func _ready() -> void:
-	current_scene_path = ProjectSettings.get_setting("application/run/main_scene")
+	current_scene_path = get_tree().current_scene.scene_file_path
 
 func change_scene(data: TransitionData) -> void:
 	if current_scene_path == data.scene_path or in_transition:
 		return
-		
-	print("changing scene to " + data.scene_path)
 	
 	await _start_transition(data.transition)
 	
