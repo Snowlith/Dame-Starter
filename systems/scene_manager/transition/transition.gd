@@ -9,7 +9,6 @@ func _input(event: InputEvent):
 			get_viewport().set_input_as_handled()
 			return
 
-# Called when the node enters the scene tree for the first time.
 func fade_out() -> void:
 	pass
 

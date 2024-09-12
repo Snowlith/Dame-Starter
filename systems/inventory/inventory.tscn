@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://t2ps5fa3fnki"]
+[gd_scene load_steps=7 format=3 uid="uid://t2ps5fa3fnki"]
 
 [ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="1_rrfv4"]
 [ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="2_ha84g"]
 [ext_resource type="Texture2D" uid="uid://bgw8e1hralkgb" path="res://assets/textures/inventory_bg.png" id="3_c2dgx"]
 [ext_resource type="PackedScene" uid="uid://cu4a3g4md3w4a" path="res://systems/inventory/inventory_slot.tscn" id="3_lwgw0"]
 [ext_resource type="Script" path="res://systems/inventory/inventory_drop_slot.gd" id="4_ju3fk"]
+[ext_resource type="PackedScene" uid="uid://3fh5yaot8awe" path="res://systems/inventory/inventory_menu.tscn" id="6_srspj"]
 
 [node name="Inventory" type="Area3D"]
 script = ExtResource("1_rrfv4")
@@ -15,7 +16,6 @@ material = ExtResource("2_ha84g")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_ju3fk")
@@ -109,3 +109,10 @@ offset_left = 14.0
 offset_top = 415.0
 offset_right = 142.0
 offset_bottom = 543.0
+
+[node name="Control" parent="." instance=ExtResource("6_srspj")]
+offset_left = 118.0
+offset_top = 43.0
+offset_right = 118.0
+offset_bottom = 43.0
+mouse_filter = 2

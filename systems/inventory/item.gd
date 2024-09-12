@@ -17,7 +17,7 @@ var icon_dir = "res://items/icons/"
 
 const VIEWMODEL_SCALE: float = 0.5
 
-var dropped: bool = true
+var is_equipped: bool = false
 var allow_unequip: bool = true
 var _bob_time: float
 
@@ -27,9 +27,9 @@ var user: Node3D:
 		if user == new_user:
 			return
 		user = new_user
-		_toggle_process_mode(user != null)
-		dropped = not user
-		area.monitorable = dropped
+		is_equipped = user != null
+		_toggle_process_mode()
+		area.monitorable = not is_equipped
 		if user:
 			transform = Transform3D.IDENTITY.scaled_local(Vector3.ONE * VIEWMODEL_SCALE)
 			_reset_bob()
@@ -44,7 +44,12 @@ var user: Node3D:
 # TODO: design unique way to represent item stacks 
 # TODO: refactor dropped to is_equipped
 
-func _toggle_process_mode(is_equipped: bool) -> void:
+func is_same(item: Item):
+	if not item:
+		return false
+	return scene_file_path == item.scene_file_path
+
+func _toggle_process_mode() -> void:
 	set_process(not is_equipped)
 	set_process_unhandled_input(is_equipped)
 
@@ -54,7 +59,7 @@ func _ready() -> void:
 		anim_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	area.monitoring = false
 	init_transform = mesh_instance.transform
-	if dropped:
+	if not is_equipped:
 		set_process_unhandled_input(false)
 		_bob_time += (global_position.x + global_position.z) / 10
 
@@ -72,7 +77,3 @@ func _bob(delta):
 	_bob_time += delta
 	mesh_instance.transform.origin = init_transform.origin + Vector3(0, sin(_bob_time) * 0.1, 0)
 	mesh_instance.rotate_y(delta)
-
-# NOTE: NOT QUEUE FREED
-func despawn() -> void:
-	get_parent().remove_child(self)
