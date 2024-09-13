@@ -13,13 +13,17 @@ var current_slot: Slot
 # take half
 # drop (IDK)
 
+var disabled_actions: Array[String] = ["jump", "crouch", "sprint", "left", "right", "up", "down", "inspect"]
+
 
 func _input(event):
-	var mouse_event = event as InputEventMouseButton
-	if not mouse_event:
-		return
-	if mouse_event.is_pressed() and not hovered:
+	if event is InputEventMouseButton and event.is_pressed() and not hovered:
 		close()
+	if visible:
+		for action in disabled_actions:
+			if event.is_action_pressed(action):
+				get_viewport().set_input_as_handled()
+				return
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,9 +35,9 @@ func _ready():
 		var action: Callable = close
 		match i:
 			0:
-				action = split
+				action = take_one
 			1:
-				action = foo
+				action = take_half
 		b.pressed.connect(action)
 		b.mouse_exited.connect(func(): hovered = false)
 		b.mouse_entered.connect(func(): hovered = true)
@@ -53,8 +57,12 @@ func close():
 	visible = false
 	current_slot = null
 
-func split():
+func take_half():
 	current_slot.drag_half()
+	close()
+
+func take_one():
+	current_slot.drag_one()
 	close()
 
 func foo():

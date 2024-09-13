@@ -1,6 +1,8 @@
 extends Control
 class_name Slot
 
+const SLOT_CAPACITY: int = 16
+
 var icon_dir = "res://items/icons/"
 
 @onready var item_visual: TextureRect = $TextureRect
@@ -44,10 +46,6 @@ var amount: int:
 		
 var texture
 
-signal swapped(target_slot, source_slot, amount)
-signal replaced(target_slot, source_slot, amount)
-signal combined(target_slot, source_slot, amount)
-
 signal item_changed
 signal hovered(slot)
 
@@ -83,20 +81,44 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	set_process_input(false)
-	if not hover_timer:
-		return
-	if hover_timer.timeout.is_connected(hovered_success):
+	if hover_timer:
 		hover_timer.timeout.disconnect(hovered_success)
-	hover_timer = null
+		hover_timer = null
 
+# TEST THIS
 func hovered_success():
-	hover_timer.timeout.disconnect(hovered_success)
 	hover_timer = null
+	print("hovered")
 	#hovered.emit(self)
 	
 func is_empty():
 	return item == null
 
+func _take_from_slot(source_slot: Slot, desired_amount: int):
+	item = source_slot.item
+	var min_amount = min(desired_amount, source_slot.amount)
+	amount = min_amount
+	source_slot.amount -= min_amount
+
+func _swap_from_slot(source_slot: Slot):
+	var temp_item = source_slot.item
+	var temp_amount = source_slot.amount
+	source_slot.item = item
+	source_slot.amount = amount
+	item = temp_item
+	amount = temp_amount
+
+func _combine_from_slot(source_slot: Slot, desired_amount: int):
+	var total_amount = amount + desired_amount
+	if total_amount <= SLOT_CAPACITY:
+		   # Merge completely
+		amount = total_amount
+		source_slot.amount -= desired_amount
+	else:
+		var amount_to_add = SLOT_CAPACITY - amount
+		amount = SLOT_CAPACITY
+		source_slot.amount -= amount_to_add
+	
 ## Dragging
 
 func _create_preview():
@@ -112,14 +134,28 @@ func _create_preview():
 	preview.add_child(texture_rect)
 	return preview
 
-func drag_half():
+func drag_one():
+	if not item or not item.allow_unequip:
+		return
 	# This will simulate the drag of the new split stack
 	var preview = _create_preview()
 	
 	var desired_amount = 1
-	if amount > 1:
-		desired_amount = ceil(float(amount) / 2)
+	var drag_data = {
+		"slot": self,
+		"amount": desired_amount
+	}
+	
+	# Trigger drag event manually with the new split slot as data
+	force_drag(drag_data, preview)
 
+func drag_half():
+	if not item or not item.allow_unequip:
+		return
+	# This will simulate the drag of the new split stack
+	var preview = _create_preview()
+	
+	var desired_amount = ceil(float(amount) / 2)
 	var drag_data = {
 		"slot": self,
 		"amount": desired_amount
@@ -149,10 +185,7 @@ func _can_drop_data(_pos, data):
 	if not source_slot or not desired_amount:
 		return false
 		
-	if not item:
-		return true
-		
-	if item.is_same(source_slot.item) and item.is_stackable:
+	if is_empty() or (item.is_same(source_slot.item) and item.is_stackable):
 		# attempting to drop partial
 		return true
 	return item.allow_unequip
@@ -160,15 +193,9 @@ func _can_drop_data(_pos, data):
 func _drop_data(_pos, data):
 	var source_slot = data["slot"] as Slot
 	var desired_amount = data['amount'] as int
-	#if item:
-		#swapped.emit(self, source_slot, desired_amount)
-	#else:
-		#replaced.emit(self, source_slot, desired_amount)
-	
 	if is_empty():
-		replaced.emit(self, source_slot, desired_amount)
-	# If items are the same and stackable, attempt to merge
-	elif item.is_stackable and item.is_same(source_slot.item):
-		combined.emit(self, source_slot, desired_amount)
+		_take_from_slot(source_slot, desired_amount)
+	elif item.is_same(source_slot.item) and item.is_stackable:
+		_combine_from_slot(source_slot, desired_amount)
 	else:
-		swapped.emit(self, source_slot, desired_amount)
+		_swap_from_slot(source_slot)

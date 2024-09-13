@@ -28,8 +28,8 @@ var user: Node3D:
 			return
 		user = new_user
 		is_equipped = user != null
-		_toggle_process_mode()
 		area.monitorable = not is_equipped
+		_toggle_process_mode()
 		if user:
 			transform = Transform3D.IDENTITY.scaled_local(Vector3.ONE * VIEWMODEL_SCALE)
 			_reset_bob()

@@ -28,10 +28,8 @@ vertical = true
 
 [node name="Button" type="Button" parent="BoxContainer"]
 layout_mode = 2
-mouse_filter = 1
-text = "Split Stack"
+text = "Take one"
 
 [node name="Button2" type="Button" parent="BoxContainer"]
 layout_mode = 2
-mouse_filter = 1
-text = "Option 2"
+text = "Take half"

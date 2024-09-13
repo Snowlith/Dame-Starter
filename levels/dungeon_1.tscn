@@ -853,6 +853,8 @@ stack_size = 3
 
 [node name="Gun" parent="." instance=ExtResource("40_iyaj4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92808, 0.0499854, -0.989661)
+stack_size = 3
+is_stackable = false
 
 [node name="DameDrink5" parent="." instance=ExtResource("41_ip18j")]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, -0.596942, 0.212009, -0.995407)
