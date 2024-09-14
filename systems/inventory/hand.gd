@@ -11,8 +11,8 @@ var item: Item:
 			return
 		
 		if item:
-			item.user = null
 			remove_material_override_rec(item)
+			item.user = null
 			remove_child(item)
 		
 		item = new_item

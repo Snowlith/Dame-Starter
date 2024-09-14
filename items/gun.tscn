@@ -1,37 +1,77 @@
-[gd_scene load_steps=10 format=3 uid="uid://ch686mym4jaw4"]
+[gd_scene load_steps=12 format=3 uid="uid://bwvbhtnkrpm7h"]
 
+[ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/base_item.tscn" id="1_86wio"]
 [ext_resource type="Script" path="res://items/scripts/gun.gd" id="1_d271n"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_60gyg"]
-size = Vector3(0.22, 0.285, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ij7uo"]
+albedo_color = Color(0.17, 0.17, 0.17, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_b6pbx"]
-size = Vector3(0.18, 0.545, 0.345)
+[sub_resource type="BoxMesh" id="BoxMesh_6ihd1"]
+material = SubResource("StandardMaterial3D_ij7uo")
+size = Vector3(0.24, 0.275, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_nv5gq"]
-size = Vector3(0.05, 0.1, 0.045)
+[sub_resource type="BoxMesh" id="BoxMesh_1x515"]
+material = SubResource("StandardMaterial3D_ij7uo")
+size = Vector3(0.125, 0.205, 0.175)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fbjna"]
-height = 1.558
+[sub_resource type="BoxMesh" id="BoxMesh_nvujn"]
+material = SubResource("StandardMaterial3D_ij7uo")
+size = Vector3(0.125, 0.205, 0.175)
 
-[sub_resource type="Animation" id="Animation_6ryg8"]
+[sub_resource type="BoxMesh" id="BoxMesh_dch7p"]
+material = SubResource("StandardMaterial3D_ij7uo")
+size = Vector3(0.045, 0.19, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qj5oa"]
+material = SubResource("StandardMaterial3D_ij7uo")
+size = Vector3(0.225, 0.375, 0.77)
+
+[sub_resource type="Animation" id="Animation_27oe5"]
+resource_name = "fire"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ViewModel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0232568, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.0536186), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ViewModel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0232568, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.190049, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aahdb"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/path = NodePath("ViewModel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0.56, -0.332)]
+"values": [Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:rotation")
+tracks/1/path = NodePath("ViewModel:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -41,95 +81,37 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_gv03o"]
-resource_name = "fire"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0.56, -0.332), Vector3(0, 0.606, 0.1), Vector3(0, 0.56, -0.332)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.174533, 0, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_6h663"]
-resource_name = "inspect"
-length = 3.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.578086, 0.961679, 1.06973, 1.82611, 2.44742, 3.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0.56, -0.332), Vector3(-0.825472, 0.527081, -0.332), Vector3(-0.825472, 0.527081, -0.332), Vector3(-0.825472, 0.527081, -0.332), Vector3(-0.679585, 0.527081, -0.332), Vector3(-0.679585, 0.527081, -0.332), Vector3(0, 0.56, -0.332)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.578086, 0.961679, 1.06973, 1.82611, 2.16648, 3.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.40415, 1.42854, -1.22151), Vector3(-0.40415, 1.42854, -1.22151), Vector3(-0.40415, 1.42854, -1.22151), Vector3(-0.147665, -1.16491, 0.913228), Vector3(-0.147665, -1.16491, 0.913228), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qgpj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e7q6h"]
 _data = {
-"RESET": SubResource("Animation_6ryg8"),
-"fire": SubResource("Animation_gv03o"),
-"inspect": SubResource("Animation_6h663")
+"RESET": SubResource("Animation_aahdb"),
+"fire": SubResource("Animation_27oe5")
 }
 
-[node name="Gun" type="Node3D"]
+[node name="Gun" instance=ExtResource("1_86wio")]
 script = ExtResource("1_d271n")
-icon_orientation = "Angled"
+is_stackable = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, -0.332)
-mesh = SubResource("BoxMesh_60gyg")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ViewModel" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659343, -0.134841)
+mesh = SubResource("BoxMesh_6ihd1")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 0.973694, 0.227858, 0, -0.227858, 0.973694, -0.000873263, -0.339273, 0.392794)
-mesh = SubResource("BoxMesh_b6pbx")
-skeleton = NodePath("../..")
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="ViewModel" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659343, -0.599112)
+mesh = SubResource("BoxMesh_1x515")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 0.973694, 0.227858, 0, -0.227858, 0.973694, -0.000873263, 0.14044, -0.478319)
-mesh = SubResource("BoxMesh_nv5gq")
-skeleton = NodePath("../..")
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="ViewModel" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720883, 0.349335)
+mesh = SubResource("BoxMesh_nvujn")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="ViewModel" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.737389, -0.569905)
+mesh = SubResource("BoxMesh_dch7p")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.279907, 0)
-shape = SubResource("CapsuleShape3D_fbjna")
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="ViewModel" index="4"]
+transform = Transform3D(1, 0, 0, 0, 0.472705, -0.881221, 0, 0.881221, 0.472705, 0, 0.328846, 0.227753)
+mesh = SubResource("BoxMesh_qj5oa")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-process_mode = 3
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 libraries = {
-"": SubResource("AnimationLibrary_7qgpj")
+"": SubResource("AnimationLibrary_e7q6h")
 }

@@ -12,6 +12,8 @@ var disabled_actions: Array[String] = ["jump", "crouch", "sprint", "left", "righ
 var slots: Array[Slot]
 var size: int
 
+# TODO: add collect notification
+# TODO: move stack size to slot as int var
 # TODO: get rid of group constant variables, increases load times and clutters
 # NOTE: potential memory leak since items are not being queue freed always? needs testing
 # TODO: add ability to add items through editor
@@ -78,12 +80,25 @@ func remove(item: Item, amount: int = 1) -> int:
 func remove_from(slot: Slot, amount: int = 1):
 	slot.amount = clamp(slot.amount - amount, 0, slot.amount)
 
+func collect(item: Item):
+	if can_insert(item, item.stack_size):
+		await item.collect()
+		item.get_parent().remove_child(item)
+		insert(item, item.stack_size)
+		item.queue_free()
+	else:
+		# make partly taken animation
+		# Only take as many items as possible
+		var items_taken = insert(item, item.stack_size)
+		item.stack_size -= items_taken
+
 func drop(slot: Slot, desired_amount: int):
 	var item = slot.item.duplicate()
+	remove_from(slot, desired_amount)
 	item.user = null
 	item.stack_size = desired_amount
-	remove_from(slot, desired_amount)
 	var existing_items = get_tree().current_scene.get_children().filter(func(child):
+		# make partly added animation
 		return child is Item and item.is_same(child))
 	
 	var spawn_location = global_position + Vector3.FORWARD.rotated(Vector3.UP, global_rotation.y) * 2
@@ -103,8 +118,8 @@ func drop(slot: Slot, desired_amount: int):
 		print(item.name)
 		
 	get_tree().current_scene.add_child(item)
-	item.user = null
 	item.transform.origin = spawn_location
+	item.drop()
 
 func has(item: Item):
 	if not item:
@@ -151,15 +166,7 @@ func _on_area_entered(area: Area3D):
 	var item := area.get_parent_node_3d() as Item
 	if not item:
 		return
-	# Check if there is enough space for all items
-	if can_insert(item, item.stack_size):
-		item.get_parent().remove_child(item)
-		insert(item, item.stack_size)
-		item.queue_free()
-	else:
-		# Only take as many items as possible
-		var items_taken = insert(item, item.stack_size)
-		item.stack_size -= items_taken
+	collect(item)
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("inventory") and not event.is_echo():
