@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck117y2sj30rc"]
+[gd_scene load_steps=7 format=3 uid="uid://ds4kxk08u15ud"]
 
-[ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/base_item.tscn" id="1_137g5"]
-[ext_resource type="Script" path="res://items/scripts/dame_drink.gd" id="1_jsmfm"]
-[ext_resource type="ArrayMesh" uid="uid://ck6cqsbvwgc7p" path="res://assets/old_meshes_2/bottle_A_labeled_green.tres" id="2_xrqoh"]
+[ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/base_item.tscn" id="1_dsww1"]
+[ext_resource type="Script" path="res://items/scripts/healing_potion.gd" id="2_ltm77"]
+[ext_resource type="ArrayMesh" uid="uid://bg28leieensqp" path="res://assets/old_meshes_2/bottle_A_labeled_brown.tres" id="3_f0d1h"]
 
 [sub_resource type="Animation" id="Animation_6ei0l"]
 length = 0.001
@@ -65,11 +65,12 @@ _data = {
 "consume": SubResource("Animation_xvo7c")
 }
 
-[node name="DameDrink" instance=ExtResource("1_137g5")]
-script = ExtResource("1_jsmfm")
+[node name="HealingPotion" instance=ExtResource("1_dsww1")]
+script = ExtResource("2_ltm77")
+health_gain = 10
 
 [node name="BottleALabeledGreen" type="MeshInstance3D" parent="ViewModel" index="0"]
-mesh = ExtResource("2_xrqoh")
+mesh = ExtResource("3_f0d1h")
 skeleton = NodePath("../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]

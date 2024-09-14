@@ -2,8 +2,12 @@ extends Item
 
 @export var health_gain: int
 
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+
 func _unhandled_input(event):
-	if event.is_echo():
+	if event is InputEventMouseMotion or event.is_echo():
+		return
+	if in_animation():
 		return
 	if event.is_action_pressed("primary attack"):
 		allow_unequip = false
@@ -13,9 +17,7 @@ func _unhandled_input(event):
 		inspect()
 
 func primary_attack():
-	if anim_player.is_playing():
-		return
-	anim_player.play("drink")
+	anim_player.play("consume")
 	await anim_player.animation_finished
 	
 	var inv: Inventory
@@ -32,9 +34,3 @@ func primary_attack():
 		inv.remove_from(inv.hand_slot)
 	if h:
 		h.current_health += health_gain
-		
-func inspect():
-	if anim_player.is_playing():
-		return
-	anim_player.play("inspect")
-	await anim_player.animation_finished

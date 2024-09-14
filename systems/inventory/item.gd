@@ -26,6 +26,7 @@ var user: Node3D:
 	set(new_user):
 		if user == new_user:
 			return
+		print("user changed")
 		user = new_user
 		is_equipped = user != null
 		area.monitorable = not is_equipped
@@ -36,10 +37,10 @@ var user: Node3D:
 		else:
 			transform = init_transform
 
-@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+@onready var view_model: Node3D = $ViewModel
 
 @onready var area: Area3D = $Area3D
-@onready var anim_player: AnimationPlayer = null
+@onready var base_anim_player: AnimationPlayer = $BaseAnimationPlayer
 
 # TODO: design unique way to represent item stacks 
 # TODO: refactor dropped to is_equipped
@@ -49,19 +50,53 @@ func is_same(item: Item):
 		return false
 	return scene_file_path == item.scene_file_path
 
+func in_animation():
+	for child in get_children():
+		var ap = child as AnimationPlayer
+		if not ap:
+			continue
+		if ap.is_playing():
+			return true
+	return false
+
+func collect():
+	if not base_anim_player.has_animation("collect"):
+		return
+	base_anim_player.play("collect")
+	await base_anim_player.animation_finished
+	base_anim_player.play("RESET")
+	base_anim_player.advance(0)
+
+func drop():
+	if not base_anim_player.has_animation("drop"):
+		return
+	base_anim_player.play("drop")
+
+func inspect():
+	print("inspecting")
+	if in_animation():
+		return
+	if not base_anim_player.has_animation("inspect"):
+		return
+	base_anim_player.play("inspect")
+	
 func _toggle_process_mode() -> void:
 	set_process(not is_equipped)
 	set_process_unhandled_input(is_equipped)
 
 func _ready() -> void:
-	anim_player = $AnimationPlayer if has_node("AnimationPlayer") else null
-	if anim_player:
-		anim_player.process_mode = Node.PROCESS_MODE_ALWAYS
+	base_anim_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	area.monitoring = false
-	init_transform = mesh_instance.transform
+	init_transform = view_model.transform
+	_toggle_process_mode()
 	if not is_equipped:
-		set_process_unhandled_input(false)
 		_bob_time += (global_position.x + global_position.z) / 10
+
+func _unhandled_input(event):
+	if event.is_echo():
+		return
+	if event.is_action_pressed("inspect"):
+		inspect()
 
 ## Dropped functionality
 	
@@ -70,10 +105,10 @@ func _process(delta) -> void:
 
 func _reset_bob():
 	_bob_time = 0
-	mesh_instance.transform = init_transform
-	mesh_instance.rotation.y = 0
+	view_model.transform = init_transform
+	view_model.rotation.y = 0
 
 func _bob(delta):
 	_bob_time += delta
-	mesh_instance.transform.origin = init_transform.origin + Vector3(0, sin(_bob_time) * 0.1, 0)
-	mesh_instance.rotate_y(delta)
+	view_model.transform.origin = init_transform.origin + Vector3(0, sin(_bob_time) * 0.1, 0)
+	view_model.rotate_y(delta)

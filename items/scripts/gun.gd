@@ -1,22 +1,21 @@
 extends Item
 
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+
 func _unhandled_input(event):
+	if event is InputEventMouseMotion or event.is_echo():
+		return
+	if in_animation():
+		return
 	if event.is_action_pressed("primary attack"):
 		primary_attack()
 	if event.is_action_pressed("inspect"):
 		inspect()
 
 func primary_attack():
-	if anim_player.is_playing():
-		return
 	anim_player.play("fire")
 	shoot()
 
-func inspect():
-	if anim_player.is_playing():
-		return
-	anim_player.play("inspect")
-	
 func shoot():
 	var cam: FPSCamera
 	for child in user.get_children():

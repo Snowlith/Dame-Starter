@@ -36,10 +36,10 @@
 [ext_resource type="PackedScene" uid="uid://f11m7k8ghv3r" path="res://scenes/terrain/ceiling_tile.tscn" id="34_hi0ku"]
 [ext_resource type="PackedScene" uid="uid://g0svunjurfbk" path="res://scenes/structures_old/wall_corner_small.tscn" id="35_fm3u3"]
 [ext_resource type="PackedScene" uid="uid://dh4gutjvyitim" path="res://scenes/structures_old/wall_half.tscn" id="36_8byr1"]
-[ext_resource type="PackedScene" uid="uid://cr4sjfmabh6to" path="res://items/small_health_potion.tscn" id="39_pr8uc"]
-[ext_resource type="PackedScene" uid="uid://ch686mym4jaw4" path="res://items/gun.tscn" id="40_iyaj4"]
-[ext_resource type="PackedScene" uid="uid://ck8f286dry1da" path="res://items/dame_drink.tscn" id="41_ip18j"]
+[ext_resource type="PackedScene" uid="uid://bwvbhtnkrpm7h" path="res://items/gun.tscn" id="40_iyaj4"]
+[ext_resource type="PackedScene" uid="uid://ck117y2sj30rc" path="res://items/dame_drink.tscn" id="41_ip18j"]
 [ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="42_k8xb4"]
+[ext_resource type="PackedScene" uid="uid://ds4kxk08u15ud" path="res://items/healing_potion.tscn" id="42_uidro"]
 [ext_resource type="PackedScene" uid="uid://bd88oygf4w224" path="res://scenes/interactable/locked_door.tscn" id="42_w5uvb"]
 [ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/interactable/jump_pad.tscn" id="43_grl8w"]
 
@@ -843,23 +843,6 @@ key = ExtResource("41_ip18j")
 [node name="Area3D" parent="." instance=ExtResource("43_grl8w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86724, 0.0499859, -1.93159)
 
-[node name="SmallHealthPotion" parent="." instance=ExtResource("39_pr8uc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.122708, 0.0499854, -3.05705)
-stack_size = 100
-
-[node name="SmallHealthPotion2" parent="." instance=ExtResource("39_pr8uc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.122708, 0.0499854, -4.46211)
-stack_size = 3
-
-[node name="Gun" parent="." instance=ExtResource("40_iyaj4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92808, 0.0499854, -0.989661)
-stack_size = 3
-is_stackable = false
-
-[node name="DameDrink5" parent="." instance=ExtResource("41_ip18j")]
-transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, -0.596942, 0.212009, -0.995407)
-stack_size = 5
-
 [node name="LoadingZone" type="Area3D" parent="."]
 transform = Transform3D(0.055351, 0, -0.998467, 0, 1, 0, 0.998467, 0, 0.055351, 5.19149, 0.55529, -9.61476)
 script = ExtResource("42_k8xb4")
@@ -869,3 +852,18 @@ displacement = Vector3(-2, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LoadingZone"]
 shape = SubResource("SphereShape3D_yyhnm")
+
+[node name="DameDrink" parent="." instance=ExtResource("41_ip18j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00346, 0.05, -1.19238)
+stack_size = 20
+
+[node name="Gun" parent="." instance=ExtResource("40_iyaj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26032, 0.0499856, -2.57037)
+
+[node name="HealingPotion" parent="." instance=ExtResource("42_uidro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.987089, 0.0499854, -0.8416)
+stack_size = 30
+
+[node name="HealingPotion2" parent="." instance=ExtResource("42_uidro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95036, 0.0499997, 0.266258)
+stack_size = 5

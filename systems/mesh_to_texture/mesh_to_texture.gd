@@ -19,7 +19,6 @@ func _ready():
 		var item_scene := load(item_dir + "/" + filename).instantiate() as Item
 		if not item_scene:
 			continue
-		print("")
 		item_scene.process_mode = PROCESS_MODE_DISABLED
 		var rig = get_rig(item_scene)
 		rig.add_child(item_scene)
