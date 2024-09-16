@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu4a3g4md3w4a"]
+
+[ext_resource type="Script" path="res://systems/inventory/slot/standard_slot.gd" id="1_13o15"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_13sfg"]
+font_size = 28
+
+[node name="StandardSlot" type="CenterContainer" groups=["inventory slot"]]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 128.0
+offset_bottom = 128.0
+script = ExtResource("1_13o15")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="AmountText" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_13sfg")
+horizontal_alignment = 2
+vertical_alignment = 2

@@ -26,24 +26,27 @@ var user: Node3D:
 	set(new_user):
 		if user == new_user:
 			return
-		print("user changed")
 		user = new_user
-		is_equipped = user != null
-		area.monitorable = not is_equipped
-		_toggle_process_mode()
-		if user:
-			transform = Transform3D.IDENTITY.scaled_local(Vector3.ONE * VIEWMODEL_SCALE)
-			_reset_bob()
-		else:
-			transform = init_transform
+		update()
 
 @onready var view_model: Node3D = $ViewModel
 
 @onready var area: Area3D = $Area3D
+@onready var area_col: CollisionShape3D = $Area3D/CollisionShape3D
 @onready var base_anim_player: AnimationPlayer = $BaseAnimationPlayer
 
+# TODO: add droppable flag
 # TODO: design unique way to represent item stacks 
-# TODO: refactor dropped to is_equipped
+
+func update():
+	is_equipped = user != null
+	area_col.disabled = is_equipped
+	_toggle_process_mode()
+	if is_equipped:
+		transform = Transform3D.IDENTITY.scaled_local(Vector3.ONE * VIEWMODEL_SCALE)
+		_reset_bob()
+	else:
+		transform.basis = init_transform.basis
 
 func is_same(item: Item):
 	if not item:
@@ -67,13 +70,22 @@ func collect():
 	base_anim_player.play("RESET")
 	base_anim_player.advance(0)
 
+func added():
+	if not base_anim_player.has_animation("added"):
+		return
+	base_anim_player.play("added")
+
+func removed():
+	if not base_anim_player.has_animation("removed"):
+		return
+	base_anim_player.play("removed")
+
 func drop():
 	if not base_anim_player.has_animation("drop"):
 		return
 	base_anim_player.play("drop")
 
 func inspect():
-	print("inspecting")
 	if in_animation():
 		return
 	if not base_anim_player.has_animation("inspect"):
@@ -110,5 +122,5 @@ func _reset_bob():
 
 func _bob(delta):
 	_bob_time += delta
-	view_model.transform.origin = init_transform.origin + Vector3(0, sin(_bob_time) * 0.1, 0)
+	view_model.transform.origin = init_transform.origin + Vector3(0, (sin(_bob_time) + 1) * 0.1, 0)
 	view_model.rotate_y(delta)

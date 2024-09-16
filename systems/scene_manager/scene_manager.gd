@@ -13,9 +13,6 @@ var current_transition: Transition
 
 var in_transition: bool = false
 
-const PLAYER = "player"
-const LOADING_ZONE = "loading_zone"
-
 @onready var label = $Label
 @onready var label_2 = $Label2
 
@@ -55,7 +52,7 @@ func _deferred_change_scene_player(scene_path: String, player: Node3D, id: Strin
 	get_tree().root.add_child(new_scene)
 	get_tree().current_scene = new_scene
 	
-	var new_players = get_tree().get_nodes_in_group(PLAYER)
+	var new_players = get_tree().get_nodes_in_group("player")
 	if new_players.is_empty():
 		player.queue_free()
 	else:
@@ -93,7 +90,7 @@ func _spawn_using_loading_zone(player: Node3D, id: String) -> bool:
 	if id == "":
 		return false
 	
-	for zone: LoadingZone in get_tree().get_nodes_in_group(LOADING_ZONE):
+	for zone: LoadingZone in get_tree().get_nodes_in_group("loading zone"):
 		if not zone.target_id == id:
 			continue
 		zone.spawn(player)

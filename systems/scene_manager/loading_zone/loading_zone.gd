@@ -7,16 +7,16 @@ class_name LoadingZone
 @export var displacement := Vector3(0, 0, 2)
 @export var transition: PackedScene = null
 
-# TODO: make player face the same direction as loading zone when spawned
+# TODO: add tool editor gizmo
+# TODO: maybe make player face away from the zone every time
 
 func _ready() -> void:
-	add_to_group(SceneManager.LOADING_ZONE)
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node3D) -> void:
 	if not target_scene_path:
 		return
-	if not body.is_in_group(SceneManager.PLAYER):
+	if not body.is_in_group("player"):
 		return
 	
 	var data = TransitionData.new(target_scene_path)

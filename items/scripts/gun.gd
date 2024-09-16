@@ -9,12 +9,17 @@ func _unhandled_input(event):
 		return
 	if event.is_action_pressed("primary attack"):
 		primary_attack()
-	if event.is_action_pressed("inspect"):
+	elif event.is_action_pressed("reload"):
+		reload()
+	elif event.is_action_pressed("inspect"):
 		inspect()
 
 func primary_attack():
 	anim_player.play("fire")
 	shoot()
+
+func reload():
+	anim_player.play("reload")
 
 func shoot():
 	var cam: FPSCamera

@@ -8,10 +8,6 @@ var hovered
 var current_slot: Slot
 
 # TODO: consume input properly
-# NOTE ideas for buttons:
-# take one
-# take half
-# drop (IDK)
 
 var disabled_actions: Array[String] = ["jump", "crouch", "sprint", "left", "right", "up", "down", "inspect"]
 
@@ -42,7 +38,7 @@ func _ready():
 		b.mouse_exited.connect(func(): hovered = false)
 		b.mouse_entered.connect(func(): hovered = true)
 		
-	for slot: Slot in get_tree().get_nodes_in_group(Inventory.SLOT):
+	for slot: Slot in get_tree().get_nodes_in_group("inventory slot"):
 		slot.hovered.connect(open)
 
 func open(slot: Slot = null):
@@ -63,10 +59,4 @@ func take_half():
 
 func take_one():
 	current_slot.drag_one()
-	close()
-
-func foo():
-	print("hello")
-
-func wow():
 	close()

@@ -1,32 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu4a3g4md3w4a"]
+[gd_scene load_steps=4 format=3 uid="uid://dyuqkek3iqopo"]
 
-[ext_resource type="Script" path="res://systems/inventory/inventory_slot.gd" id="1_qvp1a"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_o828c"]
-font_size = 26
-font_color = Color(1, 0, 0, 1)
+[ext_resource type="Script" path="res://systems/inventory/slot/hand_slot.gd" id="1_3qxtx"]
+[ext_resource type="Material" uid="uid://exj1wl8ifrmf" path="res://assets/materials/viewmodel_noclip.tres" id="2_r1ol8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_13sfg"]
 font_size = 28
 
-[node name="InventorySlot" type="CenterContainer"]
+[node name="HandSlot" type="CenterContainer" groups=["inventory slot"]]
 custom_minimum_size = Vector2(128, 128)
 offset_right = 128.0
 offset_bottom = 128.0
-script = ExtResource("1_qvp1a")
+script = ExtResource("1_3qxtx")
+shader_material = ExtResource("2_r1ol8")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-
-[node name="RarityText" type="Label" parent="."]
-visible = false
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-text = "99"
-label_settings = SubResource("LabelSettings_o828c")
-horizontal_alignment = 2
-vertical_alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(128, 128)

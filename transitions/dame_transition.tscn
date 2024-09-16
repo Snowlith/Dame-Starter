@@ -108,8 +108,10 @@ speed_scale = 2.06
 
 [node name="Arrow" type="Sprite2D" parent="."]
 position = Vector2(1476, 86)
+scale = Vector2(2.08594, 1.80469)
 texture = ExtResource("2_sr700")
 
 [node name="Arrow2" type="Sprite2D" parent="."]
 position = Vector2(1369, 233)
+scale = Vector2(2.55469, 2.57813)
 texture = ExtResource("2_sr700")

@@ -688,7 +688,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 9.1392
 [node name="Column10" parent="." instance=ExtResource("12_i1lxk")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 7.13924, -1.60182, 10.3404)
 
-[node name="LoadingZone" type="Area3D" parent="."]
+[node name="LoadingZone" type="Area3D" parent="." groups=["loading zone"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -7.97271, 9.34577)
 script = ExtResource("15_ysolj")
 target_scene_path = "res://levels/dungeon_1.tscn"

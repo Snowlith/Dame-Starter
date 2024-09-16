@@ -52,14 +52,14 @@ fov = 50.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04191, 0, 2.43191)
-light_color = Color(1, 0.984314, 0.729412, 1)
+light_color = Color(0.14, 1, 0.340667, 1)
 light_energy = 1.008
 light_specular = 0.1
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14845, 0, -0.802532)
 light_color = Color(0.31134, 0.0930822, 0.52973, 1)
-light_energy = 8.501
+light_energy = 15.224
 light_specular = 0.01
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]

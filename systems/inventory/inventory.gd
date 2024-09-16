@@ -1,9 +1,9 @@
 extends Area3D
 class_name Inventory
 
-@export var held_item: Hand
-
+# Probably don't need this ref
 @onready var hand_slot: Slot = $NinePatchRect/HandSlot
+
 @onready var nine_patch_rect: Control = $NinePatchRect
 @onready var color_rect: Control = $ColorRect
 @onready var context_menu: Control = $Control
@@ -12,13 +12,9 @@ var disabled_actions: Array[String] = ["jump", "crouch", "sprint", "left", "righ
 var slots: Array[Slot]
 var size: int
 
+# TODO: instead of can_insert, return amount that can be inserted, or just see how many were inserted
 # TODO: add collect notification
-# TODO: move stack size to slot as int var
-# TODO: get rid of group constant variables, increases load times and clutters
-# NOTE: potential memory leak since items are not being queue freed always? needs testing
-# TODO: add ability to add items through editor
-# exposing items does not allow for stacks
-# needs custom class
+# TODO: adding items through editor -> make slots export item
 
 var is_open = true:
 	set(value):
@@ -35,25 +31,15 @@ var is_open = true:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			context_menu.close()
 
-const SLOT = "inv_slot"
-const SLOT_CAPACITY: int = 16
-
 func _ready() -> void:
-	for slot: Slot in get_tree().get_nodes_in_group(SLOT):
+	for slot: Slot in get_tree().get_nodes_in_group("inventory slot"):
 		if not slot:
 			continue
 		slots.append(slot)
 	size = slots.size()
 	
-	for i in size:
-		var slot: Slot = slots[i]
-		
-	hand_slot.item_changed.connect(_update_hand)
-	color_rect.item_dropped.connect(drop)
 	area_entered.connect(_on_area_entered)
-	
-	
-	
+
 	is_open = false
 
 func insert(item: Item, amount: int = 1) -> int:
@@ -91,35 +77,7 @@ func collect(item: Item):
 		# Only take as many items as possible
 		var items_taken = insert(item, item.stack_size)
 		item.stack_size -= items_taken
-
-func drop(slot: Slot, desired_amount: int):
-	var item = slot.item.duplicate()
-	remove_from(slot, desired_amount)
-	item.user = null
-	item.stack_size = desired_amount
-	var existing_items = get_tree().current_scene.get_children().filter(func(child):
-		# make partly added animation
-		return child is Item and item.is_same(child))
-	
-	var spawn_location = global_position + Vector3.FORWARD.rotated(Vector3.UP, global_rotation.y) * 2
-	
-	for existing_item in existing_items:
-		if spawn_location.distance_to(existing_item.global_transform.origin) < 1.0:
-			# If nearby, combine the stacks
-			existing_item.stack_size += item.stack_size
-			
-			# Cannot queue free since they can be the same but split
-			item.queue_free()
-			return
-	
-	# failed combine
-	while get_tree().current_scene.has_node(str(item.name)):
-		item.name = _generate_name("abcdefghijklmnopqrstuvwxyz", 10)
-		print(item.name)
-		
-	get_tree().current_scene.add_child(item)
-	item.transform.origin = spawn_location
-	item.drop()
+		item.removed()
 
 func has(item: Item):
 	if not item:
@@ -129,14 +87,21 @@ func has(item: Item):
 			return true
 	return false
 
-func count(item: Item) -> int:
+func count(item: Item, stackable: bool) -> int:
 	var tally = 0
-	for slot in slots:
-		if slot.item == item:
-			if item:
-				tally += slot.amount
+	if item == null:
+		for slot in slots:
+			if slot.item != null:
+				continue
+			if stackable:
+				tally += slot.capacity
 			else:
 				tally += 1
+	else:
+		for slot in slots:
+			if not item.is_same(slot.item):
+				continue
+			tally += slot.amount
 	return tally
 
 func can_insert(item: Item, amount: int) -> bool:
@@ -145,22 +110,11 @@ func can_insert(item: Item, amount: int) -> bool:
 		for slot in slots:
 			if not slot.item or not item.is_same(slot.item):
 				continue
-			total_capacity += SLOT_CAPACITY - slot.amount
-		total_capacity += count(null) * SLOT_CAPACITY
+			total_capacity += slot.capacity - slot.amount
+		total_capacity += count(null, true)
 	else:
-		total_capacity = count(null)
+		total_capacity = count(null, false)
 	return total_capacity >= amount
-		
-func _update_hand():
-	if not held_item:
-		return
-	held_item.item = hand_slot.item
-
-func _generate_name(chars, length):
-	var word: String = ""
-	for i in range(length):
-		word += chars[randi() % len(chars)]
-	return word
 
 func _on_area_entered(area: Area3D):
 	var item := area.get_parent_node_3d() as Item
@@ -185,9 +139,9 @@ func _insert_into_existing_slots(item: Item, remaining_amount: int) -> int:
 		if not slot.item or not item.is_same(slot.item):
 			continue
 		# Skip full slots
-		if slot.amount >= SLOT_CAPACITY:
+		if slot.amount >= slot.capacity:
 			continue
-		var available_space = SLOT_CAPACITY - slot.amount
+		var available_space = slot.capacity - slot.amount
 		var amount_to_add = min(remaining_amount, available_space)
 		slot.amount += amount_to_add
 		remaining_amount -= amount_to_add
@@ -202,7 +156,7 @@ func _insert_into_empty_slots(item: Item, remaining_amount: int) -> int:
 		if slot.item:
 			continue
 		slot.item = item.duplicate()
-		var amount_to_add = min(remaining_amount, SLOT_CAPACITY)
+		var amount_to_add = min(remaining_amount, slot.capacity)
 		if not item.is_stackable:
 			amount_to_add = 1
 		slot.amount = amount_to_add
