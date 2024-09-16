@@ -6,7 +6,7 @@ class_name Inventory
 
 @onready var nine_patch_rect: Control = $NinePatchRect
 @onready var color_rect: Control = $ColorRect
-@onready var context_menu: Control = $Control
+@onready var context_menu: Control = $ContextMenu
 
 var disabled_actions: Array[String] = ["jump", "crouch", "sprint", "left", "right", "up", "down", "inspect"]
 var slots: Array[Slot]

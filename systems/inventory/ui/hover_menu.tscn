@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1sahxvjtxvne"]
+
+[ext_resource type="Script" path="res://systems/inventory/ui/hover_menu.gd" id="1_mix2n"]
+
+[node name="HoverMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_mix2n")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+offset_right = 143.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 138.0
+grow_vertical = 0
+text = "Hovered this item"

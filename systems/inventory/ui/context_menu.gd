@@ -1,8 +1,6 @@
 extends Control
 
 @onready var box_container = $BoxContainer
-@onready var panel = $Panel
-
 
 var hovered
 var current_slot: Slot
@@ -39,14 +37,13 @@ func _ready():
 		b.mouse_entered.connect(func(): hovered = true)
 		
 	for slot: Slot in get_tree().get_nodes_in_group("inventory slot"):
-		slot.hovered.connect(open)
+		slot.clicked.connect(open)
 
-func open(slot: Slot = null):
+func open(slot: Slot):
 	set_process_input(true)
 	position = get_viewport().get_mouse_position()
 	visible = true
-	if slot:
-		current_slot = slot
+	current_slot = slot
 
 func close():
 	set_process_input(false)

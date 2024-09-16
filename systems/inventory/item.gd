@@ -9,13 +9,12 @@ var icon_dir = "res://items/icons/"
 			return
 		stack_size = value
 		
-@export var view_name: String = ""
+@export var view_name: String = "Item"
 @export_multiline var view_description: String = ""
 @export var is_stackable: bool = true
+@export var view_model_scale: float = 0.5
 @export_enum("Common", "Rare", "Dame") var rarity: String = "Common"
 @export_enum("Front", "Angled", "Top") var icon_orientation: String = "Front"
-
-const VIEWMODEL_SCALE: float = 0.5
 
 var is_equipped: bool = false
 var allow_unequip: bool = true
@@ -43,7 +42,8 @@ func update():
 	area_col.disabled = is_equipped
 	_toggle_process_mode()
 	if is_equipped:
-		transform = Transform3D.IDENTITY.scaled_local(Vector3.ONE * VIEWMODEL_SCALE)
+		transform = Transform3D.IDENTITY.scaled_local(Vector3.ONE * view_model_scale)
+		print(transform)
 		_reset_bob()
 	else:
 		transform.basis = init_transform.basis

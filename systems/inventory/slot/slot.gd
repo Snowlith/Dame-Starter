@@ -29,6 +29,7 @@ var item: Item:
 signal item_changed
 signal amount_changed
 signal hovered(slot)
+signal clicked(slot)
 
 func _ready():
 	set_process_input(false)
@@ -40,23 +41,10 @@ func get_icon_path():
 		return ""
 	return "res://items/icons/" + item.scene_file_path.split('/')[-1] + '.png'
 
+# unused?
 func can_add(amount_to_add: int):
 	return amount_to_add + amount <= capacity
-	
-## Mouse hover
 
-func _on_mouse_entered():
-	set_process_input(true)
-	hover_timer = get_tree().create_timer(0.5)
-	# HERE
-	hover_timer.timeout.connect(func(): pass)
-
-func _on_mouse_exited():
-	set_process_input(false)
-	if hover_timer:
-		#hover_timer.timeout.disconnect(hovered_success)
-		hover_timer = null
-	
 func is_empty():
 	return item == null
 
@@ -64,6 +52,23 @@ func get_item_copy():
 	if not item:
 		return null
 	return item.duplicate()
+	
+## Mouse hover
+
+func _on_mouse_entered():
+	set_process_input(true)
+	hover_timer = get_tree().create_timer(0.5)
+	# HERE
+	hover_timer.timeout.connect(_hovered_success)
+
+func _on_mouse_exited():
+	set_process_input(false)
+	if hover_timer:
+		hover_timer.timeout.disconnect(_hovered_success)
+		hover_timer = null
+
+func _hovered_success():
+	if item: hovered.emit(self)
 
 func _take_from_slot(source_slot: Slot, desired_amount: int):
 	item = source_slot.get_item_copy()

@@ -44,6 +44,22 @@ tracks/2/keys = {
 "values": [Vector3(1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_a56gw"]
+resource_name = "added"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ViewModel:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.25, 1.25, 1.25), Vector3(1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_0g0v0"]
 resource_name = "collect"
 length = 0.25
@@ -102,22 +118,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-0.0560795, -0.326017, -0.164295), Vector3(-0.292154, -0.328316, -0.23277), Vector3(-0.292154, -0.328316, -0.23277), Vector3(-0.292154, -0.328316, -0.23277), Vector3(-0.292154, -0.328316, -0.23277), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_a56gw"]
-resource_name = "added"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ViewModel:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1.25, 1.25, 1.25), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_4mma1"]

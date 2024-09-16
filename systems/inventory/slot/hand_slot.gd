@@ -7,8 +7,8 @@ class_name HandSlot
 
 var held_item: Item
 
+# TODO: low priority but equip animation
 # NOTE: could add node config warning maybe?
-# TODO: make hand separate, no need for remote transform export var
 
 func _ready():
 	super()
@@ -43,7 +43,7 @@ func apply_mat_recursive(node, mat):
 	var mesh_instance = node as MeshInstance3D
 	if mesh_instance:
 		if mat:
-			mesh_instance.material_override = shader_material
+			mesh_instance.material_override = mat
 			mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		else:
 			mesh_instance.material_override = null

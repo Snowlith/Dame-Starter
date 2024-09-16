@@ -8,7 +8,7 @@ class_name StandardSlot
 
 # TODO: move logic from determining which method to use to slot.gd
 # TODO: write can_drop and drop in a way that visual indicator of blocked is there
-		
+
 var texture
 
 func _ready():
@@ -40,7 +40,7 @@ func _input(event):
 	if not mouse_event:
 		return
 	if mouse_event.is_pressed() and mouse_event.button_index == MOUSE_BUTTON_RIGHT:
-		hovered.emit(self)
+		clicked.emit(self)
 
 ## Dragging
 

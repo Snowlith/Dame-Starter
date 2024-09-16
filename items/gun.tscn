@@ -117,6 +117,7 @@ _data = {
 
 [node name="Gun" instance=ExtResource("1_86wio")]
 script = ExtResource("1_d271n")
+view_name = "Dame Gun"
 is_stackable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ViewModel" index="0"]

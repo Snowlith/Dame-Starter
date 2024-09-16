@@ -67,6 +67,7 @@ _data = {
 
 [node name="DameDrink" instance=ExtResource("1_137g5")]
 script = ExtResource("1_jsmfm")
+view_name = "Dame Drink"
 icon_orientation = "Front"
 
 [node name="BottleALabeledGreen" type="MeshInstance3D" parent="ViewModel" index="0"]

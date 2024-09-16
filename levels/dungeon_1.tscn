@@ -839,7 +839,7 @@ transform = Transform3D(-0.438261, 0, 0.898848, 0, 1, 0, -0.898848, 0, -0.438261
 key = ExtResource("41_ip18j")
 
 [node name="Area3D" parent="." instance=ExtResource("43_grl8w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86724, 0.0499859, -1.93159)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38339, 0.0499859, -3.23772)
 
 [node name="LoadingZone" parent="." instance=ExtResource("40_erxdg")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.04889, 0.421369, -9.65249)
@@ -848,22 +848,23 @@ target_id = "room"
 displacement = Vector3(-2, 0, 0)
 
 [node name="HealingPotion" parent="." instance=ExtResource("42_uidro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.633593, 0.0500002, -1.39099)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42761, 0.0500002, -2.49804)
 stack_size = 16
 
 [node name="HealingPotion2" parent="." instance=ExtResource("42_uidro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63359, 0.0500002, 0.60901)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.84673, 0.0500002, -2.36934)
 stack_size = 1000
 
 [node name="HealingPotion3" parent="." instance=ExtResource("42_uidro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63359, 0.0500002, 0.60901)
-stack_size = 8
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19657, 0.0500002, -2.41469)
+stack_size = 100
 
 [node name="DameDrink" parent="." instance=ExtResource("41_ip18j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.518175, 0.0499997, 0.8415)
 
 [node name="Gun" parent="." instance=ExtResource("40_iyaj4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.244, 0.0499859, -0.341347)
+view_model_scale = 1.0
 
 [node name="DameDrink2" parent="." instance=ExtResource("41_ip18j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.868484, 0.0499854, -0.612358)

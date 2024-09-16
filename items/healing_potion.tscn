@@ -68,6 +68,7 @@ _data = {
 [node name="HealingPotion" instance=ExtResource("1_dsww1")]
 script = ExtResource("2_ltm77")
 health_gain = 10
+view_name = "Las drogas"
 
 [node name="BottleALabeledGreen" type="MeshInstance3D" parent="ViewModel" index="0"]
 mesh = ExtResource("3_f0d1h")
