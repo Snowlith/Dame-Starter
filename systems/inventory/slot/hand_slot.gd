@@ -1,17 +1,27 @@
 extends StandardSlot
 class_name HandSlot
 
-@export var user: Node3D
 @export var shader_material: ShaderMaterial
-@onready var hand: Node3D = $Hand
+@onready var hand = $Hand
 
 var held_item: Item
+
+var user: Node3D
 
 # TODO: low priority but equip animation
 # NOTE: could add node config warning maybe?
 
 func _ready():
+	if not hand:
+		queue_free()
 	super()
+
+	user = _get_user_rec(get_parent())
+	
+func _get_user_rec(node):
+	if node is not Inventory:
+		return _get_user_rec(node.get_parent())
+	return node.get_parent()
 
 func get_item_copy():
 	if not item:

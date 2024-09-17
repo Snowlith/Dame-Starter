@@ -112,7 +112,7 @@ show_percentage = false
 [node name="Inventory" type="Area3D" parent="."]
 script = ExtResource("11_duaaj")
 
-[node name="ColorRect" type="ColorRect" parent="Inventory" node_paths=PackedStringArray("user")]
+[node name="ColorRect" type="ColorRect" parent="Inventory"]
 visible = false
 z_index = -5
 material = ExtResource("12_3y40k")
@@ -122,7 +122,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_65181")
-user = NodePath("../..")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Inventory"]
 texture_filter = 1
@@ -200,16 +199,16 @@ layout_mode = 2
 [node name="InventorySlot11" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="HandSlot" parent="Inventory/NinePatchRect" node_paths=PackedStringArray("user") instance=ExtResource("16_jh6gq")]
+[node name="HandSlot" parent="Inventory/NinePatchRect" instance=ExtResource("16_jh6gq")]
 layout_mode = 0
 offset_left = 713.0
 offset_top = 383.0
 offset_right = 841.0
 offset_bottom = 511.0
-user = NodePath("../../..")
 
 [node name="Hand" type="Node3D" parent="Inventory/NinePatchRect/HandSlot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, 1.32897, -0.86123)
+top_level = true
 
 [node name="InventorySlot12" parent="Inventory/NinePatchRect" instance=ExtResource("15_dqtlo")]
 layout_mode = 2

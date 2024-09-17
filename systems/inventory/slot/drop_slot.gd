@@ -1,15 +1,19 @@
 extends Slot
 class_name DropSlot
 
-@export var user: Node3D
-
-signal item_dropped(prev_owner)
+var user: Node3D
 
 func _ready():
 	super()
 	capacity = 1000000
+	user = _get_user_rec(get_parent())
+	
+func _get_user_rec(node):
+	if node is not Inventory:
+		return _get_user_rec(node.get_parent())
+	return node.get_parent()
 
-func _can_drop_data(_pos, data):
+func _can_drop_data(_pos, _data):
 	return true
 
 func _drop_data(_pos, data):
@@ -21,11 +25,9 @@ func _drop_data(_pos, data):
 	drop()
 
 func drop():
-	var existing_items = _get_existing()
-	
 	var spawn_location = user.global_position + Vector3.FORWARD.rotated(Vector3.UP, user.global_rotation.y) * 2
 	
-	for existing_item in existing_items:
+	for existing_item in _get_existing():
 		if spawn_location.distance_to(existing_item.global_transform.origin) < 1.0:
 			# If nearby, combine the stacks
 			existing_item.stack_size += item.stack_size
