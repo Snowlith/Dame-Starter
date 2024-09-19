@@ -1,11 +1,12 @@
 extends Area3D
 class_name Inventory
 
-# Probably don't need this ref
-@onready var hand_slot: Slot = $NinePatchRect/HandSlot
+@export var open_sound: AudioStream
+@export var close_sound: AudioStream
 
 @onready var nine_patch_rect: Control = $NinePatchRect
-@onready var color_rect: Control = $ColorRect
+@onready var hand_slot: Slot = $NinePatchRect/HandSlot
+@onready var drop_slot: Slot = $ColorRect
 @onready var context_menu: Control = $ContextMenu
 
 var disabled_actions: Array[String] = ["jump", "crouch", "sprint", "left", "right", "up", "down", "inspect"]
@@ -20,15 +21,17 @@ var is_open = true:
 	set(value):
 		if is_open == value:
 			return
-			
+		
 		is_open = value
-		color_rect.visible = is_open
 		nine_patch_rect.visible = is_open
+		drop_slot.visible = is_open
 		
 		if is_open:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			Audio.play_sound(open_sound)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			Audio.play_sound(close_sound)
 			context_menu.close()
 
 func _ready() -> void:
@@ -39,7 +42,7 @@ func _ready() -> void:
 	size = slots.size()
 	
 	area_entered.connect(_on_area_entered)
-
+	
 	is_open = false
 
 func insert(item: Item, amount: int = 1) -> int:
@@ -69,6 +72,7 @@ func remove_from(slot: Slot, amount: int = 1):
 func collect(item: Item):
 	if can_insert(item, item.stack_size):
 		await item.collect()
+		# some kind of bug here
 		item.get_parent().remove_child(item)
 		insert(item, item.stack_size)
 		item.queue_free()

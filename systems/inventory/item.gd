@@ -16,6 +16,9 @@ var icon_dir = "res://items/icons/"
 @export_enum("Common", "Rare", "Dame") var rarity: String = "Common"
 @export_enum("Front", "Angled", "Top") var icon_orientation: String = "Front"
 
+@export var pickup_sound: AudioStream
+@export var drop_sound: AudioStream
+
 var is_equipped: bool = false
 var allow_unequip: bool = true
 var _bob_time: float
@@ -34,6 +37,8 @@ var user: Node3D:
 @onready var area_col: CollisionShape3D = $Area3D/CollisionShape3D
 @onready var base_anim_player: AnimationPlayer = $BaseAnimationPlayer
 
+# TODO: move pickup and drop sounds to item
+# TODO: refactor names of animation methods
 # TODO: add droppable flag
 # TODO: design unique way to represent item stacks 
 
@@ -62,7 +67,10 @@ func in_animation():
 			return true
 	return false
 
+## THIS IS CONFUSING AND TERRIBLE; MAKE AN ACTION SYSTEM
+
 func collect():
+	Audio.play_sound(pickup_sound)
 	if not base_anim_player.has_animation("collect"):
 		return
 	base_anim_player.play("collect")
@@ -71,16 +79,19 @@ func collect():
 	base_anim_player.advance(0)
 
 func added():
+	Audio.play_sound(drop_sound)
 	if not base_anim_player.has_animation("added"):
 		return
 	base_anim_player.play("added")
 
 func removed():
+	Audio.play_sound(pickup_sound)
 	if not base_anim_player.has_animation("removed"):
 		return
 	base_anim_player.play("removed")
 
 func drop():
+	Audio.play_sound(drop_sound)
 	if not base_anim_player.has_animation("drop"):
 		return
 	base_anim_player.play("drop")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://id0pf2s058my"]
+[gd_scene load_steps=12 format=3 uid="uid://id0pf2s058my"]
 
 [ext_resource type="Script" path="res://systems/inventory/item.gd" id="1_65dh2"]
+[ext_resource type="AudioStream" uid="uid://bwtjajpoi2mjp" path="res://addons/kenney rpg audio/belt_handle_2.ogg" id="2_ehuco"]
+[ext_resource type="AudioStream" uid="uid://clmxo1wve7smn" path="res://addons/kenney rpg audio/belt_handle_1.ogg" id="3_ujmmk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oec8h"]
 height = 1.38877
@@ -149,6 +151,8 @@ _data = {
 [node name="BaseItem" type="Node3D"]
 script = ExtResource("1_65dh2")
 icon_orientation = "Angled"
+pickup_sound = ExtResource("2_ehuco")
+drop_sound = ExtResource("3_ujmmk")
 
 [node name="Area3D" type="Area3D" parent="."]
 

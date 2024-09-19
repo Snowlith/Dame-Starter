@@ -5,6 +5,8 @@ class_name Jump
 @export var coyote_time: float = 0.2
 @export var leniency: float = 0.15
 
+@export var jump_sound: AudioStream
+
 var current_coyote_time: float = 0
 var time_since_input: float = 0
 
@@ -27,6 +29,7 @@ func handle(cb: CharacterBody3D, delta: float) -> bool:
 		if input:
 			cb.velocity.y = strength
 			current_coyote_time = 0
+			Audio.play_sound(jump_sound)
 			return true
 	else:
 		current_coyote_time = max(current_coyote_time - delta, 0)
@@ -34,6 +37,7 @@ func handle(cb: CharacterBody3D, delta: float) -> bool:
 		if current_coyote_time > 0 and input:
 			cb.velocity.y = strength
 			current_coyote_time = 0
+			Audio.play_sound(jump_sound)
 			return true
 	return false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=23 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/components/sprint.gd" id="2_8fn3t"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://systems/components/health.gd" id="4_1205x"]
 [ext_resource type="Script" path="res://systems/components/jump.gd" id="4_ot0fo"]
 [ext_resource type="Script" path="res://systems/components/fps_controller.gd" id="6_sxn4l"]
+[ext_resource type="AudioStream" uid="uid://kqiibj6wlbcx" path="res://addons/kenney_ui_audio/click3.wav" id="11_3cm32"]
 [ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="11_duaaj"]
 [ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="12_3y40k"]
 [ext_resource type="Script" path="res://systems/inventory/slot/drop_slot.gd" id="13_65181"]
@@ -37,6 +38,7 @@ script = ExtResource("1_gp66p")
 
 [node name="FPSCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
+rotation_order = 0
 fov = 80.0
 script = ExtResource("2_kaij3")
 
@@ -111,9 +113,9 @@ show_percentage = false
 
 [node name="Inventory" type="Area3D" parent="."]
 script = ExtResource("11_duaaj")
+open_sound = ExtResource("11_3cm32")
 
 [node name="ColorRect" type="ColorRect" parent="Inventory"]
-visible = false
 z_index = -5
 material = ExtResource("12_3y40k")
 anchors_preset = 15
@@ -124,6 +126,7 @@ grow_vertical = 2
 script = ExtResource("13_65181")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Inventory"]
+self_modulate = Color(0.3397, 0.419465, 0.43, 1)
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -235,7 +238,6 @@ offset_bottom = -69.0
 mouse_filter = 2
 
 [node name="HoverMenu" parent="Inventory" instance=ExtResource("16_caq03")]
-visible = false
 offset_left = 17.0
 offset_top = 179.0
 offset_right = 17.0

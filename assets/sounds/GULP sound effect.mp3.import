@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c4axkn0wfh44x"
+path="res://.godot/imported/GULP sound effect.mp3-45f054b7edf5117cd938974718f00b75.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/GULP sound effect.mp3"
+dest_files=["res://.godot/imported/GULP sound effect.mp3-45f054b7edf5117cd938974718f00b75.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

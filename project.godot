@@ -18,6 +18,7 @@ config/icon="res://assets/textures/icon.svg"
 [autoload]
 
 SceneManager="*res://systems/scene_manager/scene_manager.tscn"
+Audio="*res://systems/audio/audio.gd"
 
 [file_customization]
 

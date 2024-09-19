@@ -1,6 +1,8 @@
 extends Item
 
 @export var health_gain: int
+@export var drinking_sound: AudioStream
+@export var finished_sound: AudioStream
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
@@ -18,6 +20,7 @@ func _unhandled_input(event):
 
 func primary_attack():
 	anim_player.play("consume")
+	Audio.play_sound(drinking_sound)
 	await anim_player.animation_finished
 	
 	var inv: Inventory
@@ -34,3 +37,4 @@ func primary_attack():
 		inv.remove_from(inv.hand_slot)
 	if h:
 		h.current_health += health_gain
+	Audio.play_sound(finished_sound)

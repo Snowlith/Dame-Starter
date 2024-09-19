@@ -1,5 +1,6 @@
 extends Item
 
+@export var shoot_sound: AudioStream
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 func _unhandled_input(event):
@@ -16,6 +17,7 @@ func _unhandled_input(event):
 
 func primary_attack():
 	anim_player.play("fire")
+	Audio.play_sound(shoot_sound)
 	shoot()
 
 func reload():

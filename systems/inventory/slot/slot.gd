@@ -1,8 +1,7 @@
 extends Control
 class_name Slot
 
-var hovering = false
-var hover_timer = null
+#var hovering = false
 
 # NOTE: position in drag could do some interesting stuff
 # TODO: write can_drop and drop in a way that visual indicator of blocked is there
@@ -28,13 +27,9 @@ var item: Item:
 		
 signal item_changed
 signal amount_changed
-signal hovered(slot)
-signal clicked(slot)
 
 func _ready():
 	set_process_input(false)
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
 	
 func get_icon_path():
 	if not item:
@@ -54,21 +49,6 @@ func get_item_copy():
 	return item.duplicate()
 	
 ## Mouse hover
-
-func _on_mouse_entered():
-	set_process_input(true)
-	hover_timer = get_tree().create_timer(0.5)
-	# HERE
-	hover_timer.timeout.connect(_hovered_success)
-
-func _on_mouse_exited():
-	set_process_input(false)
-	if hover_timer:
-		hover_timer.timeout.disconnect(_hovered_success)
-		hover_timer = null
-
-func _hovered_success():
-	if item: hovered.emit(self)
 
 func _take_from_slot(source_slot: Slot, desired_amount: int):
 	item = source_slot.get_item_copy()

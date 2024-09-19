@@ -1,27 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1sahxvjtxvne"]
+[gd_scene load_steps=3 format=3 uid="uid://b1sahxvjtxvne"]
 
 [ext_resource type="Script" path="res://systems/inventory/ui/hover_menu.gd" id="1_mix2n"]
+[ext_resource type="Theme" uid="uid://c2rm2ic405pie" path="res://assets/themes/default_ui.tres" id="2_aeken"]
 
-[node name="HoverMenu" type="Control"]
-layout_mode = 3
-anchors_preset = 0
+[node name="HoverMenu" type="PanelContainer"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 143.0
+offset_bottom = 155.0
+mouse_filter = 2
 script = ExtResource("1_mix2n")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -25.0
-offset_right = 143.0
-grow_vertical = 0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 138.0
-grow_vertical = 0
-text = "Hovered this item"
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ItemName" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_aeken")
+theme_type_variation = &"GraphFrameTitleLabel"
+text = "Name"
+
+[node name="ItemDescription" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_aeken")
+text = "Description this description goes on for too long"
+autowrap_mode = 3
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.407843)
+layout_mode = 2
+mouse_filter = 2

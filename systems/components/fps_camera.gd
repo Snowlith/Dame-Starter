@@ -30,6 +30,7 @@ func _ready():
 	player = get_parent() as CharacterBody3D
 	if not player:
 		queue_free()
+	rotation_order = EULER_ORDER_XYZ # fixes camera turning problems
 
 	default_fov = fov
 	start_pos = position
@@ -46,8 +47,9 @@ func _unhandled_input(event: InputEvent):
 		# Camera rotation
 		var look_dir: Vector2 = mouse_event.relative * 0.001
 		
-		player.rotation.y -= look_dir.x * sensitivity
-		rotation.x = clamp(rotation.x - look_dir.y * sensitivity, deg_to_rad(-89), deg_to_rad(89))
+		player.rotate_y(-look_dir.x * sensitivity)
+		rotate_x(-look_dir.y * sensitivity)
+		rotation.x = clamp(rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
 func _physics_process(_delta):
 	# Update the transform, lagging old_transform one physics frame behind

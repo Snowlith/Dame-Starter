@@ -1,13 +1,21 @@
 extends Slot
 class_name StandardSlot
 
+@export var hover_sound: AudioStream
+
 @onready var item_visual: TextureRect = $TextureRect
 @onready var amount_text: Label = $AmountText
+@onready var hover_panel: Panel = $HoverPanel
 
 # NOTE: position in drag could do some interesting stuff
 
+# TODO: change input to gui input
 # TODO: move logic from determining which method to use to slot.gd
 # TODO: write can_drop and drop in a way that visual indicator of blocked is there
+
+signal hovered(slot)
+signal unhovered(slot)
+signal clicked(slot)
 
 var texture
 
@@ -15,6 +23,20 @@ func _ready():
 	super()
 	amount_changed.connect(_on_amount_changed)
 	item_changed.connect(_on_item_changed)
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+
+func _on_mouse_entered():
+	set_process_input(true)
+	hover_panel.visible = true
+	Audio.play_sound(hover_sound)
+	if item:
+		hovered.emit(self)
+
+func _on_mouse_exited():
+	set_process_input(false)
+	hover_panel.visible = false
+	unhovered.emit(self)
 
 func _on_amount_changed():
 	amount_text.text = str(amount)
