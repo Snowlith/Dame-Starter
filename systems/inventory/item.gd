@@ -30,7 +30,7 @@ var allow_unequip: bool = true
 var _bob_time: float
 
 var _init_transform: Transform3D
-var _user: Node3D
+var _user: Entity
 var _allow_animations: bool = false
 
 @onready var view_model: Node3D = $ViewModel
@@ -40,7 +40,7 @@ var _allow_animations: bool = false
 @onready var base_anim_player: AnimationPlayer = $BaseAnimationPlayer
 
 
-
+# TODO: clear animation when item dropped during animation
 # TODO: add droppable flag
 # TODO: design unique way to represent item stacks
 # TODO: add holster animation
@@ -54,7 +54,7 @@ func _ready() -> void:
 		_bob_time += (global_position.x + global_position.z) / 10
 	_allow_animations = true
 
-func pick_up(new_user: Node3D):
+func pick_up(new_user: Entity):
 	if not new_user:
 		drop()
 		return

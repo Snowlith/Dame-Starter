@@ -1,4 +1,4 @@
-extends Node
+extends Attribute
 class_name Health
 
 @export var max_health: int = 100

@@ -6,7 +6,7 @@ class_name HandSlot
 
 var held_item: Item
 
-var user: Node3D
+var user: Entity
 
 # TODO: low priority but equip animation
 # NOTE: could add node config warning maybe?
@@ -18,10 +18,12 @@ func _ready():
 
 	user = _get_user_rec(get_parent())
 	
-func _get_user_rec(node):
-	if node is not Inventory:
+func _get_user_rec(node) -> Entity:
+	if node is not Entity:
+		if not node.get_parent():
+			return null
 		return _get_user_rec(node.get_parent())
-	return node.get_parent()
+	return node
 
 func get_item_copy():
 	if not item:

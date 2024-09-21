@@ -1,4 +1,4 @@
-extends Node
+extends Component
 class_name Crouch
 
 @export var stand_col: CollisionShape3D

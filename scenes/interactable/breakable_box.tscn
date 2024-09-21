@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ber80bhljvwly"]
 
 [ext_resource type="ArrayMesh" uid="uid://dhpiqi2pr3otg" path="res://assets/old_meshes_2/box_small.tres" id="1_4ddtw"]
-[ext_resource type="Script" path="res://systems/components/interaction/breakable.gd" id="2_e006s"]
+[ext_resource type="Script" path="res://systems/interaction/breakable.gd" id="2_e006s"]
 [ext_resource type="PackedScene" uid="uid://4sumewo15n1r" path="res://items/box.tscn" id="3_22qqi"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5l2qf"]

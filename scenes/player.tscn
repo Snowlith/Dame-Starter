@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/components/sprint.gd" id="2_8fn3t"]
-[ext_resource type="Script" path="res://systems/components/fps_camera.gd" id="2_kaij3"]
-[ext_resource type="Script" path="res://systems/components/interaction/interactor.gd" id="3_ca87e"]
+[ext_resource type="Script" path="res://systems/player/fps_camera.gd" id="2_kaij3"]
+[ext_resource type="Script" path="res://systems/interaction/interactor.gd" id="3_ca87e"]
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
 [ext_resource type="Script" path="res://systems/components/crouch.gd" id="3_tqg3l"]
-[ext_resource type="Script" path="res://systems/components/health.gd" id="4_1205x"]
+[ext_resource type="Script" path="res://systems/attributes/health.gd" id="4_1205x"]
 [ext_resource type="Script" path="res://systems/components/jump.gd" id="4_ot0fo"]
 [ext_resource type="Script" path="res://systems/components/fps_controller.gd" id="6_sxn4l"]
 [ext_resource type="AudioStream" uid="uid://kqiibj6wlbcx" path="res://addons/kenney_ui_audio/click3.wav" id="11_3cm32"]
@@ -37,12 +37,6 @@ height = 1.6
 floor_snap_length = 0.2
 script = ExtResource("1_gp66p")
 
-[node name="Interactor" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
-top_level = true
-target_position = Vector3(0, 0, -4.795)
-script = ExtResource("3_ca87e")
-
 [node name="FPSCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
 rotation_order = 0
@@ -54,8 +48,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.570339, -0.86123
 remote_path = NodePath("../../Inventory/NinePatchRect/HandSlot/Hand")
 update_scale = false
 
-[node name="RemoteTransform3D2" type="RemoteTransform3D" parent="FPSCamera"]
-remote_path = NodePath("../../Interactor")
+[node name="Interactor" type="RayCast3D" parent="FPSCamera"]
+target_position = Vector3(0, 0, -4.795)
+script = ExtResource("3_ca87e")
 
 [node name="Crosshair" type="TextureRect" parent="FPSCamera"]
 modulate = Color(1, 1, 1, 0.498039)
@@ -73,11 +68,10 @@ grow_vertical = 2
 texture = ExtResource("3_ey6jl")
 expand_mode = 1
 
-[node name="FPSController" type="Node" parent="."]
+[node name="FPSController" type="Node3D" parent="."]
 script = ExtResource("6_sxn4l")
-gravity = 30.0
 
-[node name="Sprint" type="Node" parent="FPSController"]
+[node name="Sprint" type="Node3D" parent="FPSController"]
 script = ExtResource("2_8fn3t")
 
 [node name="SprintBar" type="ProgressBar" parent="FPSController/Sprint"]
@@ -95,35 +89,16 @@ grow_vertical = 0
 max_value = 1.0
 value = 1.0
 
-[node name="Crouch" type="Node" parent="FPSController" node_paths=PackedStringArray("stand_col", "crouch_col", "shape_cast")]
+[node name="Crouch" type="Node3D" parent="FPSController" node_paths=PackedStringArray("stand_col", "crouch_col", "shape_cast")]
 script = ExtResource("3_tqg3l")
 stand_col = NodePath("../../StandCollider")
 crouch_col = NodePath("../../CrouchCollider")
 shape_cast = NodePath("../../CrouchCollider/ShapeCast3D")
 
-[node name="Jump" type="Node" parent="FPSController"]
+[node name="Jump" type="Node3D" parent="FPSController"]
 script = ExtResource("4_ot0fo")
-strength = 11.0
 
-[node name="Health" type="Node" parent="."]
-script = ExtResource("4_1205x")
-
-[node name="HealthBar" type="ProgressBar" parent="Health"]
-modulate = Color(0.15, 1, 0.220833, 1)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -111.0
-offset_top = -34.0
-offset_right = -17.0
-offset_bottom = -7.0
-grow_horizontal = 2
-grow_vertical = 0
-show_percentage = false
-
-[node name="Inventory" type="Area3D" parent="."]
+[node name="Inventory" type="Node3D" parent="."]
 script = ExtResource("11_duaaj")
 open_sound = ExtResource("11_3cm32")
 
@@ -255,9 +230,29 @@ offset_top = 179.0
 offset_right = 17.0
 offset_bottom = 179.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory"]
+[node name="Area3D" type="Area3D" parent="Inventory"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12004, 0)
 shape = SubResource("CylinderShape3D_n44de")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_1205x")
+
+[node name="HealthBar" type="ProgressBar" parent="Health"]
+modulate = Color(0.15, 1, 0.220833, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -34.0
+offset_right = -17.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false
 
 [node name="StandCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)

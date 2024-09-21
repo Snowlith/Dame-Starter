@@ -1,4 +1,4 @@
-extends Node
+extends Component
 class_name Sprint
 
 @export var duration: float = 4.0

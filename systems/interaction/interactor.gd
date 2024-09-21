@@ -8,6 +8,16 @@ var in_interaction: bool
 
 # TODO: use ray query or disable raycast when not in use
 
+func _ready():
+	add_exception(_get_user_rec(self))
+
+func _get_user_rec(node) -> Entity:
+	if node is not Entity:
+		if not node.get_parent():
+			return null
+		return _get_user_rec(node.get_parent())
+	return node
+
 func _unhandled_key_input(event):
 	if event.is_echo():
 		return
@@ -28,7 +38,7 @@ func _unhandled_key_input(event):
 				break
 
 func get_pos_along_ray(distance: float):
-	return global_position - transform.basis.z * distance
+	return global_position - global_transform.basis.z * distance
 
 func start_interaction(interactable: Interactable):
 	in_interaction = true

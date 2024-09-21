@@ -1,9 +1,10 @@
-extends Area3D
+extends Component
 class_name Inventory
 
 @export var open_sound: AudioStream
 @export var close_sound: AudioStream
 
+@onready var collect_area: Area3D = $Area3D
 @onready var nine_patch_rect: Control = $NinePatchRect
 @onready var hand_slot: Slot = $NinePatchRect/HandSlot
 @onready var drop_slot: Slot = $ColorRect
@@ -41,7 +42,7 @@ func _ready() -> void:
 		slots.append(slot)
 	size = slots.size()
 	
-	area_entered.connect(_on_area_entered)
+	collect_area.area_entered.connect(_on_area_entered)
 	
 	is_open = false
 

@@ -23,15 +23,11 @@ func primary_attack():
 func reload():
 	anim_player.play("reload")
 
+# could make a component that stores camera pos?
+
 func shoot():
-	var cam: FPSCamera
-	for child in _user.get_children():
-		cam = child as FPSCamera
-		if cam:
-			break
-	if not cam:
-		return
-		
+	var cam: FPSCamera = _user.get_node("FPSCamera")
+	
 	var ray_cast = RayCast3D.new()
 	add_child(ray_cast)
 	

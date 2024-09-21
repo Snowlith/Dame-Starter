@@ -1,11 +1,11 @@
-extends Node
+extends Component
 class_name FPSController
 
 @export var speed: float = 6.0
 @export var acceleration: float = 10.0
 @export var friction: float = 18.0
 
-@export var gravity: float = 40.0
+@export var gravity: float = 30.0
 @export var air_control_scalar: float = 0.5
 
 @export var object_push_force: float = 20

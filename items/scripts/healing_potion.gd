@@ -23,16 +23,9 @@ func primary_attack():
 	Audio.play_sound(drinking_sound)
 	await anim_player.animation_finished
 	
-	var inv: Inventory
-	var h: Health
+	var inv: Inventory = _user.get_component("Inventory")
+	var h: Health = _user.get_attribute("Health")
 	
-	for child in _user.get_children():
-		if child as Inventory:
-			inv = child
-			continue
-		if child as Health:
-			h = child
-			continue
 	if inv:
 		inv.remove_from(inv.hand_slot)
 	if h:

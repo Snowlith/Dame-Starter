@@ -1,7 +1,7 @@
-extends Node
+extends Component
 class_name Jump
 
-@export var strength: float = 13.0
+@export var strength: float = 11.0
 @export var coyote_time: float = 0.2
 @export var input_leniency: float = 0.15
 

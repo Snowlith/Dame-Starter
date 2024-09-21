@@ -17,16 +17,10 @@ func _unhandled_input(event):
 func primary_attack():
 	anim_player.play("consume")
 	await anim_player.animation_finished
-	var inv: Inventory
-	var c: FPSController
 	
-	for child in _user.get_children():
-		if child as Inventory:
-			inv = child
-			continue
-		if child as FPSController:
-			c = child
-			continue
+	var inv: Inventory = _user.get_component("Inventory")
+	var c: FPSController = _user.get_component("FPSController")
+	
 	if inv:
 		inv.remove_from(inv.hand_slot)
 	if c:
