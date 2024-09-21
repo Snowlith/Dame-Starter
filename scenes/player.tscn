@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/components/sprint.gd" id="2_8fn3t"]
 [ext_resource type="Script" path="res://systems/components/fps_camera.gd" id="2_kaij3"]
-[ext_resource type="Script" path="res://systems/components/interactor.gd" id="3_ca87e"]
+[ext_resource type="Script" path="res://systems/components/interaction/interactor.gd" id="3_ca87e"]
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
 [ext_resource type="Script" path="res://systems/components/crouch.gd" id="3_tqg3l"]
 [ext_resource type="Script" path="res://systems/components/health.gd" id="4_1205x"]
@@ -75,6 +75,7 @@ expand_mode = 1
 
 [node name="FPSController" type="Node" parent="."]
 script = ExtResource("6_sxn4l")
+gravity = 30.0
 
 [node name="Sprint" type="Node" parent="FPSController"]
 script = ExtResource("2_8fn3t")
@@ -102,6 +103,7 @@ shape_cast = NodePath("../../CrouchCollider/ShapeCast3D")
 
 [node name="Jump" type="Node" parent="FPSController"]
 script = ExtResource("4_ot0fo")
+strength = 11.0
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_1205x")

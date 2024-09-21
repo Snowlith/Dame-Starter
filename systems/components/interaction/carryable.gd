@@ -19,8 +19,8 @@ func _physics_process(_delta):
 	if is_being_carried:
 		var carry_position = carry_interactor.get_pos_along_ray(carry_distance)
 		parent.set_linear_velocity((carry_position - parent.global_position) * carry_velocity_multiplier)
-		# replace sqrt with square
-		if (carry_position - parent.global_position).length() > drop_distance_threshold:
+		# Square other side to avoid sqrt()
+		if (carry_position - parent.global_position).length_squared() > pow(drop_distance_threshold, 2):
 			carry_interactor.end_interaction()
 
 func throw():

@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://hnhfh32qlno2"]
+[gd_scene load_steps=4 format=3 uid="uid://hnhfh32qlno2"]
 
-[ext_resource type="Script" path="res://systems/inventory/breakable.gd" id="1_af8v8"]
 [ext_resource type="ArrayMesh" uid="uid://dhpiqi2pr3otg" path="res://assets/old_meshes_2/box_small.tres" id="1_sfh0g"]
 [ext_resource type="Script" path="res://systems/components/interaction/carryable.gd" id="3_m7d33"]
 
@@ -8,7 +7,6 @@
 points = PackedVector3Array(0.44998, 1, 0.44998, 0.44998, 0.94998, 0.5, 0.5, 0.94998, 0.44998, 0.44998, 1, -0.450078, -0.450078, 1, 0.44998, 0.44998, 0.0499217, 0.5, -0.450078, 0.94998, 0.5, 0.5, 0.94998, -0.450078, 0.5, 0.0499217, 0.44998, 0.44998, 0.94998, -0.5, -0.450078, 1, -0.450078, -0.5, 0.94998, 0.44998, 0.44998, 2.98023e-08, 0.44998, -0.450078, 0.0499217, 0.5, 0.5, 0.0499217, -0.450078, 0.44998, 0.0499217, -0.5, -0.450078, 0.94998, -0.5, -0.5, 0.94998, -0.450078, -0.5, 0.0499217, 0.44998, 0.44998, 2.98023e-08, -0.450078, -0.450078, 2.98023e-08, 0.44998, -0.450078, 0.0499217, -0.5, -0.5, 0.0499217, -0.450078, -0.450078, 2.98023e-08, -0.450078)
 
 [node name="Box" type="RigidBody3D" groups=["interactable"]]
-script = ExtResource("1_af8v8")
 
 [node name="BoxSmall" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_sfh0g")

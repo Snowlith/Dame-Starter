@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://4sumewo15n1r"]
 
-[ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/base_item.tscn" id="1_lrita"]
+[ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/template scenes/base_item.tscn" id="1_lrita"]
 [ext_resource type="ArrayMesh" uid="uid://dhpiqi2pr3otg" path="res://assets/old_meshes_2/box_small.tres" id="2_n0g1r"]
 
 [node name="Box" instance=ExtResource("1_lrita")]

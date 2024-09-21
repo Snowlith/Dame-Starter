@@ -3,7 +3,7 @@ class_name Jump
 
 @export var strength: float = 13.0
 @export var coyote_time: float = 0.2
-@export var leniency: float = 0.15
+@export var input_leniency: float = 0.15
 
 @export var jump_sound: AudioStream
 
@@ -45,6 +45,6 @@ func _handle_leniency(delta: float):
 	if input:
 		time_since_input += delta
 		
-	if time_since_input > leniency:
+	if time_since_input > input_leniency:
 		input = false
 		time_since_input = 0

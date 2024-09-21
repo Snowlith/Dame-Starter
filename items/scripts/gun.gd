@@ -13,7 +13,7 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("reload"):
 		reload()
 	elif event.is_action_pressed("inspect"):
-		inspect()
+		play_inspect()
 
 func primary_attack():
 	anim_player.play("fire")
@@ -25,7 +25,7 @@ func reload():
 
 func shoot():
 	var cam: FPSCamera
-	for child in user.get_children():
+	for child in _user.get_children():
 		cam = child as FPSCamera
 		if cam:
 			break
@@ -41,7 +41,7 @@ func shoot():
 	ray_cast.transform.basis.z = cam.get_look_dir()
 	ray_cast.target_position = Vector3.BACK * 100
 	
-	ray_cast.add_exception(user)
+	ray_cast.add_exception(_user)
 	ray_cast.debug_shape_custom_color = Color(1, 0, 0)
 	ray_cast.force_raycast_update()
 	if ray_cast.is_colliding():

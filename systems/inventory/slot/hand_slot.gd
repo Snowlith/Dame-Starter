@@ -35,13 +35,13 @@ func _on_item_changed():
 	if held_item:
 		apply_mat_recursive(held_item, null)
 		hand.remove_child(held_item)
-		held_item.user = null
+		held_item.drop()
 		
 	held_item = item
 	
 	if held_item:
 		hand.add_child(held_item)
-		held_item.user = user
+		held_item.pick_up(user)
 		hand.visible = true
 		if not shader_material:
 			return

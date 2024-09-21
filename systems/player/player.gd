@@ -10,8 +10,6 @@ func _process(delta: float):
 
 
 
-
-
 #func _ready():
 	#var shit_cam = get_component(Camera3D)
 	#print("Found: " + str(shit_cam))

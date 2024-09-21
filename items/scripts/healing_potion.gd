@@ -16,7 +16,7 @@ func _unhandled_input(event):
 		await primary_attack()
 		allow_unequip = true
 	elif event.is_action_pressed("inspect"):
-		inspect()
+		play_inspect()
 
 func primary_attack():
 	anim_player.play("consume")
@@ -26,7 +26,7 @@ func primary_attack():
 	var inv: Inventory
 	var h: Health
 	
-	for child in user.get_children():
+	for child in _user.get_children():
 		if child as Inventory:
 			inv = child
 			continue

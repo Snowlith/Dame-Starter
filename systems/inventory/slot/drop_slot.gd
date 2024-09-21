@@ -31,7 +31,6 @@ func drop():
 		if spawn_location.distance_to(existing_item.global_transform.origin) < 1.0:
 			# If nearby, combine the stacks
 			existing_item.stack_size += item.stack_size
-			existing_item.added()
 			item.queue_free()
 			return
 	
@@ -41,7 +40,6 @@ func drop():
 	get_tree().current_scene.add_child(item)
 	item.stack_size = amount
 	item.transform.origin = spawn_location
-	item.update()
 	item.drop()
 
 func _get_existing():

@@ -71,7 +71,7 @@ func remove_from(slot: Slot, amount: int = 1):
 
 func collect(item: Item):
 	if can_insert(item, item.stack_size):
-		await item.collect()
+		await item.play_collect()
 		# some kind of bug here
 		item.get_parent().remove_child(item)
 		insert(item, item.stack_size)
@@ -81,7 +81,6 @@ func collect(item: Item):
 		# Only take as many items as possible
 		var items_taken = insert(item, item.stack_size)
 		item.stack_size -= items_taken
-		item.removed()
 
 func has(item: Item):
 	if not item:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ck117y2sj30rc"]
 
-[ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/base_item.tscn" id="1_137g5"]
+[ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/template scenes/base_item.tscn" id="1_137g5"]
 [ext_resource type="Script" path="res://items/scripts/dame_drink.gd" id="1_jsmfm"]
 [ext_resource type="ArrayMesh" uid="uid://ck6cqsbvwgc7p" path="res://assets/old_meshes_2/bottle_A_labeled_green.tres" id="2_xrqoh"]
 
@@ -69,7 +69,6 @@ _data = {
 script = ExtResource("1_jsmfm")
 view_name = "DameDrink"
 view_description = "This is the coveted DameDrink"
-icon_orientation = "Front"
 
 [node name="BottleALabeledGreen" type="MeshInstance3D" parent="ViewModel" index="0"]
 mesh = ExtResource("2_xrqoh")

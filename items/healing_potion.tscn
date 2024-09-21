@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://ds4kxk08u15ud"]
 
-[ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/base_item.tscn" id="1_dsww1"]
+[ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/template scenes/base_item.tscn" id="1_dsww1"]
 [ext_resource type="Script" path="res://items/scripts/healing_potion.gd" id="2_ltm77"]
 [ext_resource type="ArrayMesh" uid="uid://bg28leieensqp" path="res://assets/old_meshes_2/bottle_A_labeled_brown.tres" id="3_f0d1h"]
 [ext_resource type="AudioStream" uid="uid://fd8o1cuoykv1" path="res://addons/kenney_interface_sounds/glass_002.wav" id="3_ivywp"]
