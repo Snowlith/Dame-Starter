@@ -37,7 +37,6 @@ var user: Node3D:
 @onready var area_col: CollisionShape3D = $Area3D/CollisionShape3D
 @onready var base_anim_player: AnimationPlayer = $BaseAnimationPlayer
 
-# TODO: move pickup and drop sounds to item
 # TODO: refactor names of animation methods
 # TODO: add droppable flag
 # TODO: design unique way to represent item stacks 
@@ -48,7 +47,6 @@ func update():
 	_toggle_process_mode()
 	if is_equipped:
 		transform = Transform3D.IDENTITY.scaled_local(Vector3.ONE * view_model_scale)
-		print(transform)
 		_reset_bob()
 	else:
 		transform.basis = init_transform.basis
