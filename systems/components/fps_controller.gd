@@ -71,7 +71,6 @@ func _physics_process(delta: float):
 	# Handle y: jumping and gravity
 	if not ladder_handler.active and not jump.handle(cb, delta):
 		cb.velocity.y -= gravity * delta
-	
 	_apply_impulses()
 	
 	# Physics interaction

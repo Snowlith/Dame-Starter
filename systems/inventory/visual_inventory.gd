@@ -39,6 +39,8 @@ func _ready() -> void:
 		slots.append(slot)
 	size = slots.size()
 	
+	get_initial_items()
+	
 	collect_area.area_entered.connect(_on_area_entered)
 	
 	is_open = false

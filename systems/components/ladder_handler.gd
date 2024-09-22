@@ -1,7 +1,7 @@
 extends Component
 class_name LadderHandler
 
-@export var climb_speed: float = 3.0
+@export var climb_speed: float = 200.0
 
 var active: bool = false
 
@@ -12,7 +12,7 @@ func handle(cb: CharacterBody3D, input: Vector2, delta: float):
 	if not active:
 		return
 	
-	cb.velocity.y = input.dot(-ladder_normal) * climb_speed
+	cb.velocity.y = input.dot(-ladder_normal) * climb_speed * delta
 
 func entered(ladder, normal):
 	if current_ladder:

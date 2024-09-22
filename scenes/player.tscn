@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=26 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/components/sprint.gd" id="2_8fn3t"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://systems/components/jump.gd" id="4_ot0fo"]
 [ext_resource type="Script" path="res://systems/components/fps_controller.gd" id="6_sxn4l"]
 [ext_resource type="Script" path="res://systems/inventory/visual_inventory.gd" id="10_ggp8d"]
+[ext_resource type="Script" path="res://systems/inventory/item_list.gd" id="11_rymun"]
 [ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="12_3y40k"]
 [ext_resource type="Script" path="res://systems/inventory/slot/drop_slot.gd" id="13_65181"]
 [ext_resource type="Texture2D" uid="uid://bgw8e1hralkgb" path="res://assets/textures/inventory_bg.png" id="14_kx0bo"]
@@ -108,7 +109,10 @@ script = ExtResource("19_uf1q7")
 [node name="Inventory" type="Node3D" parent="."]
 script = ExtResource("10_ggp8d")
 
-[node name="InitialItems" type="Node3D" parent="Inventory"]
+[node name="InitialItems" type="Node" parent="Inventory"]
+script = ExtResource("11_rymun")
+initial_items = Array[String](["res://items/dame_drink.tscn", "res://items/box.tscn"])
+initial_amounts = Array[int]([5, 2])
 
 [node name="ColorRect" type="ColorRect" parent="Inventory"]
 z_index = -5

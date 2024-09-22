@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://systems/components/carryable.gd" id="3_ehmd5"]
 [ext_resource type="Script" path="res://systems/attributes/range_value/health.gd" id="3_isdmw"]
 [ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="5_ysfh3"]
-[ext_resource type="Script" path="res://scenes/interactable/item_list.gd" id="6_b8ojq"]
+[ext_resource type="Script" path="res://systems/inventory/item_list.gd" id="6_b8ojq"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5l2qf"]
 points = PackedVector3Array(0.44998, 1, 0.44998, 0.44998, 0.94998, 0.5, 0.5, 0.94998, 0.44998, 0.44998, 1, -0.450078, -0.450078, 1, 0.44998, 0.44998, 0.0499217, 0.5, -0.450078, 0.94998, 0.5, 0.5, 0.94998, -0.450078, 0.5, 0.0499217, 0.44998, 0.44998, 0.94998, -0.5, -0.450078, 1, -0.450078, -0.5, 0.94998, 0.44998, 0.44998, 2.98023e-08, 0.44998, -0.450078, 0.0499217, 0.5, 0.5, 0.0499217, -0.450078, 0.44998, 0.0499217, -0.5, -0.450078, 0.94998, -0.5, -0.5, 0.94998, -0.450078, -0.5, 0.0499217, 0.44998, 0.44998, 2.98023e-08, -0.450078, -0.450078, 2.98023e-08, 0.44998, -0.450078, 0.0499217, -0.5, -0.5, 0.0499217, -0.450078, -0.450078, 2.98023e-08, -0.450078)
@@ -33,5 +33,7 @@ script = ExtResource("3_isdmw")
 [node name="Inventory" type="Node3D" parent="."]
 script = ExtResource("5_ysfh3")
 
-[node name="InitialItems" type="Node3D" parent="Inventory"]
+[node name="InitialItems" type="Node" parent="Inventory"]
 script = ExtResource("6_b8ojq")
+initial_items = Array[String](["res://items/box.tscn"])
+initial_amounts = Array[int]([1])

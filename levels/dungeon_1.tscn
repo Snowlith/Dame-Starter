@@ -910,9 +910,3 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.0149
 
 [node name="Ladder2" parent="." instance=ExtResource("47_pewsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98503, 0.0500002, -7.24692)
-
-[node name="Ladder3" parent="." instance=ExtResource("47_pewsh")]
-transform = Transform3D(0.551063, 0, 0.834463, 0, 1, 0, -0.834463, 0, 0.551063, -2.98503, 0.0500002, -6.68722)
-
-[node name="Ladder4" parent="." instance=ExtResource("47_pewsh")]
-transform = Transform3D(0.0909976, 0, 0.995851, 0, 1, 0, -0.995851, 0, 0.0909976, -3.54318, 0.0500002, -5.50437)

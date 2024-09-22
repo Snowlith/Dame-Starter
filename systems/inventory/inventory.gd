@@ -4,19 +4,28 @@ class_name Inventory
 var slots: Array[Slot]
 var size: int
 
-var shit = load("res://items/box.tscn")
-
 @onready var initial_items = $InitialItems
 
 # current problem:
 # since the item dropped by a broken box is the box itself, there is a cyclic dependency
 
 func _ready():
-	initial_items.add_child(shit.instantiate())
 	slots.append(Slot.new())
-	for child in initial_items.get_children():
-		if child is Item:
-			collect(child)
+	get_initial_items()
+
+func get_initial_items():
+	for i in initial_items.initial_items.size():
+		var item = initial_items.initial_items[i]
+		var amount = 1
+		if initial_items.initial_amounts.size() > i:
+			amount = initial_items.initial_amounts[i]
+		item = load(item).instantiate()
+		if not item is Item:
+			continue
+		item.stack_size = amount
+		add_child(item)
+		item.area_col.disabled = true
+		collect(item, false)
 
 func drop_all():
 	var temp_drop_slot = DropSlot.new()
@@ -24,6 +33,8 @@ func drop_all():
 	slots.append(temp_drop_slot)
 	for slot in slots:
 		if slot == temp_drop_slot:
+			return
+		if slot.is_empty():
 			return
 		temp_drop_slot._take_from_slot(slot, slot.amount)
 		temp_drop_slot.drop()
@@ -55,9 +66,10 @@ func remove(item: Item, amount: int = 1) -> int:
 func remove_from(slot: Slot, amount: int = 1):
 	slot.amount = clamp(slot.amount - amount, 0, slot.amount)
 
-func collect(item: Item):
+func collect(item: Item, use_animation: bool = true):
 	if can_insert(item, item.stack_size):
-		await item.play_collect()
+		if use_animation:
+			await item.play_collect()
 		# some kind of bug here
 		item.get_parent().remove_child(item)
 		insert(item, item.stack_size)
