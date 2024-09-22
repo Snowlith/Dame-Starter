@@ -41,9 +41,12 @@ func shoot():
 	ray_cast.debug_shape_custom_color = Color(1, 0, 0)
 	ray_cast.force_raycast_update()
 	if ray_cast.is_colliding():
-		var col = ray_cast.get_collider()
-		col.get_parent().remove_child(col)
-		col.queue_free()
+		var entity = ray_cast.get_collider() as Entity
+		if entity:
+			var h = entity.get_attribute("Health")
+			if h:
+				h.decrease(100)
+
 	
 	# debug shoot
 	#await get_tree().create_timer(2).timeout

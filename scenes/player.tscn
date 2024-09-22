@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=25 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
 [ext_resource type="Script" path="res://systems/components/sprint.gd" id="2_8fn3t"]
@@ -6,11 +6,10 @@
 [ext_resource type="Script" path="res://systems/interaction/interactor.gd" id="3_ca87e"]
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
 [ext_resource type="Script" path="res://systems/components/crouch.gd" id="3_tqg3l"]
-[ext_resource type="Script" path="res://systems/attributes/health.gd" id="4_1205x"]
+[ext_resource type="Script" path="res://systems/attributes/range_value/health.gd" id="4_1205x"]
 [ext_resource type="Script" path="res://systems/components/jump.gd" id="4_ot0fo"]
 [ext_resource type="Script" path="res://systems/components/fps_controller.gd" id="6_sxn4l"]
-[ext_resource type="AudioStream" uid="uid://kqiibj6wlbcx" path="res://addons/kenney_ui_audio/click3.wav" id="11_3cm32"]
-[ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="11_duaaj"]
+[ext_resource type="Script" path="res://systems/inventory/visual_inventory.gd" id="10_ggp8d"]
 [ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="12_3y40k"]
 [ext_resource type="Script" path="res://systems/inventory/slot/drop_slot.gd" id="13_65181"]
 [ext_resource type="Texture2D" uid="uid://bgw8e1hralkgb" path="res://assets/textures/inventory_bg.png" id="14_kx0bo"]
@@ -18,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://b1sahxvjtxvne" path="res://systems/inventory/ui/hover_menu.tscn" id="16_caq03"]
 [ext_resource type="PackedScene" uid="uid://dyuqkek3iqopo" path="res://systems/inventory/slot/hand_slot.tscn" id="16_jh6gq"]
 [ext_resource type="PackedScene" uid="uid://3fh5yaot8awe" path="res://systems/inventory/ui/context_menu.tscn" id="16_n384p"]
+[ext_resource type="Script" path="res://systems/components/ladder_handler.gd" id="19_uf1q7"]
+[ext_resource type="Script" path="res://systems/attributes/range_value/range_value_bar.gd" id="20_i1hms"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_n44de"]
 height = 2.17288
@@ -48,9 +49,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.570339, -0.86123
 remote_path = NodePath("../../Inventory/NinePatchRect/HandSlot/Hand")
 update_scale = false
 
-[node name="Interactor" type="RayCast3D" parent="FPSCamera"]
-target_position = Vector3(0, 0, -4.795)
+[node name="Interactor" type="Node3D" parent="FPSCamera"]
 script = ExtResource("3_ca87e")
+
+[node name="RayCast3D" type="RayCast3D" parent="FPSCamera/Interactor"]
+enabled = false
+target_position = Vector3(0, 0, -6.03)
 
 [node name="Crosshair" type="TextureRect" parent="FPSCamera"]
 modulate = Color(1, 1, 1, 0.498039)
@@ -98,9 +102,13 @@ shape_cast = NodePath("../../CrouchCollider/ShapeCast3D")
 [node name="Jump" type="Node3D" parent="FPSController"]
 script = ExtResource("4_ot0fo")
 
+[node name="LadderHandler" type="Node3D" parent="FPSController"]
+script = ExtResource("19_uf1q7")
+
 [node name="Inventory" type="Node3D" parent="."]
-script = ExtResource("11_duaaj")
-open_sound = ExtResource("11_3cm32")
+script = ExtResource("10_ggp8d")
+
+[node name="InitialItems" type="Node3D" parent="Inventory"]
 
 [node name="ColorRect" type="ColorRect" parent="Inventory"]
 z_index = -5
@@ -238,6 +246,7 @@ shape = SubResource("CylinderShape3D_n44de")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_1205x")
+value = 30
 
 [node name="HealthBar" type="ProgressBar" parent="Health"]
 modulate = Color(0.15, 1, 0.220833, 1)
@@ -253,6 +262,7 @@ offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 0
 show_percentage = false
+script = ExtResource("20_i1hms")
 
 [node name="StandCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)

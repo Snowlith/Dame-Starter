@@ -1,9 +1,75 @@
-[gd_scene load_steps=3 format=3 uid="uid://4sumewo15n1r"]
+[gd_scene load_steps=8 format=3 uid="uid://4sumewo15n1r"]
 
 [ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/template scenes/base_item.tscn" id="1_lrita"]
 [ext_resource type="ArrayMesh" uid="uid://dhpiqi2pr3otg" path="res://assets/old_meshes_2/box_small.tres" id="2_n0g1r"]
+[ext_resource type="Script" path="res://items/scripts/placeable_item.gd" id="2_ud1pn"]
+[ext_resource type="PackedScene" uid="uid://hnhfh32qlno2" path="res://scenes/interactable/box.tscn" id="3_lkkqr"]
+
+[sub_resource type="Animation" id="Animation_hgi1f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xwsw1"]
+resource_name = "fire"
+length = 0.27
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.658201, 0.464604, 0.127203)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.53764, 1.08559, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yysw4"]
+_data = {
+"RESET": SubResource("Animation_hgi1f"),
+"fire": SubResource("Animation_xwsw1")
+}
 
 [node name="Box" instance=ExtResource("1_lrita")]
+script = ExtResource("2_ud1pn")
+placed_scene = ExtResource("3_lkkqr")
+shoot_sound = null
 view_name = "Box"
 view_description = "Made in the USA"
 
@@ -11,3 +77,9 @@ view_description = "Made in the USA"
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 mesh = ExtResource("2_n0g1r")
 skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+root_node = NodePath("../ViewModel")
+libraries = {
+"": SubResource("AnimationLibrary_yysw4")
+}

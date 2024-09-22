@@ -10,9 +10,13 @@ func _enter_tree():
 func _play_sound(sound: AudioStream, player, autoplay := true):
 	if not sound or not _is_ready:
 		return
+	# THIS IS BAD
+	if not tree.current_scene:
+		return
 	player.stream = sound
 	player.autoplay = autoplay
 	player.finished.connect(func(): player.queue_free())
+	# BREAKS WHEN CALLING BEFORE READY
 	tree.current_scene.call_deferred("add_child", player)
 	return player
 

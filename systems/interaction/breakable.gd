@@ -1,4 +1,4 @@
-extends Interactable
+extends Component
 class_name Breakable
 
 @export var drop_item: PackedScene
@@ -8,8 +8,8 @@ class_name Breakable
 var parent: RigidBody3D
 
 func _ready():
-	assert(get_parent() is RigidBody3D)
-	parent = get_parent() as RigidBody3D
+	parent = get_parent_entity()
+	assert(parent is RigidBody3D)
 
 func interact(interactor: Interactor = null):
 	var dropped = drop_item.instantiate()
@@ -17,4 +17,5 @@ func interact(interactor: Interactor = null):
 	dropped.drop()
 	dropped.global_transform.origin = parent.global_transform.origin
 	parent.queue_free()
-	interactor.end_interaction(false)
+	if interactor:
+		interactor.end_interaction(false)

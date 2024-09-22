@@ -29,5 +29,5 @@ func primary_attack():
 	if inv:
 		inv.remove_from(inv.hand_slot)
 	if h:
-		h.current_health += health_gain
+		h.increase(health_gain)
 	Audio.play_sound(finished_sound)

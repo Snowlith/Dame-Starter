@@ -1,5 +1,5 @@
-extends Interactable
-class_name CarryableOld
+extends Component
+class_name Carryable
 
 @export var carry_distance: float = 2.5
 @export var carry_velocity_multiplier: float = 15
@@ -21,8 +21,8 @@ func _unhandled_input(event):
 		carry_interactor.end_interaction()
 
 func _ready():
-	assert(get_parent() is RigidBody3D)
-	parent = get_parent() as RigidBody3D
+	parent = get_parent_entity()
+	assert(parent is RigidBody3D)
 	set_process_unhandled_input(false)
 
 func _physics_process(_delta):

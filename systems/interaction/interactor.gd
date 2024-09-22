@@ -1,63 +1,50 @@
-extends RayCast3D
+extends Component
 class_name Interactor
 
-var current_collider
-var target_interactable: Interactable
+# make this into flags
+@export_enum("Carryable") var interaction_component: String = "Carryable"
+
+@onready var ray_cast: RayCast3D = $RayCast3D
+
+var target: Component
 
 var in_interaction: bool
 
-# TODO: use ray query or disable raycast when not in use
-
 func _ready():
-	add_exception(_get_user_rec(self))
-
-func _get_user_rec(node) -> Entity:
-	if node is not Entity:
-		if not node.get_parent():
-			return null
-		return _get_user_rec(node.get_parent())
-	return node
+	ray_cast.add_exception(get_parent_entity())
+	ray_cast.enabled = false
 
 func _unhandled_key_input(event):
 	if event.is_echo():
 		return
 	if event.is_action_pressed("interact"):
 		if in_interaction:
-			
 			end_interaction()
 			return
 		
-		if not current_collider:
+		ray_cast.enabled = true
+		ray_cast.force_raycast_update()
+		var col = ray_cast.get_collider() as Entity
+		if not col:
 			return
 		
-		# NOTE: does not loop recursively
-		# look into something like get_component
-		for child in current_collider.get_children():
-			if child as Interactable:
-				start_interaction(child)
-				break
+		var comp = col.get_component(interaction_component)
+		if not comp:
+			return
+		start_interaction(comp)
+		ray_cast.enabled = false
 
 func get_pos_along_ray(distance: float):
 	return global_position - global_transform.basis.z * distance
 
-func start_interaction(interactable: Interactable):
+func start_interaction(interactable: Component):
 	in_interaction = true
-	target_interactable = interactable
-	target_interactable.interact(self)
+	target = interactable
+	target.interact(self)
 	
 func end_interaction(recall = true):
 	in_interaction = false
-	if recall and is_instance_valid(target_interactable):
-		target_interactable.interact()
-	target_interactable = null
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	var collider = get_collider()
-	if collider == current_collider:
-		return
-	elif not collider or not collider.is_in_group("interactable"):
-		current_collider = null
-		return
-	current_collider = collider
+	if recall and is_instance_valid(target):
+		target.interact()
+	target = null
 	

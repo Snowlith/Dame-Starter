@@ -22,10 +22,28 @@ func _drop_data(_pos, data):
 	
 	_take_from_slot(source_slot, desired_amount)
 	
-	drop()
+	drop_in_front()
+
+func drop_in_front():
+	var spawn_location = user.global_position + Vector3.FORWARD.rotated(Vector3.UP, user.global_rotation.y) * 2
+	
+	for existing_item in _get_existing():
+		if spawn_location.distance_to(existing_item.global_transform.origin) < 1.0:
+			# If nearby, combine the stacks
+			existing_item.stack_size += item.stack_size
+			item.queue_free()
+			return
+	
+	while get_tree().current_scene.has_node(str(item.name)):
+		item.name = _generate_name("abcdefghijklmnopqrstuvwxyz", 10)
+	
+	get_tree().current_scene.add_child(item)
+	item.stack_size = amount
+	item.transform.origin = spawn_location
+	item.drop()
 
 func drop():
-	var spawn_location = user.global_position + Vector3.FORWARD.rotated(Vector3.UP, user.global_rotation.y) * 2
+	var spawn_location = user.global_position
 	
 	for existing_item in _get_existing():
 		if spawn_location.distance_to(existing_item.global_transform.origin) < 1.0:

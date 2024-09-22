@@ -9,7 +9,7 @@ extends Node3D
 var default_cam_pos
 var default_mesh_instance_pos
 
-var capture_time: float = 0.4
+var capture_time: float = .1
 
 var _debug_aabbs = []
 var _debug_positions = []
@@ -59,7 +59,7 @@ func adjust_scene(scene_root: Node3D):
 	
 	#_debug_aabbs.clear()
 	#_debug_aabbs.append(combined_aabb)
-	#
+	
 	#_debug_positions.clear()
 	#_debug_positions.append(scene_root.transform)
 
