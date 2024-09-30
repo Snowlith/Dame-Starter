@@ -54,7 +54,6 @@ func adjust_scene(scene_root: Node3D):
 		print("no valid aabb")
 		return # No valid AABB found
 
-	var center = -combined_aabb.size * 0.5
 	var max_dimension = combined_aabb.get_longest_axis_size()
 	
 	#_debug_aabbs.clear()

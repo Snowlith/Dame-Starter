@@ -1,16 +1,12 @@
 extends Camera3D
 class_name FPSCamera
 
-@export_group("Camera")
 @export var sensitivity: float = 1.5
+@export var nodes_with_camera_offset: Array[Node]
 
 @export_subgroup("Dynamic FOV")
 @export var fov_speed_change: float = 0.5
 @export var fov_settle_speed: float = 10
-
-@export_subgroup("Headbob")
-@export var bob_frequency: float = 2.4
-@export var bob_amplitude: float = 0.08
 
 var player: CharacterBody3D
 
@@ -21,16 +17,15 @@ var start_pos: Vector3
 var old_transform: Transform3D
 var new_transform: Transform3D
 
-var bob_offset_pos: Vector3
-var bob_time: float = 0
-
 var use_interp: bool = true
 
 func _ready():
-	player = get_parent() as CharacterBody3D
-	if not player:
-		queue_free()
-	rotation_order = EULER_ORDER_XYZ # fixes camera turning problems
+	assert(get_parent() is CharacterBody3D)
+	player = get_parent()
+		
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	rotation_order = EULER_ORDER_XYZ # Fixes camera turning problems
+	process_priority = 100 # Updates after other nodes
 
 	default_fov = fov
 	start_pos = position
@@ -56,7 +51,7 @@ func _physics_process(_delta):
 	old_transform = new_transform
 	new_transform = player.transform
 
-func update_camera(delta: float, offset: Vector3):
+func _process(delta):
 	var f = Engine.get_physics_interpolation_fraction()
 	if use_interp:
 		global_transform.origin = old_transform.interpolate_with(new_transform, f).origin
@@ -64,9 +59,16 @@ func update_camera(delta: float, offset: Vector3):
 		global_transform.origin = new_transform.origin # Disable interpolation for debugging
 		
 	_update_fov_offset(delta)
-	_update_headbob_offset(delta)
 	
-	position += start_pos + offset + bob_offset_pos
+	var cumulative_offset := Vector3.ZERO
+	for node in nodes_with_camera_offset:
+		if not is_instance_valid(node):
+			continue
+		if "camera_offset" in node:
+			var offset = node.camera_offset as Vector3
+			cumulative_offset += offset
+	
+	position += start_pos + cumulative_offset
 
 func get_look_dir() -> Vector3:
 	return -global_transform.basis.z
@@ -79,12 +81,6 @@ func set_look_dir(dir: Vector3) -> void:
 	rotation.x = clamp(pitch, deg_to_rad(-89), deg_to_rad(89))
 
 ## Visual effects
-	
-func _update_headbob_offset(delta: float) -> void:
-	bob_time += delta * player.velocity.length() * int(player.is_on_floor())
-	
-	bob_offset_pos.x = cos(bob_time * bob_frequency / 2) * bob_amplitude
-	bob_offset_pos.y = sin(bob_time * bob_frequency) * bob_amplitude
 
 func _update_fov_offset(delta: float) -> void:
 	# Horizontal look direction and player velocity

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cu4a3g4md3w4a"]
 
 [ext_resource type="Script" path="res://systems/inventory/slot/standard_slot.gd" id="1_13o15"]
-[ext_resource type="AudioStream" uid="uid://cvewxa0evrptj" path="res://addons/kenney_ui_audio/mouseclick1.wav" id="2_l1wev"]
+[ext_resource type="AudioStream" uid="uid://cvewxa0evrptj" path="res://addons/mouseclick1.wav" id="2_l1wev"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1aw8b"]
 bg_color = Color(1, 1, 1, 1)

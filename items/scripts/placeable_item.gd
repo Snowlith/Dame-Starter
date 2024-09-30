@@ -27,12 +27,13 @@ func primary_attack():
 # could make a component that stores camera pos?
 
 func shoot():
-	var cam: FPSCamera = _user.get_node("FPSCamera")
-	
-	var projectile = placed_scene.instantiate()
-	assert(projectile is RigidBody3D)
-	
-	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = cam.global_position + cam.get_look_dir() * 2.5
-	
-	projectile.apply_central_impulse(cam.get_look_dir() * 10)
+	pass
+	#var cam: FPSCamera = _user.get_node("FPSCamera")
+	#
+	#var projectile = placed_scene.instantiate()
+	#assert(projectile is RigidBody3D)
+	#
+	#get_tree().current_scene.add_child(projectile)
+	#projectile.global_position = cam.global_position + cam.get_look_dir() * 2.5
+	#
+	#projectile.apply_central_impulse(cam.get_look_dir() * 10)

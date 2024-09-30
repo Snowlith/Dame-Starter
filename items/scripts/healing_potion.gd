@@ -24,7 +24,7 @@ func primary_attack():
 	await anim_player.animation_finished
 	
 	var inv: Inventory = _user.get_component("Inventory")
-	var h: Health = _user.get_attribute("Health")
+	var h: Health = _user.get_component("Health")
 	
 	if inv:
 		inv.remove_from(inv.hand_slot)

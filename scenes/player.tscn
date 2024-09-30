@@ -1,14 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=30 format=3 uid="uid://d0ukggfx40yvy"]
 
+[ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
 [ext_resource type="Script" path="res://systems/player/player.gd" id="1_gp66p"]
-[ext_resource type="Script" path="res://systems/components/sprint.gd" id="2_8fn3t"]
 [ext_resource type="Script" path="res://systems/player/fps_camera.gd" id="2_kaij3"]
 [ext_resource type="Script" path="res://systems/interaction/interactor.gd" id="3_ca87e"]
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
-[ext_resource type="Script" path="res://systems/components/crouch.gd" id="3_tqg3l"]
-[ext_resource type="Script" path="res://systems/attributes/range_value/health.gd" id="4_1205x"]
-[ext_resource type="Script" path="res://systems/components/jump.gd" id="4_ot0fo"]
-[ext_resource type="Script" path="res://systems/components/fps_controller.gd" id="6_sxn4l"]
+[ext_resource type="Script" path="res://components/range_value/health.gd" id="4_1205x"]
 [ext_resource type="Script" path="res://systems/inventory/visual_inventory.gd" id="10_ggp8d"]
 [ext_resource type="Script" path="res://systems/inventory/item_list.gd" id="11_rymun"]
 [ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="12_3y40k"]
@@ -18,12 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://b1sahxvjtxvne" path="res://systems/inventory/ui/hover_menu.tscn" id="16_caq03"]
 [ext_resource type="PackedScene" uid="uid://dyuqkek3iqopo" path="res://systems/inventory/slot/hand_slot.tscn" id="16_jh6gq"]
 [ext_resource type="PackedScene" uid="uid://3fh5yaot8awe" path="res://systems/inventory/ui/context_menu.tscn" id="16_n384p"]
-[ext_resource type="Script" path="res://systems/components/ladder_handler.gd" id="19_uf1q7"]
-[ext_resource type="Script" path="res://systems/attributes/range_value/range_value_bar.gd" id="20_i1hms"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_n44de"]
-height = 2.17288
-radius = 0.829099
+[ext_resource type="Script" path="res://systems/state_machine/state_machine.gd" id="17_mu2cs"]
+[ext_resource type="Script" path="res://components/states/walk_state.gd" id="18_ql2pa"]
+[ext_resource type="Script" path="res://components/states/air_state.gd" id="19_d37tt"]
+[ext_resource type="Script" path="res://components/states/crouch_state.gd" id="19_jp43y"]
+[ext_resource type="Script" path="res://components/range_value/range_value_bar.gd" id="20_i1hms"]
+[ext_resource type="Script" path="res://components/states/jump_state.gd" id="21_c7cuh"]
+[ext_resource type="Script" path="res://components/states/ladder_state.gd" id="22_6s06b"]
+[ext_resource type="Script" path="res://components/states/swing_state.gd" id="23_tcx4j"]
+[ext_resource type="Script" path="res://components/head_bob.gd" id="24_46ms5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lb0yt"]
 height = 2.2
@@ -35,29 +35,39 @@ height = 1.6
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
-[node name="Player" type="CharacterBody3D" groups=["player"]]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n44de"]
+height = 2.17288
+radius = 0.829099
+
+[node name="Player" type="Node3D"]
+process_priority = 1
+script = ExtResource("1_60qo2")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("state_machine") groups=["player"]]
 floor_snap_length = 0.2
 script = ExtResource("1_gp66p")
+state_machine = NodePath("../StateMachine")
 
-[node name="FPSCamera" type="Camera3D" parent="."]
+[node name="FPSCamera" type="Camera3D" parent="CharacterBody3D" node_paths=PackedStringArray("nodes_with_camera_offset")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
 rotation_order = 0
 fov = 80.0
 script = ExtResource("2_kaij3")
+nodes_with_camera_offset = [NodePath("../../StateMachine/CrouchState"), NodePath("../../StateMachine/LadderState"), NodePath("../../HeadBob")]
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="FPSCamera"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CharacterBody3D/FPSCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.570339, -0.86123)
 remote_path = NodePath("../../Inventory/NinePatchRect/HandSlot/Hand")
 update_scale = false
 
-[node name="Interactor" type="Node3D" parent="FPSCamera"]
+[node name="Interactor" type="Node3D" parent="CharacterBody3D/FPSCamera"]
 script = ExtResource("3_ca87e")
 
-[node name="RayCast3D" type="RayCast3D" parent="FPSCamera/Interactor"]
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/FPSCamera/Interactor"]
 enabled = false
 target_position = Vector3(0, 0, -6.03)
 
-[node name="Crosshair" type="TextureRect" parent="FPSCamera"]
+[node name="Crosshair" type="TextureRect" parent="CharacterBody3D/FPSCamera"]
 modulate = Color(1, 1, 1, 0.498039)
 anchors_preset = 8
 anchor_left = 0.5
@@ -73,48 +83,33 @@ grow_vertical = 2
 texture = ExtResource("3_ey6jl")
 expand_mode = 1
 
-[node name="FPSController" type="Node3D" parent="."]
-script = ExtResource("6_sxn4l")
+[node name="StandCollider" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("CapsuleShape3D_lb0yt")
 
-[node name="Sprint" type="Node3D" parent="FPSController"]
-script = ExtResource("2_8fn3t")
+[node name="CrouchCollider" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_fp5m6")
 
-[node name="SprintBar" type="ProgressBar" parent="FPSController/Sprint"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -34.0
-offset_right = 114.0
-offset_bottom = -7.0
-grow_horizontal = 2
-grow_vertical = 0
-max_value = 1.0
-value = 1.0
+[node name="ShapeCast3D" type="ShapeCast3D" parent="CharacterBody3D/CrouchCollider"]
+shape = SubResource("SphereShape3D_be8k7")
+target_position = Vector3(0, 0.9, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="Crouch" type="Node3D" parent="FPSController" node_paths=PackedStringArray("stand_col", "crouch_col", "shape_cast")]
-script = ExtResource("3_tqg3l")
-stand_col = NodePath("../../StandCollider")
-crouch_col = NodePath("../../CrouchCollider")
-shape_cast = NodePath("../../CrouchCollider/ShapeCast3D")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_6nc5s")
 
-[node name="Jump" type="Node3D" parent="FPSController"]
-script = ExtResource("4_ot0fo")
-
-[node name="LadderHandler" type="Node3D" parent="FPSController"]
-script = ExtResource("19_uf1q7")
-
-[node name="Inventory" type="Node3D" parent="."]
+[node name="Inventory" type="Node3D" parent="CharacterBody3D"]
 script = ExtResource("10_ggp8d")
 
-[node name="InitialItems" type="Node" parent="Inventory"]
+[node name="InitialItems" type="Node" parent="CharacterBody3D/Inventory"]
 script = ExtResource("11_rymun")
 initial_items = Array[String](["res://items/dame_drink.tscn", "res://items/box.tscn"])
 initial_amounts = Array[int]([5, 2])
 
-[node name="ColorRect" type="ColorRect" parent="Inventory"]
+[node name="ColorRect" type="ColorRect" parent="CharacterBody3D/Inventory"]
 z_index = -5
 material = ExtResource("12_3y40k")
 anchors_preset = 15
@@ -124,7 +119,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_65181")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Inventory"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CharacterBody3D/Inventory"]
 self_modulate = Color(0.3397, 0.419465, 0.43, 1)
 texture_filter = 1
 anchors_preset = 8
@@ -149,7 +144,7 @@ patch_margin_bottom = 50
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="SlotContainer" type="GridContainer" parent="Inventory/NinePatchRect"]
+[node name="SlotContainer" type="GridContainer" parent="CharacterBody3D/Inventory/NinePatchRect"]
 custom_minimum_size = Vector2(140, 104)
 layout_mode = 1
 anchors_preset = 8
@@ -165,54 +160,54 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 6
 
-[node name="InventorySlot" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot2" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot2" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot3" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot3" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot4" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot4" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot5" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot5" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot6" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot6" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot7" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot7" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot8" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot8" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot13" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot13" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot9" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot9" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot10" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot10" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="InventorySlot11" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot11" parent="CharacterBody3D/Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 
-[node name="HandSlot" parent="Inventory/NinePatchRect" instance=ExtResource("16_jh6gq")]
+[node name="HandSlot" parent="CharacterBody3D/Inventory/NinePatchRect" instance=ExtResource("16_jh6gq")]
 layout_mode = 0
 offset_left = 713.0
 offset_top = 383.0
 offset_right = 841.0
 offset_bottom = 511.0
 
-[node name="Hand" type="Node3D" parent="Inventory/NinePatchRect/HandSlot"]
+[node name="Hand" type="Node3D" parent="CharacterBody3D/Inventory/NinePatchRect/HandSlot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, 1.32897, -0.86123)
 top_level = true
 
-[node name="InventorySlot12" parent="Inventory/NinePatchRect" instance=ExtResource("15_dqtlo")]
+[node name="InventorySlot12" parent="CharacterBody3D/Inventory/NinePatchRect" instance=ExtResource("15_dqtlo")]
 layout_mode = 2
 offset_left = 84.0
 offset_top = 392.0
@@ -220,7 +215,7 @@ offset_right = 212.0
 offset_bottom = 520.0
 capacity = 32
 
-[node name="Label" type="Label" parent="Inventory/NinePatchRect"]
+[node name="Label" type="Label" parent="CharacterBody3D/Inventory/NinePatchRect"]
 layout_mode = 0
 offset_left = 45.0
 offset_top = 355.0
@@ -228,7 +223,7 @@ offset_right = 245.0
 offset_bottom = 378.0
 text = "Big Slot: can fit more stuff"
 
-[node name="ContextMenu" parent="Inventory" instance=ExtResource("16_n384p")]
+[node name="ContextMenu" parent="CharacterBody3D/Inventory" instance=ExtResource("16_n384p")]
 visible = false
 offset_left = 15.0
 offset_top = 509.0
@@ -236,23 +231,23 @@ offset_right = -1048.0
 offset_bottom = -69.0
 mouse_filter = 2
 
-[node name="HoverMenu" parent="Inventory" instance=ExtResource("16_caq03")]
+[node name="HoverMenu" parent="CharacterBody3D/Inventory" instance=ExtResource("16_caq03")]
 offset_left = 17.0
 offset_top = 179.0
 offset_right = 17.0
 offset_bottom = 179.0
 
-[node name="Area3D" type="Area3D" parent="Inventory"]
+[node name="Area3D" type="Area3D" parent="CharacterBody3D/Inventory"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Inventory/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12004, 0)
 shape = SubResource("CylinderShape3D_n44de")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="CharacterBody3D"]
 script = ExtResource("4_1205x")
 value = 30
 
-[node name="HealthBar" type="ProgressBar" parent="Health"]
+[node name="HealthBar" type="ProgressBar" parent="CharacterBody3D/Health"]
 modulate = Color(0.15, 1, 0.220833, 1)
 anchors_preset = 7
 anchor_left = 0.5
@@ -268,20 +263,47 @@ grow_vertical = 0
 show_percentage = false
 script = ExtResource("20_i1hms")
 
-[node name="StandCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
-shape = SubResource("CapsuleShape3D_lb0yt")
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("default_state")]
+script = ExtResource("17_mu2cs")
+default_state = NodePath("WalkState")
 
-[node name="CrouchCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-shape = SubResource("CapsuleShape3D_fp5m6")
+[node name="WalkState" type="Node" parent="StateMachine"]
+script = ExtResource("18_ql2pa")
+speed = 9.0
+friction = 14.0
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="CrouchCollider"]
-shape = SubResource("SphereShape3D_be8k7")
-target_position = Vector3(0, 0.9, 0)
-debug_shape_custom_color = Color(1, 0, 0, 1)
+[node name="CrouchState" type="Node" parent="StateMachine" node_paths=PackedStringArray("stand_collider", "crouch_collider", "shape_cast", "head_bob")]
+script = ExtResource("19_jp43y")
+stand_collider = NodePath("../../CharacterBody3D/StandCollider")
+crouch_collider = NodePath("../../CharacterBody3D/CrouchCollider")
+shape_cast = NodePath("../../CharacterBody3D/CrouchCollider/ShapeCast3D")
+head_bob = NodePath("../../HeadBob")
+priority = 1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-cast_shadow = 3
-mesh = SubResource("CapsuleMesh_6nc5s")
+[node name="AirState" type="Node" parent="StateMachine"]
+script = ExtResource("19_d37tt")
+priority = 2
+
+[node name="JumpState" type="Node" parent="StateMachine"]
+script = ExtResource("21_c7cuh")
+strength = 10.0
+priority = 3
+
+[node name="LadderState" type="Node" parent="StateMachine"]
+script = ExtResource("22_6s06b")
+priority = 4
+
+[node name="SwingState" type="Node" parent="StateMachine"]
+script = ExtResource("23_tcx4j")
+priority = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="StateMachine"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="StateMachine/PanelContainer"]
+layout_mode = 2
+
+[node name="HeadBob" type="Node" parent="." node_paths=PackedStringArray("character_body")]
+script = ExtResource("24_46ms5")
+character_body = NodePath("../CharacterBody3D")

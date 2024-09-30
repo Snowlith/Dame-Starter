@@ -1,12 +1,14 @@
-extends Entity
+extends CharacterBody3D
 
-@onready var cam: FPSCamera = $FPSCamera
+var parent_entity: Entity
 
-@onready var crouch: Crouch = $FPSController/Crouch
+@export var state_machine: StateMachine
 
-func _process(delta: float):
-	var crouch_offset = crouch.get_offset(delta)
-	cam.update_camera(delta, crouch_offset)
+# TODO: impulse manager
 
 func _ready():
-	super()
+	top_level = true
+	parent_entity = get_parent() as Entity
+
+func _physics_process(delta):
+	state_machine.update(delta)

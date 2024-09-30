@@ -10,8 +10,6 @@ func _unhandled_input(event):
 		return
 	if event.is_action_pressed("primary attack"):
 		primary_attack()
-	elif event.is_action_pressed("reload"):
-		reload()
 	elif event.is_action_pressed("inspect"):
 		play_inspect()
 
@@ -24,7 +22,13 @@ func reload():
 	anim_player.play("reload")
 
 func shoot():
-	var exclude = _user.get_node("CharacterBody3D").get_rid()
+	# TODO: make signals for enter and exit hand
+	var swing_state = _user.get_component("SwingState")
+	if not swing_state:
+		return
+	
+	swing_state.detach()
+	var exclude = swing_state.character_body.get_rid()
 	var space_state = get_world_3d().get_direct_space_state()
 	var cam = get_viewport().get_camera_3d()
 	
@@ -37,11 +41,7 @@ func shoot():
 	ray_params.exclude = rid_array
 	
 	var ray = space_state.intersect_ray(ray_params)
-	if ray.has("collider"):
-		var entity = ray["collider"] as Entity
-		if entity:
-			var h = entity.get_attribute("Health")
-			if h:
-				h.decrease(100)
+	if ray.has("position"):
+		swing_state.attach(ray["position"])
 
 		
