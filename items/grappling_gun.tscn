@@ -118,8 +118,9 @@ _data = {
 [node name="GrapplingGun" instance=ExtResource("1_xhybg")]
 script = ExtResource("2_lowxy")
 shoot_sound = null
-view_name = "Dame Gun"
-view_description = "You have a seemingly infinite supply of bullets."
+view_name = "Grappling Gun"
+view_description = "Centripetal force
+"
 is_stackable = false
 icon_orientation = "Side"
 pickup_sound = null

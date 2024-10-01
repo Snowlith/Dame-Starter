@@ -36,7 +36,7 @@ func change_scene(data: TransitionData) -> void:
 		call_deferred("_deferred_change_scene", data.scene_path)
 
 # used when the player msut be switched between scenes
-func _deferred_change_scene_player(scene_path: String, player: Node3D, id: String) -> void:
+func _deferred_change_scene_player(scene_path: String, player: Entity, id: String) -> void:
 	# remove and free the old scene
 	var old_scene = get_tree().current_scene
 	player.get_parent().remove_child(player)
@@ -58,8 +58,8 @@ func _deferred_change_scene_player(scene_path: String, player: Node3D, id: Strin
 	else:
 		var new_player = new_players[0]
 		var parent = new_player.get_parent()
-		parent.add_child(player)
 		parent.remove_child(new_player)
+		parent.add_child(player)
 		if not _spawn_using_loading_zone(player, id):
 			player.position = new_player.position
 		new_player.queue_free()
@@ -86,7 +86,7 @@ func _deferred_change_scene(scene_path: String) -> void:
 func restart_scene() -> void:
 	get_tree().reload_current_scene()
 
-func _spawn_using_loading_zone(player: Node3D, id: String) -> bool:
+func _spawn_using_loading_zone(player: Entity, id: String) -> bool:
 	if id == "":
 		return false
 	

@@ -54,12 +54,12 @@ func handle(delta: float):
 	var floor_normal = character_body.get_floor_normal()
 	var slope_direction = Vector2(-floor_normal.x, -floor_normal.z)
 	
-	if xz.dot(slope_direction) < 0:
+	if xz.dot(slope_direction) < -0.25:
 		head_bob.disable()
 		# Slide down slope
 		var slope_angle = acos(floor_normal.y)
-		var slope_velocity = -slope_direction.normalized() * slope_angle * 40
-		xz = xz.lerp(slope_velocity, delta)
+		var slope_velocity = -slope_direction.normalized() * slope_angle * 50
+		xz = xz.lerp(xz + slope_velocity, delta)
 	elif xz.length_squared() > pow(slide_velocity_cutoff, 2):
 		head_bob.disable()
 		# Sliding on ground

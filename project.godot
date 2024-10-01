@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dame Starter"
-run/main_scene="res://levels/dungeon_1.tscn"
+run/main_scene="res://levels/test_level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://assets/textures/icon.svg"
 
@@ -33,6 +33,12 @@ folder_colors={
 "inventory slot"="Slots in an inventory"
 player="Entity capable of switching scenes"
 interactable="Scene that can be interacted with"
+
+[importer_defaults]
+
+texture={
+"detect_3d/compress_to": 0
+}
 
 [input]
 

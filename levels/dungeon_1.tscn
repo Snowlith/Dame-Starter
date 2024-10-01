@@ -917,6 +917,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.43391, 0.0499854, -3.39972)
 
 [node name="GrapplingGun" parent="." instance=ExtResource("47_5xwpe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.634531, 0.0499849, -2.85276)
-view_name = "Grappling Gun"
 view_description = "centripetal force
 "

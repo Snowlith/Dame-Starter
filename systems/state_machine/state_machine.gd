@@ -24,6 +24,7 @@ signal state_changed
 # DICTIONARY MERGE
 
 func _ready():
+	print("started state machine")
 	states = find_children("", "State")
 	states.sort_custom(sort_priority)
 	_create_input_state_map()
@@ -32,7 +33,7 @@ func _ready():
 	default_state.enter()
 	state_changed.emit()
 	
-	state_changed.connect(func(): print("state: " + str(selected_state)))
+	#state_changed.connect(func(): print("state: " + str(selected_state)))
 
 func _create_input_state_map():
 	_input_state_map.clear()
@@ -42,7 +43,6 @@ func _create_input_state_map():
 				_input_state_map[action].append(state)
 			else:
 				_input_state_map[action] = [state]
-	print(_input_state_map)
 
 # CANT BE KEY INPUT FOR MOUSE STUFF
 func _unhandled_key_input(event):
@@ -55,7 +55,8 @@ func _unhandled_key_input(event):
 				state.input[action] = result
 				state.input_changed.emit(action, result)
 
-func update(delta):
+func _physics_process(delta):
+	print("physics running")
 	_update_states(delta)
 
 func sort_priority(a: State, b: State):
@@ -77,6 +78,7 @@ func _update_states(delta):
 			selected_state = new_state
 			selected_state.enter()
 			state_changed.emit()
+	
 	selected_state.handle(delta)
 	
 	_update_label(active_states)

@@ -16,20 +16,20 @@ func _ready() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if not target_scene_path:
 		return
-	if not body.is_in_group("player"):
+	if not body.get_parent().is_in_group("player"):
 		return
 	
 	var data = TransitionData.new(target_scene_path)
-	data.player = body
+	data.player = body.get_parent()
 	data.transition = transition 
 	data.id = target_id
 	
 	SceneManager.change_scene(data)
 
-func spawn(node: Node3D) -> void:
+func spawn(player: Entity) -> void:
 	var spawn_dir = -transform.basis.z.normalized()
-	node.position = position + displacement
-	for child in node.get_children():
-		var cam := child as FPSCamera
+	player.physics_body.position = position + displacement
+	for cam in player.find_children("", "FPSCamera"):
 		if cam:
 			cam.set_look_dir(spawn_dir)
+			break

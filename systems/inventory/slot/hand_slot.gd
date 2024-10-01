@@ -2,6 +2,7 @@ extends StandardSlot
 class_name HandSlot
 
 @export var shader_material: ShaderMaterial
+@export var default_item: Item
 @onready var hand = $Hand
 
 var held_item: Item
@@ -9,7 +10,6 @@ var held_item: Item
 var user: Entity
 
 # TODO: low priority but equip animation
-# NOTE: could add node config warning maybe?
 
 func _ready():
 	if not hand:
