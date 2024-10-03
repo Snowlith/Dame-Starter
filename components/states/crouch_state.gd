@@ -1,11 +1,12 @@
-extends State
+extends MovementState
 class_name CrouchState
 
-@export var crouch_speed: float = 3
+@export var max_crouch_speed: float = 3
 @export var crouch_acceleration: float = 10
 @export var crouch_friction: float = 12
-@export var slide_friction: float = 1
-@export var slide_velocity_cutoff: float = 3
+
+@export var slide_friction: float = 3
+@export var slide_velocity_cutoff: float = 5
 
 @export var stand_collider: CollisionShape3D
 @export var crouch_collider: CollisionShape3D
@@ -27,7 +28,7 @@ func _init():
 
 func _ready():
 	super()
-	shape_cast.add_exception(character_body)
+	shape_cast.add_exception(_cb)
 	_toggle_colliders()
 
 func _toggle_colliders() -> void:
@@ -50,36 +51,46 @@ func is_active():
 	return input["crouch"]
 
 func handle(delta: float):
-	var xz = Vector2(character_body.velocity.x, character_body.velocity.z)
-	var floor_normal = character_body.get_floor_normal()
-	var slope_direction = Vector2(-floor_normal.x, -floor_normal.z)
+	var snap: bool = false
+	#var force_slide: bool = false
 	
-	if xz.dot(slope_direction) < -0.25:
-		head_bob.disable()
+	var floor_normal = _cb.get_floor_normal()
+	var down_slope_vector = (Vector3.DOWN - floor_normal * Vector3.DOWN.dot(floor_normal)).normalized()
+	
+	# TODO: Modify snap length based on speed!!!
+	
+	if _cb.velocity.dot(down_slope_vector) > 0:
 		# Slide down slope
-		var slope_angle = acos(floor_normal.y)
-		var slope_velocity = -slope_direction.normalized() * slope_angle * 50
-		xz = xz.lerp(xz + slope_velocity, delta)
-	elif xz.length_squared() > pow(slide_velocity_cutoff, 2):
 		head_bob.disable()
-		# Sliding on ground
-		xz = xz.lerp(Vector2.ZERO, slide_friction * delta)
-	else:
-		head_bob.enable()
-		# Crouching
-		var input_vector = Vector2(input["right"] - input["left"], input["down"] - input["up"]).normalized()
+		var slope_angle = acos(-floor_normal.y)
+		_cb.velocity += down_slope_vector * delta * 10
+		DebugDraw3D.draw_line(_cb.global_position, _cb.global_position + _cb.velocity, Color(1, 0, 0))
+		DebugDraw3D.draw_line(_cb.global_position, _cb.global_position + down_slope_vector, Color(0, 1, 0))
+		_apply_friction(slide_friction, delta)
+		#force_slide = true
+		# TEMPORARY
+		#_cb.floor_snap_length = _cb.velocity.length() / 10
+		#print(_cb.floor_snap_length)
 		
-		if input_vector == Vector2.ZERO:
-			xz = xz.lerp(Vector2.ZERO, crouch_friction * delta)
-		else:
-			input_vector = input_vector.normalized().rotated(-character_body.rotation.y)
-			xz = xz.lerp(input_vector * crouch_speed, crouch_acceleration * delta)
+	elif _cb.velocity.length_squared() > pow(slide_velocity_cutoff, 2):
+		# Slide
+		head_bob.disable()
+		_apply_friction(slide_friction, delta)
+		snap = true
+	else:
+		# Move
+		head_bob.enable()
+		_apply_acceleration(max_crouch_speed, crouch_acceleration, delta)
+		_apply_friction(crouch_friction, delta)
 	
-	
-	character_body.velocity.x = xz.x
-	character_body.velocity.z = xz.y
-	
-	character_body.move_and_slide()
+	#var temp = Vector3.ZERO
+	#if force_slide:
+		#temp = _cb.velocity.y
+	_cb.move_and_slide()
+	#if force_slide:
+		#_cb.velocity.y = temp
+	if snap:
+		_cb.apply_floor_snap()
 
 func _process(delta):
 	if active:

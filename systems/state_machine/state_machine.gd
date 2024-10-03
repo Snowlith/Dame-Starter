@@ -24,8 +24,8 @@ signal state_changed
 # DICTIONARY MERGE
 
 func _ready():
-	print("started state machine")
 	states = find_children("", "State")
+	print(states)
 	states.sort_custom(sort_priority)
 	_create_input_state_map()
 	
@@ -56,7 +56,6 @@ func _unhandled_key_input(event):
 				state.input_changed.emit(action, result)
 
 func _physics_process(delta):
-	print("physics running")
 	_update_states(delta)
 
 func sort_priority(a: State, b: State):

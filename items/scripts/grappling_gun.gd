@@ -28,7 +28,7 @@ func shoot():
 		return
 	
 	swing_state.detach()
-	var exclude = swing_state.character_body.get_rid()
+	var exclude = swing_state._cb.get_rid()
 	var space_state = get_world_3d().get_direct_space_state()
 	var cam = get_viewport().get_camera_3d()
 	

@@ -30,20 +30,20 @@ func _leniency_over():
 	_is_input_queued = false
 	
 func is_active():
-	if (character_body.is_on_floor() or _time_since_left_ground < coyote_time) and _is_input_queued:
+	if (_cb.is_on_floor() or _time_since_left_ground < coyote_time) and _is_input_queued:
 		return true
 	return false
 
 func _physics_process(delta):
-	if character_body.is_on_floor():
+	if _cb.is_on_floor():
 		_time_since_left_ground = 0
 	else:
 		_time_since_left_ground += delta
 
 func handle(delta: float):
-	character_body.velocity.y = strength
+	_cb.velocity.y = strength
 	
 	_time_since_left_ground = 100
-	character_body.move_and_slide()
+	_cb.move_and_slide()
 	input["jump"] = 0
 	_is_input_queued = false

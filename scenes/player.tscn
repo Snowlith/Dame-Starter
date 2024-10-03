@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=30 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
+[ext_resource type="Script" path="res://scenes/speed_shower.gd" id="2_2rckd"]
 [ext_resource type="Script" path="res://systems/fps_camera/fps_camera.gd" id="2_kaij3"]
 [ext_resource type="Script" path="res://systems/interaction/interactor.gd" id="3_ca87e"]
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
@@ -43,7 +44,16 @@ process_priority = 1
 script = ExtResource("1_60qo2")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-floor_snap_length = 0.5
+floor_constant_speed = true
+floor_block_on_wall = false
+floor_snap_length = 0.25
+script = ExtResource("2_2rckd")
+
+[node name="Label" type="Label" parent="CharacterBody3D"]
+offset_left = 2.63
+offset_top = 111.04
+offset_right = 42.63
+offset_bottom = 134.04
 
 [node name="FPSCamera" type="Camera3D" parent="CharacterBody3D" node_paths=PackedStringArray("nodes_with_camera_offset")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
@@ -104,8 +114,6 @@ default_state = NodePath("WalkState")
 
 [node name="WalkState" type="Node" parent="StateMachine"]
 script = ExtResource("18_ql2pa")
-speed = 9.0
-friction = 14.0
 
 [node name="CrouchState" type="Node" parent="StateMachine" node_paths=PackedStringArray("stand_collider", "crouch_collider", "shape_cast", "head_bob")]
 script = ExtResource("19_jp43y")
@@ -117,11 +125,12 @@ priority = 1
 
 [node name="AirState" type="Node" parent="StateMachine"]
 script = ExtResource("19_d37tt")
+gravity = -25.0
 priority = 2
 
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("21_c7cuh")
-strength = 10.0
+strength = 9.0
 priority = 3
 
 [node name="LadderState" type="Node" parent="StateMachine"]
@@ -142,6 +151,7 @@ layout_mode = 2
 [node name="HeadBob" type="Node" parent="." node_paths=PackedStringArray("character_body")]
 script = ExtResource("24_46ms5")
 character_body = NodePath("../CharacterBody3D")
+frequency = Vector2(1, 2)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_1205x")

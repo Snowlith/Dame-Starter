@@ -26,8 +26,8 @@ func _init():
 	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0, "jump": 0}
 
 func handle(delta: float):
-	var y = character_body.velocity.y
-	var xz = Vector2(character_body.velocity.x, character_body.velocity.z)
+	var y = _cb.velocity.y
+	var xz = Vector2(_cb.velocity.x, _cb.velocity.z)
 	var climb_direction = input["jump"] - input["crouch"]
 	var input_vector = Vector2(input["right"] - input["left"], input["down"] - input["up"])
 	
@@ -36,20 +36,20 @@ func handle(delta: float):
 		xz = xz.lerp(Vector2.ZERO, exit_friction * delta)
 	else:
 		
-		input_vector = input_vector.normalized().rotated(-character_body.rotation.y)
+		input_vector = input_vector.normalized().rotated(-_cb.rotation.y)
 		xz = xz.lerp(input_vector * exit_speed, exit_velocity * delta)
 		y = lerp(y, climb_direction * climb_speed, climb_acceleration * delta)
 	
 	
-	character_body.velocity.x = xz.x
-	character_body.velocity.y = y
-	character_body.velocity.z = xz.y
-	character_body.move_and_slide()
+	_cb.velocity.x = xz.x
+	_cb.velocity.y = y
+	_cb.velocity.z = xz.y
+	_cb.move_and_slide()
 
 func _process(delta):
 	if active:
 		# Increase the timer by delta to create continuous bobbing
-		_bob_time += delta * character_body.velocity.y
+		_bob_time += delta * _cb.velocity.y
 		
 		# Calculate the offset based on a sine wave for smooth bobbing
 		camera_offset.y = sin(_bob_time * climb_bob_frequency) * climb_bob_amplitude

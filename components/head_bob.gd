@@ -3,11 +3,8 @@ class_name HeadBob
 
 @export var character_body: CharacterBody3D
 
-@export var x_bob_frequency: float = 1.2
-@export var x_bob_amplitude: float = 0.08
-
-@export var y_bob_frequency: float = 2.4
-@export var y_bob_amplitude: float = 0.08
+@export var frequency := Vector2(1.2, 2.4)
+@export var amplitude := Vector2(0.08, 0.08)
 
 var camera_offset: Vector3
 var _bob_time: float = 0
@@ -32,8 +29,8 @@ func _process(delta: float) -> void:
 func _get_bob_at_t(t: float) -> Vector3:
 	var bob = Vector3.ZERO
 	
-	bob.x = cos(t * x_bob_frequency) * x_bob_amplitude
-	bob.y = cos(t * y_bob_frequency) * y_bob_amplitude
+	bob.x = cos(t * frequency.x) * amplitude.x
+	bob.y = cos(t * frequency.y) * amplitude.y
 	return bob
 	
 func disable():
