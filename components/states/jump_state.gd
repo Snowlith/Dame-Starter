@@ -41,7 +41,8 @@ func _physics_process(delta):
 		_time_since_left_ground += delta
 
 func handle(delta: float):
-	_cb.velocity.y = strength
+	if _cb.velocity.y < strength:
+		_cb.velocity.y = strength
 	
 	_time_since_left_ground = 100
 	_cb.move_and_slide()

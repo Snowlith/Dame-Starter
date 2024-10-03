@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=24 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="2_ooxqo"]
@@ -13,6 +13,7 @@
 [ext_resource type="Material" uid="uid://kesteoy7q4xa" path="res://assets/materials/gold.tres" id="9_y2fmi"]
 [ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/interactable/jump_pad.tscn" id="12_mcq7p"]
 [ext_resource type="PackedScene" uid="uid://cwu48ccfvyfcr" path="res://scenes/interactable/ladder.tscn" id="13_31seh"]
+[ext_resource type="PackedScene" uid="uid://cj5vh5r0v3252" path="res://scenes/interactable/speed_area.tscn" id="14_58801"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_01ou0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -596,10 +597,10 @@ use_collision = true
 size = Vector3(1.5, 2, 2)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6912, -1, 66.184)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.3822, -1, 85.1855)
 material_override = ExtResource("1_8ak7p")
 use_collision = true
-size = Vector3(186.382, 2, 90.9969)
+size = Vector3(193, 2, 129)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 5.5, 47.0476)
@@ -655,11 +656,53 @@ use_collision = true
 size = Vector3(15, 5, 6.5)
 material = ExtResource("4_toucd")
 
+[node name="CSGBox3D89" type="CSGBox3D" parent="."]
+transform = Transform3D(-3.83171e-08, -2.10354e-08, -1, -0.481234, 0.876592, 0, 0.876592, 0.481234, -4.37114e-08, 17.1945, 1.45937, 54.6519)
+material_override = ExtResource("4_toucd")
+use_collision = true
+size = Vector3(10, 1.5, 7)
+material = ExtResource("4_toucd")
+
+[node name="CSGBox3D90" type="CSGBox3D" parent="."]
+transform = Transform3D(-3.83171e-08, -2.10354e-08, -1, -0.691715, 0.72217, 1.13133e-08, 0.72217, 0.691715, -4.2222e-08, 10.1945, 2.45937, 55.1519)
+material_override = ExtResource("4_toucd")
+use_collision = true
+size = Vector3(10, 1.5, 7)
+material = ExtResource("4_toucd")
+
+[node name="CSGBox3D91" type="CSGBox3D" parent="."]
+transform = Transform3D(-3.83171e-08, -2.10354e-08, -1, -0.855057, 0.518534, 2.18557e-08, 0.518534, 0.855057, -3.78552e-08, 3.1945, 3.45937, 55.6519)
+material_override = ExtResource("4_toucd")
+use_collision = true
+size = Vector3(10, 1.5, 7)
+material = ExtResource("4_toucd")
+
+[node name="CSGBox3D92" type="CSGBox3D" parent="."]
+transform = Transform3D(-3.83171e-08, -2.10354e-08, -1, -0.960128, 0.27956, 3.09086e-08, 0.27956, 0.960128, -3.09086e-08, -3.8055, 3.45937, 56.6519)
+material_override = ExtResource("4_toucd")
+use_collision = true
+size = Vector3(10, 1.5, 7)
+material = ExtResource("4_toucd")
+
 [node name="CSGBox3D84" type="CSGBox3D" parent="."]
 transform = Transform3D(0.777958, 0.628316, 0, -0.628316, 0.777958, 0, 0, 0, 1, -12.5959, 10.9086, 87.4356)
 material_override = ExtResource("4_toucd")
 use_collision = true
 size = Vector3(39.6299, 2.87708, 20.0909)
+material = ExtResource("4_toucd")
+
+[node name="CSGBox3D93" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.777958, -0.628316, -8.74228e-08, -0.628316, 0.777958, 3.55271e-15, 6.80112e-08, 5.49291e-08, -1, 66.3795, 3.42755, 127.436)
+material_override = ExtResource("4_toucd")
+use_collision = true
+size = Vector3(19, 2.87708, 20.0909)
+material = ExtResource("4_toucd")
+
+[node name="CSGBox3D94" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.777958, -0.628316, -8.74228e-08, -0.628316, 0.777958, 3.55271e-15, 6.80112e-08, 5.49291e-08, -1, 29.3787, 1.60013, 115.981)
+material_override = ExtResource("4_toucd")
+use_collision = true
+size = Vector3(10, 2.87708, 5)
 material = ExtResource("4_toucd")
 
 [node name="CSGBox3D82" type="CSGBox3D" parent="."]
@@ -830,3 +873,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.3012, 1.37411, 50.9655)
 
 [node name="Ladder2" parent="." instance=ExtResource("13_31seh")]
 transform = Transform3D(-4.3429e-08, -0.113481, 0.99354, 0.123809, 0.985896, 0.112608, -0.992306, 0.12301, 0.0140499, 26.5863, 8.26607, 29.9631)
+
+[node name="SpeedArea" parent="." instance=ExtResource("14_58801")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5936, -1.66885, 115.918)

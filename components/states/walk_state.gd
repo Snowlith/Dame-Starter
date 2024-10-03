@@ -20,5 +20,7 @@ func handle(delta: float):
 	_apply_acceleration(max_speed, acceleration, delta)
 	_apply_friction(friction, delta)
 	_cb.move_and_slide()
+	if _cb.velocity.y > 0:
+		_cb.apply_floor_snap()
 	#if _cb.is_on_wall():
 		#clip_velocity(_cb.get_wall_normal(), 1, delta)

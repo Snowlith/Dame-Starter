@@ -45,7 +45,6 @@ script = ExtResource("1_60qo2")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 floor_constant_speed = true
-floor_block_on_wall = false
 floor_snap_length = 0.25
 script = ExtResource("2_2rckd")
 
@@ -135,6 +134,8 @@ priority = 3
 
 [node name="LadderState" type="Node" parent="StateMachine"]
 script = ExtResource("22_6s06b")
+climb_bob_frequency = 0.0
+climb_bob_amplitude = 0.0
 priority = 4
 
 [node name="SwingState" type="Node" parent="StateMachine"]

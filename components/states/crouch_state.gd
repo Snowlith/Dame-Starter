@@ -7,6 +7,7 @@ class_name CrouchState
 
 @export var slide_friction: float = 3
 @export var slide_velocity_cutoff: float = 5
+@export var slide_minimum_angle: float = 15
 
 @export var stand_collider: CollisionShape3D
 @export var crouch_collider: CollisionShape3D
@@ -55,17 +56,36 @@ func handle(delta: float):
 	#var force_slide: bool = false
 	
 	var floor_normal = _cb.get_floor_normal()
+	var floor_angle = _cb.get_floor_angle()
 	var down_slope_vector = (Vector3.DOWN - floor_normal * Vector3.DOWN.dot(floor_normal)).normalized()
 	
 	# TODO: Modify snap length based on speed!!!
 	
-	if _cb.velocity.dot(down_slope_vector) > 0:
+	var exclude = _cb.get_rid()
+	var space_state = _cb.get_world_3d().get_direct_space_state()
+	
+	var from = _cb.global_position
+	var to = from + Vector3(_cb.velocity.x, 0, _cb.velocity.z).normalized() * 1
+	
+	DebugDraw3D.draw_line(from, to, Color(0, 0, 1))
+	var ray_params = PhysicsRayQueryParameters3D.create(from, to)
+	var rid_array: Array[RID]
+	rid_array.append(exclude)
+	ray_params.exclude = rid_array
+	
+	var ray = space_state.intersect_ray(ray_params)
+	
+	
+	if ray.has("collider"):
+		print(ray["collider"])
+	
+	if _cb.velocity.dot(down_slope_vector) > 0.25 and floor_angle > deg_to_rad(slide_minimum_angle):
 		# Slide down slope
 		head_bob.disable()
 		var slope_angle = acos(-floor_normal.y)
 		_cb.velocity += down_slope_vector * delta * 10
-		DebugDraw3D.draw_line(_cb.global_position, _cb.global_position + _cb.velocity, Color(1, 0, 0))
-		DebugDraw3D.draw_line(_cb.global_position, _cb.global_position + down_slope_vector, Color(0, 1, 0))
+		#DebugDraw3D.draw_line(_cb.global_position, _cb.global_position + _cb.velocity, Color(1, 0, 0))
+		#DebugDraw3D.draw_line(_cb.global_position, _cb.global_position + down_slope_vector, Color(0, 1, 0))
 		_apply_friction(slide_friction, delta)
 		#force_slide = true
 		# TEMPORARY
@@ -76,6 +96,8 @@ func handle(delta: float):
 		# Slide
 		head_bob.disable()
 		_apply_friction(slide_friction, delta)
+		#if ray.has("collider"):
+			#snap = true
 		snap = true
 	else:
 		# Move
