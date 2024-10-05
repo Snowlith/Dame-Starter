@@ -70,7 +70,7 @@ func collect(item: Item, use_animation: bool = true):
 	if can_insert(item, item.stack_size):
 		if use_animation:
 			await item.play_collect()
-		# some kind of bug here
+		### BUG: invalid removal condition, rare
 		item.get_parent().remove_child(item)
 		insert(item, item.stack_size)
 		item.queue_free()

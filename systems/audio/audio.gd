@@ -1,22 +1,16 @@
 extends Node
 
-@onready var tree := get_tree() # Gets the slightest of performance improvements by caching the SceneTree
+@onready var tree := get_tree()
 
-var _is_ready = false
-
-func _enter_tree():
-	_is_ready = true
-	
 func _play_sound(sound: AudioStream, player, autoplay := true):
-	if not sound or not _is_ready:
+	if not sound:
 		return
-	# THIS IS BAD
-	if not tree.current_scene:
+	if not is_node_ready():
 		return
+		
 	player.stream = sound
 	player.autoplay = autoplay
 	player.finished.connect(func(): player.queue_free())
-	# BREAKS WHEN CALLING BEFORE READY
 	tree.current_scene.call_deferred("add_child", player)
 	return player
 

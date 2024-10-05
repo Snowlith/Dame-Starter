@@ -124,14 +124,6 @@ shape_cast = NodePath("../../CharacterBody3D/CrouchCollider/ShapeCast3D")
 head_bob = NodePath("../../HeadBob")
 priority = 1
 
-[node name="Label" type="Label" parent="StateMachine/CrouchState"]
-offset_left = 137.875
-offset_top = 81.07
-offset_right = 177.875
-offset_bottom = 104.07
-theme_override_font_sizes/font_size = 30
-text = "vector"
-
 [node name="AirState" type="Node" parent="StateMachine"]
 script = ExtResource("19_d37tt")
 gravity = -25.0

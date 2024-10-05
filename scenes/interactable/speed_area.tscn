@@ -10,10 +10,11 @@ albedo_color = Color(1, 0.55, 0, 0.164706)
 material = SubResource("StandardMaterial3D_rkxkm")
 size = Vector3(5, 5, 5)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fdkwi"]
-data = PackedVector3Array(-2.5, 2.5, 2.5, 2.5, 2.5, 2.5, -2.5, -2.5, 2.5, 2.5, 2.5, 2.5, 2.5, -2.5, 2.5, -2.5, -2.5, 2.5, 2.5, 2.5, -2.5, -2.5, 2.5, -2.5, 2.5, -2.5, -2.5, -2.5, 2.5, -2.5, -2.5, -2.5, -2.5, 2.5, -2.5, -2.5, 2.5, 2.5, 2.5, 2.5, 2.5, -2.5, 2.5, -2.5, 2.5, 2.5, 2.5, -2.5, 2.5, -2.5, -2.5, 2.5, -2.5, 2.5, -2.5, 2.5, -2.5, -2.5, 2.5, 2.5, -2.5, -2.5, -2.5, -2.5, 2.5, 2.5, -2.5, -2.5, 2.5, -2.5, -2.5, -2.5, 2.5, 2.5, 2.5, -2.5, 2.5, 2.5, 2.5, 2.5, -2.5, -2.5, 2.5, 2.5, -2.5, 2.5, -2.5, 2.5, 2.5, -2.5, -2.5, -2.5, 2.5, 2.5, -2.5, 2.5, -2.5, -2.5, -2.5, 2.5, -2.5, 2.5, 2.5, -2.5, -2.5, -2.5, -2.5, -2.5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_7x3nm"]
+size = Vector3(5, 5, 5)
 
 [node name="SpeedArea" type="Area3D"]
+monitorable = false
 script = ExtResource("1_b2joa")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -22,4 +23,4 @@ mesh = SubResource("BoxMesh_eq5vd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-shape = SubResource("ConcavePolygonShape3D_fdkwi")
+shape = SubResource("BoxShape3D_7x3nm")

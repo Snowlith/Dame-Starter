@@ -16,10 +16,12 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("inspect"):
 		play_inspect()
 
+# HACK: should write this better
 func _physics_process(delta):
-	if Input.is_action_pressed("primary attack"):
-		_ensure_state()
-		swing_state.reel(reel_speed * delta)
+	if is_equipped:
+		if Input.is_action_pressed("primary attack"):
+			_ensure_state()
+			swing_state.reel(reel_speed * delta)
 
 func primary_attack():
 	anim_player.play("fire")
