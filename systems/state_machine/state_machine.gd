@@ -79,6 +79,8 @@ func _update_states(delta):
 			state_changed.emit()
 	
 	selected_state.handle(delta)
+	#print(selected_state)
+	#print(selected_state._cb.velocity.x)
 	
 	_update_label(active_states)
 

@@ -1,7 +1,10 @@
 extends Item
 
 @export var shoot_sound: AudioStream
+@export var reel_speed: float = 10
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+
+var swing_state: SwingState
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion or event.is_echo():
@@ -13,6 +16,11 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("inspect"):
 		play_inspect()
 
+func _physics_process(delta):
+	if Input.is_action_pressed("primary attack"):
+		_ensure_state()
+		swing_state.reel(reel_speed * delta)
+
 func primary_attack():
 	anim_player.play("fire")
 	Audio.play_sound(shoot_sound)
@@ -21,14 +29,15 @@ func primary_attack():
 func reload():
 	anim_player.play("reload")
 
+func _ensure_state():
+	if not swing_state:
+		swing_state = _user.get_component("SwingState")
+
 func shoot():
 	# TODO: make signals for enter and exit hand
-	var swing_state = _user.get_component("SwingState")
-	if not swing_state:
-		return
+	_ensure_state()
 	
-	swing_state.detach()
-	var exclude = swing_state._cb.get_rid()
+	var exclude = _user.physics_body.get_rid()
 	var space_state = get_world_3d().get_direct_space_state()
 	var cam = get_viewport().get_camera_3d()
 	
@@ -42,6 +51,7 @@ func shoot():
 	
 	var ray = space_state.intersect_ray(ray_params)
 	if ray.has("position"):
+		swing_state.detach()
 		swing_state.attach(ray["position"])
 
 		

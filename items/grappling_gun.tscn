@@ -118,6 +118,7 @@ _data = {
 [node name="GrapplingGun" instance=ExtResource("1_xhybg")]
 script = ExtResource("2_lowxy")
 shoot_sound = null
+reel_speed = 10.0
 view_name = "Grappling Gun"
 view_description = "Centripetal force
 "

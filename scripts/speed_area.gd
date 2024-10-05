@@ -5,5 +5,6 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node3D) -> void:
+	print("entered")
 	if body is CharacterBody3D:
-		body.velocity.x = 20
+		body.velocity.x += 15

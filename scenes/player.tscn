@@ -45,6 +45,7 @@ script = ExtResource("1_60qo2")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 floor_constant_speed = true
+floor_max_angle = 0.872665
 floor_snap_length = 0.25
 script = ExtResource("2_2rckd")
 
@@ -116,11 +117,20 @@ script = ExtResource("18_ql2pa")
 
 [node name="CrouchState" type="Node" parent="StateMachine" node_paths=PackedStringArray("stand_collider", "crouch_collider", "shape_cast", "head_bob")]
 script = ExtResource("19_jp43y")
+slide_friction = 4.0
 stand_collider = NodePath("../../CharacterBody3D/StandCollider")
 crouch_collider = NodePath("../../CharacterBody3D/CrouchCollider")
 shape_cast = NodePath("../../CharacterBody3D/CrouchCollider/ShapeCast3D")
 head_bob = NodePath("../../HeadBob")
 priority = 1
+
+[node name="Label" type="Label" parent="StateMachine/CrouchState"]
+offset_left = 137.875
+offset_top = 81.07
+offset_right = 177.875
+offset_bottom = 104.07
+theme_override_font_sizes/font_size = 30
+text = "vector"
 
 [node name="AirState" type="Node" parent="StateMachine"]
 script = ExtResource("19_d37tt")
@@ -134,6 +144,7 @@ priority = 3
 
 [node name="LadderState" type="Node" parent="StateMachine"]
 script = ExtResource("22_6s06b")
+climb_acceleration = 10.0
 climb_bob_frequency = 0.0
 climb_bob_amplitude = 0.0
 priority = 4
@@ -153,6 +164,7 @@ layout_mode = 2
 script = ExtResource("24_46ms5")
 character_body = NodePath("../CharacterBody3D")
 frequency = Vector2(1, 2)
+amplitude = Vector2(0.04, 0.08)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_1205x")

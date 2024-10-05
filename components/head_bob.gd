@@ -29,8 +29,8 @@ func _process(delta: float) -> void:
 func _get_bob_at_t(t: float) -> Vector3:
 	var bob = Vector3.ZERO
 	
-	bob.x = cos(t * frequency.x) * amplitude.x
-	bob.y = cos(t * frequency.y) * amplitude.y
+	bob.x = sin(t * frequency.x) * amplitude.x
+	bob.y = sin(t * frequency.y) * amplitude.y
 	return bob
 	
 func disable():
