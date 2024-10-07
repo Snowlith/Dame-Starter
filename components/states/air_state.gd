@@ -8,8 +8,10 @@ class_name AirState
 func _init():
 	input = {"left": 0, "right": 0, "up": 0, "down": 0}
 
-func is_active():
-	return not _cb.is_on_floor()
+func update_status(delta: float):
+	if not _cb.is_on_floor():
+		return Status.ACTIVE
+	return Status.INACTIVE
 
 func handle(delta: float):
 	_apply_acceleration(max_speed, acceleration, delta)

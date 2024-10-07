@@ -7,14 +7,17 @@ class_name WalkState
 
 func _init():
 	input = {"left": 0, "right": 0, "up": 0, "down": 0}
-
-func is_active():
-	# or velocity.y > 0
-	return _cb.is_on_floor()
+	
+func update_status(delta: float) -> Status:
+	if _cb.is_on_floor():
+		return Status.ACTIVE
+	return Status.INACTIVE
 
 #func clip_velocity(normal: Vector3, overbounce: float, delta: float) -> void:
 	#var correction_amount = _cb.velocity.normalized().dot(normal) * overbounce
 	#_cb.velocity -= correction_amount * normal
+
+# BUG: walk state does not have snap length adjustment
 
 func handle(delta: float):
 	_apply_acceleration(max_speed, acceleration, delta)

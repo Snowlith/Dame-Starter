@@ -1,26 +1,24 @@
 extends Component
 class_name State
 
-@export var priority: int
-var _cb: CharacterBody3D
+@export var disabled: bool = false
+
+@onready var _cb: CharacterBody3D = get_parent_entity().physics_body
+
+enum Status {INACTIVE, ACTIVE, FORCED, ACTIVE_FORCED}
 
 signal input_changed(action: String, value: int)
 
 var input: Dictionary
 
-func _ready():
-	var cbs = get_parent_entity().find_children("", "CharacterBody3D")
-	assert(not cbs.is_empty())
-	_cb = cbs[0]
-
-func is_active():
-	return true
-
-func enter():
+func enter() -> void:
 	pass
 
-func exit() -> bool:
-	return true
+func exit() -> void:
+	pass
 
-func handle(delta: float):
+func update_status(delta: float) -> Status:
+	return Status.INACTIVE
+
+func handle(delta: float) -> void:
 	pass

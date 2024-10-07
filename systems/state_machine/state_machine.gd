@@ -1,7 +1,7 @@
 extends Component
 class_name StateMachine
 
-@export var default_state: State
+@export_enum("First child is highest priority:0", "First child is lowest priority:1") var state_priority_order: int = 1
 
 var states: Array = []
 var selected_state: State
@@ -11,29 +11,20 @@ var _input_state_map: Dictionary
 
 signal state_changed
 
-# TODO: remove priority system, do in node order
+# BUG: slide is forced when under an obstacle even though the crouch is more valid
+# This is because slide has a higher priority than the crouch
+# Slide does not want to be active, just has to because there is an object above it
+# Crouch wants to be active but is a lower priority
+# Crouch should be selected
 
-# BIND METHOD FOR Signals
-# TODO: put all input events passed in as a dictionary from the state machine
-# * Could either run a custom event bus each time an event is received
-# * Or could combine is_active and input methods to create a more uniform update bool
-
-# TODO: inherit a player movement specific state machine
-# TODO: add a data class for persistent info across states
-
-# DICTIONARY MERGE
+# Return two values with exit (active, forced)
+# Use these to determine it
 
 func _ready():
 	states = find_children("", "State")
-	print(states)
-	states.sort_custom(sort_priority)
+	if state_priority_order:
+		states.reverse()
 	_create_input_state_map()
-	
-	selected_state = default_state
-	default_state.enter()
-	state_changed.emit()
-	
-	#state_changed.connect(func(): print("state: " + str(selected_state)))
 
 func _create_input_state_map():
 	_input_state_map.clear()
@@ -44,7 +35,7 @@ func _create_input_state_map():
 			else:
 				_input_state_map[action] = [state]
 
-# CANT BE KEY INPUT FOR MOUSE STUFF
+# For mouse input, use a different method
 func _unhandled_key_input(event):
 	if event.is_echo():
 		return
@@ -58,31 +49,33 @@ func _unhandled_key_input(event):
 func _physics_process(delta):
 	_update_states(delta)
 
-func sort_priority(a: State, b: State):
-	return a.priority > b.priority
-
 func _update_states(delta):
-	var active_states = []
+	var state_priority = []
 	
 	for state in states:
-		if state.is_active():
-			active_states.append(state)
+		if state.disabled:
+			continue
+		var status = state.update_status(delta)
+		state_priority.append([state, status])
 	
-	if active_states.is_empty():
+	state_priority.sort_custom(_compare_status)
+	
+	if state_priority.is_empty():
 		return
-	var new_state = active_states[0]
+	var new_state = state_priority[0][0]
 	if selected_state != new_state:
-		# try exiting state
-		if not selected_state or selected_state.exit():
-			selected_state = new_state
-			selected_state.enter()
-			state_changed.emit()
+		if selected_state:
+			selected_state.exit()
+		selected_state = new_state
+		selected_state.enter()
+		state_changed.emit()
 	
 	selected_state.handle(delta)
-	#print(selected_state)
-	#print(selected_state._cb.velocity.x)
 	
-	_update_label(active_states)
+	_update_label(state_priority)
+
+func _compare_status(a: Array, b: Array):
+	return a[1] > b[1]
 
 func _update_label(active_states):
 	var text = ""

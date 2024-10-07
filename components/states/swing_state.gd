@@ -26,7 +26,6 @@ var swing_point: Vector3
 var swing_distance: float
 
 func _ready():
-	super()
 	input_changed.connect(_on_input_changed)
 
 func _on_input_changed(action: String, value: int):
@@ -74,10 +73,20 @@ func handle(delta: float):
 	
 	_cb.move_and_slide()
 
-func is_active():
+func update_status(delta: float):
+	#if _cb.position.distance_squared_to(swing_point) > pow(swing_distance, 2):
+		#return active
+	#return not _cb.is_on_floor() and active
+	#
 	if _cb.position.distance_squared_to(swing_point) > pow(swing_distance, 2):
-		return active
-	return not _cb.is_on_floor() and active
+		if active:
+			return Status.ACTIVE
+		else:
+			return Status.INACTIVE
+	if not _cb.is_on_floor() and active:
+		return Status.ACTIVE
+	return Status.INACTIVE
+
 
 func attach(pos):
 	active = true

@@ -14,6 +14,7 @@ var disabled_actions: Array[String] = ["jump", "crouch", "sprint", "left", "righ
 # TODO: instead of can_insert, return amount that can be inserted, or just see how many were inserted
 # TODO: add collect notification
 # TODO: adding items through editor -> make slots export item
+# TODO: bind method when using slot methods
 
 var is_open = true:
 	set(value):

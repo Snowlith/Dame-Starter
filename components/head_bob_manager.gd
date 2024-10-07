@@ -1,10 +1,10 @@
 extends Component
-class_name HeadBob
+class_name HeadBobManager
 
-@export var character_body: CharacterBody3D
+@onready var character_body: CharacterBody3D = get_parent_entity().physics_body
 
-@export var frequency := Vector2(1.2, 2.4)
-@export var amplitude := Vector2(0.08, 0.08)
+@export var frequency := Vector2(1, 2)
+@export var amplitude := Vector2(0.04, 0.08)
 
 var camera_offset: Vector3
 var _bob_time: float = 0

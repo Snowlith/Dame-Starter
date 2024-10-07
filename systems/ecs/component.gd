@@ -1,10 +1,10 @@
 extends Node
 class_name Component
 
-func get_parent_entity():
+func get_parent_entity() -> Entity:
 	return _get_parent_entity_rec(self)
 	
-func _get_parent_entity_rec(node):
+func _get_parent_entity_rec(node) -> Entity:
 	if node is Entity:
 		return node
 	if not node.get_parent():

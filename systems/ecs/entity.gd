@@ -1,16 +1,13 @@
 extends Node3D
 class_name Entity
 
+@export var physics_body: PhysicsBody3D
 var components: Dictionary
-var physics_body: PhysicsBody3D
 
 func _ready():
 	for c in find_children("", "Component"):
 		components[_get_component_name(c)] = c
-	var bodies = find_children("", "PhysicsBody3D")
-	if not bodies.is_empty():
-		physics_body = bodies[0]
-		physics_body.top_level = true
+	physics_body.top_level = true
 
 func get_component(c_name: String) -> Component:
 	if components.has(c_name):

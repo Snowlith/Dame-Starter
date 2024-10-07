@@ -13,7 +13,6 @@ func _init():
 	input = {"jump": 0}
 
 func _ready():
-	super()
 	input_changed.connect(_on_input_changed)
 
 func _on_input_changed(action: String, value: int):
@@ -29,10 +28,10 @@ func _on_input_changed(action: String, value: int):
 func _leniency_over():
 	_is_input_queued = false
 	
-func is_active():
+func update_status(delta: float):
 	if (_cb.is_on_floor() or _time_since_left_ground < coyote_time) and _is_input_queued:
-		return true
-	return false
+		return Status.ACTIVE
+	return Status.INACTIVE
 
 func _physics_process(delta):
 	if _cb.is_on_floor():

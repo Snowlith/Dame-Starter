@@ -21,6 +21,7 @@ var current_ladder: Node3D
 var ladder_normal: Vector2
 
 # make player slide down after a while
+# TODO: rewrite ladder physics with vector3
 
 func _init():
 	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0, "jump": 0}
@@ -58,8 +59,19 @@ func _process(delta):
 		camera_offset.y = lerp(camera_offset.y, 0.0, delta * 10)
 		_bob_time = 0
 
-func is_active():
-	return current_ladder != null
+func update_status(delta: float):
+	#if current_ladder != null:
+		#current_status = Status.ACTIVE
+	#else:
+		#current_status = Status.INACTIVE
+	#return current_status
+	#
+	#current_status = int(current_ladder != null) as Status
+	#return current_status
+	
+	if current_ladder != null:
+		return Status.ACTIVE
+	return Status.INACTIVE
 
 func enter_ladder(ladder, normal):
 	if current_ladder:
