@@ -7,8 +7,6 @@ class_name CrouchState
 
 @export var head_duck: HeadDuckManager
 
-# TODO: make slide higher priority?
-
 var camera_offset: Vector3
 
 func _init():
@@ -22,28 +20,17 @@ func exit():
 	_cb.apply_floor_snap()
 
 func update_status(delta: float) -> Status:
-	var uncrouch_value = int(not head_duck.can_disable())
-	var input_value = int(input["crouch"] or uncrouch_value)
-	return (input_value + uncrouch_value * 2) as Status
-	
-	#var can_uncrouch = head_duck.can_disable()
-	#if head_duck.can_disable():
-		#if input["crouch"]:
-			#return Status.ACTIVE_FORCED
-		#pass
-	#else:
-		#if input["crouch"]:
-			#pass
-		#pass
-	#if input["crouch"] and not head_duck.can_disable():
-		#return Status.ACTIVE_FORCED
-	#if not head_duck.can_disable():
-		#return Status.FORCED
-	#if input["crouch"]:
-		#return Status.ACTIVE  
-	#return Status.INACTIVE
+	if not _cb.is_on_floor():
+		return Status.INACTIVE
+	if head_duck.is_hitting_head():
+		return Status.ACTIVE_FORCED
+	elif input["crouch"]:
+		return Status.ACTIVE
+	return Status.INACTIVE
 
 func handle(delta: float):
 	_apply_acceleration(max_speed, acceleration, delta)
 	_apply_friction(friction, delta)
 	_cb.move_and_slide()
+	if _cb.velocity.y > 0:
+		_cb.apply_floor_snap()

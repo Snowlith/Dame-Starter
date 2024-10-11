@@ -1,7 +1,7 @@
 extends MovementState
 class_name SwingState
 
-@export var gravity: float = -30
+@export var gravity: float = 25
 
 @export var max_speed: float = 5
 @export var acceleration: float = 5
@@ -18,9 +18,7 @@ class_name SwingState
 # TODO:
 # going toward does not work
 # maybe disable correction?
-
-
-var active: bool = false
+var _is_attached: bool = false
 
 var swing_point: Vector3
 var swing_distance: float
@@ -34,7 +32,7 @@ func _on_input_changed(action: String, value: int):
 			detach()
 
 func _process(delta):
-	if active:
+	if _is_attached:
 		DebugDraw3D.draw_line(swing_point, _cb.global_transform.origin, Color(0, 0, 0.5))
 		DebugDraw3D.draw_position(Transform3D(Basis.IDENTITY, swing_point), Color(0, 1, 0))
 
@@ -47,7 +45,7 @@ func reel(distance: float):
 func handle(delta: float):
 	_apply_acceleration(max_speed, acceleration, delta)
 	
-	_cb.velocity.y += gravity * delta
+	_cb.velocity.y -= gravity * delta
 	
 	# When going away from point, swing
 	# When going toward point, shorten line
@@ -78,21 +76,20 @@ func update_status(delta: float):
 		#return active
 	#return not _cb.is_on_floor() and active
 	#
-	if _cb.position.distance_squared_to(swing_point) > pow(swing_distance, 2):
-		if active:
+	if _is_attached:
+		if _cb.position.distance_squared_to(swing_point) > pow(swing_distance, 2):
 			return Status.ACTIVE
-		else:
-			return Status.INACTIVE
-	if not _cb.is_on_floor() and active:
+			
+	if not _cb.is_on_floor() and _is_attached:
 		return Status.ACTIVE
 	return Status.INACTIVE
 
 
 func attach(pos):
-	active = true
+	_is_attached = true
 	swing_point = pos
 
 func detach():
-	active = false
+	_is_attached = false
 	swing_point = Vector3.ZERO
 	swing_distance = 0

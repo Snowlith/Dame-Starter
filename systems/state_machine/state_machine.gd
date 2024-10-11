@@ -11,15 +11,6 @@ var _input_state_map: Dictionary
 
 signal state_changed
 
-# BUG: slide is forced when under an obstacle even though the crouch is more valid
-# This is because slide has a higher priority than the crouch
-# Slide does not want to be active, just has to because there is an object above it
-# Crouch wants to be active but is a lower priority
-# Crouch should be selected
-
-# Return two values with exit (active, forced)
-# Use these to determine it
-
 func _ready():
 	states = find_children("", "State")
 	if state_priority_order:
@@ -47,9 +38,6 @@ func _unhandled_key_input(event):
 				state.input_changed.emit(action, result)
 
 func _physics_process(delta):
-	_update_states(delta)
-
-func _update_states(delta):
 	var state_priority = []
 	
 	for state in states:
@@ -69,6 +57,7 @@ func _update_states(delta):
 		selected_state = new_state
 		selected_state.enter()
 		state_changed.emit()
+		#print(selected_state)
 	
 	selected_state.handle(delta)
 	

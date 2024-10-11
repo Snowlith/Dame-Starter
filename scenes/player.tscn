@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=33 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
 [ext_resource type="Script" path="res://scenes/speed_shower.gd" id="2_2rckd"]
@@ -12,6 +12,7 @@
 [ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="12_3y40k"]
 [ext_resource type="Script" path="res://systems/inventory/slot/drop_slot.gd" id="13_65181"]
 [ext_resource type="Script" path="res://components/head_duck_manager.gd" id="14_eheid"]
+[ext_resource type="Script" path="res://components/states/water_state.gd" id="14_kihxp"]
 [ext_resource type="Texture2D" uid="uid://bgw8e1hralkgb" path="res://assets/textures/inventory_bg.png" id="14_kx0bo"]
 [ext_resource type="PackedScene" uid="uid://cu4a3g4md3w4a" path="res://systems/inventory/slot/standard_slot.tscn" id="15_dqtlo"]
 [ext_resource type="PackedScene" uid="uid://b1sahxvjtxvne" path="res://systems/inventory/ui/hover_menu.tscn" id="16_caq03"]
@@ -108,10 +109,12 @@ shape = SubResource("CapsuleShape3D_fp5m6")
 [node name="ShapeCast3D" type="ShapeCast3D" parent="CharacterBody3D/CrouchCollider"]
 shape = SubResource("SphereShape3D_be8k7")
 target_position = Vector3(0, 0.9, 0)
+max_results = 1
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_6nc5s")
 
@@ -127,12 +130,12 @@ head_duck = NodePath("../../HeadDuckManager")
 
 [node name="SlideState" type="Node" parent="StateMachine" node_paths=PackedStringArray("head_bob", "head_duck")]
 script = ExtResource("9_aa3x5")
+slope_minimum_angle = 15.5
 head_bob = NodePath("../../HeadBobManager")
 head_duck = NodePath("../../HeadDuckManager")
 
 [node name="AirState" type="Node" parent="StateMachine"]
 script = ExtResource("19_d37tt")
-gravity = -25.0
 
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("21_c7cuh")
@@ -140,12 +143,18 @@ strength = 9.0
 
 [node name="LadderState" type="Node" parent="StateMachine"]
 script = ExtResource("22_6s06b")
+acceleration = 10.0
+friction = 7.0
+climb_max_speed = 6.0
 climb_acceleration = 10.0
-climb_bob_frequency = 0.0
-climb_bob_amplitude = 0.0
 
 [node name="SwingState" type="Node" parent="StateMachine"]
 script = ExtResource("23_tcx4j")
+
+[node name="WaterState" type="Node" parent="StateMachine"]
+script = ExtResource("14_kihxp")
+max_speed = 12.0
+friction = 2.0
 
 [node name="PanelContainer" type="PanelContainer" parent="StateMachine"]
 offset_right = 40.0
@@ -162,6 +171,7 @@ script = ExtResource("14_eheid")
 stand_collider = NodePath("../CharacterBody3D/StandCollider")
 crouch_collider = NodePath("../CharacterBody3D/CrouchCollider")
 shape_cast = NodePath("../CharacterBody3D/CrouchCollider/ShapeCast3D")
+y_offset_change_speed = 8.0
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_1205x")

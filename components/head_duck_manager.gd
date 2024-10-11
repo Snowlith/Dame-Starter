@@ -8,11 +8,13 @@ class_name HeadDuckManager
 @export var shape_cast: ShapeCast3D
 
 @export var y_offset: float = 0.5
-@export var y_offset_change_speed: float = 10
+@export var y_offset_change_speed: float = 100
 
 var camera_offset: Vector3
 
 var enabled: bool = false
+
+var _epsilon: float = 0.01
 
 # TODO: add many states to transition between
 # Crouch state
@@ -20,13 +22,17 @@ var enabled: bool = false
 
 func _ready():
 	shape_cast.add_exception(character_body)
+	shape_cast.max_results = 1
 	_toggle_colliders()
 
 func _process(delta: float) -> void:
+	var target_offset: float = 0
 	if enabled:
-		camera_offset.y = lerp(camera_offset.y, -y_offset, y_offset_change_speed * delta)
-	else:
-		camera_offset.y = lerp(camera_offset.y, 0.0, y_offset_change_speed * delta)
+		target_offset = -y_offset
+	# Check if value is close enough
+	#if abs(target_offset - camera_offset.y) < _epsilon:
+		#return
+	camera_offset.y = lerp(camera_offset.y, target_offset, y_offset_change_speed * delta)
 
 func _toggle_colliders() -> void:
 	stand_collider.disabled = enabled
@@ -43,5 +49,5 @@ func enable():
 func is_enabled():
 	return enabled
 
-func can_disable():
-	return not(shape_cast and shape_cast.is_colliding())
+func is_hitting_head():
+	return shape_cast and shape_cast.is_colliding()

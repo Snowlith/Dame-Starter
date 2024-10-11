@@ -43,7 +43,7 @@ func _enter_slope(velocity):
 	if velocity.y > 0:
 		return
 	if not _cb.get_floor_angle() > deg_to_rad(slope_minimum_angle):
-		print("too shallow")
+		#print("too shallow")
 		return
 
 	var projected_velocity = velocity.slide(_cb.get_floor_normal())
@@ -60,11 +60,30 @@ func update_status(delta: float) -> Status:
 	_previous_grounded = _current_grounded
 	_current_grounded = _cb.is_on_floor()
 	
-	var is_slope_steep = _cb.get_floor_angle() > deg_to_rad(slope_minimum_angle)
-	var is_velocity_sufficient = _cb.velocity.length_squared() > pow(velocity_cutoff, 2)
-	var input_value = int(input["crouch"] and (is_slope_steep or is_velocity_sufficient))
-	var uncrouch_value = int(not head_duck.can_disable()) * 2
-	return (input_value + uncrouch_value) as Status
+	if not _cb.is_on_floor():
+		return Status.INACTIVE
+	
+	var is_slope_steep = _cb.get_floor_angle() >= deg_to_rad(slope_minimum_angle)
+	var is_velocity_sufficient = _cb.velocity.length_squared() >= pow(velocity_cutoff, 2)
+	
+	print("")
+	print(_cb.get_floor_angle())
+	print(deg_to_rad(slope_minimum_angle))
+	
+	# TODO: only check for hitting head when crouching
+	
+	if input["crouch"] and (is_slope_steep or is_velocity_sufficient):
+		if head_duck.is_hitting_head():
+			return Status.ACTIVE_FORCED
+		else:
+			return Status.ACTIVE
+	else:
+		if head_duck.is_hitting_head():
+			return Status.FORCED
+		else:
+			return Status.INACTIVE
+	
+	
 
 func _check_snap_ray(target: Vector3) -> bool:
 	var exclude = _cb.get_rid()
@@ -81,8 +100,8 @@ func _check_snap_ray(target: Vector3) -> bool:
 	
 	var ray = space_state.intersect_ray(ray_params)
 	var result = ray.has("collider")
-	if ray.has("normal"):
-		print(ray["normal"])
+	#if ray.has("normal"):
+		#print(ray["normal"])
 	return result
 
 func handle(delta: float):

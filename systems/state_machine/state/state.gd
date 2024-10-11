@@ -17,7 +17,7 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-func update_status(delta: float) -> Status:
+func update_status(_delta: float) -> Status:
 	return Status.INACTIVE
 
 func handle(delta: float) -> void:

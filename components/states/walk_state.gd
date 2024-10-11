@@ -8,7 +8,7 @@ class_name WalkState
 func _init():
 	input = {"left": 0, "right": 0, "up": 0, "down": 0}
 	
-func update_status(delta: float) -> Status:
+func update_status(_delta: float) -> Status:
 	if _cb.is_on_floor():
 		return Status.ACTIVE
 	return Status.INACTIVE

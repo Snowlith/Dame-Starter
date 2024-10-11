@@ -5,9 +5,13 @@ class_name JumpState
 @export var coyote_time: float = 0.15
 @export var input_leniency: float = 0.15
 
+@export var allow_slope_boost_jump: bool = true
+
 var _time_since_left_ground: float = 0
 var _input_leniency_timer: SceneTreeTimer
 var _is_input_queued: bool = false
+
+# TODO: make slope boost jump less op, maybe add area where it is possible
 
 func _init():
 	input = {"jump": 0}
@@ -40,8 +44,11 @@ func _physics_process(delta):
 		_time_since_left_ground += delta
 
 func handle(delta: float):
-	if _cb.velocity.y < strength:
-		_cb.velocity.y = strength
+	if allow_slope_boost_jump:
+		_cb.velocity.y += strength
+	else:
+		if _cb.velocity.y < strength:
+			_cb.velocity.y = strength
 	
 	_time_since_left_ground = 100
 	_cb.move_and_slide()
