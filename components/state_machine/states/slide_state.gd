@@ -66,10 +66,6 @@ func update_status(delta: float) -> Status:
 	var is_slope_steep = _cb.get_floor_angle() >= deg_to_rad(slope_minimum_angle)
 	var is_velocity_sufficient = _cb.velocity.length_squared() >= pow(velocity_cutoff, 2)
 	
-	print("")
-	print(_cb.get_floor_angle())
-	print(deg_to_rad(slope_minimum_angle))
-	
 	# TODO: only check for hitting head when crouching
 	
 	if input["crouch"] and (is_slope_steep or is_velocity_sufficient):

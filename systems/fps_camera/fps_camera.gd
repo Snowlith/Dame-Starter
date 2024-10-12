@@ -19,6 +19,9 @@ var new_transform: Transform3D
 
 var use_interp: bool = true
 
+# TODO: refactor fpscamera to an fov manager once godot 4.4 drops
+# physics interpolation will be a feature
+
 func _ready():
 	assert(get_parent() is CharacterBody3D)
 	player = get_parent()

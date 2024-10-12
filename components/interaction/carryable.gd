@@ -1,4 +1,4 @@
-extends Component
+extends Interactable
 class_name Carryable
 
 @export var rigid_body: RigidBody3D
@@ -8,9 +8,7 @@ class_name Carryable
 @export var drop_distance_threshold: float = 3.5
 @export var throw_strength: float = 10
 
-var parent: RigidBody3D
-
-var is_being_carried = false
+var _is_being_carried = false
 var carry_interactor = null
 
 # TODO: sounds
@@ -25,7 +23,7 @@ func _ready():
 	set_process_unhandled_input(false)
 
 func _physics_process(_delta):
-	if is_being_carried:
+	if _is_being_carried:
 		var carry_position = carry_interactor.get_pos_along_ray(carry_distance)
 		rigid_body.set_linear_velocity((carry_position - rigid_body.global_position) * carry_velocity_multiplier)
 		# Square other side to avoid sqrt()
@@ -37,9 +35,9 @@ func throw():
 	rigid_body.apply_central_impulse(impulse)
 
 func interact(interactor: Interactor = null):
-	is_being_carried = interactor != null
-	rigid_body.set_lock_rotation_enabled(carry_lock_rotation and is_being_carried)
-	set_process_unhandled_input(is_being_carried)
+	_is_being_carried = interactor != null
+	rigid_body.set_lock_rotation_enabled(carry_lock_rotation and _is_being_carried)
+	set_process_unhandled_input(_is_being_carried)
 	#if not is_being_carried:
 		#throw()
 	carry_interactor = interactor

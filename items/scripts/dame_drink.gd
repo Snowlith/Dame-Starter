@@ -19,9 +19,6 @@ func primary_attack():
 	await anim_player.animation_finished
 	
 	var inv: Inventory = _user.get_component("Inventory")
-	var c: FPSController = _user.get_component("FPSController")
 	
 	if inv:
 		inv.remove_from(inv.hand_slot)
-	if c:
-		c.queue_impulse(Vector3.UP, 15)

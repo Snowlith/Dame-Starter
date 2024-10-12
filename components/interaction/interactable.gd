@@ -1,4 +1,4 @@
-extends Node
+extends Component
 class_name Interactable
 
 func interact(interactor: Interactor = null):

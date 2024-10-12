@@ -3,38 +3,41 @@
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
 [ext_resource type="Script" path="res://scenes/speed_shower.gd" id="2_2rckd"]
 [ext_resource type="Script" path="res://systems/fps_camera/fps_camera.gd" id="2_kaij3"]
-[ext_resource type="Script" path="res://systems/interaction/interactor.gd" id="3_ca87e"]
+[ext_resource type="Script" path="res://components/interaction/interactor/interactor.gd" id="3_ca87e"]
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
 [ext_resource type="Script" path="res://components/range_value/health.gd" id="4_1205x"]
-[ext_resource type="Script" path="res://components/states/slide_state.gd" id="9_aa3x5"]
+[ext_resource type="Script" path="res://components/state_machine/states/slide_state.gd" id="9_aa3x5"]
 [ext_resource type="Script" path="res://systems/inventory/visual_inventory.gd" id="10_ggp8d"]
 [ext_resource type="Script" path="res://systems/inventory/item_list.gd" id="11_rymun"]
 [ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="12_3y40k"]
 [ext_resource type="Script" path="res://systems/inventory/slot/drop_slot.gd" id="13_65181"]
 [ext_resource type="Script" path="res://components/head_duck_manager.gd" id="14_eheid"]
-[ext_resource type="Script" path="res://components/states/water_state.gd" id="14_kihxp"]
+[ext_resource type="Script" path="res://components/state_machine/states/water_state.gd" id="14_kihxp"]
 [ext_resource type="Texture2D" uid="uid://bgw8e1hralkgb" path="res://assets/textures/inventory_bg.png" id="14_kx0bo"]
 [ext_resource type="PackedScene" uid="uid://cu4a3g4md3w4a" path="res://systems/inventory/slot/standard_slot.tscn" id="15_dqtlo"]
 [ext_resource type="PackedScene" uid="uid://b1sahxvjtxvne" path="res://systems/inventory/ui/hover_menu.tscn" id="16_caq03"]
 [ext_resource type="PackedScene" uid="uid://dyuqkek3iqopo" path="res://systems/inventory/slot/hand_slot.tscn" id="16_jh6gq"]
 [ext_resource type="PackedScene" uid="uid://3fh5yaot8awe" path="res://systems/inventory/ui/context_menu.tscn" id="16_n384p"]
-[ext_resource type="Script" path="res://systems/state_machine/state_machine.gd" id="17_mu2cs"]
-[ext_resource type="Script" path="res://components/states/walk_state.gd" id="18_ql2pa"]
-[ext_resource type="Script" path="res://components/states/air_state.gd" id="19_d37tt"]
-[ext_resource type="Script" path="res://components/states/crouch_state.gd" id="19_jp43y"]
+[ext_resource type="Script" path="res://components/state_machine/state_machine.gd" id="17_mu2cs"]
+[ext_resource type="Script" path="res://components/state_machine/states/walk_state.gd" id="18_ql2pa"]
+[ext_resource type="Script" path="res://components/state_machine/states/air_state.gd" id="19_d37tt"]
+[ext_resource type="Script" path="res://components/state_machine/states/crouch_state.gd" id="19_jp43y"]
 [ext_resource type="Script" path="res://components/range_value/range_value_bar.gd" id="20_i1hms"]
-[ext_resource type="Script" path="res://components/states/jump_state.gd" id="21_c7cuh"]
-[ext_resource type="Script" path="res://components/states/ladder_state.gd" id="22_6s06b"]
-[ext_resource type="Script" path="res://components/states/swing_state.gd" id="23_tcx4j"]
+[ext_resource type="Script" path="res://components/state_machine/states/jump_state.gd" id="21_c7cuh"]
+[ext_resource type="Script" path="res://components/state_machine/states/ladder_state.gd" id="22_6s06b"]
+[ext_resource type="Script" path="res://components/state_machine/states/swing_state.gd" id="23_tcx4j"]
 [ext_resource type="Script" path="res://components/head_bob_manager.gd" id="24_46ms5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lb0yt"]
-height = 2.2
+radius = 0.45
+height = 1.95
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp5m6"]
-height = 1.6
+radius = 0.45
+height = 1.45
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_be8k7"]
+radius = 0.45
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
@@ -43,7 +46,6 @@ height = 2.17288
 radius = 0.829099
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("physics_body") groups=["player"]]
-process_priority = 1
 script = ExtResource("1_60qo2")
 physics_body = NodePath("CharacterBody3D")
 
@@ -64,7 +66,7 @@ offset_bottom = 67.305
 grow_horizontal = 0
 
 [node name="FPSCamera" type="Camera3D" parent="CharacterBody3D" node_paths=PackedStringArray("nodes_with_camera_offset")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89931, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58348, 0)
 rotation_order = 0
 fov = 80.0
 script = ExtResource("2_kaij3")
@@ -79,8 +81,7 @@ update_scale = false
 script = ExtResource("3_ca87e")
 
 [node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/FPSCamera/Interactor"]
-enabled = false
-target_position = Vector3(0, 0, -6.03)
+target_position = Vector3(0, 0, -8.14)
 
 [node name="Crosshair" type="TextureRect" parent="CharacterBody3D/FPSCamera"]
 modulate = Color(1, 1, 1, 0.498039)
@@ -99,16 +100,16 @@ texture = ExtResource("3_ey6jl")
 expand_mode = 1
 
 [node name="StandCollider" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975, 0)
 shape = SubResource("CapsuleShape3D_lb0yt")
 
 [node name="CrouchCollider" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0)
 shape = SubResource("CapsuleShape3D_fp5m6")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="CharacterBody3D/CrouchCollider"]
 shape = SubResource("SphereShape3D_be8k7")
-target_position = Vector3(0, 0.9, 0)
+target_position = Vector3(0, 0.775, 0)
 max_results = 1
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
@@ -119,10 +120,12 @@ cast_shadow = 3
 mesh = SubResource("CapsuleMesh_6nc5s")
 
 [node name="StateMachine" type="Node" parent="."]
+process_priority = -1
 script = ExtResource("17_mu2cs")
 
 [node name="WalkState" type="Node" parent="StateMachine"]
 script = ExtResource("18_ql2pa")
+max_speed = 8.0
 
 [node name="CrouchState" type="Node" parent="StateMachine" node_paths=PackedStringArray("head_duck")]
 script = ExtResource("19_jp43y")
@@ -198,6 +201,8 @@ script = ExtResource("10_ggp8d")
 
 [node name="InitialItems" type="Node" parent="Inventory"]
 script = ExtResource("11_rymun")
+initial_items = Array[String](["res://items/dame_drink.tscn"])
+initial_amounts = Array[int]([1])
 
 [node name="ColorRect" type="ColorRect" parent="Inventory"]
 z_index = -5
@@ -294,7 +299,7 @@ offset_right = 841.0
 offset_bottom = 511.0
 
 [node name="Hand" type="Node3D" parent="Inventory/NinePatchRect/HandSlot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, 1.32897, -0.86123)
+transform = Transform3D(0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, 0.523012, 1.01314, -0.86123)
 top_level = true
 
 [node name="InventorySlot12" parent="Inventory/NinePatchRect" instance=ExtResource("15_dqtlo")]

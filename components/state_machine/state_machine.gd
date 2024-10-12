@@ -12,7 +12,7 @@ var _input_state_map: Dictionary
 signal state_changed
 
 func _ready():
-	states = find_children("", "State")
+	states = get_parent_entity().get_components_of_type("State")
 	if state_priority_order:
 		states.reverse()
 	_create_input_state_map()
