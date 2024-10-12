@@ -1,7 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
-[ext_resource type="Script" path="res://scenes/speed_shower.gd" id="2_2rckd"]
 [ext_resource type="Script" path="res://systems/fps_camera/fps_camera.gd" id="2_kaij3"]
 [ext_resource type="Script" path="res://components/interaction/interactor/interactor.gd" id="3_ca87e"]
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
@@ -27,6 +26,7 @@
 [ext_resource type="Script" path="res://components/state_machine/states/ladder_state.gd" id="22_6s06b"]
 [ext_resource type="Script" path="res://components/state_machine/states/swing_state.gd" id="23_tcx4j"]
 [ext_resource type="Script" path="res://components/head_bob_manager.gd" id="24_46ms5"]
+[ext_resource type="Script" path="res://components/cheats.gd" id="27_ioq8s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lb0yt"]
 radius = 0.45
@@ -45,45 +45,31 @@ radius = 0.45
 height = 2.17288
 radius = 0.829099
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("physics_body") groups=["player"]]
-script = ExtResource("1_60qo2")
-physics_body = NodePath("CharacterBody3D")
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 floor_constant_speed = true
 floor_max_angle = 0.872665
 floor_snap_length = 0.25
-script = ExtResource("2_2rckd")
+script = ExtResource("1_60qo2")
 
-[node name="Label" type="Label" parent="CharacterBody3D"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -85.34
-offset_top = 44.305
-offset_right = -45.34
-offset_bottom = 67.305
-grow_horizontal = 0
-
-[node name="FPSCamera" type="Camera3D" parent="CharacterBody3D" node_paths=PackedStringArray("nodes_with_camera_offset")]
+[node name="FPSCamera" type="Camera3D" parent="." node_paths=PackedStringArray("nodes_with_camera_offset")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58348, 0)
 rotation_order = 0
 fov = 80.0
 script = ExtResource("2_kaij3")
-nodes_with_camera_offset = [NodePath("../../StateMachine/LadderState"), NodePath("../../HeadBobManager"), NodePath("../../HeadDuckManager")]
+nodes_with_camera_offset = [NodePath("../StateMachine/LadderState"), NodePath("../HeadBobManager"), NodePath("../HeadDuckManager")]
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CharacterBody3D/FPSCamera"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="FPSCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.570339, -0.86123)
-remote_path = NodePath("../../../Inventory/NinePatchRect/HandSlot/Hand")
+remote_path = NodePath("../../Inventory/NinePatchRect/HandSlot/Hand")
 update_scale = false
 
-[node name="Interactor" type="Node3D" parent="CharacterBody3D/FPSCamera"]
+[node name="Interactor" type="Node3D" parent="FPSCamera"]
 script = ExtResource("3_ca87e")
 
-[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/FPSCamera/Interactor"]
+[node name="RayCast3D" type="RayCast3D" parent="FPSCamera/Interactor"]
 target_position = Vector3(0, 0, -8.14)
 
-[node name="Crosshair" type="TextureRect" parent="CharacterBody3D/FPSCamera"]
+[node name="Crosshair" type="TextureRect" parent="FPSCamera"]
 modulate = Color(1, 1, 1, 0.498039)
 anchors_preset = 8
 anchor_left = 0.5
@@ -99,29 +85,30 @@ grow_vertical = 2
 texture = ExtResource("3_ey6jl")
 expand_mode = 1
 
-[node name="StandCollider" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="StandCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975, 0)
 shape = SubResource("CapsuleShape3D_lb0yt")
 
-[node name="CrouchCollider" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CrouchCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0)
 shape = SubResource("CapsuleShape3D_fp5m6")
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="CharacterBody3D/CrouchCollider"]
+[node name="ShapeCast3D" type="ShapeCast3D" parent="CrouchCollider"]
 shape = SubResource("SphereShape3D_be8k7")
 target_position = Vector3(0, 0.775, 0)
 max_results = 1
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_6nc5s")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("character_body")]
 process_priority = -1
 script = ExtResource("17_mu2cs")
+character_body = NodePath("..")
 
 [node name="WalkState" type="Node" parent="StateMachine"]
 script = ExtResource("18_ql2pa")
@@ -146,6 +133,7 @@ strength = 9.0
 
 [node name="LadderState" type="Node" parent="StateMachine"]
 script = ExtResource("22_6s06b")
+max_speed = 2.0
 acceleration = 10.0
 friction = 7.0
 climb_max_speed = 6.0
@@ -171,9 +159,9 @@ script = ExtResource("24_46ms5")
 
 [node name="HeadDuckManager" type="Node" parent="." node_paths=PackedStringArray("stand_collider", "crouch_collider", "shape_cast")]
 script = ExtResource("14_eheid")
-stand_collider = NodePath("../CharacterBody3D/StandCollider")
-crouch_collider = NodePath("../CharacterBody3D/CrouchCollider")
-shape_cast = NodePath("../CharacterBody3D/CrouchCollider/ShapeCast3D")
+stand_collider = NodePath("../StandCollider")
+crouch_collider = NodePath("../CrouchCollider")
+shape_cast = NodePath("../CrouchCollider/ShapeCast3D")
 y_offset_change_speed = 8.0
 
 [node name="Health" type="Node" parent="."]
@@ -337,3 +325,20 @@ offset_bottom = 179.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12004, 0)
 shape = SubResource("CylinderShape3D_n44de")
+
+[node name="Cheats" type="Node" parent="."]
+script = ExtResource("27_ioq8s")
+
+[node name="Label" type="Label" parent="Cheats"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 74.0
+offset_top = -37.0
+offset_right = 114.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1

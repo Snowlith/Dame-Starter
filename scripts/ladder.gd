@@ -11,7 +11,7 @@ func _ready():
 	area.body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body: Node3D):
-	var entity = body.get_parent() as Entity
+	var entity = body as Entity
 	if not entity:
 		return
 	var ladder_state = entity.get_component("LadderState")
@@ -21,7 +21,7 @@ func _on_body_entered(body: Node3D):
 	entities.append(entity)
 
 func _on_body_exited(body: Node3D):
-	var entity = body.get_parent() as Entity
+	var entity = body as Entity
 	if not entity:
 		return
 	var found = entities.find(entity)

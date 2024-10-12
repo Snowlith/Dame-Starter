@@ -13,10 +13,6 @@ func update_status(_delta: float) -> Status:
 		return Status.ACTIVE
 	return Status.INACTIVE
 
-#func clip_velocity(normal: Vector3, overbounce: float, delta: float) -> void:
-	#var correction_amount = _cb.velocity.normalized().dot(normal) * overbounce
-	#_cb.velocity -= correction_amount * normal
-
 # BUG: walk state does not have snap length adjustment
 
 func handle(delta: float):
@@ -25,5 +21,3 @@ func handle(delta: float):
 	_cb.move_and_slide()
 	if _cb.velocity.y > 0:
 		_cb.apply_floor_snap()
-	#if _cb.is_on_wall():
-		#clip_velocity(_cb.get_wall_normal(), 1, delta)

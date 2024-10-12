@@ -13,7 +13,7 @@ func _ready():
 	if parent:
 		rigid_body = parent.get_physics_body()
 
-func interact(interactor: Interactor = null):
+func interact(interactor: Interactor):
 	var dropped = drop_item.instantiate()
 	get_tree().current_scene.add_child(dropped)
 	dropped.drop()

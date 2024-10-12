@@ -6,26 +6,23 @@
 [sub_resource type="BoxMesh" id="BoxMesh_udfve"]
 size = Vector3(1, 2, 0.165)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_se0ut"]
-size = Vector3(0.96106, 1.97565, 0.159491)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sqyr7"]
+points = PackedVector3Array(-0.5, -1, -0.0825, -0.5, -1, 0.0825, -0.5, 1, -0.0825, 0.5, -1, -0.0825, 0.5, -1, 0.0825, -0.5, 1, 0.0825, 0.5, 1, -0.0825, 0.5, 1, 0.0825)
 
-[node name="Door" type="Node3D" node_paths=PackedStringArray("physics_body")]
-script = ExtResource("1_jrptt")
-physics_body = NodePath("AnimatableBody3D")
-
-[node name="Door" type="Node" parent="."]
-script = ExtResource("2_i3uqu")
-
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
+[node name="AnimatableBody3D" type="AnimatableBody3D"]
 collision_mask = 0
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 sync_to_physics = false
+script = ExtResource("1_jrptt")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+[node name="Door2" type="Node" parent="."]
+script = ExtResource("2_i3uqu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
 mesh = SubResource("BoxMesh_udfve")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48053, 1.01035, 0.00924389)
-shape = SubResource("BoxShape3D_se0ut")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+shape = SubResource("ConvexPolygonShape3D_sqyr7")

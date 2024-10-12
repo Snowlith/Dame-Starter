@@ -39,7 +39,7 @@ func shoot():
 	# TODO: make signals for enter and exit hand
 	_ensure_state()
 	
-	var exclude = _user.physics_body.get_rid()
+	var exclude = _user.get_rid()
 	var space_state = get_world_3d().get_direct_space_state()
 	var cam = get_viewport().get_camera_3d()
 	

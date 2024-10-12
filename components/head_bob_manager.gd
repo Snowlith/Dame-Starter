@@ -1,7 +1,7 @@
 extends Component
 class_name HeadBobManager
 
-@onready var character_body: CharacterBody3D = get_parent_entity().physics_body
+@onready var character_body: CharacterBody3D = get_parent_entity() as PhysicsBody3D
 
 @export var frequency := Vector2(1, 2)
 @export var amplitude := Vector2(0.04, 0.08)

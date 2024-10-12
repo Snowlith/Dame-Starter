@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=34 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="2_ooxqo"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://hnhfh32qlno2" path="res://scenes/interactable/box.tscn" id="17_4otwc"]
 [ext_resource type="PackedScene" uid="uid://c13oa335whkhe" path="res://scenes/interactable/door.tscn" id="18_j2t1j"]
 [ext_resource type="PackedScene" uid="uid://b5ya1fnvgasiv" path="res://scenes/interactable/sliding_door.tscn" id="19_yfjv6"]
+[ext_resource type="PackedScene" uid="uid://bnn2ye16c487e" path="res://scenes/interactable/drawer.tscn" id="20_7rga7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_01ou0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -1300,3 +1301,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.3765, 2.10922, 78.5458)
 
 [node name="Door10" parent="." instance=ExtResource("19_yfjv6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.6373, 2.10922, 78.5458)
+
+[node name="Drawer" parent="." instance=ExtResource("20_7rga7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.6674, 0.429201, 78.4801)

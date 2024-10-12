@@ -12,6 +12,7 @@ var _input_leniency_timer: SceneTreeTimer
 var _is_input_queued: bool = false
 
 # TODO: make slope boost jump less op, maybe add area where it is possible
+# TODO: add force jump (maybe better to have a more flexible impulse system)
 
 func _init():
 	input = {"jump": 0}

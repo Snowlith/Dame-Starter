@@ -1,6 +1,7 @@
 extends Component
 class_name StateMachine
 
+@export var character_body: CharacterBody3D
 @export_enum("First child is highest priority:0", "First child is lowest priority:1") var state_priority_order: int = 1
 
 var states: Array = []
@@ -11,8 +12,12 @@ var _input_state_map: Dictionary
 
 signal state_changed
 
+# POTENTIAL BUG: if state machine is readied after children, children won't have _cb
+
 func _ready():
 	states = get_parent_entity().get_components_of_type("State")
+	for state in states:
+		state.initialize(character_body)
 	if state_priority_order:
 		states.reverse()
 	_create_input_state_map()

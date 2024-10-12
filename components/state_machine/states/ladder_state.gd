@@ -16,8 +16,7 @@ var camera_offset: Vector3
 var current_ladder: Node3D
 var ladder_normal: Vector2
 
-# make player slide down after a while
-# TODO: rewrite ladder physics with vector3
+# TODO: make player slide down after a while
 
 func _init():
 	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0, "jump": 0}

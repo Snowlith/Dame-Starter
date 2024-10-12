@@ -1,7 +1,7 @@
 extends Component
 class_name HeadDuckManager
 
-@onready var character_body: CharacterBody3D = get_parent_entity().physics_body
+@onready var character_body: CharacterBody3D = get_parent_entity() as PhysicsBody3D
 
 @export var stand_collider: CollisionShape3D
 @export var crouch_collider: CollisionShape3D

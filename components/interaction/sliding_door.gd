@@ -6,40 +6,35 @@ class_name SlidingDoor
 @export var open_offset := Vector3(0, 0, 0.5)
 @export var closed_offset: Vector3
 
-@export var open_close_speed: float = 10
+@export var opening_duration: float = 0.5
+@export var closing_duration: float = 0.5
 
 @onready var parent: Entity = get_parent_entity()
 
 var _ab: AnimatableBody3D
 var _init_pos: Vector3
-var _target_offset: Vector3
-
-var _epsilon: float = 0.01
 
 # TODO: sounds
 
 func _ready():
 	if parent:
-		_ab = parent.get_physics_body()
+		_ab = parent as PhysicsBody3D
 		_ab.sync_to_physics = false
 		await parent.ready # Make sure top level == true
-		_init_pos = _ab.transform.origin
+		_init_pos = _ab.global_position
 	else:
 		queue_free()
 
-func interact(interactor: Interactor = null):
+func interact(interactor: Interactor):
+	print("interacted2")
 	is_open = not is_open
-	set_physics_process(true)
+	_start_tween()
 	if interactor:
-		interactor.end_interaction(false)
+		interactor.end_interaction()
 
-func _physics_process(delta):
-	var target_pos = _init_pos
-	if is_open:
-		target_pos += open_offset
-	else:
-		target_pos += closed_offset
-	if (target_pos - _ab.global_transform.origin).length_squared() < pow(_epsilon, 2):
-		set_physics_process(false)
-		return
-	_ab.global_transform.origin = _ab.global_transform.origin.lerp(target_pos, open_close_speed * delta)
+func _start_tween():
+	var target_pos = _init_pos + open_offset if is_open else _init_pos + closed_offset
+	var duration = opening_duration if is_open else closing_duration
+	
+	var tween = create_tween().bind_node(_ab).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_ab, "global_position", target_pos, duration)
