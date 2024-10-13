@@ -30,8 +30,8 @@ func _process(delta: float) -> void:
 	if enabled:
 		target_offset = -y_offset
 	# Check if value is close enough
-	#if abs(target_offset - camera_offset.y) < _epsilon:
-		#return
+	if abs(target_offset - camera_offset.y) < _epsilon:
+		return
 	camera_offset.y = lerp(camera_offset.y, target_offset, y_offset_change_speed * delta)
 
 func _toggle_colliders() -> void:

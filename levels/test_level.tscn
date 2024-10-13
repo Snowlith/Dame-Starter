@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=35 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="2_ooxqo"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://c13oa335whkhe" path="res://scenes/interactable/door.tscn" id="18_j2t1j"]
 [ext_resource type="PackedScene" uid="uid://b5ya1fnvgasiv" path="res://scenes/interactable/sliding_door.tscn" id="19_yfjv6"]
 [ext_resource type="PackedScene" uid="uid://bnn2ye16c487e" path="res://scenes/interactable/drawer.tscn" id="20_7rga7"]
+[ext_resource type="PackedScene" uid="uid://dtvnn4a8g0yxt" path="res://scenes/interactable/switch.tscn" id="21_27bn4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_01ou0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -421,7 +422,7 @@ material = ExtResource("7_nt6et")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.5, 0.1792, 83.4386)
 use_collision = true
 size = Vector3(12.5, 0.5, 13.5)
-material = ExtResource("7_nt6et")
+material = ExtResource("4_jss3i")
 
 [node name="CSGBox3D118" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.5, 2.1792, 77.4386)
@@ -436,22 +437,22 @@ size = Vector3(9.5, 4.5, 0.5)
 material = ExtResource("7_nt6et")
 
 [node name="CSGBox3D129" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.5, 2.1792, 83.4386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.3127, 2.1792, 83.4386)
 use_collision = true
-size = Vector3(5.5, 4.5, 0.5)
-material = ExtResource("7_nt6et")
+size = Vector3(5.12549, 4.5, 0.5)
+material = ExtResource("4_toucd")
 
 [node name="CSGBox3D130" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.5, 2.1792, 83.4386)
 use_collision = true
 size = Vector3(2.5, 4.5, 0.5)
-material = ExtResource("7_nt6et")
+material = ExtResource("4_toucd")
 
 [node name="CSGBox3D131" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.25, 3.4292, 83.4386)
 use_collision = true
 size = Vector3(1, 2, 0.5)
-material = ExtResource("7_nt6et")
+material = ExtResource("4_toucd")
 
 [node name="CSGBox3D120" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2.1792, 79.1886)
@@ -1007,6 +1008,13 @@ use_collision = true
 size = Vector3(19, 2.87708, 20.0909)
 material = ExtResource("4_toucd")
 
+[node name="CSGBox3D139" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.5601, 4.90795, 83.6646)
+material_override = ExtResource("4_toucd")
+use_collision = true
+size = Vector3(10.042, 1.21094, 14.0928)
+material = ExtResource("4_toucd")
+
 [node name="CSGBox3D94" type="CSGBox3D" parent="."]
 transform = Transform3D(-0.777958, -0.628316, -8.74228e-08, -0.628316, 0.777958, 3.55271e-15, 6.80112e-08, 5.49291e-08, -1, 28.3716, 2.51247, 114.694)
 material_override = ExtResource("4_toucd")
@@ -1304,3 +1312,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.6373, 2.10922, 78.5458)
 
 [node name="Drawer" parent="." instance=ExtResource("20_7rga7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.6674, 0.429201, 78.4801)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.2552, 4.02445, 80.4752)
+light_color = Color(0.928531, 0.752198, 0.684664, 1)
+light_energy = 2.933
+omni_range = 7.32
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.4535, 4.02445, 80.4752)
+light_color = Color(0.928531, 0.752198, 0.684664, 1)
+light_energy = 2.933
+omni_range = 7.32
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.4535, 4.02445, 86.9752)
+light_color = Color(0.928531, 0.752198, 0.684664, 1)
+light_energy = 2.933
+omni_range = 7.32
+
+[node name="Switch" parent="." instance=ExtResource("21_27bn4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.75, 1.88782, 80.3191)
+
+[node name="Switch" parent="Switch" index="3" node_paths=PackedStringArray("entities_to_interact_with")]
+entities_to_interact_with = [NodePath("../../Door2")]
+
+[node name="Switch2" parent="." instance=ExtResource("21_27bn4")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 41.1727, 1.88782, 83.1701)
+
+[node name="Switch" parent="Switch2" index="3" node_paths=PackedStringArray("nodes_to_show_when_on")]
+nodes_to_show_when_on = [NodePath("../../OmniLight3D"), NodePath("../../OmniLight3D2"), NodePath("../../OmniLight3D3")]
+
+[editable path="Switch"]
+[editable path="Switch2"]

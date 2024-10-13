@@ -11,8 +11,6 @@ class_name LadderState
 
 var active: bool = false
 
-var camera_offset: Vector3
-
 var current_ladder: Node3D
 var ladder_normal: Vector2
 

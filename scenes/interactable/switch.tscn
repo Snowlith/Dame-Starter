@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtvnn4a8g0yxt"]
+
+[ext_resource type="Script" path="res://components/interaction/switch.gd" id="1_57y66"]
+[ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_jj6cb"]
+[ext_resource type="Script" path="res://components/interaction/sliding_door.gd" id="3_idfct"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3eh76"]
+size = Vector3(0.25, 0.25, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghvbb"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l2cpt"]
+material = SubResource("StandardMaterial3D_ghvbb")
+size = Vector3(0.19, 0.19, 0.095)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wljkn"]
+size = Vector3(0.248871, 0.242432, 0.151855)
+
+[node name="Switch" type="AnimatableBody3D"]
+script = ExtResource("1_jj6cb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+mesh = SubResource("BoxMesh_3eh76")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.10277)
+mesh = SubResource("BoxMesh_l2cpt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000411987, 0.00158691, 0.0744629)
+shape = SubResource("BoxShape3D_wljkn")
+
+[node name="Switch" type="Node" parent="."]
+script = ExtResource("1_57y66")
+
+[node name="SlidingDoor" type="Node" parent="."]
+script = ExtResource("3_idfct")
+open_offset = Vector3(0, 0, -0.05)

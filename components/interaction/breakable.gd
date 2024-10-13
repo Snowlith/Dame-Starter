@@ -19,5 +19,4 @@ func interact(interactor: Interactor):
 	dropped.drop()
 	dropped.global_transform.origin = rigid_body.global_transform.origin
 	parent.queue_free()
-	if interactor:
-		interactor.end_interaction(false)
+	interactor.end_interaction(false)

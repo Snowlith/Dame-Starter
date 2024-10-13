@@ -33,8 +33,6 @@ func _ready():
 func interact(interactor: Interactor):
 	is_open = not is_open
 	_start_tween(_get_entity_side(interactor.get_parent_entity().global_position))
-	if interactor:
-		interactor.end_interaction()
 
 func _get_entity_side(entity_position: Vector3) -> int:
 	match rotation_direction:

@@ -29,11 +29,13 @@ func interact(interactor: Interactor):
 	print("interacted2")
 	is_open = not is_open
 	_start_tween()
-	if interactor:
-		interactor.end_interaction()
 
 func _start_tween():
-	var target_pos = _init_pos + open_offset if is_open else _init_pos + closed_offset
+	var target_pos = _init_pos
+	if is_open:
+		target_pos += _ab.global_basis * open_offset
+	else:
+		target_pos += _ab.global_basis * closed_offset
 	var duration = opening_duration if is_open else closing_duration
 	
 	var tween = create_tween().bind_node(_ab).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
