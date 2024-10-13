@@ -9,24 +9,21 @@ class_name SlidingDoor
 @export var opening_duration: float = 0.5
 @export var closing_duration: float = 0.5
 
-@onready var parent: Entity = get_parent_entity()
+@onready var _ab: AnimatableBody3D = get_parent_entity() as PhysicsBody3D
 
-var _ab: AnimatableBody3D
 var _init_pos: Vector3
 
 # TODO: sounds
 
 func _ready():
-	if parent:
-		_ab = parent as PhysicsBody3D
+	if _ab:
 		_ab.sync_to_physics = false
-		await parent.ready # Make sure top level == true
+		await get_parent_entity().ready # Make sure top level == true
 		_init_pos = _ab.global_position
 	else:
 		queue_free()
 
 func interact(interactor: Interactor):
-	print("interacted2")
 	is_open = not is_open
 	_start_tween()
 

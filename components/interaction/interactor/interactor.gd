@@ -5,6 +5,8 @@ class_name Interactor
 
 var _enabled: bool = true
 
+# TODO: add cooldown after interacting and dropping carryable
+
 func _ready():
 	var parent = get_parent_entity()
 	if parent:
@@ -43,6 +45,10 @@ func enable():
 
 func disable():
 	_enabled = false
+
+###
+func apply_cooldown():
+	pass
 		
 
 #func Get_Look_Direction() -> Vector3:

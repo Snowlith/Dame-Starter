@@ -155,6 +155,11 @@ reel_in={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="default"
+3d_physics/layer_2="interactable"
+
 [physics]
 
 common/physics_ticks_per_second=50

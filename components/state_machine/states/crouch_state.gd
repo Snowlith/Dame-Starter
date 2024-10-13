@@ -5,7 +5,7 @@ class_name CrouchState
 @export var acceleration: float = 10
 @export var friction: float = 12
 
-@export var head_duck: HeadDuckManager
+@export var cam_crouch: CameraCrouchManager
 
 var camera_offset: Vector3
 
@@ -13,16 +13,16 @@ func _init():
 	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0}
 
 func enter():
-	head_duck.enable()
+	cam_crouch.enable()
 
 func exit():
-	head_duck.disable()
+	cam_crouch.disable()
 	_cb.apply_floor_snap()
 
 func update_status(delta: float) -> Status:
 	if not _cb.is_on_floor():
 		return Status.INACTIVE
-	if head_duck.is_hitting_head():
+	if cam_crouch.is_hitting_head():
 		return Status.ACTIVE_FORCED
 	elif input["crouch"]:
 		return Status.ACTIVE

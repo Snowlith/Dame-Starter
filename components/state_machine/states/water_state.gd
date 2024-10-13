@@ -19,7 +19,7 @@ func _init():
 func handle(delta: float):
 	var input_vector = _get_input_vector()
 	input_vector.y = input["jump"] - input["crouch"]
-	input_vector = _cb.global_transform.basis * input_vector
+	input_vector = _cb.global_basis * input_vector
 	
 	if not input_vector:
 		_cb.velocity = lerp(_cb.velocity, Vector3.ZERO, friction * delta)

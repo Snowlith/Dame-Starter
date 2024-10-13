@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://systems/inventory/item_list.gd" id="11_rymun"]
 [ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="12_3y40k"]
 [ext_resource type="Script" path="res://systems/inventory/slot/drop_slot.gd" id="13_65181"]
-[ext_resource type="Script" path="res://components/head_duck_manager.gd" id="14_eheid"]
+[ext_resource type="Script" path="res://components/camera_crouch_manager.gd" id="14_eheid"]
 [ext_resource type="Script" path="res://components/state_machine/states/water_state.gd" id="14_kihxp"]
 [ext_resource type="Texture2D" uid="uid://bgw8e1hralkgb" path="res://assets/textures/inventory_bg.png" id="14_kx0bo"]
 [ext_resource type="PackedScene" uid="uid://cu4a3g4md3w4a" path="res://systems/inventory/slot/standard_slot.tscn" id="15_dqtlo"]
@@ -25,7 +25,7 @@
 [ext_resource type="Script" path="res://components/state_machine/states/jump_state.gd" id="21_c7cuh"]
 [ext_resource type="Script" path="res://components/state_machine/states/ladder_state.gd" id="22_6s06b"]
 [ext_resource type="Script" path="res://components/state_machine/states/swing_state.gd" id="23_tcx4j"]
-[ext_resource type="Script" path="res://components/head_bob_manager.gd" id="24_46ms5"]
+[ext_resource type="Script" path="res://components/camera_bob_manager.gd" id="24_46ms5"]
 [ext_resource type="Script" path="res://components/cheats.gd" id="27_ioq8s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lb0yt"]
@@ -56,7 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58348, 0)
 rotation_order = 0
 fov = 80.0
 script = ExtResource("2_kaij3")
-nodes_with_camera_offset = [NodePath("../HeadBobManager"), NodePath("../HeadDuckManager")]
+nodes_with_camera_offset = [NodePath("../CameraBobManager"), NodePath("../CameraCrouchManager")]
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="FPSCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.570339, -0.86123)
@@ -68,6 +68,8 @@ script = ExtResource("3_ca87e")
 
 [node name="RayCast3D" type="RayCast3D" parent="FPSCamera/Interactor"]
 target_position = Vector3(0, 0, -8.14)
+collision_mask = 2
+debug_shape_custom_color = Color(0.824082, 9.14484e-07, 0.458211, 1)
 
 [node name="Crosshair" type="TextureRect" parent="FPSCamera"]
 modulate = Color(1, 1, 1, 0.498039)
@@ -114,15 +116,15 @@ character_body = NodePath("..")
 script = ExtResource("18_ql2pa")
 max_speed = 8.0
 
-[node name="CrouchState" type="Node" parent="StateMachine" node_paths=PackedStringArray("head_duck")]
+[node name="CrouchState" type="Node" parent="StateMachine" node_paths=PackedStringArray("cam_crouch")]
 script = ExtResource("19_jp43y")
-head_duck = NodePath("../../HeadDuckManager")
+cam_crouch = NodePath("../../CameraCrouchManager")
 
-[node name="SlideState" type="Node" parent="StateMachine" node_paths=PackedStringArray("head_bob", "head_duck")]
+[node name="SlideState" type="Node" parent="StateMachine" node_paths=PackedStringArray("cam_bob", "cam_crouch")]
 script = ExtResource("9_aa3x5")
 slope_minimum_angle = 15.5
-head_bob = NodePath("../../HeadBobManager")
-head_duck = NodePath("../../HeadDuckManager")
+cam_bob = NodePath("../../CameraBobManager")
+cam_crouch = NodePath("../../CameraCrouchManager")
 
 [node name="AirState" type="Node" parent="StateMachine"]
 script = ExtResource("19_d37tt")
@@ -154,15 +156,14 @@ offset_bottom = 40.0
 [node name="Label" type="Label" parent="StateMachine/PanelContainer"]
 layout_mode = 2
 
-[node name="HeadBobManager" type="Node" parent="."]
+[node name="CameraBobManager" type="Node" parent="."]
 script = ExtResource("24_46ms5")
 
-[node name="HeadDuckManager" type="Node" parent="." node_paths=PackedStringArray("stand_collider", "crouch_collider", "shape_cast")]
+[node name="CameraCrouchManager" type="Node" parent="." node_paths=PackedStringArray("stand_collider", "crouch_collider", "shape_cast")]
 script = ExtResource("14_eheid")
 stand_collider = NodePath("../StandCollider")
 crouch_collider = NodePath("../CrouchCollider")
 shape_cast = NodePath("../CrouchCollider/ShapeCast3D")
-y_offset_change_speed = 8.0
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_1205x")

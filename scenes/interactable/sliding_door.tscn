@@ -16,6 +16,7 @@ size = Vector3(0.08, 0.35, 0.455)
 size = Vector3(0.598087, 0.453874, 0.717015)
 
 [node name="SlidingCompartment" type="AnimatableBody3D"]
+collision_layer = 2
 collision_mask = 0
 axis_lock_angular_x = true
 axis_lock_angular_z = true

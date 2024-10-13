@@ -21,6 +21,7 @@ var use_interp: bool = true
 
 # TODO: refactor fpscamera to an fov manager once godot 4.4 drops
 # physics interpolation will be a feature
+# ALso make a camera manager component!!!
 
 func _ready():
 	assert(get_parent() is CharacterBody3D)

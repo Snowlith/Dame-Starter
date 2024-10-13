@@ -1,38 +1,35 @@
 extends Component
-class_name HeadDuckManager
-
-@onready var character_body: CharacterBody3D = get_parent_entity() as PhysicsBody3D
+class_name CameraCrouchManager
 
 @export var stand_collider: CollisionShape3D
 @export var crouch_collider: CollisionShape3D
 @export var shape_cast: ShapeCast3D
 
-@export var y_offset: float = 0.5
-@export var y_offset_change_speed: float = 100
+@export var crouch_offset := Vector3(0, -0.5, 0)
+@export var crouch_enter_exit_duration: float = 0.3
+
+@onready var _cb: CharacterBody3D = get_parent_entity() as PhysicsBody3D
 
 var camera_offset: Vector3
 
 var enabled: bool = false
-
-var _epsilon: float = 0.01
 
 # TODO: add many states to transition between
 # Crouch state
 # Lay state
 
 func _ready():
-	shape_cast.add_exception(character_body)
+	shape_cast.add_exception(_cb)
 	shape_cast.max_results = 1
 	_toggle_colliders()
 
-func _process(delta: float) -> void:
-	var target_offset: float = 0
+func _start_tween():
+	var target_pos = Vector3.ZERO
 	if enabled:
-		target_offset = -y_offset
-	# Check if value is close enough
-	if abs(target_offset - camera_offset.y) < _epsilon:
-		return
-	camera_offset.y = lerp(camera_offset.y, target_offset, y_offset_change_speed * delta)
+		target_pos += crouch_offset
+		
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "camera_offset", target_pos, crouch_enter_exit_duration)
 
 func _toggle_colliders() -> void:
 	stand_collider.disabled = enabled
@@ -41,10 +38,12 @@ func _toggle_colliders() -> void:
 func disable():
 	enabled = false
 	_toggle_colliders()
+	_start_tween()
 
 func enable():
 	enabled = true
 	_toggle_colliders()
+	_start_tween()
 
 func is_enabled():
 	return enabled

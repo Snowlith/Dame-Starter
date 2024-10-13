@@ -1,5 +1,5 @@
 extends Component
-class_name HeadBobManager
+class_name CameraBobManager
 
 @onready var character_body: CharacterBody3D = get_parent_entity() as PhysicsBody3D
 

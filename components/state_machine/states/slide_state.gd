@@ -10,8 +10,8 @@ class_name SlideState
 @export var slope_downward_acceleration: float = 60
 @export var slope_minimum_angle: float = 15
 
-@export var head_bob: HeadBobManager
-@export var head_duck: HeadDuckManager
+@export var cam_bob: CameraBobManager
+@export var cam_crouch: CameraCrouchManager
 
 var camera_offset: Vector3
 
@@ -30,12 +30,12 @@ func enter():
 	if not _previous_grounded:
 		_enter_slope(_previous_velocity)
 	_initial_snap_length = _cb.floor_snap_length
-	head_bob.disable()
-	head_duck.enable()
+	cam_bob.disable()
+	cam_crouch.enable()
 
 func exit():
-	head_bob.enable()
-	head_duck.disable()
+	cam_bob.enable()
+	cam_crouch.disable()
 	_cb.floor_snap_length = _initial_snap_length
 	_cb.apply_floor_snap()
 
@@ -69,12 +69,12 @@ func update_status(delta: float) -> Status:
 	# TODO: only check for hitting head when crouching
 	
 	if input["crouch"] and (is_slope_steep or is_velocity_sufficient):
-		if head_duck.is_hitting_head():
+		if cam_crouch.is_hitting_head():
 			return Status.ACTIVE_FORCED
 		else:
 			return Status.ACTIVE
 	else:
-		if head_duck.is_hitting_head():
+		if cam_crouch.is_hitting_head():
 			return Status.FORCED
 		else:
 			return Status.INACTIVE
@@ -120,7 +120,7 @@ func handle(delta: float):
 		
 	_apply_acceleration(max_speed, acceleration, delta)
 	_apply_friction(friction, delta)
-	head_bob.disable()
+	cam_bob.disable()
 		
 	_cb.move_and_slide()
 	

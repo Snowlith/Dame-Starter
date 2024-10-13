@@ -1,17 +1,24 @@
 extends Interactable
 class_name Carryable
 
-@export var rigid_body: RigidBody3D
+#@export var rigid_body: RigidBody3D
 @export var carry_distance: float = 2.5
 @export var carry_velocity_multiplier: float = 15
 @export var carry_lock_rotation: bool = true
 @export var drop_distance_threshold: float = 3.5
 @export var throw_strength: float = 10
 
-var carry_interactor = null
+@export_flags_3d_physics var layers_while_carrying: int = 0b00000000_00000000_00000000_00000010
+
+@onready var _rb: RigidBody3D = get_parent_entity() as PhysicsBody3D
+
+var _interactor = null
+
+var _default_layers: int
 
 # TODO: sounds
 # TODO: disable carry if holding item?
+# TODO: carry from center of collision aabb
 
 func _unhandled_input(event):
 	if event.is_action_pressed("interact"):
@@ -20,30 +27,35 @@ func _unhandled_input(event):
 		throw()
 
 func _ready():
+	_default_layers = _rb.collision_layer
 	drop()
 
 func _physics_process(_delta):
-	var carry_position = carry_interactor.get_pos_along_ray(carry_distance)
-	rigid_body.set_linear_velocity((carry_position - rigid_body.global_position) * carry_velocity_multiplier)
+	var carry_position = _interactor.get_pos_along_ray(carry_distance)
+	_rb.set_linear_velocity((carry_position - _rb.global_position) * carry_velocity_multiplier)
 	# Square other side to avoid sqrt()
-	if (carry_position - rigid_body.global_position).length_squared() > pow(drop_distance_threshold, 2):
-		carry_interactor.end_interaction(true)
+	if (carry_position - _rb.global_position).length_squared() > pow(drop_distance_threshold, 2):
+		drop()
 
 func drop():
-	if carry_interactor:
-		carry_interactor.enable()
-	carry_interactor = null
-	set_process_unhandled_input(false)
-	set_physics_process(false)
+	if _interactor:
+		_interactor.enable()
+	_interactor = null
+	_toggle_mode()
+
+func _toggle_mode():
+	var mode = is_instance_valid(_interactor)
+	_rb.set_lock_rotation_enabled(mode)
+	set_process_unhandled_input(mode)
+	set_physics_process(mode)
+	_rb.collision_layer = layers_while_carrying if mode else _default_layers
 
 func throw():
-	var impulse = carry_interactor.get_pos_along_ray(carry_distance + throw_strength) - rigid_body.global_position
-	rigid_body.apply_central_impulse(impulse)
+	var impulse = _interactor.get_pos_along_ray(carry_distance + throw_strength) - _rb.global_position
+	_rb.apply_central_impulse(impulse)
 	drop()
 
 func interact(interactor: Interactor):
-	carry_interactor = interactor
-	carry_interactor.disable()
-	rigid_body.set_lock_rotation_enabled(carry_lock_rotation)
-	set_process_unhandled_input(true)
-	set_physics_process(true)
+	_interactor = interactor
+	_interactor.disable()
+	_toggle_mode()

@@ -23,5 +23,5 @@ func exit() -> void:
 func update_status(_delta: float) -> Status:
 	return Status.INACTIVE
 
-func handle(delta: float) -> void:
+func handle(_delta: float) -> void:
 	pass

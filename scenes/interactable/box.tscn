@@ -11,6 +11,9 @@
 points = PackedVector3Array(0.44998, 1, 0.44998, 0.44998, 0.94998, 0.5, 0.5, 0.94998, 0.44998, 0.44998, 1, -0.450078, -0.450078, 1, 0.44998, 0.44998, 0.0499217, 0.5, -0.450078, 0.94998, 0.5, 0.5, 0.94998, -0.450078, 0.5, 0.0499217, 0.44998, 0.44998, 0.94998, -0.5, -0.450078, 1, -0.450078, -0.5, 0.94998, 0.44998, 0.44998, 2.98023e-08, 0.44998, -0.450078, 0.0499217, 0.5, 0.5, 0.0499217, -0.450078, 0.44998, 0.0499217, -0.5, -0.450078, 0.94998, -0.5, -0.5, 0.94998, -0.450078, -0.5, 0.0499217, 0.44998, 0.44998, 2.98023e-08, -0.450078, -0.450078, 2.98023e-08, 0.44998, -0.450078, 0.0499217, -0.5, -0.5, 0.0499217, -0.450078, -0.450078, 2.98023e-08, -0.450078)
 
 [node name="RigidBody3D" type="RigidBody3D" groups=["interactable"]]
+collision_layer = 3
+collision_mask = 3
+mass = 5.0
 script = ExtResource("1_vsme0")
 
 [node name="BoxSmall" type="MeshInstance3D" parent="."]
@@ -30,6 +33,6 @@ script = ExtResource("6_b8ojq")
 initial_items = Array[String](["res://items/box.tscn"])
 initial_amounts = Array[int]([1])
 
-[node name="Carryable" type="Node3D" parent="." node_paths=PackedStringArray("rigid_body")]
+[node name="Carryable" type="Node3D" parent="."]
 script = ExtResource("3_ehmd5")
-rigid_body = NodePath("..")
+throw_strength = 30.0

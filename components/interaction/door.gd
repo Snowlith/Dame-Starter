@@ -16,8 +16,6 @@ class_name Door
 var _ab: AnimatableBody3D
 var _init_angle: float
 
-var _epsilon: float = 0.01
-
 # TODO: bidirectional door, goes away from opener
 # TODO: sounds
 
