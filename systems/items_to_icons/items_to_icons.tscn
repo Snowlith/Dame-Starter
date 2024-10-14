@@ -60,7 +60,7 @@ light_energy = 1.008
 light_specular = 0.1
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14845, 0, -0.802532)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29084, 0, -1.77078)
 light_color = Color(0.31134, 0.0930822, 0.52973, 1)
 light_energy = 15.224
 light_specular = 0.01

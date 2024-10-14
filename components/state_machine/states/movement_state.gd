@@ -1,6 +1,8 @@
 extends State
 class_name MovementState
 
+var _initial_snap_length: float
+
 func _get_input_vector():
 	return Vector3(input["right"] - input["left"], 0, input["down"] - input["up"])
 
@@ -44,6 +46,33 @@ func _push_rigid_bodies(push_force: float):
 		var position_diff = collision.get_position() - collider.global_position
 		collider.apply_impulse(push_dir * velocity_diff * mass_ratio * push_force, position_diff)
 
-# seems difficult because the initial snap length must always be restored after leaving the state
+func is_surface_too_steep(normal: Vector3):
+	return normal.angle_to(Vector3.UP) > _cb.floor_max_angle
+
+func enter():
+	_initial_snap_length = _cb.floor_snap_length
+
+func exit():
+	_cb.floor_snap_length = _initial_snap_length
+	_cb.apply_floor_snap()
+	
 func _adjust_snap_length():
-	pass
+	var floor_normal = _cb.get_floor_normal()
+	
+	if floor_normal == Vector3.UP:
+		_cb.floor_snap_length = _initial_snap_length
+		return
+	
+	# Don't need to normalize this
+	var slope_vector = (Vector3.DOWN - floor_normal * Vector3.DOWN.dot(floor_normal))
+	
+	if _cb.velocity.dot(slope_vector) > 0:
+		# Going down slope
+		_cb.floor_snap_length = max(_cb.velocity.length() / 20, _initial_snap_length)
+	else:
+		# Going up slope
+		_cb.floor_snap_length = _initial_snap_length
+
+func _snap_up_slope():
+	if _cb.velocity.y > 0:
+		_cb.apply_floor_snap()

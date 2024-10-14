@@ -15,8 +15,6 @@ class_name SlideState
 
 var camera_offset: Vector3
 
-var _initial_snap_length: float
-
 var _current_velocity: Vector3
 var _previous_velocity: Vector3
 
@@ -27,17 +25,16 @@ func _init():
 	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0}
 
 func enter():
+	super()
 	if not _previous_grounded:
 		_enter_slope(_previous_velocity)
-	_initial_snap_length = _cb.floor_snap_length
 	cam_bob.disable()
 	cam_crouch.enable()
 
 func exit():
+	super()
 	cam_bob.enable()
 	cam_crouch.disable()
-	_cb.floor_snap_length = _initial_snap_length
-	_cb.apply_floor_snap()
 
 func _enter_slope(velocity):
 	if velocity.y > 0:
@@ -106,20 +103,14 @@ func handle(delta: float):
 	var slope_vector = (Vector3.DOWN - floor_normal * Vector3.DOWN.dot(floor_normal)).normalized()
 	
 	if floor_angle:
-		# Down slope
-		if _cb.velocity.dot(slope_vector) > 0:
-			_cb.floor_snap_length = max(_cb.velocity.length() / 20, _initial_snap_length)
-		else:
+		if _cb.velocity.dot(slope_vector) <= 0:
 			_cb.velocity.y = _cb.get_real_velocity().y
-			_cb.floor_snap_length = _initial_snap_length
 		var steepness_scalar = floor_angle / (PI / 2)
 		_cb.velocity += slope_vector * slope_downward_acceleration * steepness_scalar * delta
-	else:
-		# Slide
-		_cb.floor_snap_length = _initial_snap_length
 		
 	_apply_acceleration(max_speed, acceleration, delta)
 	_apply_friction(friction, delta)
+	_adjust_snap_length()
 	cam_bob.disable()
 		
 	_cb.move_and_slide()

@@ -17,8 +17,9 @@ axis_lock_angular_z = true
 sync_to_physics = false
 script = ExtResource("1_jrptt")
 
-[node name="RotatingDoor" type="Node" parent="."]
+[node name="RotatingDoor" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("2_1fyen")
+target = NodePath("..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)

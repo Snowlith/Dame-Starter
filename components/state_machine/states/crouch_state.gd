@@ -13,9 +13,11 @@ func _init():
 	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0}
 
 func enter():
+	super()
 	cam_crouch.enable()
 
 func exit():
+	super()
 	cam_crouch.disable()
 	_cb.apply_floor_snap()
 
@@ -31,6 +33,6 @@ func update_status(delta: float) -> Status:
 func handle(delta: float):
 	_apply_acceleration(max_speed, acceleration, delta)
 	_apply_friction(friction, delta)
+	_adjust_snap_length()
 	_cb.move_and_slide()
-	if _cb.velocity.y > 0:
-		_cb.apply_floor_snap()
+	_snap_up_slope()

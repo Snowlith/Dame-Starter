@@ -17,11 +17,12 @@ axis_lock_angular_z = true
 sync_to_physics = false
 script = ExtResource("1_yg32h")
 
-[node name="SlidingDoor" type="Node" parent="."]
+[node name="SlidingDoor" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("2_oojrg")
 open_offset = Vector3(0, 0, 0)
 closed_offset = Vector3(-0.5, 0, 0)
 is_open = true
+target = NodePath("..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1, 0)

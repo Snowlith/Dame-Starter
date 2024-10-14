@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var debug_viewing_time: float = 1
+@export var enable_debug_shapes: bool = false
 
 @export_dir var item_dir
 @export_dir var icon_dir
@@ -9,7 +10,6 @@ extends Node3D
 @onready var cam: Camera3D = $SubViewportContainer/SubViewport/Camera3D
 
 var default_cam_pos
-var default_mesh_instance_pos
 
 var capture_time: float = .1
 
@@ -58,11 +58,12 @@ func adjust_scene(scene_root: Node3D):
 
 	var max_dimension = combined_aabb.get_longest_axis_size()
 	
-	_debug_aabbs.clear()
-	_debug_aabbs.append(combined_aabb)
-	
-	_debug_positions.clear()
-	_debug_positions.append(scene_root.transform)
+	if enable_debug_shapes:
+		_debug_aabbs.clear()
+		_debug_aabbs.append(combined_aabb)
+		
+		_debug_positions.clear()
+		_debug_positions.append(scene_root.transform)
 
 	# Adjust the scene position
 	

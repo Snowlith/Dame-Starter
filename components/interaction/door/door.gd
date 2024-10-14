@@ -3,16 +3,19 @@ class_name Door
 
 @export var is_open: bool = false
 
+@export var target: Node3D
+
 @export var opening_duration: float = 0.5
 @export var closing_duration: float = 0.5
 
 @export_enum("Linear", "Cubic", "Bounce", "Elastic", "Spring", "Sine") var interpolation: String = "Cubic"
 @export_enum("Ease in", "Ease out", "Ease in out", "Ease out in") var easing: String = "Ease out"
 
-@onready var _ab: AnimatableBody3D = get_parent_entity() as PhysicsBody3D
-
 func interact(interactor: Interactor):
 	is_open = not is_open
+
+func get_duration() -> float:
+	return opening_duration if is_open else closing_duration
 	
 func get_interpolation() -> Tween.TransitionType:
 	match interpolation:

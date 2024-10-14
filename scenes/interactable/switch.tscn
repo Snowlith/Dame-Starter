@@ -19,6 +19,7 @@ size = Vector3(0.248871, 0.242432, 0.151855)
 
 [node name="Switch" type="AnimatableBody3D"]
 collision_layer = 2
+sync_to_physics = false
 script = ExtResource("1_jj6cb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -35,7 +36,10 @@ shape = SubResource("BoxShape3D_wljkn")
 
 [node name="Switch" type="Node" parent="."]
 script = ExtResource("1_57y66")
+toggle_On_prompt = "[F] Turn on"
+toggle_off_prompt = "[F] Turn off"
 
-[node name="SlidingDoor" type="Node" parent="."]
+[node name="SlidingDoor" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("3_idfct")
 open_offset = Vector3(0, 0, -0.05)
+target = NodePath("../MeshInstance3D2")

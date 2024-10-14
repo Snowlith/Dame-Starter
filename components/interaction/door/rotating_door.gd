@@ -11,10 +11,11 @@ var _init_angle: float
 # TODO: sounds
 
 func _ready():
-	if _ab:
-		_ab.sync_to_physics = false
+	if target:
+		if target is AnimatableBody3D:
+			target.sync_to_physics = false
 		await get_parent_entity().ready # Make sure top level == true
-		_init_angle = _ab.rotation.y
+		_init_angle = target.rotation.y
 	else:
 		queue_free()
 
@@ -27,16 +28,15 @@ func interact(interactor: Interactor):
 		target_rotation.y += side * deg_to_rad(open_angle)
 	else:
 		target_rotation.y += deg_to_rad(closed_angle)
-	var duration = opening_duration if is_open else closing_duration
 	
-	var tween = create_tween().bind_node(_ab).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_ab, "rotation", target_rotation, duration)
+	var tween = create_tween().bind_node(target).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(target, "rotation", target_rotation, get_duration())
 
 func _get_entity_side(entity_position: Vector3) -> int:
 	match rotation_direction:
 		"Bidirectional":
-			var door_to_player = (entity_position - _ab.global_position).normalized()
-			var local_player_direction = door_to_player * _ab.global_basis
+			var door_to_player = (entity_position - target.global_position).normalized()
+			var local_player_direction = door_to_player * target.global_basis
 			return 1 if local_player_direction.z > 0 else -1
 		"Counterclockwise":
 			return 1

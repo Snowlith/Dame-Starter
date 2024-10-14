@@ -21,6 +21,6 @@ func handle(delta: float):
 	_apply_acceleration(max_speed, acceleration, delta)
 	_apply_friction(friction, delta)
 	_push_rigid_bodies(rigid_body_push_force)
+	_adjust_snap_length()
 	_cb.move_and_slide()
-	#if _cb.velocity.y > 0:
-		#_cb.apply_floor_snap()
+	_snap_up_slope()

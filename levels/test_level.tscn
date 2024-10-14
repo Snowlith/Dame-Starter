@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=42 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="2_ooxqo"]
@@ -82,8 +82,17 @@ size = Vector2(25.435, 26.35)
 subdivide_width = 20
 subdivide_depth = 20
 
+[sub_resource type="BoxMesh" id="BoxMesh_1khcu"]
+material = ExtResource("7_nt6et")
+size = Vector3(1, 2, 0.165)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ehthg"]
 size = Vector3(2.3, 1.085, 4.46601)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u30f6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2fhcm"]
+size = Vector3(0.37, 4.185, 0.355)
 
 [node name="TestLevel" type="Node3D"]
 
@@ -430,6 +439,12 @@ use_collision = true
 size = Vector3(12.5, 0.5, 13.5)
 material = ExtResource("4_jss3i")
 
+[node name="CSGBox3D149" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.5, 0.1792, 81.6886)
+use_collision = true
+size = Vector3(5.5, 0.5, 10)
+material = ExtResource("4_jss3i")
+
 [node name="CSGBox3D144" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.25, 0.0717171, 85.6886)
 use_collision = true
@@ -464,6 +479,18 @@ material = ExtResource("4_jss3i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.5, 2.1792, 77.4386)
 use_collision = true
 size = Vector3(9.5, 4.5, 0.5)
+material = ExtResource("7_nt6et")
+
+[node name="CSGBox3D150" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.75, 4.4292, 81.4386)
+use_collision = true
+size = Vector3(3, 9, 0.5)
+material = ExtResource("7_nt6et")
+
+[node name="CSGBox3D151" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.75, 4.4292, 83.9386)
+use_collision = true
+size = Vector3(3, 9, 0.5)
 material = ExtResource("7_nt6et")
 
 [node name="CSGBox3D119" type="CSGBox3D" parent="."]
@@ -521,9 +548,27 @@ size = Vector3(0.5, 2, 1)
 material = ExtResource("7_nt6et")
 
 [node name="CSGBox3D121" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 2.1792, 83.4386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 2.1792, 86.1886)
 use_collision = true
-size = Vector3(0.5, 4.5, 11.5)
+size = Vector3(0.5, 4.5, 6)
+material = ExtResource("7_nt6et")
+
+[node name="CSGBox3D152" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 4.4292, 82.6886)
+use_collision = true
+size = Vector3(0.5, 9, 2)
+material = ExtResource("7_nt6et")
+
+[node name="CSGBox3D147" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 2.1792, 79.9386)
+use_collision = true
+size = Vector3(0.5, 4.5, 4.5)
+material = ExtResource("7_nt6et")
+
+[node name="CSGBox3D148" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 3.4292, 82.6886)
+use_collision = true
+size = Vector3(0.5, 2, 1)
 material = ExtResource("7_nt6et")
 
 [node name="CSGBox3D48" type="CSGBox3D" parent="."]
@@ -1063,6 +1108,13 @@ use_collision = true
 size = Vector3(10.042, 1.21094, 14.0928)
 material = ExtResource("4_toucd")
 
+[node name="CSGBox3D153" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7891, 9.40795, 82.6182)
+material_override = ExtResource("4_toucd")
+use_collision = true
+size = Vector3(4.5, 1.21094, 4)
+material = ExtResource("4_toucd")
+
 [node name="CSGBox3D94" type="CSGBox3D" parent="."]
 transform = Transform3D(-0.777958, -0.628316, -8.74228e-08, -0.628316, 0.777958, 3.55271e-15, 6.80112e-08, 5.49291e-08, -1, 28.3716, 2.51247, 114.694)
 material_override = ExtResource("4_toucd")
@@ -1325,8 +1377,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3909, 0, 75.6272)
 [node name="Door2" parent="." instance=ExtResource("18_j2t1j")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 39.9125, 0.42148, 80.689)
 
+[node name="Door11" parent="." instance=ExtResource("18_j2t1j")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 42.9125, -0.07852, 102.514)
+
+[node name="Door12" parent="." instance=ExtResource("18_j2t1j")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 42.9125, -0.07852, 104.652)
+
+[node name="Door13" parent="." instance=ExtResource("18_j2t1j")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 42.9125, -0.07852, 106.62)
+
 [node name="Door3" parent="." instance=ExtResource("18_j2t1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.7547, 0.407299, 83.4434)
+
+[node name="Door14" parent="." instance=ExtResource("18_j2t1j")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48.9391, 0.407299, 82.1974)
+collision_layer = 1
+
+[node name="RotatingDoor" parent="Door14" index="0"]
+rotation_direction = "Counterclockwise"
+
+[node name="MeshInstance3D" parent="Door14" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.01809, 0)
+mesh = SubResource("BoxMesh_1khcu")
 
 [node name="Player" parent="." instance=ExtResource("2_ooxqo")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 32.9232, 2.38419e-07, 86.1328)
@@ -1358,6 +1430,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.6373, 2.10922, 78.5458)
 [node name="Drawer" parent="." instance=ExtResource("20_7rga7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.6674, 0.429201, 78.4801)
 
+[node name="SlidingCompartment3" parent="Drawer" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.650665, 0.533889, 0.222168)
+
+[node name="Switch4" parent="Drawer/SlidingCompartment3" index="9" instance=ExtResource("21_27bn4")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.250259, 0.194382, -0.00543213)
+
+[node name="Switch" parent="Drawer/SlidingCompartment3/Switch4" index="3" node_paths=PackedStringArray("entities_to_interact_with")]
+entities_to_interact_with = [NodePath("../../../../Door14")]
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.2552, 4.02445, 80.4752)
 light_color = Color(0.928531, 0.752198, 0.684664, 1)
@@ -1376,6 +1457,24 @@ light_color = Color(0.928531, 0.752198, 0.684664, 1)
 light_energy = 2.933
 omni_range = 7.32
 
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.4535, 0.52445, 102.975)
+light_color = Color(0.928531, 0.752198, 0.684664, 1)
+light_energy = 2.933
+omni_range = 2.42487
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.4535, 0.52445, 105.223)
+light_color = Color(0.928531, 0.752198, 0.684664, 1)
+light_energy = 2.933
+omni_range = 2.0
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.4535, 0.52445, 107.377)
+light_color = Color(0.928531, 0.752198, 0.684664, 1)
+light_energy = 2.933
+omni_range = 2.0
+
 [node name="Switch" parent="." instance=ExtResource("21_27bn4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.75, 1.88782, 80.3191)
 
@@ -1388,17 +1487,12 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.75,
 [node name="Switch" parent="Switch3" index="3" node_paths=PackedStringArray("entities_to_interact_with")]
 entities_to_interact_with = [NodePath("../../SlidingDoor"), NodePath("../../SlidingDoor2")]
 
-[node name="Switch4" parent="." instance=ExtResource("21_27bn4")]
-transform = Transform3D(1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, 37.75, 0.410406, 88.3191)
-
-[node name="Switch" parent="Switch4" index="3" node_paths=PackedStringArray("entities_to_interact_with")]
-entities_to_interact_with = [NodePath("../../Elevator")]
-
 [node name="Switch2" parent="." instance=ExtResource("21_27bn4")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 41.1727, 1.88782, 83.1701)
 
 [node name="Switch" parent="Switch2" index="3" node_paths=PackedStringArray("nodes_to_show_when_on")]
 nodes_to_show_when_on = [NodePath("../../OmniLight3D"), NodePath("../../OmniLight3D2"), NodePath("../../OmniLight3D3")]
+stagger_time = 0.3
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.4427, 1.58359, 74.6542)
@@ -1414,7 +1508,17 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.895
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 39.8958, 0.417087, 87.1878)
 
 [node name="Elevator" parent="." instance=ExtResource("23_xw0pm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8873, 0.429201, 89.3807)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7987, 0.376333, 82.6238)
+
+[node name="Switch4" parent="Elevator" instance=ExtResource("21_27bn4")]
+transform = Transform3D(-4.37114e-08, 1.06581e-14, -1, 3.81165e-21, 1, 1.06581e-14, 1, 0, -4.37114e-08, 0.778454, 1.86273, -0.401001)
+
+[node name="Switch" parent="Elevator/Switch4" index="3" node_paths=PackedStringArray("entities_to_interact_with")]
+entities_to_interact_with = [NodePath("../..")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Elevator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57079, 0)
+omni_range = 1.242
 
 [node name="GrapplingGun" parent="." instance=ExtResource("23_awnaj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.64376, 23, -9.58032)
@@ -1422,7 +1526,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.64376, 23, -9.58032)
 [node name="StupidItem" parent="." instance=ExtResource("24_j4at8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.0449, -9.53674e-07, 93.0485)
 
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.2348, 0, 102.869)
+mesh = SubResource("BoxMesh_u30f6")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4811, 0, 100.321)
+mesh = SubResource("BoxMesh_2fhcm")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.2348, 0, 105.237)
+mesh = SubResource("BoxMesh_u30f6")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.2348, 0, 107.41)
+mesh = SubResource("BoxMesh_u30f6")
+
+[node name="Switch5" parent="." instance=ExtResource("21_27bn4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 44.3031, 1.88782, 100.315)
+
+[node name="Switch" parent="Switch5" index="3" node_paths=PackedStringArray("entities_to_interact_with", "nodes_to_show_when_on", "nodes_to_hide_when_on")]
+entities_to_interact_with = [NodePath("../../Door11"), NodePath("../../Door12"), NodePath("../../Door13")]
+nodes_to_show_when_on = [NodePath("../../OmniLight3D4"), NodePath("../../OmniLight3D5"), NodePath("../../OmniLight3D6")]
+nodes_to_hide_when_on = [NodePath("../../MeshInstance3D5"), NodePath("../../MeshInstance3D6"), NodePath("../../MeshInstance3D7")]
+stagger_time = 0.3
+
+[editable path="Door14"]
+[editable path="Drawer"]
+[editable path="Drawer/SlidingCompartment3/Switch4"]
 [editable path="Switch"]
 [editable path="Switch3"]
-[editable path="Switch4"]
 [editable path="Switch2"]
+[editable path="Elevator/Switch4"]
+[editable path="Switch5"]
