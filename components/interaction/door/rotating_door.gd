@@ -8,9 +8,6 @@ class_name RotatingDoor
 
 var _init_angle: float
 
-var _last_interactor: Interactor
-
-# TODO: bidirectional door, goes away from opener
 # TODO: sounds
 
 func _ready():

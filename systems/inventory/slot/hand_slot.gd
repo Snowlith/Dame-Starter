@@ -1,7 +1,7 @@
 extends StandardSlot
 class_name HandSlot
 
-@export var shader_material: ShaderMaterial
+@export var viewmodel_material: ShaderMaterial
 @export var default_item: Item
 @onready var hand = $Hand
 
@@ -45,9 +45,9 @@ func _on_item_changed():
 		hand.add_child(held_item)
 		held_item.pick_up(user)
 		hand.visible = true
-		if not shader_material:
+		if not viewmodel_material:
 			return
-		apply_mat_recursive(held_item, shader_material)
+		apply_mat_recursive(held_item, viewmodel_material)
 	else:
 		hand.visible = false
 
@@ -55,10 +55,20 @@ func apply_mat_recursive(node, mat):
 	var mesh_instance = node as MeshInstance3D
 	if mesh_instance:
 		if mat:
-			mesh_instance.material_override = mat
+			for i in mesh_instance.get_surface_override_material_count():
+				var s: ShaderMaterial = mat.duplicate()
+				var active_material = mesh_instance.get_active_material(i)
+				if active_material.albedo_texture:
+					s.set_shader_parameter("albedo_texture", active_material.albedo_texture)
+					s.set_shader_parameter("use_texture", true)
+				else:
+					s.set_shader_parameter("albedo_color", active_material.albedo_color)
+					s.set_shader_parameter("use_texture", false)
+				mesh_instance.set_surface_override_material(i, s)
 			mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		else:
-			mesh_instance.material_override = null
+			for i in mesh_instance.get_surface_override_material_count():
+				mesh_instance.set_surface_override_material(i, null)
 			mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	for child in node.get_children():
 		apply_mat_recursive(child, mat)

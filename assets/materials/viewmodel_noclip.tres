@@ -1,10 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://exj1wl8ifrmf"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://exj1wl8ifrmf"]
 
 [ext_resource type="Shader" path="res://assets/materials/viewmodel_noclip.gdshader" id="1_la4vo"]
-[ext_resource type="Texture2D" uid="uid://37lpyj3savse" path="res://assets/textures/dungeon_texture.png" id="2_0bgse"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_la4vo")
 shader_parameter/fov = 60.0
-shader_parameter/albedo_texture = ExtResource("2_0bgse")

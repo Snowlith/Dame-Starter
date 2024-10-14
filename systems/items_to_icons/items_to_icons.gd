@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var debug_viewing_time: float = 1
+
 @export_dir var item_dir
 @export_dir var icon_dir
 
@@ -30,7 +32,7 @@ func _ready():
 		
 		
 		await RenderingServer.frame_post_draw
-		await get_tree().create_timer(capture_time).timeout
+		await get_tree().create_timer(capture_time + debug_viewing_time).timeout
 		save_image(item_scene)
 		rig.remove_child(item_scene)
 	
@@ -56,11 +58,11 @@ func adjust_scene(scene_root: Node3D):
 
 	var max_dimension = combined_aabb.get_longest_axis_size()
 	
-	#_debug_aabbs.clear()
-	#_debug_aabbs.append(combined_aabb)
+	_debug_aabbs.clear()
+	_debug_aabbs.append(combined_aabb)
 	
-	#_debug_positions.clear()
-	#_debug_positions.append(scene_root.transform)
+	_debug_positions.clear()
+	_debug_positions.append(scene_root.transform)
 
 	# Adjust the scene position
 	
@@ -75,7 +77,7 @@ func get_combined_aabb_rec(node: Node3D, combined_aabb: AABB):
 		if mesh_instance.mesh:
 			var aabb_transform = mesh_instance.transform
 			aabb_transform.origin = Vector3.ZERO
-			var aabb = mesh_instance.mesh.get_aabb() * aabb_transform
+			var aabb = aabb_transform * mesh_instance.mesh.get_aabb()
 			aabb *= Transform3D(Basis(), -mesh_instance.transform.origin)
 			if not combined_aabb:
 				combined_aabb = aabb

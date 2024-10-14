@@ -13,7 +13,7 @@ font_size = 28
 offset_right = 128.0
 offset_bottom = 128.0
 script = ExtResource("1_3qxtx")
-shader_material = ExtResource("2_r1ol8")
+viewmodel_material = ExtResource("2_r1ol8")
 
 [node name="HoverPanel" type="Panel" parent="."]
 visible = false
