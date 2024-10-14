@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5ya1fnvgasiv"]
+
+[ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_ajmcl"]
+[ext_resource type="Script" path="res://components/interaction/door/sliding_door.gd" id="2_3bdvl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_udfve"]
+size = Vector3(0.59, 0.115, 0.725)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ixa5e"]
+size = Vector3(0.08, 0.35, 0.725)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4spb7"]
+size = Vector3(0.08, 0.35, 0.455)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_se0ut"]
+size = Vector3(0.598087, 0.453874, 0.717015)
+
+[node name="SlidingCompartment" type="AnimatableBody3D"]
+collision_layer = 2
+collision_mask = 0
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+sync_to_physics = false
+script = ExtResource("1_ajmcl")
+
+[node name="SlidingDoor" type="Node" parent="."]
+script = ExtResource("2_3bdvl")
+interpolation = "Bounce"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000345588, -0.00276017, 0)
+mesh = SubResource("BoxMesh_udfve")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.252454, 0.211853, 0)
+mesh = SubResource("BoxMesh_ixa5e")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.259751, 0.211853, 0)
+mesh = SubResource("BoxMesh_ixa5e")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0140943, 0.211853, 0.323757)
+mesh = SubResource("BoxMesh_4spb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000484109, 0.175015, 0.0123168)
+shape = SubResource("BoxShape3D_se0ut")

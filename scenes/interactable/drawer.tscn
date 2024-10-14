@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bnn2ye16c487e"]
 
-[ext_resource type="PackedScene" uid="uid://b5ya1fnvgasiv" path="res://scenes/interactable/sliding_door.tscn" id="1_nfujv"]
+[ext_resource type="PackedScene" uid="uid://b5ya1fnvgasiv" path="res://scenes/interactable/sliding_compartment.tscn" id="1_nfujv"]
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_vwfsb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixvvo"]

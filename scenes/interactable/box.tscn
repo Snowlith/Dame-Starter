@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://hnhfh32qlno2"]
+[gd_scene load_steps=9 format=3 uid="uid://hnhfh32qlno2"]
 
 [ext_resource type="ArrayMesh" uid="uid://dhpiqi2pr3otg" path="res://assets/old_meshes_2/box_small.tres" id="1_sfh0g"]
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_vsme0"]
@@ -7,13 +7,15 @@
 [ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="5_ysfh3"]
 [ext_resource type="Script" path="res://systems/inventory/item_list.gd" id="6_b8ojq"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qb5c4"]
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5l2qf"]
 points = PackedVector3Array(0.44998, 1, 0.44998, 0.44998, 0.94998, 0.5, 0.5, 0.94998, 0.44998, 0.44998, 1, -0.450078, -0.450078, 1, 0.44998, 0.44998, 0.0499217, 0.5, -0.450078, 0.94998, 0.5, 0.5, 0.94998, -0.450078, 0.5, 0.0499217, 0.44998, 0.44998, 0.94998, -0.5, -0.450078, 1, -0.450078, -0.5, 0.94998, 0.44998, 0.44998, 2.98023e-08, 0.44998, -0.450078, 0.0499217, 0.5, 0.5, 0.0499217, -0.450078, 0.44998, 0.0499217, -0.5, -0.450078, 0.94998, -0.5, -0.5, 0.94998, -0.450078, -0.5, 0.0499217, 0.44998, 0.44998, 2.98023e-08, -0.450078, -0.450078, 2.98023e-08, 0.44998, -0.450078, 0.0499217, -0.5, -0.5, 0.0499217, -0.450078, -0.450078, 2.98023e-08, -0.450078)
 
 [node name="RigidBody3D" type="RigidBody3D" groups=["interactable"]]
 collision_layer = 3
 collision_mask = 3
-mass = 5.0
+physics_material_override = SubResource("PhysicsMaterial_qb5c4")
 script = ExtResource("1_vsme0")
 
 [node name="BoxSmall" type="MeshInstance3D" parent="."]

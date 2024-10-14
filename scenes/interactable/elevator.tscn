@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5d66to1rl6f3"]
+
+[ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_8m3vh"]
+[ext_resource type="Script" path="res://components/interaction/door/sliding_door.gd" id="2_w476i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_udfve"]
+size = Vector3(1, 5, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hv23p"]
+points = PackedVector3Array(-0.5, -2.5, -0.5, -0.5, -2.5, 0.5, -0.5, 2.5, -0.5, 0.5, -2.5, -0.5, 0.5, -2.5, 0.5, -0.5, 2.5, 0.5, 0.5, 2.5, -0.5, 0.5, 2.5, 0.5)
+
+[node name="Elevator" type="AnimatableBody3D"]
+collision_mask = 0
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+sync_to_physics = false
+script = ExtResource("1_8m3vh")
+
+[node name="SlidingDoor" type="Node" parent="."]
+script = ExtResource("2_w476i")
+open_offset = Vector3(0, 4.5, 0)
+opening_duration = 3.0
+closing_duration = 3.0
+interpolation = "Elastic"
+easing = "Ease in out"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("BoxMesh_udfve")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("ConvexPolygonShape3D_hv23p")

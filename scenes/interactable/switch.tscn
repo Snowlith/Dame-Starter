@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://components/interaction/switch.gd" id="1_57y66"]
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_jj6cb"]
-[ext_resource type="Script" path="res://components/interaction/sliding_door.gd" id="3_idfct"]
+[ext_resource type="Script" path="res://components/interaction/door/sliding_door.gd" id="3_idfct"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3eh76"]
 size = Vector3(0.25, 0.25, 0.1)

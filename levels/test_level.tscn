@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=38 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="2_ooxqo"]
@@ -18,9 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://cj5vh5r0v3252" path="res://scenes/interactable/speed_area.tscn" id="14_58801"]
 [ext_resource type="PackedScene" uid="uid://hnhfh32qlno2" path="res://scenes/interactable/box.tscn" id="17_4otwc"]
 [ext_resource type="PackedScene" uid="uid://c13oa335whkhe" path="res://scenes/interactable/door.tscn" id="18_j2t1j"]
-[ext_resource type="PackedScene" uid="uid://b5ya1fnvgasiv" path="res://scenes/interactable/sliding_door.tscn" id="19_yfjv6"]
+[ext_resource type="PackedScene" uid="uid://b5ya1fnvgasiv" path="res://scenes/interactable/sliding_compartment.tscn" id="19_yfjv6"]
 [ext_resource type="PackedScene" uid="uid://bnn2ye16c487e" path="res://scenes/interactable/drawer.tscn" id="20_7rga7"]
 [ext_resource type="PackedScene" uid="uid://dtvnn4a8g0yxt" path="res://scenes/interactable/switch.tscn" id="21_27bn4"]
+[ext_resource type="PackedScene" uid="uid://bsl044fh7s51d" path="res://scenes/interactable/sliding_door.tscn" id="22_6pj4b"]
+[ext_resource type="PackedScene" uid="uid://c5d66to1rl6f3" path="res://scenes/interactable/elevator.tscn" id="23_xw0pm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_01ou0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -78,6 +80,9 @@ material = ExtResource("11_wcwd8")
 size = Vector2(25.435, 26.35)
 subdivide_width = 20
 subdivide_depth = 20
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ehthg"]
+size = Vector3(2.3, 1.085, 4.46601)
 
 [node name="TestLevel" type="Node3D"]
 
@@ -424,6 +429,36 @@ use_collision = true
 size = Vector3(12.5, 0.5, 13.5)
 material = ExtResource("4_jss3i")
 
+[node name="CSGBox3D144" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.25, 0.0717171, 85.6886)
+use_collision = true
+size = Vector3(2, 0.285034, 3)
+material = ExtResource("4_jss3i")
+
+[node name="CSGBox3D140" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0.1792, 74.6886)
+use_collision = true
+size = Vector3(2.5, 0.5, 4)
+material = ExtResource("4_jss3i")
+
+[node name="CSGBox3D141" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0.6792, 75.1886)
+use_collision = true
+size = Vector3(2.5, 0.5, 3)
+material = ExtResource("4_jss3i")
+
+[node name="CSGBox3D142" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 1.1792, 75.6886)
+use_collision = true
+size = Vector3(2.5, 0.5, 2)
+material = ExtResource("4_jss3i")
+
+[node name="CSGBox3D143" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 1.6792, 76.1886)
+use_collision = true
+size = Vector3(2.5, 0.5, 1)
+material = ExtResource("4_jss3i")
+
 [node name="CSGBox3D118" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.5, 2.1792, 77.4386)
 use_collision = true
@@ -461,13 +496,25 @@ size = Vector3(0.5, 4.5, 3)
 material = ExtResource("7_nt6et")
 
 [node name="CSGBox3D122" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2.1792, 85.4386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2.1792, 83.9386)
 use_collision = true
-size = Vector3(0.5, 4.5, 7.5)
+size = Vector3(0.5, 4.5, 4.5)
+material = ExtResource("7_nt6et")
+
+[node name="CSGBox3D146" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2.1792, 88.1886)
+use_collision = true
+size = Vector3(0.5, 4.5, 2)
 material = ExtResource("7_nt6et")
 
 [node name="CSGBox3D123" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 3.4292, 81.1886)
+use_collision = true
+size = Vector3(0.5, 2, 1)
+material = ExtResource("7_nt6et")
+
+[node name="CSGBox3D145" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 3.4292, 86.6886)
 use_collision = true
 size = Vector3(0.5, 2, 1)
 material = ExtResource("7_nt6et")
@@ -1284,7 +1331,7 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 39.9125,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.7547, 0.407299, 83.4434)
 
 [node name="Player" parent="." instance=ExtResource("2_ooxqo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3776, 0, 81.0232)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 32.9232, 2.38419e-07, 86.1328)
 
 [node name="Door" parent="." instance=ExtResource("19_yfjv6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.642, 0.4292, 78.5458)
@@ -1335,7 +1382,19 @@ omni_range = 7.32
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.75, 1.88782, 80.3191)
 
 [node name="Switch" parent="Switch" index="3" node_paths=PackedStringArray("entities_to_interact_with")]
-entities_to_interact_with = [NodePath("../../Door2")]
+entities_to_interact_with = [NodePath("../../Door2"), NodePath("../../Door3")]
+
+[node name="Switch3" parent="." instance=ExtResource("21_27bn4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.75, 1.88782, 85.8191)
+
+[node name="Switch" parent="Switch3" index="3" node_paths=PackedStringArray("entities_to_interact_with")]
+entities_to_interact_with = [NodePath("../../SlidingDoor"), NodePath("../../SlidingDoor2")]
+
+[node name="Switch4" parent="." instance=ExtResource("21_27bn4")]
+transform = Transform3D(1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, 37.75, 0.410406, 88.3191)
+
+[node name="Switch" parent="Switch4" index="3" node_paths=PackedStringArray("entities_to_interact_with")]
+entities_to_interact_with = [NodePath("../../Elevator")]
 
 [node name="Switch2" parent="." instance=ExtResource("21_27bn4")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 41.1727, 1.88782, 83.1701)
@@ -1343,5 +1402,23 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 41.172
 [node name="Switch" parent="Switch2" index="3" node_paths=PackedStringArray("nodes_to_show_when_on")]
 nodes_to_show_when_on = [NodePath("../../OmniLight3D"), NodePath("../../OmniLight3D2"), NodePath("../../OmniLight3D3")]
 
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.4427, 1.58359, 74.6542)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.898281, 0.439422, 0, -0.439422, 0.898281, 0, -1.13309, -0.721794)
+shape = SubResource("BoxShape3D_ehthg")
+
+[node name="SlidingDoor" parent="." instance=ExtResource("22_6pj4b")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.8958, 0.417087, 86.1878)
+
+[node name="SlidingDoor2" parent="." instance=ExtResource("22_6pj4b")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 39.8958, 0.417087, 87.1878)
+
+[node name="Elevator" parent="." instance=ExtResource("23_xw0pm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8873, 0.429201, 89.3807)
+
 [editable path="Switch"]
+[editable path="Switch3"]
+[editable path="Switch4"]
 [editable path="Switch2"]

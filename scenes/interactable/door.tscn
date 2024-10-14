@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c13oa335whkhe"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_jrptt"]
-[ext_resource type="Script" path="res://components/interaction/door.gd" id="2_i3uqu"]
+[ext_resource type="Script" path="res://components/interaction/door/rotating_door.gd" id="2_1fyen"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_udfve"]
 size = Vector3(1, 2, 0.165)
@@ -9,7 +9,7 @@ size = Vector3(1, 2, 0.165)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sqyr7"]
 points = PackedVector3Array(-0.5, -1, -0.0825, -0.5, -1, 0.0825, -0.5, 1, -0.0825, 0.5, -1, -0.0825, 0.5, -1, 0.0825, -0.5, 1, 0.0825, 0.5, 1, -0.0825, 0.5, 1, 0.0825)
 
-[node name="AnimatableBody3D" type="AnimatableBody3D"]
+[node name="Door" type="AnimatableBody3D"]
 collision_layer = 3
 collision_mask = 0
 axis_lock_angular_x = true
@@ -17,8 +17,8 @@ axis_lock_angular_z = true
 sync_to_physics = false
 script = ExtResource("1_jrptt")
 
-[node name="Door2" type="Node" parent="."]
-script = ExtResource("2_i3uqu")
+[node name="RotatingDoor" type="Node" parent="."]
+script = ExtResource("2_1fyen")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
