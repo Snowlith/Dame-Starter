@@ -15,12 +15,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"ShitFloor",
-			"translation":[
-				1,
-				-1,
-				15
-			]
+			"name":"ShitFloor"
 		}
 	],
 	"meshes":[

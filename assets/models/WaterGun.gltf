@@ -26,11 +26,6 @@
 				0.30000001192092896,
 				0.006750002037733793,
 				0.30000001192092896
-			],
-			"translation":[
-				-5.000593185424805,
-				1.9860570430755615,
-				0.10440194606781006
 			]
 		}
 	],
@@ -70,7 +65,7 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":3986,
+			"count":3982,
 			"max":[
 				0.20197610557079315,
 				171.19969177246094,
@@ -86,13 +81,13 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":3986,
+			"count":3982,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":3986,
+			"count":3982,
 			"type":"VEC2"
 		},
 		{
@@ -105,32 +100,32 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":47832,
+			"byteLength":47784,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":47832,
-			"byteOffset":47832,
+			"byteLength":47784,
+			"byteOffset":47784,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":31888,
-			"byteOffset":95664,
+			"byteLength":31856,
+			"byteOffset":95568,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":13080,
-			"byteOffset":127552,
+			"byteOffset":127424,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":140632,
+			"byteLength":140504,
 			"uri":"WaterGun.bin"
 		}
 	]

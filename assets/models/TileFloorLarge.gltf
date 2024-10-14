@@ -15,12 +15,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"TileFloorLarge",
-			"translation":[
-				4,
-				0,
-				12
-			]
+			"name":"TileFloorLarge"
 		}
 	],
 	"materials":[
