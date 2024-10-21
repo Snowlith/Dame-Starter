@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0y8bif4yygct"]
-
-[ext_resource type="ArrayMesh" uid="uid://bw2soub0g86g6" path="res://assets/old_meshes_2/candle.tres" id="1_3xwxm"]
-
-[node name="Candle" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = ExtResource("1_3xwxm")

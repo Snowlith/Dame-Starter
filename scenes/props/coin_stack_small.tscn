@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://wc03s716uy5q"]
-
-[ext_resource type="ArrayMesh" uid="uid://dihgiod5r2fse" path="res://assets/old_meshes_2/coin_stack_small.tres" id="1_gj5ts"]
-
-[node name="CoinStackSmall" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = ExtResource("1_gj5ts")
