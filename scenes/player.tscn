@@ -219,8 +219,6 @@ script = ExtResource("10_ggp8d")
 
 [node name="InitialItems" type="Node" parent="Inventory"]
 script = ExtResource("11_rymun")
-initial_items = Array[String](["res://items/dame_drink.tscn"])
-initial_amounts = Array[int]([1])
 
 [node name="ColorRect" type="ColorRect" parent="Inventory"]
 z_index = -5
@@ -317,7 +315,7 @@ offset_right = 841.0
 offset_bottom = 511.0
 
 [node name="Hand" type="Node3D" parent="Inventory/NinePatchRect/HandSlot"]
-transform = Transform3D(0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, 0.523012, 0.989197, -0.86123)
+transform = Transform3D(0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, 0.523012, 0.989201, -0.86123)
 top_level = true
 
 [node name="InventorySlot12" parent="Inventory/NinePatchRect" instance=ExtResource("15_dqtlo")]

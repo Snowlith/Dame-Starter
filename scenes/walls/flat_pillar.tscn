@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgjvuyg88i118"]
+
+[ext_resource type="PackedScene" uid="uid://c31kmx5sg8a1g" path="res://assets/models/Pillar-colonly.gltf" id="1_pyfai"]
+[ext_resource type="PackedScene" uid="uid://by5kfuerxypwc" path="res://assets/models/FlatPillar.gltf" id="2_3506h"]
+
+[node name="FlatPillar" type="Node3D"]
+
+[node name="Pillar-colonly2" parent="." instance=ExtResource("1_pyfai")]
+
+[node name="FlatPillar2" parent="." instance=ExtResource("2_3506h")]
