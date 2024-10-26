@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bepg6821mbuqr"]
+
+[ext_resource type="SystemFont" uid="uid://pk08352u7hw8" path="res://themes/dame_font.tres" id="1_5rl1b"]
+[ext_resource type="StyleBox" uid="uid://ci36kuhp6f33d" path="res://themes/style_boxes/hover_outline.tres" id="1_ctu4x"]
+[ext_resource type="StyleBox" uid="uid://cuujlxl2obw24" path="res://themes/style_boxes/normal.tres" id="2_vc7y5"]
+[ext_resource type="StyleBox" uid="uid://cu3t0dpqyg1fk" path="res://themes/style_boxes/pressed_outline.tres" id="3_s57hg"]
+[ext_resource type="StyleBox" uid="uid://ctcaa4xyc2dhb" path="res://themes/style_boxes/normal_outline.tres" id="4_w5ky0"]
+
+[resource]
+Button/fonts/font = ExtResource("1_5rl1b")
+Button/styles/focus = ExtResource("1_ctu4x")
+Button/styles/hover = ExtResource("1_ctu4x")
+Button/styles/normal = ExtResource("2_vc7y5")
+Button/styles/pressed = ExtResource("3_s57hg")
+GridContainer/constants/h_separation = 0
+GridContainer/constants/v_separation = 0
+Label/font_sizes/font_size = 18
+Label/fonts/font = ExtResource("1_5rl1b")
+MarginContainer/constants/margin_bottom = 4
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
+Panel/styles/panel = ExtResource("4_w5ky0")
+PanelContainer/styles/panel = ExtResource("4_w5ky0")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=44 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="2_ooxqo"]
@@ -21,7 +21,10 @@
 [ext_resource type="PackedScene" uid="uid://bnn2ye16c487e" path="res://scenes/interactable/drawer.tscn" id="20_7rga7"]
 [ext_resource type="PackedScene" uid="uid://dtvnn4a8g0yxt" path="res://scenes/interactable/switch.tscn" id="21_27bn4"]
 [ext_resource type="PackedScene" uid="uid://bsl044fh7s51d" path="res://scenes/interactable/sliding_door.tscn" id="22_6pj4b"]
+[ext_resource type="PackedScene" uid="uid://bakxrp26sqimq" path="res://systems/inventory/item/dropped_item.tscn" id="23_ryq8j"]
 [ext_resource type="PackedScene" uid="uid://c5d66to1rl6f3" path="res://scenes/interactable/elevator.tscn" id="23_xw0pm"]
+[ext_resource type="Resource" uid="uid://b1l0pf5a63rim" path="res://items/box.tres" id="24_lexb4"]
+[ext_resource type="Script" path="res://systems/inventory/slot/slot.gd" id="25_xwnvv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_01ou0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -91,6 +94,12 @@ size = Vector3(2.3, 1.085, 4.46601)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2fhcm"]
 size = Vector3(0.37, 4.185, 0.355)
+
+[sub_resource type="Resource" id="Resource_tn7rd"]
+script = ExtResource("25_xwnvv")
+item = ExtResource("24_lexb4")
+amount = 5
+capacity = 16
 
 [node name="TestLevel" type="Node3D"]
 
@@ -1477,7 +1486,7 @@ omni_range = 2.0
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.75, 1.88782, 80.3191)
 
 [node name="Switch" parent="Switch" index="3" node_paths=PackedStringArray("entities_to_interact_with")]
-entities_to_interact_with = [NodePath("../../Door2"), NodePath("../../Door3")]
+entities_to_interact_with = [NodePath("../../Door2")]
 
 [node name="Switch3" parent="." instance=ExtResource("21_27bn4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.75, 1.88782, 85.8191)
@@ -1542,6 +1551,10 @@ entities_to_interact_with = [NodePath("../../Door11"), NodePath("../../Door12"),
 nodes_to_show_when_on = [NodePath("../../OmniLight3D4"), NodePath("../../OmniLight3D5"), NodePath("../../OmniLight3D6")]
 nodes_to_hide_when_on = [NodePath("../../MeshInstance3D5"), NodePath("../../MeshInstance3D6"), NodePath("../../MeshInstance3D7")]
 stagger_time = 0.3
+
+[node name="DroppedItem" parent="." instance=ExtResource("23_ryq8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4352, 7.62939e-06, 86.1504)
+slot = SubResource("Resource_tn7rd")
 
 [editable path="Door14"]
 [editable path="Drawer"]

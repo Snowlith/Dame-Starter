@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://0745ac0okddn"]
+
+[ext_resource type="Script" path="res://systems/inventory/slot/hotbar_slot_ui.gd" id="1_4nsmf"]
+[ext_resource type="Theme" uid="uid://bepg6821mbuqr" path="res://themes/dame_theme.tres" id="1_ycen3"]
+[ext_resource type="Script" path="res://systems/inventory/slot/slot_ui_interface.gd" id="2_l0tkp"]
+[ext_resource type="StyleBox" uid="uid://cuujlxl2obw24" path="res://themes/style_boxes/normal.tres" id="2_n4mho"]
+[ext_resource type="Texture2D" uid="uid://cvjf23d67ave7" path="res://assets/textures/icon.svg" id="3_jyk7u"]
+
+[node name="HotbarSlotUI" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+theme = ExtResource("1_ycen3")
+theme_override_styles/panel = ExtResource("2_n4mho")
+script = ExtResource("1_4nsmf")
+
+[node name="SlotUIInterface" type="Control" parent="."]
+layout_mode = 2
+script = ExtResource("2_l0tkp")
+
+[node name="MarginContainer" type="MarginContainer" parent="SlotUIInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SlotUIInterface/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_jyk7u")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AmountLabel" type="Label" parent="SlotUIInterface"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "1"
+horizontal_alignment = 2

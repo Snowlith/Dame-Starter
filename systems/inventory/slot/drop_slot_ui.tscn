@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b14j47c5vo5qx"]
+
+[ext_resource type="Script" path="res://systems/inventory/slot/drop_slot_ui.gd" id="1_1jp8a"]
+[ext_resource type="Script" path="res://systems/inventory/slot/slot_ui_drag_drop.gd" id="2_qcp2p"]
+
+[node name="DropSlotUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1jp8a")
+
+[node name="SlotUIDragDrop" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_qcp2p")

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://b1l0pf5a63rim"]
+
+[ext_resource type="Texture2D" uid="uid://dy0l01b5welky" path="res://items/icons/box.png" id="1_5oipk"]
+[ext_resource type="Script" path="res://systems/inventory/item/item.gd" id="1_x3cp0"]
+[ext_resource type="PackedScene" uid="uid://covy3pga8jy0h" path="res://items/view_models/box.tscn" id="3_leq0m"]
+
+[resource]
+script = ExtResource("1_x3cp0")
+name = "Box"
+description = ""
+view_model = ExtResource("3_leq0m")
+icon = ExtResource("1_5oipk")
+is_stackable = true
+is_droppable = true
+rarity = "Common"
+icon_orientation = "Front"

@@ -1,84 +1,35 @@
 extends Component
 class_name Inventory
 
-var slots: Array[Slot]
-var size: int
-
-@onready var initial_items = $InitialItems
-
-# current problem:
-# since the item dropped by a broken box is the box itself, there is a cyclic dependency
+@export var size: int
+@export var slots: Array[Slot]
 
 func _ready():
-	slots.append(Slot.new())
-	get_initial_items()
-
-func get_initial_items():
-	for i in initial_items.initial_items.size():
-		var item = initial_items.initial_items[i]
-		var amount = 1
-		if initial_items.initial_amounts.size() > i:
-			amount = initial_items.initial_amounts[i]
-		item = load(item).instantiate()
-		if not item is Item:
-			continue
-		item.stack_size = amount
-		add_child(item)
-		item.area_col.disabled = true
-		collect(item, false)
-
-func drop_all():
-	var temp_drop_slot = DropSlot.new()
-	add_child(temp_drop_slot)
-	slots.append(temp_drop_slot)
-	for slot in slots:
-		if slot == temp_drop_slot:
-			return
-		if slot.is_empty():
-			return
-		temp_drop_slot._take_from_slot(slot, slot.amount)
-		temp_drop_slot.drop()
-	remove_child(temp_drop_slot)
-	temp_drop_slot.queue_free()
-		
+	slots.resize(max(size, slots.size()))
+	for i in slots.size():
+		if not slots[i]:
+			slots[i] = Slot.new()
 
 func insert(item: Item, amount: int = 1) -> int:
 	if amount <= 0 or not item:
 		return 0
+		
 	var remaining_amount = amount
-
 	# Try inserting into existing slots
 	if item.is_stackable:
 		remaining_amount = _insert_into_existing_slots(item, remaining_amount)
-
 	# Try inserting into empty slots
 	if remaining_amount > 0:
 		remaining_amount = _insert_into_empty_slots(item, remaining_amount)
-	return amount - remaining_amount
+	return remaining_amount
 
 func remove(item: Item, amount: int = 1) -> int:
 	if amount <= 0 or not item:
 		return 0
-	var remaining_amount = amount
-	remaining_amount = _remove_from_existing_slots(item, remaining_amount)
-	return amount - remaining_amount
+	return _remove_from_existing_slots(item, amount)
 
 func remove_from(slot: Slot, amount: int = 1):
 	slot.amount = clamp(slot.amount - amount, 0, slot.amount)
-
-func collect(item: Item, use_animation: bool = true):
-	if can_insert(item, item.stack_size):
-		if use_animation:
-			await item.play_collect()
-		### BUG: invalid removal condition, rare
-		item.get_parent().remove_child(item)
-		insert(item, item.stack_size)
-		item.queue_free()
-	else:
-		# make partly taken animation
-		# Only take as many items as possible
-		var items_taken = insert(item, item.stack_size)
-		item.stack_size -= items_taken
 
 func has(item: Item):
 	if not item:
@@ -163,6 +114,5 @@ func _remove_from_existing_slots(item: Item, remaining_amount: int) -> int:
 		else:
 			# Completely deplete slot
 			remaining_amount -= slot.amount
-			slot.item.queue_free()
 			slot.amount = 0
 	return remaining_amount

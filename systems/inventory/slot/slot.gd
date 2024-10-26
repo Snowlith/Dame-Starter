@@ -1,62 +1,50 @@
-extends Control
+extends Resource
 class_name Slot
 
-#var hovering = false
-
-# NOTE: position in drag could do some interesting stuff
-# TODO: write can_drop and drop in a way that visual indicator of blocked is there
-
-@export var capacity: int = 16
-
-var amount: int:
-	set(value):
-		if amount == value:
+@export var item: Item:
+	set(new_item):
+		if item and item.is_same(new_item):
 			return
-		amount = value
-		if amount <= 0:
+		if not new_item and amount != 0:
 			amount = 0
+		item = new_item
+		item_changed.emit()
+
+@export_range(0, 10000) var amount: int = 0:
+	set(new_amount):
+		if _is_ready and new_amount > capacity:
+			push_error("Amount is greater than capacity")
+			return
+		amount = max(0, new_amount)
+		if amount == 0:
 			item = null
 		amount_changed.emit()
 		
-var item: Item:
-	set(value):
-		if item == value:
-			return
-		item = value
-		item_changed.emit()
-		
+@export var capacity: int = 16
+
 signal item_changed
 signal amount_changed
 
+# HACK: exporting sucks on resources so gotta do this
+var _is_ready = false
+func _init():
+	call_deferred("_ready")
 func _ready():
-	set_process_input(false)
-	
-func get_icon_path():
-	if not item:
-		return ""
-	return "res://items/icons/" + item.scene_file_path.split('/')[-1] + '.png'
-
-# unused?
-func can_add(amount_to_add: int):
-	return amount_to_add + amount <= capacity
+	_is_ready = true
 
 func is_empty():
-	return item == null
+	return not item
 
-func get_item_copy():
-	if not item:
-		return null
-	return item.duplicate()
+func exchange_with(source_slot: Slot, desired_amount: int):
+	if source_slot.is_empty():
+		return
 	
-## Mouse hover
+	if is_empty() or (item.is_same(source_slot.item) and item.is_stackable):
+		combine_with(source_slot, desired_amount)
+	else:
+		swap_with(source_slot)
 
-func _take_from_slot(source_slot: Slot, desired_amount: int):
-	item = source_slot.get_item_copy()
-	var min_amount = min(desired_amount, capacity)
-	amount = min_amount
-	source_slot.amount -= min_amount
-
-func _swap_from_slot(source_slot: Slot):
+func swap_with(source_slot: Slot):
 	var temp_item = source_slot.item
 	var temp_amount = source_slot.amount
 	source_slot.item = item
@@ -64,15 +52,17 @@ func _swap_from_slot(source_slot: Slot):
 	item = temp_item
 	amount = temp_amount
 
-func _combine_from_slot(source_slot: Slot, desired_amount: int):
-	var total_amount = amount + desired_amount
-	if total_amount <= capacity:
-		   # Merge completely
-		amount = total_amount
-		source_slot.amount -= desired_amount
-	else:
-		var amount_to_add = capacity - amount
-		amount = capacity
-		source_slot.amount -= amount_to_add
+func combine_with(source_slot: Slot, desired_amount: int):
+	if not item:
+		item = source_slot.item
 	
-## Dragging
+	var transferable_amount = min(desired_amount, source_slot.amount)
+	var total_amount = amount + desired_amount
+	
+	if total_amount <= capacity:
+		amount = total_amount
+		source_slot.amount -= transferable_amount
+	else:
+		var remaining_capacity = capacity - amount
+		amount = capacity
+		source_slot.amount -= remaining_capacity
