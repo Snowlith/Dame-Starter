@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=27 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
 [ext_resource type="Script" path="res://systems/fps_camera/fps_camera.gd" id="2_kaij3"]
@@ -6,24 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
 [ext_resource type="Script" path="res://components/range_value/health.gd" id="4_1205x"]
 [ext_resource type="Script" path="res://components/state_machine/states/slide_state.gd" id="9_aa3x5"]
-[ext_resource type="Script" path="res://systems/inventory/visual_inventory.gd" id="10_ggp8d"]
-[ext_resource type="Script" path="res://systems/inventory/item_list.gd" id="11_rymun"]
-[ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="12_3y40k"]
-[ext_resource type="Script" path="res://systems/inventory/slot/drop_slot.gd" id="13_65181"]
 [ext_resource type="Script" path="res://components/camera_crouch_manager.gd" id="14_eheid"]
 [ext_resource type="Script" path="res://components/state_machine/states/water_state.gd" id="14_kihxp"]
-[ext_resource type="Texture2D" uid="uid://bgw8e1hralkgb" path="res://assets/textures/inventory_bg.png" id="14_kx0bo"]
-[ext_resource type="PackedScene" uid="uid://cu4a3g4md3w4a" path="res://systems/inventory/slot/standard_slot.tscn" id="15_dqtlo"]
-[ext_resource type="PackedScene" uid="uid://b1sahxvjtxvne" path="res://systems/inventory/ui/hover_menu.tscn" id="16_caq03"]
-[ext_resource type="PackedScene" uid="uid://dyuqkek3iqopo" path="res://systems/inventory/slot/hand_slot.tscn" id="16_jh6gq"]
-[ext_resource type="PackedScene" uid="uid://3fh5yaot8awe" path="res://systems/inventory/ui/context_menu.tscn" id="16_n384p"]
 [ext_resource type="Script" path="res://components/state_machine/state_machine.gd" id="17_mu2cs"]
 [ext_resource type="Script" path="res://components/state_machine/states/walk_state.gd" id="18_ql2pa"]
 [ext_resource type="Script" path="res://components/state_machine/states/air_state.gd" id="19_d37tt"]
 [ext_resource type="Script" path="res://components/state_machine/states/crouch_state.gd" id="19_jp43y"]
+[ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="19_xbb15"]
+[ext_resource type="PackedScene" uid="uid://bvxhi2871d2sc" path="res://systems/inventory/hotbar_ui.tscn" id="20_1hxwv"]
 [ext_resource type="Script" path="res://components/range_value/range_value_bar.gd" id="20_i1hms"]
 [ext_resource type="Script" path="res://components/state_machine/states/jump_state.gd" id="21_c7cuh"]
+[ext_resource type="PackedScene" uid="uid://075sa5fr7b7l" path="res://systems/inventory/inventory_ui.tscn" id="21_pndlx"]
 [ext_resource type="Script" path="res://components/state_machine/states/ladder_state.gd" id="22_6s06b"]
+[ext_resource type="PackedScene" uid="uid://dxae1xi6w0bjp" path="res://systems/inventory/context_menu/context_menu.tscn" id="22_ovcos"]
 [ext_resource type="Script" path="res://components/state_machine/states/swing_state.gd" id="23_tcx4j"]
 [ext_resource type="Script" path="res://components/camera_bob_manager.gd" id="24_46ms5"]
 [ext_resource type="Script" path="res://components/cheats.gd" id="27_ioq8s"]
@@ -41,10 +36,6 @@ radius = 0.39
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_n44de"]
-height = 2.17288
-radius = 0.829099
-
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 floor_constant_speed = true
 floor_max_angle = 0.872665
@@ -58,10 +49,7 @@ fov = 80.0
 script = ExtResource("2_kaij3")
 nodes_with_camera_offset = [NodePath("../CameraBobManager"), NodePath("../CameraCrouchManager")]
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="FPSCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.523012, -0.570339, -0.86123)
-remote_path = NodePath("../../Inventory/NinePatchRect/HandSlot/Hand")
-update_scale = false
+[node name="Hand" type="Node3D" parent="FPSCamera"]
 
 [node name="Interactor" type="Node3D" parent="FPSCamera"]
 script = ExtResource("3_ca87e")
@@ -205,154 +193,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -111.0
+offset_left = -336.915
 offset_top = -34.0
-offset_right = -17.0
+offset_right = -242.915
 offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 0
 show_percentage = false
 script = ExtResource("20_i1hms")
-
-[node name="Inventory" type="Node3D" parent="."]
-script = ExtResource("10_ggp8d")
-
-[node name="InitialItems" type="Node" parent="Inventory"]
-script = ExtResource("11_rymun")
-
-[node name="ColorRect" type="ColorRect" parent="Inventory"]
-z_index = -5
-material = ExtResource("12_3y40k")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_65181")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Inventory"]
-self_modulate = Color(0.3397, 0.419465, 0.43, 1)
-texture_filter = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -458.0
-offset_top = -281.0
-offset_right = 458.0
-offset_bottom = 281.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-mouse_filter = 0
-texture = ExtResource("14_kx0bo")
-patch_margin_left = 50
-patch_margin_top = 50
-patch_margin_right = 50
-patch_margin_bottom = 50
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
-
-[node name="SlotContainer" type="GridContainer" parent="Inventory/NinePatchRect"]
-custom_minimum_size = Vector2(140, 104)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -444.0
-offset_top = -269.0
-offset_right = 444.0
-offset_bottom = 269.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 6
-
-[node name="InventorySlot" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot2" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot3" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot4" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot5" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot6" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot7" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot8" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot13" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot9" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot10" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="InventorySlot11" parent="Inventory/NinePatchRect/SlotContainer" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-
-[node name="HandSlot" parent="Inventory/NinePatchRect" instance=ExtResource("16_jh6gq")]
-layout_mode = 0
-offset_left = 713.0
-offset_top = 383.0
-offset_right = 841.0
-offset_bottom = 511.0
-
-[node name="Hand" type="Node3D" parent="Inventory/NinePatchRect/HandSlot"]
-transform = Transform3D(0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, 0.523012, 0.989201, -0.86123)
-top_level = true
-
-[node name="InventorySlot12" parent="Inventory/NinePatchRect" instance=ExtResource("15_dqtlo")]
-layout_mode = 2
-offset_left = 84.0
-offset_top = 392.0
-offset_right = 212.0
-offset_bottom = 520.0
-capacity = 32
-
-[node name="Label" type="Label" parent="Inventory/NinePatchRect"]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 355.0
-offset_right = 245.0
-offset_bottom = 378.0
-text = "Big Slot: can fit more stuff"
-
-[node name="ContextMenu" parent="Inventory" instance=ExtResource("16_n384p")]
-visible = false
-offset_left = 15.0
-offset_top = 509.0
-offset_right = -1048.0
-offset_bottom = -69.0
-mouse_filter = 2
-
-[node name="HoverMenu" parent="Inventory" instance=ExtResource("16_caq03")]
-offset_left = 17.0
-offset_top = 179.0
-offset_right = 17.0
-offset_bottom = 179.0
-
-[node name="Area3D" type="Area3D" parent="Inventory"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12004, 0)
-shape = SubResource("CylinderShape3D_n44de")
 
 [node name="Cheats" type="Node" parent="."]
 script = ExtResource("27_ioq8s")
@@ -363,10 +211,38 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 74.0
+offset_left = 248.39
 offset_top = -37.0
-offset_right = 114.0
+offset_right = 288.39
 offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 horizontal_alignment = 1
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("19_xbb15")
+size = 24
+
+[node name="InventoryUI" parent="Inventory" node_paths=PackedStringArray("inventory", "context_menu", "hotbar_ui") instance=ExtResource("21_pndlx")]
+inventory = NodePath("..")
+context_menu = NodePath("ContextMenu")
+hotbar_ui = NodePath("Node/HotbarUI")
+
+[node name="Node" type="Node" parent="Inventory/InventoryUI"]
+
+[node name="HotbarUI" parent="Inventory/InventoryUI/Node" node_paths=PackedStringArray("hand") instance=ExtResource("20_1hxwv")]
+z_index = -1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -207.0
+offset_top = -74.0
+offset_right = 207.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+hand = NodePath("../../../../FPSCamera/Hand")
+
+[node name="ContextMenu" parent="Inventory/InventoryUI" instance=ExtResource("22_ovcos")]
