@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc7beffj14o8i"]
+
+[ext_resource type="PackedScene" uid="uid://bacf4io82hfl0" path="res://assets/models/FlatDoorway.gltf" id="1_gtqo4"]
+[ext_resource type="PackedScene" uid="uid://eveq3t2pjdg2" path="res://assets/models/Doorway-colonly.gltf" id="2_1ulhr"]
+
+[node name="FlatDoorway" type="Node3D"]
+
+[node name="FlatDoorway2" parent="." instance=ExtResource("1_gtqo4")]
+
+[node name="FlatDoorway-colonly2" parent="." instance=ExtResource("2_1ulhr")]

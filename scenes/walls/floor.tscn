@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://3eoquqbnbaq2"]
+
+[ext_resource type="PackedScene" uid="uid://b1wpfe60m8ug4" path="res://assets/models/Floor.gltf" id="1_ue2wt"]
+[ext_resource type="PackedScene" uid="uid://d4er1qv6a766v" path="res://assets/models/Floor-colonly.gltf" id="2_v6hwa"]
+
+[node name="Floor" type="Node3D"]
+
+[node name="Floor2" parent="." instance=ExtResource("1_ue2wt")]
+
+[node name="Floor-colonly2" parent="." instance=ExtResource("2_v6hwa")]

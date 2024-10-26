@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk564sm54ruqa"]
+
+[ext_resource type="PackedScene" uid="uid://xiygexmi2om4" path="res://assets/models/FlatPillarAccented.gltf" id="1_wta7k"]
+[ext_resource type="PackedScene" uid="uid://c31kmx5sg8a1g" path="res://assets/models/Pillar-colonly.gltf" id="2_i3vdu"]
+
+[node name="FlatPillarAccented" type="Node3D"]
+
+[node name="FlatPillarAccented2" parent="." instance=ExtResource("1_wta7k")]
+
+[node name="Pillar-colonly2" parent="." instance=ExtResource("2_i3vdu")]
