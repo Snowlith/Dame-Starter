@@ -27,9 +27,9 @@ func _ready() -> void:
 func change_scene(data: TransitionData) -> void:
 	if current_scene_path == data.scene_path or in_transition:
 		return
-	
+	print("here")
 	await _start_transition(data.transition)
-	
+	print("here2")
 	if data.player:
 		call_deferred("_deferred_change_scene_player", data.scene_path, data.player, data.id)
 	else:
@@ -91,6 +91,7 @@ func _spawn_using_loading_zone(player: Entity, id: String) -> bool:
 		return false
 	
 	for zone: LoadingZone in get_tree().get_nodes_in_group("loading zone"):
+		print("ZONE")
 		if not zone.target_id == id:
 			continue
 		zone.spawn(player)
@@ -103,11 +104,13 @@ func _start_transition(transition: PackedScene):
 	
 	if transition:
 		current_transition = transition.instantiate() as Transition
+		print("existeed")
 	elif default_transition:
 		current_transition = default_transition.instantiate() as Transition
+		print("used default")
 	else:
 		return
-		
+	
 	add_child(current_transition)
 	@warning_ignore("redundant_await")
 	await current_transition.fade_out()
@@ -117,7 +120,3 @@ func _end_transition():
 		current_transition.fade_in()
 	
 	in_transition = false
-	
-func _unhandled_key_input(event):
-	if event.is_action_pressed("quit"):
-		get_tree().quit()

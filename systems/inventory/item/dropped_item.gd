@@ -17,6 +17,7 @@ func _ready() -> void:
 		get_parent().remove_child(self)
 		queue_free()
 	var item_node = slot.item.view_model.instantiate()
+	item_node.process_mode = PROCESS_MODE_DISABLED
 	view_model.add_child(item_node)
 	anim_player.play("appear")
 

@@ -6,9 +6,6 @@ class_name WalkState
 @export var friction: float = 40
 
 @export var rigid_body_push_force: float = 2
-
-func _init():
-	input = {"left": 0, "right": 0, "up": 0, "down": 0}
 	
 func update_status(_delta: float) -> Status:
 	if _cb.is_on_floor():

@@ -25,7 +25,7 @@ size = Vector3(0.08, 0.35, 0.455)
 points = PackedVector3Array(-0.04, -0.175, -0.2275, 0.04, -0.175, -0.2275, -0.04, -0.175, 0.2275, -0.04, 0.174966, -0.2275, 0.04, 0.174966, -0.2275, 0.04, -0.175, 0.2275, -0.04, 0.174966, 0.2275, 0.04, 0.174966, 0.2275)
 
 [node name="SlidingCompartment" type="AnimatableBody3D"]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 0
 axis_lock_angular_x = true
 axis_lock_angular_z = true

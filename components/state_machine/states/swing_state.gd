@@ -23,11 +23,8 @@ var _is_attached: bool = false
 var swing_point: Vector3
 var swing_distance: float
 
-func _ready():
-	input_changed.connect(_on_input_changed)
-
-func _on_input_changed(action: String, value: int):
-	if action == "jump" and value:
+func _physics_process(delta):
+	if Input.is_action_pressed("jump"):
 		if not _cb.is_on_floor():
 			detach()
 
@@ -35,10 +32,7 @@ func _process(delta):
 	if _is_attached:
 		DebugDraw3D.draw_line(swing_point, _cb.global_transform.origin, Color(0, 0, 0.5))
 		DebugDraw3D.draw_position(Transform3D(Basis.IDENTITY, swing_point), Color(0, 1, 0))
-
-func _init():
-	input = {"left": 0, "right": 0, "up": 0, "down": 0, "jump": 0, "reel_in": 0}
-
+		
 func reel(distance: float):
 	swing_distance = max(swing_distance - distance, min_swing_distance)
 

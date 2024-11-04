@@ -18,7 +18,7 @@ size = Vector3(0.19, 0.19, 0.095)
 size = Vector3(0.248871, 0.242432, 0.151855)
 
 [node name="Switch" type="AnimatableBody3D"]
-collision_layer = 2
+collision_layer = 4
 sync_to_physics = false
 script = ExtResource("1_jj6cb")
 

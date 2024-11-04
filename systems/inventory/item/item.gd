@@ -1,7 +1,8 @@
 extends Resource
 class_name Item
 
-# View model scale should be handled by instantiated item itself
+# ViewModel scale should always be same as the scene
+# add a separate variable for dropped scale
 
 @export var name: String = "Item"
 @export_multiline var description: String = ""
@@ -12,6 +13,8 @@ class_name Item
 @export var is_stackable: bool = true
 @export var is_droppable: bool = true
 @export_enum("Common", "Rare", "Dame") var rarity: String = "Common"
+
+# This is kind of dumb since icons are no longer automatically assigned anyway
 @export_enum("Front", "Side", "Angled", "Top") var icon_orientation: String = "Front"
 
 @export var pickup_sound: AudioStream

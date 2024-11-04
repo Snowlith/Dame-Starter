@@ -4,7 +4,7 @@ class_name MovementState
 var _initial_snap_length: float
 
 func _get_input_vector():
-	return Vector3(input["right"] - input["left"], 0, input["down"] - input["up"])
+	return Vector3(input_int("right") - input_int("left"), 0, input_int("down") - input_int("up"))
 
 func _apply_acceleration(max_speed: float, acceleration: float, delta: float) -> void:
 	var input_vector = _cb.global_basis * _get_input_vector().normalized()

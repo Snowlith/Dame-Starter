@@ -11,6 +11,17 @@ class_name Door
 @export_enum("Linear", "Cubic", "Bounce", "Elastic", "Spring", "Sine") var interpolation: String = "Cubic"
 @export_enum("Ease in", "Ease out", "Ease in out", "Ease out in") var easing: String = "Ease out"
 
+func _ready():
+	if not target:
+		var parent = get_parent_entity()
+		if parent:
+			target = get_parent_entity()
+		else:
+			queue_free()
+			return
+	if target is AnimatableBody3D:
+		target.sync_to_physics = false
+		
 func interact(interactor: Interactor):
 	is_open = not is_open
 

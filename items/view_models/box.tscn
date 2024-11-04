@@ -10,3 +10,5 @@ script = ExtResource("1_3iobk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_f8tej")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

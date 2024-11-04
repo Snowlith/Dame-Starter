@@ -6,41 +6,24 @@ class_name StateMachine
 
 var states: Array = []
 var selected_state: State
-var _input_state_map: Dictionary
 
 @onready var label = $PanelContainer/Label
 
 signal state_changed
 
-# POTENTIAL BUG: if state machine is readied after children, children won't have _cb
+func _init():
+	# Ready runs before children
+	process_priority = -1
 
 func _ready():
+	if not get_parent_entity().is_multiplayer_authority():
+		queue_free()
+		return
 	states = get_parent_entity().get_components_of_type("State")
 	for state in states:
 		state.initialize(character_body)
 	if state_priority_order:
 		states.reverse()
-	_create_input_state_map()
-
-func _create_input_state_map():
-	_input_state_map.clear()
-	for state in states:
-		for action in state.input.keys():
-			if _input_state_map.has(action):
-				_input_state_map[action].append(state)
-			else:
-				_input_state_map[action] = [state]
-
-# For mouse input, use a different method
-func _unhandled_key_input(event):
-	if event.is_echo():
-		return
-	for action in _input_state_map.keys():
-		if event.is_action(action):
-			var result = int(event.is_pressed())
-			for state in _input_state_map[action]:
-				state.input[action] = result
-				state.input_changed.emit(action, result)
 
 func _physics_process(delta):
 	var state_priority = []

@@ -8,6 +8,10 @@ var _cached_typed_components: Dictionary
 @onready var _all_components: Array[Component] = _find_components(self, "Component")
 
 # TODO: rewrite as get_components when typed dicts come
+# TODO: use child added and removed signals
+
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
 
 func _ready():
 	_register_components(_all_components)

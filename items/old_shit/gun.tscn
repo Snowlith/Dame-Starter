@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwvbhtnkrpm7h"]
+[gd_scene load_steps=13 format=3 uid="uid://bwvbhtnkrpm7h"]
 
 [ext_resource type="PackedScene" uid="uid://id0pf2s058my" path="res://items/old_shit/template scenes/base_item.tscn" id="1_86wio"]
 [ext_resource type="Script" path="res://items/old_shit/scripts/gun.gd" id="1_d271n"]
-[ext_resource type="AudioStream" uid="uid://co3l5qa6232wo" path="res://addons/kenney_interface_sounds/close_004.wav" id="3_cb15s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ij7uo"]
 albedo_color = Color(0.17, 0.17, 0.17, 1)
@@ -118,9 +117,6 @@ _data = {
 
 [node name="Gun" instance=ExtResource("1_86wio")]
 script = ExtResource("1_d271n")
-shoot_sound = ExtResource("3_cb15s")
-view_name = "Dame Gun"
-view_description = "You have a seemingly infinite supply of bullets."
 is_stackable = false
 icon_orientation = "Side"
 

@@ -13,12 +13,9 @@ var current_water
 
 var camera_offset: Vector3
 
-func _init():
-	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0, "jump": 0}
-
 func handle(delta: float):
 	var input_vector = _get_input_vector()
-	input_vector.y = input["jump"] - input["crouch"]
+	input_vector.y = input_int("jump") - input_int("crouch")
 	input_vector = _cb.global_basis * input_vector
 	
 	if not input_vector:

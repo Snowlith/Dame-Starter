@@ -8,6 +8,7 @@ script = ExtResource("1_bemho")
 default_transition = ExtResource("2_4m8vw")
 
 [node name="Label" type="Label" parent="."]
+z_index = 5
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -18,6 +19,7 @@ text = "Scene"
 horizontal_alignment = 2
 
 [node name="Label2" type="Label" parent="."]
+z_index = 5
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

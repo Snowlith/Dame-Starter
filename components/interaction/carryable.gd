@@ -23,7 +23,7 @@ var _default_layers: int
 func _unhandled_input(event):
 	if event.is_action_pressed("interact"):
 		drop()
-	if event.is_action_pressed("primary attack"):
+	if event.is_action_pressed("primary_attack"):
 		throw()
 
 func _ready():

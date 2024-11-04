@@ -9,13 +9,12 @@ var _init_pos: Vector3
 # TODO: sounds
 
 func _ready():
-	if target:
-		if target is AnimatableBody3D:
-			target.sync_to_physics = false
-		await get_parent_entity().ready # Make sure top level == true
-		_init_pos = target.position
-	else:
-		queue_free()
+	super()
+	if not target:
+		return
+	if not target.is_node_ready():
+		await target.ready
+	_init_pos = target.position
 
 func interact(interactor: Interactor):
 	is_open = not is_open

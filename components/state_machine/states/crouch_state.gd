@@ -9,9 +9,6 @@ class_name CrouchState
 
 var camera_offset: Vector3
 
-func _init():
-	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0}
-
 func enter():
 	super()
 	cam_crouch.enable()
@@ -26,7 +23,7 @@ func update_status(delta: float) -> Status:
 		return Status.INACTIVE
 	if cam_crouch.is_hitting_head():
 		return Status.ACTIVE_FORCED
-	elif input["crouch"]:
+	elif Input.is_action_pressed("crouch"):
 		return Status.ACTIVE
 	return Status.INACTIVE
 

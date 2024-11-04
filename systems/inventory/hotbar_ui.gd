@@ -1,6 +1,7 @@
 extends Control
 class_name HotbarUI
 
+@export var item_user: Entity
 @export var hand: Node3D
 @onready var selected_panel = $MarginContainer/HBoxContainer/HotbarSlotUI/SelectedPanel
 
@@ -31,7 +32,7 @@ func _update_hand():
 	var item_node = hand_slot_ui.slot.item.view_model.instantiate() as Node3D
 	hand.add_child(item_node)
 	if item_node is ItemBehavior:
-		item_node.equip()
+		item_node.user = item_user
 
 func assign_slots(slot_container):
 	var hotbar_uis = find_children("", "HotbarSlotUI")

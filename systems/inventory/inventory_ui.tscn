@@ -18,6 +18,8 @@ size_flags_vertical = 4
 theme = ExtResource("1_0mmxo")
 script = ExtResource("1_e5nwt")
 hotbar_target_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer2")
+opening_actions = Array[String](["toggle_inventory"])
+closing_actions = Array[String](["close_menu", "toggle_inventory"])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = ExtResource("1_0fmsg")

@@ -8,16 +8,22 @@ class_name RotatingDoor
 
 var _init_angle: float
 
+var _last_tween: Tween
+
 # TODO: sounds
+# TODO: make an option to move the collider like a minecraft door
+# less glitchy 
+# use test body motion thing to validate door opening
+
+# tween col shape angle in opposite dir
 
 func _ready():
-	if target:
-		if target is AnimatableBody3D:
-			target.sync_to_physics = false
-		await get_parent_entity().ready # Make sure top level == true
-		_init_angle = target.rotation.y
-	else:
-		queue_free()
+	super()
+	if not target:
+		return
+	if not target.is_node_ready():
+		await target.ready
+	_init_angle = target.rotation.y
 
 func interact(interactor: Interactor):
 	is_open = not is_open
@@ -29,8 +35,8 @@ func interact(interactor: Interactor):
 	else:
 		target_rotation.y += deg_to_rad(closed_angle)
 	
-	var tween = create_tween().bind_node(target).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(target, "rotation", target_rotation, get_duration())
+	_last_tween = create_tween().bind_node(target).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_last_tween.tween_property(target, "rotation", target_rotation, get_duration())
 
 func _get_entity_side(entity_position: Vector3) -> int:
 	match rotation_direction:

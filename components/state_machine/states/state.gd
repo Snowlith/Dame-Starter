@@ -5,11 +5,10 @@ class_name State
 
 enum Status {INACTIVE, ACTIVE, FORCED, ACTIVE_FORCED}
 
-signal input_changed(action: String, value: int)
-
-var input: Dictionary
-
 var _cb: CharacterBody3D
+
+func input_int(action: String) -> int:
+	return int(Input.is_action_pressed(action))
 
 func initialize(cb: CharacterBody3D) -> void:
 	_cb = cb

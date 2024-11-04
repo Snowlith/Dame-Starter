@@ -1,7 +1,7 @@
 extends Component
 class_name Interactor
 
-@export_flags_3d_physics var interactable_layers: int = 0b00000000_00000000_00000000_00000010
+@export_flags_3d_physics var interactable_layers: int = 0b00000000_00000000_00000000_00000100
 
 @onready var ray_cast: RayCast3D = $RayCast3D
 @onready var panel: Control = $Panel
@@ -10,6 +10,8 @@ class_name Interactor
 var _enabled: bool = true
 
 # TODO: add cooldown after interacting and dropping carryable
+
+# TODO: simplify input handling, no unhandled input
 
 func _ready():
 	ray_cast.add_exception(get_parent_entity() as PhysicsBody3D)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=31 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
 [ext_resource type="Script" path="res://systems/fps_camera/fps_camera.gd" id="2_kaij3"]
@@ -19,9 +19,16 @@
 [ext_resource type="PackedScene" uid="uid://075sa5fr7b7l" path="res://systems/inventory/inventory_ui.tscn" id="21_pndlx"]
 [ext_resource type="Script" path="res://components/state_machine/states/ladder_state.gd" id="22_6s06b"]
 [ext_resource type="PackedScene" uid="uid://dxae1xi6w0bjp" path="res://systems/inventory/context_menu/context_menu.tscn" id="22_ovcos"]
+[ext_resource type="PackedScene" uid="uid://j2on3sovf35h" path="res://systems/menu/pause_menu/pause_menu_ui.tscn" id="23_m6bw7"]
 [ext_resource type="Script" path="res://components/state_machine/states/swing_state.gd" id="23_tcx4j"]
 [ext_resource type="Script" path="res://components/camera_bob_manager.gd" id="24_46ms5"]
 [ext_resource type="Script" path="res://components/cheats.gd" id="27_ioq8s"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nv2fy"]
+size = Vector3(0.605, 0.105, 0.71)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lw4bm"]
+size = Vector3(0.535, 0.41, 0.42)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lb0yt"]
 radius = 0.4
@@ -36,7 +43,17 @@ radius = 0.39
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_52eyb"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2
+collision_mask = 5
 floor_constant_speed = true
 floor_max_angle = 0.872665
 floor_snap_length = 0.25
@@ -50,13 +67,14 @@ script = ExtResource("2_kaij3")
 nodes_with_camera_offset = [NodePath("../CameraBobManager"), NodePath("../CameraCrouchManager")]
 
 [node name="Hand" type="Node3D" parent="FPSCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.510445, -0.0682315, -0.894002)
 
 [node name="Interactor" type="Node3D" parent="FPSCamera"]
 script = ExtResource("3_ca87e")
 
 [node name="RayCast3D" type="RayCast3D" parent="FPSCamera/Interactor"]
 target_position = Vector3(0, 0, -4)
-collision_mask = 3
+collision_mask = 5
 debug_shape_custom_color = Color(0.824082, 9.14484e-07, 0.458211, 1)
 
 [node name="Panel" type="Panel" parent="FPSCamera/Interactor"]
@@ -103,6 +121,16 @@ grow_vertical = 2
 texture = ExtResource("3_ey6jl")
 expand_mode = 1
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="FPSCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442215, -0.0221641)
+mesh = SubResource("BoxMesh_nv2fy")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="FPSCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636556, 0.0997427)
+mesh = SubResource("BoxMesh_lw4bm")
+skeleton = NodePath("../..")
+
 [node name="StandCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_lb0yt")
@@ -120,8 +148,6 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-cast_shadow = 3
 mesh = SubResource("CapsuleMesh_6nc5s")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("character_body")]
@@ -230,7 +256,7 @@ hotbar_ui = NodePath("Node/HotbarUI")
 
 [node name="Node" type="Node" parent="Inventory/InventoryUI"]
 
-[node name="HotbarUI" parent="Inventory/InventoryUI/Node" node_paths=PackedStringArray("hand") instance=ExtResource("20_1hxwv")]
+[node name="HotbarUI" parent="Inventory/InventoryUI/Node" node_paths=PackedStringArray("item_user", "hand") instance=ExtResource("20_1hxwv")]
 z_index = -1
 anchors_preset = 7
 anchor_left = 0.5
@@ -243,6 +269,13 @@ offset_right = 207.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
+item_user = NodePath("../../../..")
 hand = NodePath("../../../../FPSCamera/Hand")
 
 [node name="ContextMenu" parent="Inventory/InventoryUI" instance=ExtResource("22_ovcos")]
+layout_mode = 0
+
+[node name="PauseMenuUI" parent="." instance=ExtResource("23_m6bw7")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_52eyb")

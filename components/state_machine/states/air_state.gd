@@ -5,9 +5,6 @@ class_name AirState
 @export var max_speed: float = 2
 @export var acceleration: float = 40
 
-func _init():
-	input = {"left": 0, "right": 0, "up": 0, "down": 0}
-
 func update_status(delta: float):
 	if not _cb.is_on_floor():
 		return Status.ACTIVE

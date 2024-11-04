@@ -16,11 +16,8 @@ var ladder_normal: Vector2
 
 # TODO: make player slide down after a while
 
-func _init():
-	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0, "jump": 0}
-
 func handle(delta: float):
-	var climb_direction = input["jump"] - input["crouch"]
+	var climb_direction = input_int("jump") - input_int("crouch")
 	
 	if climb_direction == 0:
 		_cb.velocity.y = lerp(_cb.velocity.y, 0.0, climb_friction * delta)

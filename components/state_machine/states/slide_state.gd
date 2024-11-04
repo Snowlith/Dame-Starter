@@ -21,9 +21,6 @@ var _previous_velocity: Vector3
 var _current_grounded: bool
 var _previous_grounded: bool
 
-func _init():
-	input = {"left": 0, "right": 0, "up": 0, "down": 0, "crouch": 0}
-
 func enter():
 	super()
 	if not _previous_grounded:
@@ -65,7 +62,7 @@ func update_status(delta: float) -> Status:
 	
 	# TODO: only check for hitting head when crouching
 	
-	if input["crouch"] and (is_slope_steep or is_velocity_sufficient):
+	if Input.is_action_pressed("crouch") and (is_slope_steep or is_velocity_sufficient):
 		if cam_crouch.is_hitting_head():
 			return Status.ACTIVE_FORCED
 		else:
