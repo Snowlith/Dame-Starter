@@ -22,19 +22,20 @@ func _ready():
 	if not item_dir:
 		return
 	for filename in DirAccess.get_files_at(item_dir):
-		var item_scene := load(item_dir + "/" + filename).instantiate() as Item
-		if not item_scene:
+		var item: Item = load(item_dir + "/" + filename)
+		if not is_instance_valid(item):
 			continue
-		item_scene.process_mode = PROCESS_MODE_DISABLED
-		var rig = get_rig(item_scene)
-		rig.add_child(item_scene)
-		adjust_scene(item_scene)
-		
+		var view_model = item.view_model.instantiate()
+		view_model.process_mode = PROCESS_MODE_DISABLED
+		var rig = get_rig(item)
+		rig.add_child(view_model)
+		adjust_scene(view_model)
 		
 		await RenderingServer.frame_post_draw
 		await get_tree().create_timer(capture_time + debug_viewing_time).timeout
-		save_image(item_scene)
-		rig.remove_child(item_scene)
+		save_image(item)
+		rig.remove_child(view_model)
+		view_model.queue_free()
 	
 	get_tree().quit()
 
@@ -94,7 +95,8 @@ func save_image(item):
 	var image = sub_viewport.get_viewport().get_texture().get_image()
 	var image_path = icon_dir + "/%s.png" % get_item_name(item)
 	image.save_png(image_path)
+	#item.view_model = image
 	
 func get_item_name(item: Item):
-	return item.scene_file_path.split('/')[-1]
+	return item.resource_path.split('/')[-1]
 	#.trim_suffix('.tscn')

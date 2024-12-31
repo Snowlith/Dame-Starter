@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=59 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Texture2D" uid="uid://cnn7bor6s1hf0" path="res://assets/sky/autumn_field_puresky_4k.exr" id="1_2cbns"]
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
@@ -13,7 +13,7 @@
 [ext_resource type="Material" uid="uid://yxixeuylf1rx" path="res://assets/materials/water.tres" id="11_wcwd8"]
 [ext_resource type="Script" path="res://scripts/water.gd" id="12_43twi"]
 [ext_resource type="PackedScene" uid="uid://7gepbj547uc5" path="res://scenes/interactable/jump_pad.tscn" id="12_mcq7p"]
-[ext_resource type="PackedScene" uid="uid://cwu48ccfvyfcr" path="res://scenes/interactable/ladder.tscn" id="13_31seh"]
+[ext_resource type="PackedScene" uid="uid://cwu48ccfvyfcr" path="res://scenes/ladder.tscn" id="13_31seh"]
 [ext_resource type="PackedScene" uid="uid://cj5vh5r0v3252" path="res://scenes/interactable/speed_area.tscn" id="14_58801"]
 [ext_resource type="PackedScene" uid="uid://hnhfh32qlno2" path="res://scenes/interactable/box.tscn" id="17_4otwc"]
 [ext_resource type="PackedScene" uid="uid://c13oa335whkhe" path="res://scenes/interactable/door.tscn" id="18_j2t1j"]
@@ -27,8 +27,11 @@
 [ext_resource type="Resource" uid="uid://b1l0pf5a63rim" path="res://items/box.tres" id="24_lexb4"]
 [ext_resource type="Script" path="res://components/interaction/door/sliding_door.gd" id="25_fyb0d"]
 [ext_resource type="Script" path="res://systems/inventory/slot/slot.gd" id="25_xwnvv"]
-[ext_resource type="Resource" uid="uid://dd3kqlcxq7sa" path="res://items/nimuseal.tres" id="29_uxpya"]
+[ext_resource type="Script" path="res://scripts/inheritance_test.gd" id="30_5cd4i"]
 [ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="30_6rwtq"]
+[ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="31_bgij8"]
+[ext_resource type="Resource" uid="uid://dw85tfg4agy1m" path="res://items/handgun.tres" id="32_6tyeb"]
+[ext_resource type="Resource" uid="uid://c8cncf13j6hqk" path="res://items/bullet.tres" id="33_40cxd"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6yu1f"]
 panorama = ExtResource("1_2cbns")
@@ -111,11 +114,27 @@ capacity = 16
 
 [sub_resource type="Resource" id="Resource_ffoht"]
 script = ExtResource("25_xwnvv")
-item = ExtResource("29_uxpya")
-amount = 5
-capacity = 16
+item = ExtResource("33_40cxd")
+amount = 32
+capacity = 32
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fjbx1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yvm0q"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_spurr"]
+
+[sub_resource type="Resource" id="Resource_uvvpb"]
+script = ExtResource("25_xwnvv")
+item = ExtResource("32_6tyeb")
+amount = 1
+capacity = 16
+
+[sub_resource type="Resource" id="Resource_1udex"]
+script = ExtResource("25_xwnvv")
+item = ExtResource("33_40cxd")
+amount = 16
+capacity = 16
 
 [node name="TestLevel" type="Node3D"]
 
@@ -1398,13 +1417,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.692, -21, -6.7079)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3909, -21, -6.3728)
 
 [node name="Door2" parent="." instance=ExtResource("18_j2t1j")]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 39.9125, 0.42148, 80.689)
-
-[node name="MeshInstance3D" parent="Door2" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.5, -20, 11)
-
-[node name="CollisionShape3D" parent="Door2" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.5, -20, 11)
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 28.8824, -20.5607, -1.29045)
 
 [node name="Door11" parent="." instance=ExtResource("18_j2t1j")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 31.9125, -21.0785, 20.514)
@@ -1419,18 +1432,14 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 31.9125,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.7547, -20.5927, 1.4434)
 
 [node name="Door14" parent="." instance=ExtResource("18_j2t1j")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48.9391, 0.407299, 82.1974)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 37.8395, -20.5738, 0.176558)
 collision_layer = 1
 
 [node name="RotatingDoor" parent="Door14" index="0"]
 rotation_direction = "Counterclockwise"
 
 [node name="MeshInstance3D" parent="Door14" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.5, -19.9819, 11)
 mesh = SubResource("BoxMesh_1khcu")
-
-[node name="CollisionShape3D" parent="Door14" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.5, -20, 11)
 
 [node name="Door" parent="." instance=ExtResource("19_yfjv6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.642, -20.5708, -3.4542)
@@ -1655,6 +1664,28 @@ target_id = "spawn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2119, -22.5096, -82)
 shape = SubResource("BoxShape3D_fjbx1")
 disabled = true
+
+[node name="RigidBody3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -20.227, 31)
+script = ExtResource("30_5cd4i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_yvm0q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_spurr")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Player" parent="." instance=ExtResource("31_bgij8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7934, -21, 8.6748)
+
+[node name="DroppedItem3" parent="." instance=ExtResource("23_ryq8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.462, -21, 1.5227)
+slot = SubResource("Resource_uvvpb")
+
+[node name="DroppedItem4" parent="." instance=ExtResource("23_ryq8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.462, -21, -1.23742)
+slot = SubResource("Resource_1udex")
 
 [editable path="Door2"]
 [editable path="Door14"]

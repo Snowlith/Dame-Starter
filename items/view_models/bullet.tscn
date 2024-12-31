@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://baewhflse63nh"]
+
+[ext_resource type="Material" uid="uid://bdiokccwj2i2d" path="res://assets/materials/prototype/prototype_gray.tres" id="1_boi4a"]
+[ext_resource type="Material" uid="uid://kesteoy7q4xa" path="res://assets/materials/gold.tres" id="2_em4n5"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d27j4"]
+material = ExtResource("1_boi4a")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_235bs"]
+material = ExtResource("2_em4n5")
+radius = 0.05
+height = 0.1
+
+[node name="Bullet" type="Node3D"]
+
+[node name="Meshes" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
+mesh = SubResource("CylinderMesh_d27j4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100038, 0)
+mesh = SubResource("SphereMesh_235bs")

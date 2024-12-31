@@ -39,6 +39,7 @@ func has(item: Item):
 			return true
 	return false
 
+# TODO: write this better, what even is this
 func count(item: Item, stackable: bool) -> int:
 	var tally = 0
 	if item == null:
@@ -92,7 +93,10 @@ func _insert_into_empty_slots(item: Item, remaining_amount: int) -> int:
 		# Only consider empty slots
 		if slot.item:
 			continue
-		slot.item = item.duplicate()
+		
+		# DUPLICATE IS BAD
+		slot.item = item #.duplicate()
+		#slot.item.take_over_path(item.resource_path) # Duplicate erases the resource path
 		var amount_to_add = min(remaining_amount, slot.capacity)
 		if not item.is_stackable:
 			amount_to_add = 1

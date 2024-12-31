@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://kx0bm4wmbgfu"]
 
 [ext_resource type="Theme" uid="uid://bepg6821mbuqr" path="res://themes/dame_theme.tres" id="1_tcs30"]
-[ext_resource type="Script" path="res://scripts/host_button.gd" id="2_jplcq"]
-[ext_resource type="Script" path="res://scripts/join_button.gd" id="3_55de4"]
+[ext_resource type="Script" path="res://scripts/play_button.gd" id="2_jplcq"]
+[ext_resource type="Script" path="res://scripts/quit_button.gd" id="3_kohhm"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -41,16 +41,15 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HostButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Host Server"
+text = "Play"
 script = ExtResource("2_jplcq")
 target_scene_path = "res://levels/test_level.tscn"
 id = "spawn"
 
-[node name="JoinButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Join Server"
-script = ExtResource("3_55de4")
-target_scene_path = "res://levels/test_level.tscn"
-id = "spawn"
+text = "Quit
+"
+script = ExtResource("3_kohhm")

@@ -27,7 +27,7 @@ func _on_body_entered(body: Node3D):
 	var entity = body as Entity
 	if not entity:
 		return
-	var inventory: Inventory = entity.get_component("Inventory")
+	var inventory: Inventory = entity.get_component(Inventory)
 	if not inventory:
 		return
 	var amount_left = inventory.insert(slot.item, slot.amount)

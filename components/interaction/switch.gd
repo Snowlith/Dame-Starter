@@ -7,6 +7,8 @@ class_name Switch
 
 @export var stagger_time: float = 0
 
+@export var toggle_sound: AudioStream
+
 func _ready():
 	_toggle_visible(nodes_to_show_when_on, is_on, 0)
 	_toggle_visible(nodes_to_hide_when_on, not is_on, 0)
@@ -19,7 +21,7 @@ func _toggle_visible(nodes: Array, on: bool, stagger: float):
 
 func _interact_nodes(nodes: Array, interactor: Interactor, stagger: float):
 	for entity in nodes:
-		var interactables = entity.get_components_of_type("Interactable")
+		var interactables = entity.get_components(Interactable)
 		for interactable: Interactable in interactables:
 			interactable.interact(interactor)
 		if stagger:
@@ -30,3 +32,4 @@ func interact(interactor: Interactor):
 	_toggle_visible(nodes_to_show_when_on, is_on, stagger_time)
 	_toggle_visible(nodes_to_hide_when_on, not is_on, stagger_time)
 	_interact_nodes(entities_to_interact_with, interactor, stagger_time)
+	Audio.play_sound(toggle_sound)

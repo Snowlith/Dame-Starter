@@ -26,7 +26,7 @@ func _on_dropped(data):
 	if not dropped:
 		return
 	var dropped_slot = Slot.new()
-	dropped_slot.item = source_slot.item.duplicate()
+	dropped_slot.item = source_slot.item #.duplicate()
 	dropped_slot.amount = desired_amount
 	
 	dropped.slot = dropped_slot

@@ -1,7 +1,6 @@
 extends Component
 class_name StateMachine
 
-@export var character_body: CharacterBody3D
 @export_enum("First child is highest priority:0", "First child is lowest priority:1") var state_priority_order: int = 1
 
 var states: Array = []
@@ -16,12 +15,9 @@ func _init():
 	process_priority = -1
 
 func _ready():
-	if not get_parent_entity().is_multiplayer_authority():
-		queue_free()
-		return
-	states = get_parent_entity().get_components_of_type("State")
-	for state in states:
-		state.initialize(character_body)
+	if not get_parent_entity().is_node_ready():
+		await get_parent_entity().ready
+	states = get_parent_entity().get_components(State)
 	if state_priority_order:
 		states.reverse()
 

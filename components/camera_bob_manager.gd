@@ -1,7 +1,7 @@
 extends Component
 class_name CameraBobManager
 
-@onready var character_body: CharacterBody3D = get_parent_entity() as PhysicsBody3D
+@onready var character_body: CharacterBody3D = get_parent_entity().get_physics_body()
 
 @export var frequency := Vector2(1, 2)
 @export var amplitude := Vector2(0.04, 0.08)

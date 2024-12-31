@@ -14,4 +14,3 @@ func _on_pressed():
 	transition_data.transition = transition
 	transition_data.id = id
 	SceneManager.change_scene(transition_data)
-	Lobby.join_server()

@@ -11,7 +11,7 @@ func _on_body_entered(body: Node3D):
 	var entity = body as Entity
 	if not entity:
 		return
-	var water_state = entity.get_component("WaterState")
+	var water_state = entity.get_component(WaterState)
 	if not water_state:
 		return
 	if water_state.enter_water(self):
@@ -23,5 +23,5 @@ func _on_body_exited(body: Node3D):
 		return
 	var found = entities.find(entity)
 	if found != -1:
-		entity.get_component("WaterState").exit_water()
+		entity.get_component(WaterState).exit_water()
 		entities.remove_at(found)

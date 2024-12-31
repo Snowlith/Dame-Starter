@@ -24,8 +24,6 @@ var use_interp: bool = true
 # ALso make a camera manager component!!!
 
 func _ready():
-	if get_parent().is_multiplayer_authority():
-		make_current()
 	assert(get_parent() is CharacterBody3D)
 	player = get_parent()
 		
@@ -41,7 +39,6 @@ func _ready():
 	old_transform = player.global_transform
 
 func _unhandled_input(event: InputEvent):
-	if not get_parent().is_multiplayer_authority(): return
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
 	var mouse_event := event as InputEventMouseMotion
@@ -59,7 +56,6 @@ func _physics_process(_delta):
 	new_transform = player.transform
 
 func _process(delta):
-	if not get_parent().is_multiplayer_authority(): return
 	var f = Engine.get_physics_interpolation_fraction()
 	if use_interp:
 		global_transform.origin = old_transform.interpolate_with(new_transform, f).origin

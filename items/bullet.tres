@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://c8cncf13j6hqk"]
+
+[ext_resource type="Script" path="res://systems/inventory/item/item.gd" id="1_0e2yq"]
+[ext_resource type="Texture2D" uid="uid://mutjsjm2p7as" path="res://items/icons/bullet.tres.png" id="1_pjkd5"]
+[ext_resource type="PackedScene" uid="uid://baewhflse63nh" path="res://items/view_models/bullet.tscn" id="3_apke0"]
+
+[resource]
+script = ExtResource("1_0e2yq")
+name = "Bullet"
+description = "Used in the handgun"
+view_model = ExtResource("3_apke0")
+icon = ExtResource("1_pjkd5")
+is_stackable = true
+is_droppable = true
+rarity = "Common"
+icon_orientation = "Angled"

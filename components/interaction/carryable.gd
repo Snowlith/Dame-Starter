@@ -10,7 +10,7 @@ class_name Carryable
 
 @export_flags_3d_physics var layers_while_carrying: int = 0b00000000_00000000_00000000_00000010
 
-@onready var _rb: RigidBody3D = get_parent_entity() as PhysicsBody3D
+@onready var _rb: RigidBody3D = get_parent_entity().get_physics_body()
 
 var _interactor = null
 

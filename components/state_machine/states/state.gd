@@ -5,14 +5,11 @@ class_name State
 
 enum Status {INACTIVE, ACTIVE, FORCED, ACTIVE_FORCED}
 
-var _cb: CharacterBody3D
+@onready var _cb: CharacterBody3D = get_parent_entity().get_physics_body()
 
 func input_int(action: String) -> int:
 	return int(Input.is_action_pressed(action))
-
-func initialize(cb: CharacterBody3D) -> void:
-	_cb = cb
-
+	
 func enter() -> void:
 	pass
 

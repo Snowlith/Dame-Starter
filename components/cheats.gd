@@ -3,7 +3,7 @@ class_name Cheats
 
 @onready var label = $Label
 
-@onready var physics_body: PhysicsBody3D = get_parent_entity() as PhysicsBody3D
+@onready var physics_body: PhysicsBody3D = get_parent_entity().get_physics_body()
 
 func _process(delta):
 	label.text = "Velocity: " + str(snapped(Vector3(physics_body.velocity.x, 0, physics_body.velocity.z).length(), 0.01))

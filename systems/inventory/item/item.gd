@@ -1,6 +1,11 @@
 extends Resource
 class_name Item
 
+
+# TODO: make an inheritance hierarchy for different types of items
+
+# TODO: add an icon for item resources
+
 # ViewModel scale should always be same as the scene
 # add a separate variable for dropped scale
 
@@ -23,4 +28,4 @@ class_name Item
 func is_same(item: Item):
 	if not item:
 		return false
-	return resource_path == item.resource_path
+	return item == self

@@ -24,6 +24,9 @@
 [ext_resource type="Script" path="res://components/camera_bob_manager.gd" id="24_46ms5"]
 [ext_resource type="Script" path="res://components/cheats.gd" id="27_ioq8s"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_gifap"]
+size = Vector3(0.035, 1.1, 0.18)
+
 [sub_resource type="BoxMesh" id="BoxMesh_nv2fy"]
 size = Vector3(0.605, 0.105, 0.71)
 
@@ -43,14 +46,6 @@ radius = 0.39
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nc5s"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_52eyb"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 collision_mask = 5
@@ -67,7 +62,12 @@ script = ExtResource("2_kaij3")
 nodes_with_camera_offset = [NodePath("../CameraBobManager"), NodePath("../CameraCrouchManager")]
 
 [node name="Hand" type="Node3D" parent="FPSCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.510445, -0.0682315, -0.894002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.595, -0.608, -0.744)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FPSCamera/Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+mesh = SubResource("BoxMesh_gifap")
 
 [node name="Interactor" type="Node3D" parent="FPSCamera"]
 script = ExtResource("3_ca87e")
@@ -123,11 +123,13 @@ expand_mode = 1
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="FPSCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442215, -0.0221641)
+cast_shadow = 3
 mesh = SubResource("BoxMesh_nv2fy")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="FPSCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636556, 0.0997427)
+cast_shadow = 3
 mesh = SubResource("BoxMesh_lw4bm")
 skeleton = NodePath("../..")
 
@@ -148,12 +150,12 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 3
 mesh = SubResource("CapsuleMesh_6nc5s")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("character_body")]
+[node name="StateMachine" type="Node" parent="."]
 process_priority = -1
 script = ExtResource("17_mu2cs")
-character_body = NodePath("..")
 
 [node name="WalkState" type="Node" parent="StateMachine"]
 script = ExtResource("18_ql2pa")
@@ -276,6 +278,3 @@ hand = NodePath("../../../../FPSCamera/Hand")
 layout_mode = 0
 
 [node name="PauseMenuUI" parent="." instance=ExtResource("23_m6bw7")]
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_52eyb")

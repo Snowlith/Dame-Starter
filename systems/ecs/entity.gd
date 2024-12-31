@@ -1,55 +1,80 @@
-extends PhysicsBody3D
+extends Node3D
 class_name Entity
 
 var components: Dictionary
 
+# TODO: THIS
 var _cached_typed_components: Dictionary
 
-@onready var _all_components: Array[Component] = _find_components(self, "Component")
+func get_physics_body() -> PhysicsBody3D:
+	var node: Node = self
+	return node as PhysicsBody3D
+#
+#func _ready():
+	#child_entered_tree.connect(_on_child_entered_tree)
+	#child_exiting_tree.connect(_on_child_exiting_tree)
+	#
+	#for child in get_children():
+		#_on_child_entered_tree(child)
 
-# TODO: rewrite as get_components when typed dicts come
-# TODO: use child added and removed signals
+func get_component(type: Object) -> Component:
+	return components.get(type, null)
 
-func _enter_tree():
-	set_multiplayer_authority(str(name).to_int())
+func has_component(type: Object) -> bool:
+	return components.has(type)
 
-func _ready():
-	_register_components(_all_components)
-
-func get_component(c_name: String) -> Component:
-	if components.has(c_name):
-		return components[c_name]
-	return null
-
-func get_components_of_type(t_name: String) -> Array[Component]:
-	if _cached_typed_components.has(t_name):
-		return _cached_typed_components[t_name]
-	var filtered = _find_components(self, t_name)
-	_cached_typed_components[t_name] = filtered
-	return filtered
-
-func has_component(c_name: String) -> bool:
-	return components.has(c_name)
-	
-func _find_components(node: Node, t_name: String) -> Array[Component]:
+# TODO: cache results in cached typed components
+func get_components(type: Object) -> Array[Component]:
 	var result: Array[Component] = []
-	result.append_array(node.find_children("", t_name, false))
-	for child in node.get_children():
-		if child is Entity:
-			continue
-		result.append_array(_find_components(child, t_name))
+	for component in components.values():
+		if is_instance_of(component, type):
+			result.append(component)
 	return result
 
-func _register_components(to_register: Array[Component]) -> void:
-	for component in to_register:
-		var c_name = _get_component_name(component)
-		if components.has(c_name):
-			push_error("Duplicate component " + str(component) + " at " + str(self))
-		else:
-			components[c_name] = component
+#func _on_child_entered_tree(node: Node):
+	#if is_instance_of(node, Entity):
+		#return
+	#
+	#if node is Component:
+		#_register_component(node)
+	#
+	#node.child_entered_tree.connect(_on_child_entered_tree)
+	#node.child_exiting_tree.connect(_on_child_exiting_tree)
+	#
+	#for child in node.get_children():
+		#_on_child_entered_tree(child)
+#
+#func _on_child_exiting_tree(node):
+	#if is_instance_of(node, Entity):
+		#return
+		#
+	#if node is Component:
+		#_unregister_component(node)
+		#
+	#node.child_entered_tree.disconnect(_on_child_entered_tree)
+	#node.child_exiting_tree.disconnect(_on_child_exiting_tree)
+	#
+	#for child in node.get_children():
+		#_on_child_exiting_tree(child)
 
-func _get_component_name(c: Component):
-	var default = c.script.get_global_name()
-	if not default:
-		return c.script.get_base_script().get_global_name()
-	return default
+func register_component(component: Component):
+	var type: Object = component.get_script()
+	if has_component(type):
+		push_error("Duplicate component " + str(component) + " at " + str(self))
+	else:
+		components[type] = component
+
+func unregister_component(component: Component):
+	var type: Object = component.get_script()
+	if has_component(type):
+		components.erase(type)
+
+#func _find_child_components(node: Node) -> Array[Component]:
+	#var result: Array[Component] = []
+	#result.append_array(node.find_children("", "Component", false))
+	#for child in node.get_children():
+		#if child is Entity:
+			#continue
+		#result.append_array(_find_child_components(child))
+	#return result
+##

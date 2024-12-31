@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtvnn4a8g0yxt"]
+[gd_scene load_steps=9 format=3 uid="uid://dtvnn4a8g0yxt"]
 
 [ext_resource type="Script" path="res://components/interaction/switch.gd" id="1_57y66"]
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_jj6cb"]
 [ext_resource type="Script" path="res://components/interaction/door/sliding_door.gd" id="3_idfct"]
+[ext_resource type="AudioStream" uid="uid://ccl2fs18hlx7b" path="res://addons/kenney rpg audio/chop.ogg" id="3_ljmlm"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3eh76"]
 size = Vector3(0.25, 0.25, 0.1)
@@ -36,6 +37,7 @@ shape = SubResource("BoxShape3D_wljkn")
 
 [node name="Switch" type="Node" parent="."]
 script = ExtResource("1_57y66")
+toggle_sound = ExtResource("3_ljmlm")
 toggle_On_prompt = "[F] Turn on"
 toggle_off_prompt = "[F] Turn off"
 

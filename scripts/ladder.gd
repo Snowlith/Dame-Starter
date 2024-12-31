@@ -14,7 +14,7 @@ func _on_body_entered(body: Node3D):
 	var entity = body as Entity
 	if not entity:
 		return
-	var ladder_state = entity.get_component("LadderState")
+	var ladder_state = entity.get_component(LadderState)
 	if not ladder_state:
 		return
 	ladder_state.enter_ladder(self, ladder_normal)
@@ -26,5 +26,5 @@ func _on_body_exited(body: Node3D):
 		return
 	var found = entities.find(entity)
 	if found != -1:
-		entity.get_component("LadderState").exit_ladder()
+		entity.get_component(LadderState).exit_ladder()
 		entities.remove_at(found)

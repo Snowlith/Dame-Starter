@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dd3kqlcxq7sa"]
 
+[ext_resource type="Texture2D" uid="uid://b5fa6qf8hbawl" path="res://items/icons/nimuseal.tres.png" id="1_0o3pl"]
 [ext_resource type="Script" path="res://systems/inventory/item/item.gd" id="1_8p7r3"]
-[ext_resource type="Texture2D" uid="uid://cugv0cmjufklx" path="res://items/old_shit/icons/healing_potion.tscn.png" id="1_gek0d"]
 [ext_resource type="PackedScene" uid="uid://4xvssfkd3j2w" path="res://items/view_models/nimu_seal.tscn" id="3_u2eya"]
 
 [resource]
@@ -9,8 +9,8 @@ script = ExtResource("1_8p7r3")
 name = "NimuSeal"
 description = "Hyly nimu!"
 view_model = ExtResource("3_u2eya")
-icon = ExtResource("1_gek0d")
+icon = ExtResource("1_0o3pl")
 is_stackable = true
 is_droppable = true
 rarity = "Common"
-icon_orientation = "Front"
+icon_orientation = "Angled"

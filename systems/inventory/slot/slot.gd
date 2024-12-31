@@ -33,7 +33,7 @@ func _ready():
 	_is_ready = true
 
 func is_empty():
-	return not item
+	return not is_instance_valid(item)
 
 func exchange_with(source_slot: Slot, desired_amount: int):
 	if source_slot.is_empty():

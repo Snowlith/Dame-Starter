@@ -10,6 +10,3 @@ func _set_slot(new_slot):
 	slot = new_slot
 	interface.connect_slot_signals(slot)
 	interface.refresh(slot)
-
-func get_update_signal():
-	return slot.item_changed

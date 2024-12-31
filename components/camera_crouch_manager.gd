@@ -8,7 +8,7 @@ class_name CameraCrouchManager
 @export var crouch_offset := Vector3(0, -0.5, 0)
 @export var crouch_enter_exit_duration: float = 0.3
 
-@onready var _cb: CharacterBody3D = get_parent_entity() as PhysicsBody3D
+@onready var _cb: CharacterBody3D = get_parent_entity().get_physics_body()
 
 var camera_offset: Vector3
 

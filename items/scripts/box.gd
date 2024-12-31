@@ -10,12 +10,12 @@ func _unhandled_input(event):
 		return
 	if anim_player.is_playing():
 		return
-	if event.is_action_pressed("primary_attack"):
-		primary_attack()
+	if event.is_action_pressed("primary"):
+		primary()
 	#elif event.is_action_pressed("inspect"):
 		#play_inspect()
 
-func primary_attack():
+func primary():
 	shoot()
 	anim_player.play("fire")
 	Audio.play_sound(shoot_sound)

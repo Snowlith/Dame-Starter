@@ -14,7 +14,7 @@ var _enabled: bool = true
 # TODO: simplify input handling, no unhandled input
 
 func _ready():
-	ray_cast.add_exception(get_parent_entity() as PhysicsBody3D)
+	ray_cast.add_exception(get_parent_entity().get_physics_body())
 	ray_cast.enabled = true
 	panel.hide()
 
@@ -40,7 +40,7 @@ func _physics_process(delta):
 		panel.hide()
 		return
 	var text = ""
-	for interactable: Interactable in target_entity.get_components_of_type("Interactable"):
+	for interactable: Interactable in target_entity.get_components(Interactable):
 		if not is_instance_valid(interactable):
 			continue
 		text = interactable.get_prompt()
@@ -56,7 +56,7 @@ func get_pos_along_ray(distance: float):
 	return ray_cast.global_position - ray_cast.global_transform.basis.z * distance
 	
 func start_interaction(entity: Entity):
-	for interactable: Interactable in entity.get_components_of_type("Interactable"):
+	for interactable: Interactable in entity.get_components(Interactable):
 		if not is_instance_valid(interactable):
 			continue
 		interactable.interact(self)

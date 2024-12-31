@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h7p3j5nc8jys"
-path.s3tc="res://.godot/imported/gun.tscn.png-286bf99e8eb18ffe88fedca0b8b91a0f.s3tc.ctex"
+uid="uid://dkm5bgx1edf7t"
+path="res://.godot/imported/box.tres.png-08540e03d2da66bebca08bd051a81a55.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/old_shit/icons/gun.tscn.png"
-dest_files=["res://.godot/imported/gun.tscn.png-286bf99e8eb18ffe88fedca0b8b91a0f.s3tc.ctex"]
+source_file="res://items/icons/box.tres.png"
+dest_files=["res://.godot/imported/box.tres.png-08540e03d2da66bebca08bd051a81a55.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

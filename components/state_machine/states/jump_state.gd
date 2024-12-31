@@ -12,7 +12,7 @@ var _is_input_queued: bool = false
 
 # TODO: make slope boost jump less op, maybe add area where it is possible
 # TODO: add force jump (maybe better to have a more flexible impulse system)
-
+	
 func _physics_process(delta):
 	if Input.is_action_pressed("jump"):
 		_is_input_queued = true
@@ -30,7 +30,7 @@ func _leniency_over():
 	_is_input_queued = false
 	
 func update_status(delta: float):
-	if (_cb.is_on_floor() or _time_since_left_ground < coyote_time) and _is_input_queued:
+	if _is_input_queued and (_cb.is_on_floor() or _time_since_left_ground < coyote_time):
 		return Status.ACTIVE
 	return Status.INACTIVE
 
@@ -42,5 +42,6 @@ func handle(delta: float):
 			_cb.velocity.y = strength
 	
 	_time_since_left_ground = 100
-	_cb.move_and_slide()
 	_is_input_queued = false
+	
+	_cb.move_and_slide()
