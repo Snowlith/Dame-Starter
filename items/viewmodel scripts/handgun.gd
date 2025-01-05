@@ -1,19 +1,20 @@
 extends ItemBehavior
 
-@export var required_bullet_item: Item
 @export var loaded_bullets: int = 0
 @export var max_bullets: int = 6
 
+@export var required_bullet_item: Item
+
 @export var shoot_sound: AudioStream
 @export var reload_sound: AudioStream
-
+		
 func _unhandled_input(event):
 	if event is InputEventMouseMotion or event.is_echo():
 		return
 	if %AnimationPlayer.is_playing():
 		return
 	if event.is_action_pressed("primary"):
-		var inventory: Inventory = user.get_component(Inventory)
+		var inventory: Inventory = _user.get_component(Inventory)
 		if not inventory:
 			return
 		if loaded_bullets <= 0:
@@ -22,12 +23,13 @@ func _unhandled_input(event):
 		loaded_bullets -= 1
 		update_ammo_counter()
 		%AnimationPlayer.play("primary")
+		%MuzzleFlash.emitting = true
 		Audio.play_sound(shoot_sound)
 	elif event.is_action_pressed("reload"):
-		var inventory: Inventory = user.get_component(Inventory)
+		var inventory: Inventory = _user.get_component(Inventory)
 		if not inventory:
 			return
-		var inventory_bullets = inventory.count(required_bullet_item, true)
+		var inventory_bullets = inventory.count(required_bullet_item)
 		var bullets_to_load = min(inventory_bullets, max_bullets - loaded_bullets)
 		if bullets_to_load <= 0:
 			return
@@ -45,7 +47,7 @@ func shoot():
 	var to = from + -cam.global_transform.basis.z * 100
 	var ray_params = PhysicsRayQueryParameters3D.create(from, to)
 	
-	ray_params.exclude = [user.get_rid()]
+	ray_params.exclude = [_user.get_rid()]
 	
 	var ray = space_state.intersect_ray(ray_params)
 	if ray.has("collider"):

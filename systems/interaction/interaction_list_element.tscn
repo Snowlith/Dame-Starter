@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://kisyygtx578y"]
+
+[ext_resource type="Script" path="res://systems/interaction/interaction_list_element.gd" id="1_n445n"]
+[ext_resource type="PackedScene" uid="uid://dgjlsboap5b1d" path="res://systems/input_manager/input_icon.tscn" id="1_qnbi5"]
+
+[node name="InteractionListElement" type="HBoxContainer"]
+script = ExtResource("1_n445n")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="InputIcon" parent="MarginContainer" instance=ExtResource("1_qnbi5")]
+scale = Vector2(0.3, 0.3)
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="PromptContainer" type="VBoxContainer" parent="."]
+layout_mode = 2

@@ -14,6 +14,7 @@ height = 0.293927
 radius = 0.597495
 
 [node name="Area3D" type="Area3D"]
+collision_mask = 3
 script = ExtResource("1_6ymft")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

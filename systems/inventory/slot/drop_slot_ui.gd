@@ -1,16 +1,30 @@
 extends SlotUI
 class_name DropSlotUI
 
-var _dropped_scene = preload("res://systems/inventory/item/dropped_item.tscn")
+@export var user: Entity
+@export var user_camera: Camera3D
+
+@export var throw_strength: float = 10
+@export var hotbar_ui: HotbarUI
+
+const DROPPED_ITEM_PACKED = preload("res://systems/inventory/item/dropped_item.tscn")
 
 @onready var drag_drop: SlotUIDragDrop = $SlotUIDragDrop
 
 func _ready():
 	slot = Slot.new()
-	slot.capacity = 100000000
 	
 	drag_drop.set_drop_validation_callable(_on_drop_requested)
 	drag_drop.dropped.connect(_on_dropped)
+
+func _unhandled_key_input(event):
+	if event.is_echo():
+		return
+	if event.is_action_pressed("drop"):
+		var dropping_shit_slot = hotbar_ui.hotbar[hotbar_ui.selected_slot_index].slot
+		if dropping_shit_slot.is_empty():
+			return
+		_on_dropped({"slot": dropping_shit_slot, "amount": 1})
 
 func _on_drop_requested(data: Dictionary):
 	var has_source_slot = data.has("slot")
@@ -22,19 +36,19 @@ func _on_dropped(data):
 	var source_slot = data["slot"] as Slot
 	var desired_amount = data["amount"] as int
 	
-	var dropped = _dropped_scene.instantiate() as DroppedItem
-	if not dropped:
+	var dropped_item = DROPPED_ITEM_PACKED.instantiate() as DroppedItem
+	if not dropped_item:
 		return
-	var dropped_slot = Slot.new()
-	dropped_slot.item = source_slot.item #.duplicate()
-	dropped_slot.amount = desired_amount
+	var dropped_item_slot = Slot.new()
+	dropped_item_slot.item = source_slot.item
+	dropped_item_slot.amount = desired_amount
+	dropped_item_slot.cached_viewmodel = source_slot.cached_viewmodel
 	
-	dropped.slot = dropped_slot
-	get_tree().current_scene.add_child(dropped)
+	dropped_item.slot = dropped_item_slot
+	get_tree().current_scene.add_child(dropped_item)
 	
-	var cam = get_viewport().get_camera_3d()
-	dropped.global_position = cam.global_position - cam.global_basis.z * 3
-	print(cam.global_basis.z)
+	dropped_item.global_position = user_camera.global_position-user_camera.global_basis.z
+	dropped_item.throw(-user_camera.global_basis.z * throw_strength, [user])
 		
 	slot.exchange_with(source_slot, desired_amount)
 	slot.amount = 0

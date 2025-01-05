@@ -82,7 +82,7 @@ func _check_snap_ray(target: Vector3) -> bool:
 	var from = _cb.global_position
 	var to = from + target
 	
-	DebugDraw3D.draw_line(from, to, Color(0, 0, 1))
+	#DebugDraw3D.draw_line(from, to, Color(0, 0, 1))
 	var ray_params = PhysicsRayQueryParameters3D.create(from, to)
 	var rid_array: Array[RID]
 	rid_array.append(exclude)

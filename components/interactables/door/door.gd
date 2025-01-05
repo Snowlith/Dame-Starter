@@ -1,7 +1,5 @@
-extends Interactable
+extends Toggleable
 class_name Door
-
-@export var is_open: bool = false
 
 @export var target: Node3D
 
@@ -15,18 +13,16 @@ func _ready():
 	if not target:
 		var parent = get_parent_entity()
 		if parent:
-			target = get_parent_entity()
+			target = parent
 		else:
 			queue_free()
 			return
 	if target is AnimatableBody3D:
 		target.sync_to_physics = false
-		
-func interact(interactor: Interactor):
-	is_open = not is_open
 
+# TEST THIS
 func get_duration() -> float:
-	return opening_duration if is_open else closing_duration
+	return closing_duration if enabled else opening_duration
 	
 func get_interpolation() -> Tween.TransitionType:
 	match interpolation:

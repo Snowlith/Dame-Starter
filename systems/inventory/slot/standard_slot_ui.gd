@@ -3,7 +3,10 @@ class_name StandardSlotUI
 
 @onready var interface: SlotUIInterface = $SlotUIInterface
 @onready var drag_drop: SlotUIDragDrop = $SlotUIDragDrop
-@onready var button: Control = $Button
+@onready var button: Button = $Button
+
+signal hover_started
+signal hover_ended
 
 func _set_slot(new_slot):
 	if slot == new_slot:
@@ -19,6 +22,9 @@ func _ready():
 	
 	drag_drop.dropped.connect(_on_dropped)
 	button.pressed.connect(_on_pressed)
+	
+	mouse_entered.connect(func(): hover_started.emit())
+	mouse_exited.connect(func(): hover_ended.emit())
 
 func _on_pressed():
 	if not slot.item:

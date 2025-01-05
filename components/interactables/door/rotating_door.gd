@@ -26,11 +26,11 @@ func _ready():
 	_init_angle = target.rotation.y
 
 func interact(interactor: Interactor):
-	is_open = not is_open
+	super(interactor)
 	
 	var side = _get_entity_side(interactor.get_parent_entity().global_position)
 	var target_rotation = Vector3(0, _init_angle, 0)
-	if is_open:
+	if enabled:
 		target_rotation.y += side * deg_to_rad(open_angle)
 	else:
 		target_rotation.y += deg_to_rad(closed_angle)

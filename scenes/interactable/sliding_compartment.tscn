@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b5ya1fnvgasiv"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_ajmcl"]
-[ext_resource type="Script" path="res://components/interaction/door/sliding_door.gd" id="2_3bdvl"]
+[ext_resource type="Script" path="res://components/interactables/door/sliding_door.gd" id="2_3bdvl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_udfve"]
 size = Vector3(0.59, 0.115, 0.725)
@@ -36,6 +36,8 @@ script = ExtResource("1_ajmcl")
 script = ExtResource("2_3bdvl")
 target = NodePath("..")
 interpolation = "Bounce"
+enable_prompt = "Open"
+disable_prompt = "Close"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000345588, -0.00276017, 0)

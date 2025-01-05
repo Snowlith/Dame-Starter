@@ -5,6 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_u7efj"]
 
 [node name="Water" type="Area3D"]
+collision_mask = 3
 monitorable = false
 script = ExtResource("1_jrtns")
 

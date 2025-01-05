@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgjlsboap5b1d"]
+
+[ext_resource type="Texture2D" uid="uid://c8kxrddm2nttd" path="res://assets/input_icons/keyboard_icons.png" id="1_eksm5"]
+[ext_resource type="Script" path="res://systems/input_manager/input_icon.gd" id="1_khb0u"]
+
+[node name="InputIcon" type="Sprite2D"]
+texture = ExtResource("1_eksm5")
+centered = false
+hframes = 10
+vframes = 10
+frame = 1
+script = ExtResource("1_khb0u")

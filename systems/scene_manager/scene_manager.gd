@@ -27,9 +27,7 @@ func _ready() -> void:
 func change_scene(data: TransitionData) -> void:
 	if current_scene_path == data.scene_path or in_transition:
 		return
-	print("here")
 	await _start_transition(data.transition)
-	print("here2")
 	if data.player:
 		call_deferred("_deferred_change_scene_player", data.scene_path, data.player, data.id)
 	else:
@@ -104,10 +102,8 @@ func _start_transition(transition: PackedScene):
 	
 	if transition:
 		current_transition = transition.instantiate() as Transition
-		print("existeed")
 	elif default_transition:
 		current_transition = default_transition.instantiate() as Transition
-		print("used default")
 	else:
 		return
 	

@@ -1,8 +1,8 @@
 extends Control
 class_name ContextMenu
 
-@onready var box_container = $MarginContainer/BoxContainer
-@onready var button = $MarginContainer/BoxContainer/Button
+@onready var box_container: Control = $MarginContainer/BoxContainer
+@onready var button: Button = $MarginContainer/BoxContainer/Button
 
 var actions: Dictionary
 

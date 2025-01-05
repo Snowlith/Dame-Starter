@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsl044fh7s51d"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_yg32h"]
-[ext_resource type="Script" path="res://components/interaction/door/sliding_door.gd" id="2_oojrg"]
+[ext_resource type="Script" path="res://components/interactables/door/sliding_door.gd" id="2_oojrg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_udfve"]
 size = Vector3(0.5, 2, 0.165)

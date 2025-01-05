@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dw85tfg4agy1m"]
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://o0a4wr3iaoyr"]
 
 [ext_resource type="Texture2D" uid="uid://b0xfu0rcqg0hb" path="res://items/icons/handgun.tres.png" id="1_0120w"]
-[ext_resource type="Script" path="res://systems/inventory/item/item.gd" id="1_y1s0w"]
-[ext_resource type="PackedScene" uid="uid://ddffxn803psxt" path="res://items/view_models/handgun.tscn" id="3_n47w4"]
+[ext_resource type="Script" path="res://systems/inventory/item/item.gd" id="1_so7rw"]
+[ext_resource type="PackedScene" uid="uid://ddffxn803psxt" path="res://items/viewmodels/handgun.tscn" id="3_e03bo"]
 
 [resource]
-script = ExtResource("1_y1s0w")
+script = ExtResource("1_so7rw")
 name = "Handgun"
-description = ""
-view_model = ExtResource("3_n47w4")
+description = "This consumes bullets."
+viewmodel = ExtResource("3_e03bo")
 icon = ExtResource("1_0120w")
-is_stackable = false
+stack_size = 1
+is_use_persistent = true
 is_droppable = true
 rarity = "Common"
-icon_orientation = "Angled"
+icon_orientation = "Front"

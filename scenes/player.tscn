@@ -1,31 +1,37 @@
-[gd_scene load_steps=31 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=39 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
-[ext_resource type="Script" path="res://systems/fps_camera/fps_camera.gd" id="2_kaij3"]
-[ext_resource type="Script" path="res://components/interaction/interactor/interactor.gd" id="3_ca87e"]
+[ext_resource type="Script" path="res://components/camera/camera_manager.gd" id="2_a330s"]
+[ext_resource type="Script" path="res://systems/interaction/interactor.gd" id="3_ca87e"]
 [ext_resource type="Texture2D" uid="uid://62qvs5juj8mf" path="res://assets/textures/crosshair.png" id="3_ey6jl"]
 [ext_resource type="Script" path="res://components/range_value/health.gd" id="4_1205x"]
+[ext_resource type="Script" path="res://systems/interaction/interactor_ui.gd" id="7_slrvw"]
 [ext_resource type="Script" path="res://components/state_machine/states/slide_state.gd" id="9_aa3x5"]
-[ext_resource type="Script" path="res://components/camera_crouch_manager.gd" id="14_eheid"]
+[ext_resource type="Script" path="res://components/camera/camera_crouch_manager.gd" id="14_eheid"]
 [ext_resource type="Script" path="res://components/state_machine/states/water_state.gd" id="14_kihxp"]
 [ext_resource type="Script" path="res://components/state_machine/state_machine.gd" id="17_mu2cs"]
 [ext_resource type="Script" path="res://components/state_machine/states/walk_state.gd" id="18_ql2pa"]
 [ext_resource type="Script" path="res://components/state_machine/states/air_state.gd" id="19_d37tt"]
 [ext_resource type="Script" path="res://components/state_machine/states/crouch_state.gd" id="19_jp43y"]
 [ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="19_xbb15"]
-[ext_resource type="PackedScene" uid="uid://bvxhi2871d2sc" path="res://systems/inventory/hotbar_ui.tscn" id="20_1hxwv"]
 [ext_resource type="Script" path="res://components/range_value/range_value_bar.gd" id="20_i1hms"]
+[ext_resource type="Script" path="res://systems/menu/menu_ui.gd" id="20_mk8ru"]
 [ext_resource type="Script" path="res://components/state_machine/states/jump_state.gd" id="21_c7cuh"]
-[ext_resource type="PackedScene" uid="uid://075sa5fr7b7l" path="res://systems/inventory/inventory_ui.tscn" id="21_pndlx"]
+[ext_resource type="Script" path="res://systems/inventory/context_menu/context_menu.gd" id="21_j4koc"]
+[ext_resource type="Material" uid="uid://cdxy2h0sc1d7q" path="res://assets/materials/blur.tres" id="21_kmdrx"]
+[ext_resource type="Script" path="res://systems/inventory/hotbar_ui.gd" id="22_3bcew"]
 [ext_resource type="Script" path="res://components/state_machine/states/ladder_state.gd" id="22_6s06b"]
-[ext_resource type="PackedScene" uid="uid://dxae1xi6w0bjp" path="res://systems/inventory/context_menu/context_menu.tscn" id="22_ovcos"]
-[ext_resource type="PackedScene" uid="uid://j2on3sovf35h" path="res://systems/menu/pause_menu/pause_menu_ui.tscn" id="23_m6bw7"]
+[ext_resource type="PackedScene" uid="uid://b14j47c5vo5qx" path="res://systems/inventory/slot/drop_slot_ui.tscn" id="22_ec2w0"]
+[ext_resource type="Theme" uid="uid://bepg6821mbuqr" path="res://themes/dame_theme.tres" id="22_t4hsk"]
+[ext_resource type="Script" path="res://systems/inventory/inventory_ui.gd" id="23_m40b2"]
 [ext_resource type="Script" path="res://components/state_machine/states/swing_state.gd" id="23_tcx4j"]
-[ext_resource type="Script" path="res://components/camera_bob_manager.gd" id="24_46ms5"]
+[ext_resource type="PackedScene" uid="uid://0745ac0okddn" path="res://systems/inventory/slot/hotbar_slot_ui.tscn" id="23_w4jga"]
+[ext_resource type="Script" path="res://components/camera/camera_bob_manager.gd" id="24_46ms5"]
+[ext_resource type="Script" path="res://systems/inventory/external_inventory_ui.gd" id="26_neu0t"]
+[ext_resource type="PackedScene" uid="uid://dq63txm4huwfx" path="res://systems/inventory/slot/standard_slot_ui.tscn" id="26_pv35w"]
 [ext_resource type="Script" path="res://components/cheats.gd" id="27_ioq8s"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_gifap"]
-size = Vector3(0.035, 1.1, 0.18)
+[ext_resource type="Script" path="res://systems/menu/pause_menu/pause_menu_ui.gd" id="29_r1sy2"]
+[ext_resource type="Script" path="res://scripts/change_scene_button.gd" id="30_ruxv8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nv2fy"]
 size = Vector3(0.605, 0.105, 0.71)
@@ -54,58 +60,58 @@ floor_max_angle = 0.872665
 floor_snap_length = 0.25
 script = ExtResource("1_60qo2")
 
-[node name="FPSCamera" type="Camera3D" parent="." node_paths=PackedStringArray("nodes_with_camera_offset")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55954, 0)
-rotation_order = 0
-fov = 80.0
-script = ExtResource("2_kaij3")
-nodes_with_camera_offset = [NodePath("../CameraBobManager"), NodePath("../CameraCrouchManager")]
+[node name="CameraManager" type="Node3D" parent="." node_paths=PackedStringArray("nodes_with_camera_offset")]
+script = ExtResource("2_a330s")
+nodes_with_camera_offset = [NodePath("CameraBobManager"), NodePath("CameraCrouchManager")]
 
-[node name="Hand" type="Node3D" parent="FPSCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.595, -0.608, -0.744)
+[node name="CameraBobManager" type="Node" parent="CameraManager"]
+script = ExtResource("24_46ms5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FPSCamera/Hand"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-visible = false
-mesh = SubResource("BoxMesh_gifap")
+[node name="CameraCrouchManager" type="Node" parent="CameraManager" node_paths=PackedStringArray("stand_collider", "crouch_collider", "shape_cast")]
+script = ExtResource("14_eheid")
+stand_collider = NodePath("../../StandCollider")
+crouch_collider = NodePath("../../CrouchCollider")
+shape_cast = NodePath("../../CrouchCollider/ShapeCast3D")
 
-[node name="Interactor" type="Node3D" parent="FPSCamera"]
+[node name="Camera3D" type="Camera3D" parent="CameraManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56, 0)
+
+[node name="Hand" type="Marker3D" parent="CameraManager/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.595, -0.60846, -0.744)
+
+[node name="DropPosition" type="Marker3D" parent="CameraManager/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.157506, -0.744)
+
+[node name="Interactor" type="Node3D" parent="CameraManager/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000459909, 0)
 script = ExtResource("3_ca87e")
 
-[node name="RayCast3D" type="RayCast3D" parent="FPSCamera/Interactor"]
+[node name="RayCast3D" type="RayCast3D" parent="CameraManager/Camera3D/Interactor"]
 target_position = Vector3(0, 0, -4)
 collision_mask = 5
 debug_shape_custom_color = Color(0.824082, 9.14484e-07, 0.458211, 1)
 
-[node name="Panel" type="Panel" parent="FPSCamera/Interactor"]
-anchors_preset = 8
-anchor_left = 0.5
+[node name="InteractorUI" type="PanelContainer" parent="CameraManager/Camera3D/Interactor" node_paths=PackedStringArray("interactor")]
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 44.59
-offset_top = -14.0
-offset_right = 143.59
+offset_left = 605.0
+offset_top = -20.0
+offset_right = 645.0
 offset_bottom = 20.0
-grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 0
+theme = ExtResource("22_t4hsk")
+script = ExtResource("7_slrvw")
+interactor = NodePath("..")
 
-[node name="Label" type="Label" parent="FPSCamera/Interactor/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -39.5
-offset_top = -11.5
-offset_right = 39.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "F: Interact"
+[node name="MarginContainer" type="MarginContainer" parent="CameraManager/Camera3D/Interactor/InteractorUI"]
+layout_mode = 2
 
-[node name="Crosshair" type="TextureRect" parent="FPSCamera"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CameraManager/Camera3D/Interactor/InteractorUI/MarginContainer"]
+layout_mode = 2
+
+[node name="Crosshair" type="TextureRect" parent="CameraManager/Camera3D"]
 modulate = Color(1, 1, 1, 0.498039)
 anchors_preset = 8
 anchor_left = 0.5
@@ -121,17 +127,17 @@ grow_vertical = 2
 texture = ExtResource("3_ey6jl")
 expand_mode = 1
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="FPSCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442215, -0.0221641)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CameraManager/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441755, -0.0221641)
 cast_shadow = 3
 mesh = SubResource("BoxMesh_nv2fy")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="FPSCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636556, 0.0997427)
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CameraManager/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636096, 0.0997427)
 cast_shadow = 3
 mesh = SubResource("BoxMesh_lw4bm")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
 [node name="StandCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -163,13 +169,13 @@ max_speed = 8.0
 
 [node name="CrouchState" type="Node" parent="StateMachine" node_paths=PackedStringArray("cam_crouch")]
 script = ExtResource("19_jp43y")
-cam_crouch = NodePath("../../CameraCrouchManager")
+cam_crouch = NodePath("../../CameraManager/CameraCrouchManager")
 
 [node name="SlideState" type="Node" parent="StateMachine" node_paths=PackedStringArray("cam_bob", "cam_crouch")]
 script = ExtResource("9_aa3x5")
 slope_minimum_angle = 15.5
-cam_bob = NodePath("../../CameraBobManager")
-cam_crouch = NodePath("../../CameraCrouchManager")
+cam_bob = NodePath("../../CameraManager/CameraBobManager")
+cam_crouch = NodePath("../../CameraManager/CameraCrouchManager")
 
 [node name="AirState" type="Node" parent="StateMachine"]
 script = ExtResource("19_d37tt")
@@ -195,20 +201,12 @@ max_speed = 12.0
 friction = 2.0
 
 [node name="PanelContainer" type="PanelContainer" parent="StateMachine"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="StateMachine/PanelContainer"]
 layout_mode = 2
-
-[node name="CameraBobManager" type="Node" parent="."]
-script = ExtResource("24_46ms5")
-
-[node name="CameraCrouchManager" type="Node" parent="." node_paths=PackedStringArray("stand_collider", "crouch_collider", "shape_cast")]
-script = ExtResource("14_eheid")
-stand_collider = NodePath("../StandCollider")
-crouch_collider = NodePath("../CrouchCollider")
-shape_cast = NodePath("../CrouchCollider/ShapeCast3D")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_1205x")
@@ -251,14 +249,297 @@ horizontal_alignment = 1
 script = ExtResource("19_xbb15")
 size = 24
 
-[node name="InventoryUI" parent="Inventory" node_paths=PackedStringArray("inventory", "context_menu", "hotbar_ui") instance=ExtResource("21_pndlx")]
-inventory = NodePath("..")
+[node name="InventoryMenuUI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("20_mk8ru")
+opening_actions = Array[String](["toggle_inventory"])
+closing_actions = Array[String](["close_menu", "toggle_inventory"])
+
+[node name="BlurRect" type="ColorRect" parent="InventoryMenuUI"]
+material = ExtResource("21_kmdrx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DropSlotUI" parent="InventoryMenuUI/BlurRect" node_paths=PackedStringArray("user", "user_camera", "hotbar_ui") instance=ExtResource("22_ec2w0")]
+layout_mode = 1
+user = NodePath("../../..")
+user_camera = NodePath("../../../CameraManager/Camera3D")
+hotbar_ui = NodePath("../../../HotbarUI")
+
+[node name="BackpackUI" type="Control" parent="InventoryMenuUI" node_paths=PackedStringArray("inventory", "context_menu")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("22_t4hsk")
+script = ExtResource("23_m40b2")
+inventory = NodePath("../../Inventory")
 context_menu = NodePath("ContextMenu")
-hotbar_ui = NodePath("Node/HotbarUI")
 
-[node name="Node" type="Node" parent="Inventory/InventoryUI"]
+[node name="PanelContainer" type="PanelContainer" parent="InventoryMenuUI/BackpackUI"]
+layout_mode = 1
+offset_left = 39.0
+offset_top = -173.0
+offset_right = 443.0
+offset_bottom = 140.0
 
-[node name="HotbarUI" parent="Inventory/InventoryUI/Node" node_paths=PackedStringArray("item_user", "hand") instance=ExtResource("20_1hxwv")]
+[node name="MarginContainer" type="MarginContainer" parent="InventoryMenuUI/BackpackUI/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Backpack"
+
+[node name="HSeparator" type="HSeparator" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 6
+
+[node name="StandardSlotUI" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI2" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI3" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI4" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI5" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI6" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI7" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI8" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI9" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI10" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI11" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI12" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI13" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI14" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI15" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI16" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI17" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI18" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer2" type="GridContainer" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 6
+
+[node name="StandardSlotUI18" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI19" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI20" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI21" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI22" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI23" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="ContextMenu" type="PanelContainer" parent="InventoryMenuUI/BackpackUI"]
+layout_mode = 0
+offset_top = -324.0
+offset_right = 40.0
+offset_bottom = -284.0
+theme = ExtResource("22_t4hsk")
+script = ExtResource("21_j4koc")
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryMenuUI/BackpackUI/ContextMenu"]
+layout_mode = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="InventoryMenuUI/BackpackUI/ContextMenu/MarginContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="Button" type="Button" parent="InventoryMenuUI/BackpackUI/ContextMenu/MarginContainer/BoxContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+text = "aaa"
+
+[node name="ExternalUI" type="Control" parent="InventoryMenuUI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("22_t4hsk")
+script = ExtResource("26_neu0t")
+
+[node name="PanelContainer" type="PanelContainer" parent="InventoryMenuUI/ExternalUI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -404.0
+offset_top = -156.5
+offset_bottom = 156.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryMenuUI/ExternalUI/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Backpack"
+
+[node name="HSeparator" type="HSeparator" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 6
+
+[node name="StandardSlotUI" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI2" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI3" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI4" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI5" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI6" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI7" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI8" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI9" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI10" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI11" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI12" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI13" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI14" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI15" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI16" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI17" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI18" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer2" type="GridContainer" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 6
+
+[node name="StandardSlotUI18" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI19" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI20" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI21" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI22" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="StandardSlotUI23" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+layout_mode = 2
+
+[node name="HotbarUI" type="PanelContainer" parent="." node_paths=PackedStringArray("item_user", "hand", "inventory_ui", "target_slot_container")]
 z_index = -1
 anchors_preset = 7
 anchor_left = 0.5
@@ -268,13 +549,106 @@ anchor_bottom = 1.0
 offset_left = -207.0
 offset_top = -74.0
 offset_right = 207.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
-item_user = NodePath("../../../..")
-hand = NodePath("../../../../FPSCamera/Hand")
+theme = ExtResource("22_t4hsk")
+script = ExtResource("22_3bcew")
+item_user = NodePath("..")
+hand = NodePath("../CameraManager/Camera3D/Hand")
+inventory_ui = NodePath("../InventoryMenuUI/BackpackUI")
+target_slot_container = NodePath("../InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2")
 
-[node name="ContextMenu" parent="Inventory/InventoryUI" instance=ExtResource("22_ovcos")]
-layout_mode = 0
+[node name="MarginContainer" type="MarginContainer" parent="HotbarUI"]
+layout_mode = 2
 
-[node name="PauseMenuUI" parent="." instance=ExtResource("23_m6bw7")]
+[node name="HBoxContainer" type="HBoxContainer" parent="HotbarUI/MarginContainer"]
+layout_mode = 2
+
+[node name="HotbarSlotUI" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
+layout_mode = 2
+
+[node name="SelectionPanel" type="Panel" parent="HotbarUI/MarginContainer/HBoxContainer/HotbarSlotUI"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HotbarSlotUI2" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
+layout_mode = 2
+
+[node name="HotbarSlotUI3" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
+layout_mode = 2
+
+[node name="HotbarSlotUI4" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
+layout_mode = 2
+
+[node name="HotbarSlotUI5" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
+layout_mode = 2
+
+[node name="HotbarSlotUI6" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
+layout_mode = 2
+
+[node name="PauseMenuUI" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("22_t4hsk")
+script = ExtResource("29_r1sy2")
+opening_actions = Array[String](["toggle_pause_menu"])
+closing_actions = Array[String](["close_menu", "toggle_pause_menu"])
+
+[node name="BlurRect" type="ColorRect" parent="PauseMenuUI"]
+material = ExtResource("21_kmdrx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenuUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -58.0
+offset_right = 49.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenuUI/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuUI/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenuUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PauseMenuUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainMenuButton" type="Button" parent="PauseMenuUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+script = ExtResource("30_ruxv8")
+target_scene_path = "res://levels/main_menu.tscn"
+
+[node name="Button2" type="Button" parent="PauseMenuUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Do nothing"
+
+[node name="Button3" type="Button" parent="PauseMenuUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Do nothing"

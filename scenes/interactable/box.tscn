@@ -1,36 +1,68 @@
-[gd_scene load_steps=8 format=3 uid="uid://hnhfh32qlno2"]
+[gd_scene load_steps=11 format=3 uid="uid://hnhfh32qlno2"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_vsme0"]
-[ext_resource type="Script" path="res://components/interaction/carryable.gd" id="3_ehmd5"]
+[ext_resource type="Script" path="res://components/interactables/carryable.gd" id="3_ehmd5"]
 [ext_resource type="Script" path="res://components/range_value/health.gd" id="3_isdmw"]
+[ext_resource type="Script" path="res://components/interactables/throwable.gd" id="4_vxbqh"]
 [ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="5_ysfh3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qb5c4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ge0ug"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5l2qf"]
-points = PackedVector3Array(0.44998, 1, 0.44998, 0.44998, 0.94998, 0.5, 0.5, 0.94998, 0.44998, 0.44998, 1, -0.450078, -0.450078, 1, 0.44998, 0.44998, 0.0499217, 0.5, -0.450078, 0.94998, 0.5, 0.5, 0.94998, -0.450078, 0.5, 0.0499217, 0.44998, 0.44998, 0.94998, -0.5, -0.450078, 1, -0.450078, -0.5, 0.94998, 0.44998, 0.44998, 2.98023e-08, 0.44998, -0.450078, 0.0499217, 0.5, 0.5, 0.0499217, -0.450078, 0.44998, 0.0499217, -0.5, -0.450078, 0.94998, -0.5, -0.5, 0.94998, -0.450078, -0.5, 0.0499217, 0.44998, 0.44998, 2.98023e-08, -0.450078, -0.450078, 2.98023e-08, 0.44998, -0.450078, 0.0499217, -0.5, -0.5, 0.0499217, -0.450078, -0.450078, 2.98023e-08, -0.450078)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8ig0y"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_whjop"]
+shading_mode = 2
+albedo_color = Color(1, 0.524667, 0.08, 1)
+emission_enabled = true
+emission = Color(0.77, 0.333667, 0, 1)
+emission_energy_multiplier = 2.07
+
+[sub_resource type="SphereMesh" id="SphereMesh_grflq"]
+material = SubResource("StandardMaterial3D_whjop")
 
 [node name="RigidBody3D" type="RigidBody3D" groups=["interactable"]]
-collision_layer = 3
+collision_layer = 7
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_qb5c4")
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_vsme0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.486234, 0)
 mesh = SubResource("BoxMesh_ge0ug")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_5l2qf")
+shape = SubResource("ConvexPolygonShape3D_8ig0y")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("death_effects")]
 script = ExtResource("3_isdmw")
+death_effects = [NodePath("../CPUParticles3D")]
 
-[node name="Carryable" type="Node3D" parent="."]
+[node name="Carryable" type="Node" parent="."]
 script = ExtResource("3_ehmd5")
-throw_strength = 30.0
+enable_prompt = "Carry"
+disable_prompt = "Drop"
+
+[node name="Throwable" type="Node" parent="."]
+script = ExtResource("4_vxbqh")
+required_input_action = "primary"
+interact_prompt = "Throw"
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("5_ysfh3")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+mesh = SubResource("SphereMesh_grflq")
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 36.58
+damping_min = 3.0
+damping_max = 15.0
+scale_amount_min = 0.2

@@ -2,15 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://dkm5bgx1edf7t" path="res://items/icons/box.tres.png" id="1_2gxwn"]
 [ext_resource type="Script" path="res://systems/inventory/item/item.gd" id="1_x3cp0"]
-[ext_resource type="PackedScene" uid="uid://covy3pga8jy0h" path="res://items/view_models/box.tscn" id="3_leq0m"]
+[ext_resource type="PackedScene" uid="uid://covy3pga8jy0h" path="res://items/viewmodels/box.tscn" id="3_36ybu"]
 
 [resource]
 script = ExtResource("1_x3cp0")
 name = "Box"
 description = ""
-view_model = ExtResource("3_leq0m")
+viewmodel = ExtResource("3_36ybu")
 icon = ExtResource("1_2gxwn")
-is_stackable = true
+stack_size = 8
+is_use_persistent = false
 is_droppable = true
 rarity = "Common"
 icon_orientation = "Front"

@@ -25,7 +25,7 @@ func refresh_texture(slot: Slot):
 		texture_rect.hide()
 
 func refresh_amount(slot: Slot):
-	if slot.item and slot.item.is_stackable:
+	if slot.item and slot.item.stack_size > 1:
 		amount_label.show()
 		amount_label.text = str(slot.amount)
 	else:

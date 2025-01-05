@@ -1,34 +1,45 @@
-[gd_scene load_steps=16 format=3 uid="uid://ddffxn803psxt"]
+[gd_scene load_steps=18 format=3 uid="uid://ddffxn803psxt"]
 
-[ext_resource type="Script" path="res://items/scripts/handgun.gd" id="1_4d4v3"]
-[ext_resource type="Resource" uid="uid://c8cncf13j6hqk" path="res://items/bullet.tres" id="2_1xi1s"]
-[ext_resource type="Material" uid="uid://bdiokccwj2i2d" path="res://assets/materials/prototype/prototype_gray.tres" id="2_tyt8a"]
-[ext_resource type="AudioStream" uid="uid://h0w3ja0ywol1" path="res://addons/kenney_interface_sounds/click_001.wav" id="3_q4lgf"]
-[ext_resource type="AudioStream" uid="uid://c3gu5g8u0j4qa" path="res://addons/kenney_interface_sounds/switch_002.wav" id="4_qhkgi"]
+[ext_resource type="Script" path="res://items/viewmodel scripts/handgun.gd" id="1_tnrp6"]
+[ext_resource type="Resource" uid="uid://c8cncf13j6hqk" path="res://items/bullet.tres" id="2_g5qwj"]
+[ext_resource type="AudioStream" uid="uid://h0w3ja0ywol1" path="res://addons/kenney_interface_sounds/click_001.wav" id="3_ar472"]
+[ext_resource type="AudioStream" uid="uid://c3gu5g8u0j4qa" path="res://addons/kenney_interface_sounds/switch_002.wav" id="4_ikmx0"]
+[ext_resource type="Material" uid="uid://bdiokccwj2i2d" path="res://assets/materials/prototype/prototype_gray.tres" id="5_2ki37"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vwgm3"]
-material = ExtResource("2_tyt8a")
+material = ExtResource("5_2ki37")
 size = Vector3(0.15, 0.13, 0.67)
 
 [sub_resource type="BoxMesh" id="BoxMesh_342vt"]
-material = ExtResource("2_tyt8a")
+material = ExtResource("5_2ki37")
 size = Vector3(0.085, 0.1, 0.58)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3ajdd"]
-material = ExtResource("2_tyt8a")
+material = ExtResource("5_2ki37")
 size = Vector3(0.055, 0.025, 0.18)
 
 [sub_resource type="BoxMesh" id="BoxMesh_v1cee"]
-material = ExtResource("2_tyt8a")
+material = ExtResource("5_2ki37")
 size = Vector3(0.055, 0.025, 0.18)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u13e7"]
-material = ExtResource("2_tyt8a")
+material = ExtResource("5_2ki37")
 size = Vector3(0.115, 0.215, 0.45)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6heda"]
-material = ExtResource("2_tyt8a")
+material = ExtResource("5_2ki37")
 size = Vector3(0.095, 0.185, 0.255)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljty7"]
+albedo_color = Color(0.994028, 0.509089, 0, 1)
+emission_enabled = true
+emission = Color(0.941356, 0.392152, 0, 1)
+emission_energy_multiplier = 2.81
+
+[sub_resource type="SphereMesh" id="SphereMesh_2snyt"]
+material = SubResource("StandardMaterial3D_ljty7")
+radius = 0.05
+height = 0.1
 
 [sub_resource type="Animation" id="Animation_amgni"]
 length = 0.001
@@ -145,10 +156,10 @@ _data = {
 }
 
 [node name="Handgun" type="Node3D"]
-script = ExtResource("1_4d4v3")
-required_bullet_item = ExtResource("2_1xi1s")
-shoot_sound = ExtResource("3_q4lgf")
-reload_sound = ExtResource("4_qhkgi")
+script = ExtResource("1_tnrp6")
+required_bullet_item = ExtResource("2_g5qwj")
+shoot_sound = ExtResource("3_ar472")
+reload_sound = ExtResource("4_ikmx0")
 
 [node name="Meshes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.279227, 0)
@@ -182,6 +193,21 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, -7.45058e-09, -1.30385e-08, -1.11759e-08, -0.336011, 0.941858, 0, -0.941858, -0.336011, 0, 0.300151, 0.0254957)
 mesh = SubResource("BoxMesh_6heda")
 skeleton = NodePath("../..")
+
+[node name="MuzzleFlash" type="CPUParticles3D" parent="Meshes"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00403033, 0.651988, -0.663119)
+emitting = false
+lifetime = 0.2
+one_shot = true
+mesh = SubResource("SphereMesh_2snyt")
+emission_shape = 3
+emission_box_extents = Vector3(0.06, 0.15, 0.195)
+direction = Vector3(0, 0, -1)
+spread = 17.83
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.95
+initial_velocity_max = 1.95
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

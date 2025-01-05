@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c13oa335whkhe"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_jrptt"]
-[ext_resource type="Script" path="res://components/interaction/door/rotating_door.gd" id="2_1fyen"]
+[ext_resource type="Script" path="res://components/interactables/door/rotating_door.gd" id="2_1fyen"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_udfve"]
 size = Vector3(1, 2, 0.165)
@@ -20,6 +20,8 @@ script = ExtResource("1_jrptt")
 [node name="RotatingDoor" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("2_1fyen")
 target = NodePath("..")
+enable_prompt = "Open"
+disable_prompt = "Close"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
