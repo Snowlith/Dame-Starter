@@ -30,7 +30,7 @@ func interact(interactor: Interactor):
 	
 	var side = _get_entity_side(interactor.get_parent_entity().global_position)
 	var target_rotation = Vector3(0, _init_angle, 0)
-	if enabled:
+	if toggled:
 		target_rotation.y += side * deg_to_rad(open_angle)
 	else:
 		target_rotation.y += deg_to_rad(closed_angle)

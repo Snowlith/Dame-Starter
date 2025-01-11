@@ -5,12 +5,13 @@ class_name Throwable
 
 @onready var rigid_body: RigidBody3D = get_parent_entity().get_physics_body()
 
+signal thrown
+
 func _ready():
 	assert(is_instance_valid(rigid_body))
 
 func interact(interactor: Interactor):
-	print("thrown")
 	super(interactor)
+	thrown.emit()
 	var impulse = interactor.get_pos_along_ray(throw_strength) - rigid_body.global_position
-	print(impulse)
 	rigid_body.apply_central_impulse(impulse)

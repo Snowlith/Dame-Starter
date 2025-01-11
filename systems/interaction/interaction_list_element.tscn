@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://kisyygtx578y"]
 
 [ext_resource type="Script" path="res://systems/interaction/interaction_list_element.gd" id="1_n445n"]
-[ext_resource type="PackedScene" uid="uid://dgjlsboap5b1d" path="res://systems/input_manager/input_icon.tscn" id="1_qnbi5"]
+[ext_resource type="PackedScene" uid="uid://dgjlsboap5b1d" path="res://systems/input_icon/input_icon.tscn" id="1_qnbi5"]
 
 [node name="InteractionListElement" type="HBoxContainer"]
 script = ExtResource("1_n445n")

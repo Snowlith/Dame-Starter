@@ -7,12 +7,20 @@ class_name JumpState
 @export var allow_bunnyhop: bool = false
 @export var allow_slope_boost_jump: bool = false
 
+@onready var input_manager = get_parent_entity().get_component(InputManager)
+
 var _time_since_left_ground: float = 0
 var _input_leniency_timer: SceneTreeTimer
 var _is_input_queued: bool = false
 
 # TODO: make slope boost jump less op, maybe add area where it is possible
 # TODO: add force jump (maybe better to have a more flexible impulse system)
+
+func _ready():
+	input_manager.get_bool_signal("jump").connect(jump)
+
+func jump():
+	print("jumped")
 	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") or (allow_bunnyhop and Input.is_action_pressed("jump")):

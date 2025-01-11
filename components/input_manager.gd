@@ -1,13 +1,50 @@
-extends Node
+extends Component
+class_name InputManager
 
 var _bool_signals: Dictionary
 var _vec1_signals: Dictionary
 var _vec2_signals: Dictionary
 
-var _input_events: Dictionary
+var _actions: Dictionary
 
-func create_bool_signal(input_action: StringName):
-	#if not _bool_signals.has(input_action):
+# Dictionary of each keyboard key -> array of signals that are called
+
+# 1. Convert event to array of actions
+# 2. Dictionary of each input action -> array of signals
+
+#var shit = {"jump": jump_signal, shit_signal}
+
+#func _ready():
+#
+	#print(InputMap.get_actions())
+
+func _input(event):
+	if not event is InputEventKey and not event is InputEventMouseButton:
+		return
+	for action in _actions.keys():
+		if event.is_action_pressed(action):
+			for sig in _actions[action]:
+				sig.emit()
+
+func get_bool_signal(action: String):
+	var bool_signal = Signal(self, action)
+	add_user_signal(action, [{"name": "is_pressed", "type": TYPE_BOOL}])
+	if _actions.has(action):
+		_actions[action].append(bool_signal)
+	else:
+		_actions[action] = [bool_signal]
+	return bool_signal
+	
+	#var inputs = get_keyboard_inputs_for_action(action)
+	#for input in inputs:
+		#if _input_events.has(input):
+			#_input_events[input].append(bool_signal)
+		#else:
+			#_input_events[input] = [bool_signal]
+	#print(_input_events)
+	#return bool_signal
+			
+	#if not _bool_signals.has(action):
 		#for event in InputMap.action_get_events(input_action):
 			#var event_string = event.as_text()
 			#if not _input_events.has(event_string):
@@ -17,10 +54,15 @@ func create_bool_signal(input_action: StringName):
 		#_bool_signals[input_action] = Signal(self, input_action)
 		#add_user_signal(input_action, [{"name": "is_pressed", "type": TYPE_BOOL}])
 	#return _bool_signals[input_action]
-	pass
 
-func create_string(input_event: InputEvent):
-	return input_event.as_text()
+func get_keyboard_inputs_for_action(action: String) -> Array[InputEvent]:
+	return InputMap.action_get_events(action).filter(func(event):
+		return event is InputEventKey or event is InputEventMouseButton
+	)
+
+func get_keyboard_input_for_action(action: String) -> InputEvent:
+	var inputs: Array[InputEvent] = get_keyboard_inputs_for_action(action)
+	return null if inputs.is_empty() else inputs[0]
 
 #func create_vec1_signal(positive_x: StringName, negative_x: StringName):
 	#var signal_name: StringName = positive_x + "/" + negative_x

@@ -6,22 +6,21 @@ class_name HotbarUI
 @export var item_user: Entity
 @export var hand: Node3D
 @export var inventory_ui: InventoryUI
-@export var target_slot_container: Control
+
+@export var hotbar_container: HBoxContainer
+
+const HOTBAR_SLOT_UI = preload("res://systems/inventory/slot/hotbar_slot_ui.tscn")
 
 var previous_slot_ui: SlotUI
 var selected_slot_ui: SlotUI
 
 var selected_slot_index: int = 0
 
+# maybe instead of this, use get_child() for hotbar container
 var hotbar: Array[HotbarSlotUI] = []
 
 var _loaded_viewmodel: Node3D
 var _is_use_persistent: bool = false
-
-func _ready():
-	if not inventory_ui.are_slots_populated:
-		await inventory_ui.slots_populated
-	_assign_slots(target_slot_container)
 
 func _unhandled_input(event):
 	if event.is_echo():
@@ -34,6 +33,7 @@ func _unhandled_input(event):
 		_selected_slot_changed()
 		return
 	
+	# This is bad
 	for i in range(0, 6, 1):
 		if Input.is_action_just_pressed("hotbar_"+str(i+1)):
 			if inventory_ui.hovered_standard_slot_ui:
@@ -82,17 +82,17 @@ func _update_hand():
 	if _loaded_viewmodel is ItemBehavior:
 		_loaded_viewmodel.holster(item_user)
 
-func _assign_slots(slot_container: Control):
-	var hotbar_slot_uis = find_children("", "HotbarSlotUI")
-	var target_standard_uis = slot_container.find_children("", "StandardSlotUI")
+func _assign_slots():
+	var target_slot_uis = inventory_ui.hotbar_container.get_children()
 	
-	for i in hotbar_slot_uis.size():
-		var hotbar_slot_ui = hotbar_slot_uis[i] as HotbarSlotUI
-		if not i < target_standard_uis.size():
-			return
-		hotbar.append(hotbar_slot_ui)
-		hotbar_slot_ui.slot = target_standard_uis[i].slot
-	
+	for target_slot_ui: StandardSlotUI in target_slot_uis:
+		var slot_ui: HotbarSlotUI = HOTBAR_SLOT_UI.instantiate()
+		hotbar_container.add_child(slot_ui)
+		slot_ui.slot = target_slot_ui.slot
+		hotbar.append(slot_ui)
+		
 	selected_slot_ui = hotbar[selected_slot_index]
 	_selected_slot_changed()
-		
+
+func _on_backpack_ui_slots_created():
+	_assign_slots()

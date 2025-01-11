@@ -22,7 +22,7 @@ func _ready():
 
 # TEST THIS
 func get_duration() -> float:
-	return closing_duration if enabled else opening_duration
+	return closing_duration if toggled else opening_duration
 	
 func get_interpolation() -> Tween.TransitionType:
 	match interpolation:

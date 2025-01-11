@@ -1,15 +1,17 @@
 extends Component
 class_name Inventory
 
-# TODO: make this into a vector2
 @export var size: int
 @export var slots: Array[Slot]
+
+signal slots_initialized
 
 func _ready():
 	slots.resize(max(size, slots.size()))
 	for i in slots.size():
 		if not slots[i]:
 			slots[i] = Slot.new()
+	slots_initialized.emit()
 
 func insert(source_slot: Slot, amount: int = 1) -> int:
 	if source_slot.is_empty():

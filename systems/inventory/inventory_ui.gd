@@ -5,19 +5,31 @@ class_name InventoryUI
 
 @export var inventory: Inventory
 
+@export var backpack_container: GridContainer
+@export var backpack_width: int = 6
+
+@export var hotbar_container: GridContainer
+@export var hotbar_width: int = 6
+
 @export var context_menu: ContextMenu
 
-var hovered_standard_slot_ui: StandardSlotUI
+const STANDARD_SLOT_UI = preload("res://systems/inventory/slot/standard_slot_ui.tscn")
 
-var are_slots_populated: bool = false
-signal slots_populated
+var _hovered_standard_slot_ui: StandardSlotUI
 
-# TODO: when pressing q on a hovered item, drop it
+signal slots_created
 
 func _ready():
+	# do this differently
 	if not inventory.is_node_ready():
 		await inventory.ready
-	_populate_slots()
+	backpack_container.columns = backpack_width
+	hotbar_container.columns = hotbar_width
+	_create_slots()
+
+# TODO
+func get_slot(index: int):
+	pass
 		
 # TODO
 func open_external(external_inventory: Inventory):
@@ -26,21 +38,18 @@ func open_external(external_inventory: Inventory):
 func drop(slot: Slot, amount: int):
 	pass
 
-func _populate_slots():
-	var standard_uis = find_children("", "StandardSlotUI")
-	
-	for i in standard_uis.size():
-		var slot_ui = standard_uis[i] as StandardSlotUI
-		if i >= inventory.slots.size():
-			slot_ui.get_parent().remove_child(slot_ui)
-			slot_ui.queue_free()
-			continue
+func _create_slots():
+	for i in inventory.size:
+		var slot_ui: StandardSlotUI = STANDARD_SLOT_UI.instantiate()
+		if i < hotbar_width:
+			hotbar_container.add_child(slot_ui)
+		else:
+			backpack_container.add_child(slot_ui)
 		slot_ui.slot = inventory.slots[i]
-		slot_ui.hover_started.connect(func(): hovered_standard_slot_ui = slot_ui)
-		slot_ui.hover_ended.connect(func(): hovered_standard_slot_ui = null)
+		slot_ui.hover_started.connect(func(): _hovered_standard_slot_ui = slot_ui)
+		slot_ui.hover_ended.connect(func(): _hovered_standard_slot_ui = null)
 		if context_menu:
 			slot_ui.context_action_registered.connect(context_menu.register_action.bind(slot_ui))
 			slot_ui.context_menu_requested.connect(context_menu.open.bind(slot_ui))
 			slot_ui.register_context_actions()
-	are_slots_populated = true
-	slots_populated.emit()
+	slots_created.emit()

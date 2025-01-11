@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bolu78f8y3iy8"]
+
+[ext_resource type="Script" path="res://systems/interaction/interaction_list_label.gd" id="1_4wvvk"]
+
+[node name="InteractionListLabel" type="Label"]
+script = ExtResource("1_4wvvk")

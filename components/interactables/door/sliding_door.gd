@@ -20,7 +20,7 @@ func interact(interactor: Interactor):
 	super(interactor)
 	
 	var target_pos = _init_pos
-	if enabled:
+	if toggled:
 		target_pos += target.basis * open_offset
 	else:
 		target_pos += target.basis * closed_offset

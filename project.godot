@@ -19,7 +19,6 @@ config/icon="res://assets/textures/icon.svg"
 
 SceneManager="*res://systems/scene_manager/scene_manager.tscn"
 Audio="*res://systems/audio/audio.gd"
-InputManager="*res://systems/input_manager/input_manager.tscn"
 
 [debug]
 

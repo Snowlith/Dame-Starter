@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=37 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
 [ext_resource type="Script" path="res://components/camera/camera_manager.gd" id="2_a330s"]
@@ -25,13 +25,11 @@
 [ext_resource type="Theme" uid="uid://bepg6821mbuqr" path="res://themes/dame_theme.tres" id="22_t4hsk"]
 [ext_resource type="Script" path="res://systems/inventory/inventory_ui.gd" id="23_m40b2"]
 [ext_resource type="Script" path="res://components/state_machine/states/swing_state.gd" id="23_tcx4j"]
-[ext_resource type="PackedScene" uid="uid://0745ac0okddn" path="res://systems/inventory/slot/hotbar_slot_ui.tscn" id="23_w4jga"]
 [ext_resource type="Script" path="res://components/camera/camera_bob_manager.gd" id="24_46ms5"]
-[ext_resource type="Script" path="res://systems/inventory/external_inventory_ui.gd" id="26_neu0t"]
-[ext_resource type="PackedScene" uid="uid://dq63txm4huwfx" path="res://systems/inventory/slot/standard_slot_ui.tscn" id="26_pv35w"]
 [ext_resource type="Script" path="res://components/cheats.gd" id="27_ioq8s"]
 [ext_resource type="Script" path="res://systems/menu/pause_menu/pause_menu_ui.gd" id="29_r1sy2"]
 [ext_resource type="Script" path="res://scripts/change_scene_button.gd" id="30_ruxv8"]
+[ext_resource type="Script" path="res://components/input_manager.gd" id="33_swjsx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nv2fy"]
 size = Vector3(0.605, 0.105, 0.71)
@@ -249,8 +247,7 @@ horizontal_alignment = 1
 script = ExtResource("19_xbb15")
 size = 24
 
-[node name="InventoryMenuUI" type="Control" parent="."]
-visible = false
+[node name="InventoryMenuUI" type="Control" parent="Inventory"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -261,7 +258,7 @@ script = ExtResource("20_mk8ru")
 opening_actions = Array[String](["toggle_inventory"])
 closing_actions = Array[String](["close_menu", "toggle_inventory"])
 
-[node name="BlurRect" type="ColorRect" parent="InventoryMenuUI"]
+[node name="BlurRect" type="ColorRect" parent="Inventory/InventoryMenuUI"]
 material = ExtResource("21_kmdrx")
 layout_mode = 1
 anchors_preset = 15
@@ -270,13 +267,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DropSlotUI" parent="InventoryMenuUI/BlurRect" node_paths=PackedStringArray("user", "user_camera", "hotbar_ui") instance=ExtResource("22_ec2w0")]
+[node name="DropSlotUI" parent="Inventory/InventoryMenuUI/BlurRect" node_paths=PackedStringArray("user", "user_camera", "hotbar_ui") instance=ExtResource("22_ec2w0")]
 layout_mode = 1
-user = NodePath("../../..")
-user_camera = NodePath("../../../CameraManager/Camera3D")
+user = NodePath("../../../..")
+user_camera = NodePath("../../../../CameraManager/Camera3D")
 hotbar_ui = NodePath("../../../HotbarUI")
 
-[node name="BackpackUI" type="Control" parent="InventoryMenuUI" node_paths=PackedStringArray("inventory", "context_menu")]
+[node name="BackpackUI" type="Control" parent="Inventory/InventoryMenuUI" node_paths=PackedStringArray("inventory", "backpack_container", "hotbar_container", "context_menu")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -286,116 +283,44 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("22_t4hsk")
 script = ExtResource("23_m40b2")
-inventory = NodePath("../../Inventory")
+inventory = NodePath("../..")
+backpack_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/BackpackContainer")
+hotbar_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/HotbarContainer")
 context_menu = NodePath("ContextMenu")
 
-[node name="PanelContainer" type="PanelContainer" parent="InventoryMenuUI/BackpackUI"]
+[node name="PanelContainer" type="PanelContainer" parent="Inventory/InventoryMenuUI/BackpackUI"]
 layout_mode = 1
 offset_left = 39.0
 offset_top = -173.0
 offset_right = 443.0
 offset_bottom = 140.0
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryMenuUI/BackpackUI/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/InventoryMenuUI/BackpackUI/PanelContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Inventory/InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Backpack"
 
-[node name="HSeparator" type="HSeparator" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Inventory/InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-columns = 6
-
-[node name="StandardSlotUI" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI2" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI3" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI4" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI5" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI6" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI7" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI8" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI9" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI10" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI11" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI12" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI13" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI14" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI15" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI16" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI17" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI18" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="HSeparator2" type="HSeparator" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="GridContainer2" type="GridContainer" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="BackpackContainer" type="GridContainer" parent="Inventory/InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-columns = 6
 
-[node name="StandardSlotUI18" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+[node name="HSeparator2" type="HSeparator" parent="Inventory/InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="StandardSlotUI19" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
+[node name="HotbarContainer" type="GridContainer" parent="Inventory/InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 
-[node name="StandardSlotUI20" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI21" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI22" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI23" parent="InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="ContextMenu" type="PanelContainer" parent="InventoryMenuUI/BackpackUI"]
+[node name="ContextMenu" type="PanelContainer" parent="Inventory/InventoryMenuUI/BackpackUI"]
 layout_mode = 0
 offset_top = -324.0
 offset_right = 40.0
@@ -403,143 +328,20 @@ offset_bottom = -284.0
 theme = ExtResource("22_t4hsk")
 script = ExtResource("21_j4koc")
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryMenuUI/BackpackUI/ContextMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/InventoryMenuUI/BackpackUI/ContextMenu"]
 layout_mode = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="InventoryMenuUI/BackpackUI/ContextMenu/MarginContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="Inventory/InventoryMenuUI/BackpackUI/ContextMenu/MarginContainer"]
 layout_mode = 2
 vertical = true
 
-[node name="Button" type="Button" parent="InventoryMenuUI/BackpackUI/ContextMenu/MarginContainer/BoxContainer"]
+[node name="Button" type="Button" parent="Inventory/InventoryMenuUI/BackpackUI/ContextMenu/MarginContainer/BoxContainer"]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 text = "aaa"
 
-[node name="ExternalUI" type="Control" parent="InventoryMenuUI"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("22_t4hsk")
-script = ExtResource("26_neu0t")
-
-[node name="PanelContainer" type="PanelContainer" parent="InventoryMenuUI/ExternalUI"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -404.0
-offset_top = -156.5
-offset_bottom = 156.5
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="InventoryMenuUI/ExternalUI/PanelContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Backpack"
-
-[node name="HSeparator" type="HSeparator" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="GridContainer" type="GridContainer" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-columns = 6
-
-[node name="StandardSlotUI" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI2" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI3" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI4" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI5" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI6" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI7" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI8" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI9" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI10" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI11" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI12" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI13" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI14" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI15" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI16" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI17" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI18" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="HSeparator2" type="HSeparator" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="GridContainer2" type="GridContainer" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-columns = 6
-
-[node name="StandardSlotUI18" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI19" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI20" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI21" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI22" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="StandardSlotUI23" parent="InventoryMenuUI/ExternalUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2" instance=ExtResource("26_pv35w")]
-layout_mode = 2
-
-[node name="HotbarUI" type="PanelContainer" parent="." node_paths=PackedStringArray("item_user", "hand", "inventory_ui", "target_slot_container")]
+[node name="HotbarUI" type="PanelContainer" parent="Inventory" node_paths=PackedStringArray("item_user", "hand", "inventory_ui", "hotbar_container")]
 z_index = -1
 anchors_preset = 7
 anchor_left = 0.5
@@ -553,37 +355,19 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("22_t4hsk")
 script = ExtResource("22_3bcew")
-item_user = NodePath("..")
-hand = NodePath("../CameraManager/Camera3D/Hand")
+item_user = NodePath("../..")
+hand = NodePath("../../CameraManager/Camera3D/Hand")
 inventory_ui = NodePath("../InventoryMenuUI/BackpackUI")
-target_slot_container = NodePath("../InventoryMenuUI/BackpackUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer2")
+hotbar_container = NodePath("MarginContainer/HBoxContainer")
 
-[node name="MarginContainer" type="MarginContainer" parent="HotbarUI"]
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/HotbarUI"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HotbarUI/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/HotbarUI/MarginContainer"]
 layout_mode = 2
 
-[node name="HotbarSlotUI" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
-layout_mode = 2
-
-[node name="SelectionPanel" type="Panel" parent="HotbarUI/MarginContainer/HBoxContainer/HotbarSlotUI"]
+[node name="SelectionPanel" type="Panel" parent="Inventory/HotbarUI/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
-
-[node name="HotbarSlotUI2" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
-layout_mode = 2
-
-[node name="HotbarSlotUI3" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
-layout_mode = 2
-
-[node name="HotbarSlotUI4" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
-layout_mode = 2
-
-[node name="HotbarSlotUI5" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
-layout_mode = 2
-
-[node name="HotbarSlotUI6" parent="HotbarUI/MarginContainer/HBoxContainer" instance=ExtResource("23_w4jga")]
 layout_mode = 2
 
 [node name="PauseMenuUI" type="Control" parent="."]
@@ -652,3 +436,8 @@ text = "Do nothing"
 [node name="Button3" type="Button" parent="PauseMenuUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Do nothing"
+
+[node name="InputManager" type="Node" parent="."]
+script = ExtResource("33_swjsx")
+
+[connection signal="slots_created" from="Inventory/InventoryMenuUI/BackpackUI" to="Inventory/HotbarUI" method="_on_backpack_ui_slots_created"]
