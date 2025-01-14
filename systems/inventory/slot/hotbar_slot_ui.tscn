@@ -1,16 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://0745ac0okddn"]
+[gd_scene load_steps=7 format=3 uid="uid://0745ac0okddn"]
 
 [ext_resource type="Script" path="res://systems/inventory/slot/hotbar_slot_ui.gd" id="1_4nsmf"]
 [ext_resource type="Theme" uid="uid://bepg6821mbuqr" path="res://themes/dame_theme.tres" id="1_ycen3"]
 [ext_resource type="Script" path="res://systems/inventory/slot/slot_ui_interface.gd" id="2_l0tkp"]
 [ext_resource type="StyleBox" uid="uid://cuujlxl2obw24" path="res://themes/style_boxes/normal.tres" id="2_n4mho"]
 [ext_resource type="Texture2D" uid="uid://cvjf23d67ave7" path="res://assets/textures/icon.svg" id="3_jyk7u"]
+[ext_resource type="PackedScene" uid="uid://dgjlsboap5b1d" path="res://systems/input_icon/input_icon.tscn" id="6_h316l"]
 
 [node name="HotbarSlotUI" type="PanelContainer"]
 custom_minimum_size = Vector2(64, 64)
 theme = ExtResource("1_ycen3")
 theme_override_styles/panel = ExtResource("2_n4mho")
 script = ExtResource("1_4nsmf")
+
+[node name="InputIcon" parent="." instance=ExtResource("6_h316l")]
+position = Vector2(3, 50)
+scale = Vector2(0.25, 0.25)
 
 [node name="SlotUIInterface" type="Control" parent="."]
 layout_mode = 2

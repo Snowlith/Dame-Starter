@@ -25,7 +25,7 @@ func _ready():
 		var item: Item = load(item_dir + "/" + filename)
 		if not is_instance_valid(item):
 			continue
-		var view_model = item.view_model.instantiate()
+		var view_model = item.viewmodel.instantiate()
 		view_model.process_mode = PROCESS_MODE_DISABLED
 		var rig = get_rig(item)
 		rig.add_child(view_model)

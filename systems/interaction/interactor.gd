@@ -25,6 +25,8 @@ func _ready():
 	ray_cast.enabled = true
 
 func _unhandled_input(event):
+	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		return
 	if event.is_echo():
 		return
 	if not _enabled:
@@ -32,7 +34,6 @@ func _unhandled_input(event):
 	for input_action in _hovered_input_actions.keys():
 		if event.is_action_pressed(input_action):
 			for interactable in _hovered_input_actions[input_action]:
-				print(interactable)
 				if not interactable.is_active:
 					continue
 				interactable.interact(self)

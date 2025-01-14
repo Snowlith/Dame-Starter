@@ -1,55 +1,57 @@
-extends Control
+extends MenuUI
 class_name InventoryUI
-
-# TODO instantiate slots automatically instead of populating them
 
 @export var inventory: Inventory
 
-@export var backpack_container: GridContainer
-@export var backpack_width: int = 6
+@onready var hotbar_ui = $DontInheritVisibility/HotbarUI
+@onready var backpack_grid_ui = $HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BackpackGridUI
+@onready var external_grid_ui = $HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/ExternalGridUI
 
-@export var hotbar_container: GridContainer
-@export var hotbar_width: int = 6
+# TODO: when pressing number keys, switch with hotbar ui
+# TODO: block hotbar actions when menu open
 
-@export var context_menu: ContextMenu
 
-const STANDARD_SLOT_UI = preload("res://systems/inventory/slot/standard_slot_ui.tscn")
+# TODO: click instead of drag to move items 
 
-var _hovered_standard_slot_ui: StandardSlotUI
-
-signal slots_created
+var _is_external_loaded: bool = false
 
 func _ready():
-	# do this differently
-	if not inventory.is_node_ready():
-		await inventory.ready
-	backpack_container.columns = backpack_width
-	hotbar_container.columns = hotbar_width
-	_create_slots()
+	super()
+	inventory.inventory_loaded.connect(_on_inventory_loaded)
+	inventory.external_inventory_loaded.connect(_on_external_inventory_loaded)
+	inventory.external_inventory_closed.connect(_on_external_inventory_closed)
 
-# TODO
-func get_slot(index: int):
-	pass
-		
-# TODO
-func open_external(external_inventory: Inventory):
-	pass
+func _input(event):
+	super(event)
+	
+	# THIS IS NECESSARY
+	#for i in range(0, 6, 1):
+			#if Input.is_action_just_pressed("hotbar_"+str(i+1)):
+				#var hovered = inventory_ui.get_hovered_slot_ui()
+				#if hovered:
+					#var target = hotbar[i].slot
+					#target.swap_with(hovered.slot)
+					#return
+				#previous_slot_ui = hotbar[selected_slot_index]
+				#selected_slot_index = i
+				#selected_slot_ui = hotbar[selected_slot_index]
+				#_selected_slot_changed()
+				#return
+				
+func _on_inventory_loaded():
+	print("hello")
+	backpack_grid_ui.create_slots(inventory)
+	hotbar_ui.create_slots(inventory)
 
-func drop(slot: Slot, amount: int):
-	pass
+func _on_external_inventory_loaded(external_inventory: Inventory):
+	external_grid_ui.create_slots(external_inventory)
+	open()
+	_is_external_loaded = true
 
-func _create_slots():
-	for i in inventory.size:
-		var slot_ui: StandardSlotUI = STANDARD_SLOT_UI.instantiate()
-		if i < hotbar_width:
-			hotbar_container.add_child(slot_ui)
-		else:
-			backpack_container.add_child(slot_ui)
-		slot_ui.slot = inventory.slots[i]
-		slot_ui.hover_started.connect(func(): _hovered_standard_slot_ui = slot_ui)
-		slot_ui.hover_ended.connect(func(): _hovered_standard_slot_ui = null)
-		if context_menu:
-			slot_ui.context_action_registered.connect(context_menu.register_action.bind(slot_ui))
-			slot_ui.context_menu_requested.connect(context_menu.open.bind(slot_ui))
-			slot_ui.register_context_actions()
-	slots_created.emit()
+func _on_external_inventory_closed():
+	close()
+
+func close():
+	super()
+	if _is_external_loaded:
+		external_grid_ui.clear_slots()

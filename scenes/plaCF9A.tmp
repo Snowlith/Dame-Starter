@@ -242,7 +242,6 @@ script = ExtResource("24_c55ef")
 inventory = NodePath("..")
 opening_actions = Array[String](["toggle_inventory"])
 closing_actions = Array[String](["close_menu", "toggle_inventory"])
-blocked_ui_actions = Array[String](["hotbar_left", "hotbar_right", "hotbar_1", "hotbar_2", "hotbar_3", "hotbar_4", "hotbar_5", "hotbar_6"])
 
 [node name="BlurRect" type="ColorRect" parent="Inventory/InventoryUI"]
 material = ExtResource("21_kmdrx")
@@ -330,7 +329,8 @@ offset_bottom = 10.0
 
 [node name="DontInheritVisibility" type="Node" parent="Inventory/InventoryUI"]
 
-[node name="HotbarUI" parent="Inventory/InventoryUI/DontInheritVisibility" node_paths=PackedStringArray("item_user", "hand") instance=ExtResource("26_6cyo7")]
+[node name="HotbarUI" parent="Inventory/InventoryUI/DontInheritVisibility" node_paths=PackedStringArray("inventory", "item_user", "hand") instance=ExtResource("26_6cyo7")]
+inventory = NodePath("../../..")
 item_user = NodePath("../../../..")
 hand = NodePath("../../../../CameraManager/Camera3D/Hand")
 
@@ -400,3 +400,6 @@ text = "Do nothing"
 [node name="Button3" type="Button" parent="PauseMenuUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Do nothing"
+
+[connection signal="ready" from="Inventory" to="Inventory/InventoryUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BackpackGridUI" method="_on_inventory_ready"]
+[connection signal="slots_created" from="Inventory/InventoryUI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BackpackGridUI" to="Inventory/InventoryUI/DontInheritVisibility/HotbarUI" method="_on_inventory_ui_slots_created"]

@@ -4,15 +4,17 @@ class_name Inventory
 @export var size: int
 @export var slots: Array[Slot]
 
-signal slots_initialized
+signal inventory_loaded
+signal external_inventory_loaded(inventory: Inventory)
+signal external_inventory_closed
 
 func _ready():
 	slots.resize(max(size, slots.size()))
 	for i in slots.size():
 		if not slots[i]:
 			slots[i] = Slot.new()
-	slots_initialized.emit()
-
+	inventory_loaded.emit()
+			
 func insert(source_slot: Slot, amount: int = 1) -> int:
 	if source_slot.is_empty():
 		return 0
@@ -32,25 +34,17 @@ func insert(source_slot: Slot, amount: int = 1) -> int:
 			return 0
 	return source_slot.amount
 
-#func insert(item: Item, amount: int = 1) -> int:
-	#if amount <= 0 or not item:
-		#return 0
-		#
-	#var remaining_amount = amount
-	#if item.stack_size > 1:
-		#remaining_amount = _insert_into_existing_slots(item, remaining_amount)
-	#if remaining_amount > 0:
-		#remaining_amount = _insert_into_empty_slots(item, remaining_amount)
-	#return remaining_amount
+func open_external(inventory: Inventory):
+	external_inventory_loaded.emit(inventory)
+
+func close_external():
+	external_inventory_closed.emit()
 
 # TODO: write similarly to insert
 func remove(item: Item, amount: int = 1) -> int:
 	if amount <= 0 or not item:
 		return 0
 	return _remove_from_existing_slots(item, amount)
-
-#func remove_from(slot: Slot, amount: int = 1):
-	#slot.amount = clamp(slot.amount - amount, 0, slot.amount)
 
 func has(item: Item):
 	for slot in slots:
@@ -82,38 +76,6 @@ func can_insert(item: Item, amount: int) -> bool:
 	else:
 		capacity = count(null)
 	return capacity >= amount
-
-## Stacking helper methods
-
-#func _insert_into_existing_slots(item: Item, remaining_amount: int) -> int:
-	#for slot in slots:
-		## Skip when items don't match
-		#if slot.item != item:
-			#continue
-		## Skip full slots
-		#if slot.amount >= item.stack_size:
-			#continue
-		#var available_space = item.stack_size - slot.amount
-		#var amount_to_add = min(remaining_amount, available_space)
-		#slot.amount += amount_to_add
-		#remaining_amount -= amount_to_add
-		#if remaining_amount <= 0:
-			#return 0
-	#return remaining_amount
-#
-#func _insert_into_empty_slots(item: Item, remaining_amount: int) -> int:
-	#for slot in slots:
-		## Only consider empty slots
-		#if slot.item:
-			#continue
-		#
-		#slot.item = item
-		#var amount_to_add = min(remaining_amount, item.stack_size)
-		#slot.amount = amount_to_add
-		#remaining_amount -= amount_to_add
-		#if remaining_amount <= 0:
-			#return 0
-	#return remaining_amount
 
 func _remove_from_existing_slots(item: Item, remaining_amount: int) -> int:
 	for slot in slots:

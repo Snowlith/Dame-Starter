@@ -13,6 +13,7 @@ class_name Item
 # ViewModel scale should always be same as the scene
 # add a separate variable for dropped scale
 
+@export var item_category: ItemCategories.ItemCategoryTypes
 @export var name: String
 @export_multiline var description: String
 

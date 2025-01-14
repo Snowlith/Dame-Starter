@@ -1,0 +1,92 @@
+[gd_scene load_steps=19 format=3 uid="uid://vga70f3k4mc"]
+
+[ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_5a1s0"]
+[ext_resource type="Material" uid="uid://br3pi6kmr8wk3" path="res://assets/materials/prototype/prototype_brown.tres" id="2_krwp1"]
+[ext_resource type="Material" uid="uid://p71knmqvevd6" path="res://assets/materials/prototype/prototype_white.tres" id="3_858ke"]
+[ext_resource type="Script" path="res://systems/inventory/inventory.gd" id="4_sprgg"]
+[ext_resource type="Script" path="res://components/interactables/inventory_access.gd" id="5_dq76r"]
+[ext_resource type="Script" path="res://systems/inventory/slot/slot.gd" id="5_gtugf"]
+[ext_resource type="Resource" uid="uid://d25dr5tul4dkp" path="res://items/rocket_launcher.tres" id="6_x42n5"]
+[ext_resource type="Resource" uid="uid://o0a4wr3iaoyr" path="res://items/handgun.tres" id="7_r3uww"]
+[ext_resource type="Resource" uid="uid://c8cncf13j6hqk" path="res://items/bullet.tres" id="8_gckex"]
+[ext_resource type="Script" path="res://components/interactables/door/rotating_door.gd" id="10_geeda"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_s32mu"]
+material = ExtResource("2_krwp1")
+size = Vector3(2, 1, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5y4rh"]
+points = PackedVector3Array(1, 0.5, 0.5, 1, 0.5, -0.5, -1, 0.5, 0.5, 1, -0.5, 0.5, 1, -0.5, -0.5, -1, 0.5, -0.5, -1, -0.5, 0.5, -1, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tx36y"]
+material = ExtResource("3_858ke")
+size = Vector3(0.175, 0.305, 0.255)
+
+[sub_resource type="Resource" id="Resource_jkncc"]
+script = ExtResource("5_gtugf")
+item = ExtResource("6_x42n5")
+amount = 1
+
+[sub_resource type="Resource" id="Resource_epae3"]
+script = ExtResource("5_gtugf")
+item = ExtResource("7_r3uww")
+amount = 1
+
+[sub_resource type="Resource" id="Resource_ve2oy"]
+script = ExtResource("5_gtugf")
+item = ExtResource("8_gckex")
+amount = 10
+
+[sub_resource type="PrismMesh" id="PrismMesh_7dpgo"]
+material = ExtResource("2_krwp1")
+size = Vector3(1, 0.5, 2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d5ww7"]
+points = PackedVector3Array(0.5, -0.25, 1, 0, 0.25, 1, -0.5, -0.25, 1, 0.5, -0.25, -1, 0, 0.25, -1, -0.5, -0.25, -1)
+
+[node name="Chest" type="StaticBody3D"]
+collision_layer = 5
+script = ExtResource("1_5a1s0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_s32mu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("ConvexPolygonShape3D_5y4rh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.829975, -0.469638)
+mesh = SubResource("BoxMesh_tx36y")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("4_sprgg")
+size = 3
+slots = Array[ExtResource("5_gtugf")]([SubResource("Resource_jkncc"), SubResource("Resource_epae3"), SubResource("Resource_ve2oy")])
+
+[node name="InventoryAccess" type="Node" parent="." node_paths=PackedStringArray("entities_to_interact")]
+script = ExtResource("5_dq76r")
+entities_to_interact = [NodePath("../Lid")]
+input_action = "open"
+prompt = "Open"
+
+[node name="Lid" type="AnimatableBody3D" parent="."]
+script = ExtResource("1_5a1s0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Lid"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.25, 0)
+mesh = SubResource("PrismMesh_7dpgo")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Lid"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.25, 0)
+shape = SubResource("ConvexPolygonShape3D_d5ww7")
+
+[node name="RotatingDoor" type="Node" parent="Lid" node_paths=PackedStringArray("target")]
+script = ExtResource("10_geeda")
+rotation_axis = Vector3(1, 0, 0)
+rotation_direction = 1
+target = NodePath("../MeshInstance3D2")
+transition = 9
+easing = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=63 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Texture2D" uid="uid://cnn7bor6s1hf0" path="res://assets/sky/autumn_field_puresky_4k.exr" id="1_2cbns"]
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
@@ -32,6 +32,8 @@
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="31_bgij8"]
 [ext_resource type="Resource" uid="uid://o0a4wr3iaoyr" path="res://items/handgun.tres" id="32_6tyeb"]
 [ext_resource type="Resource" uid="uid://c8cncf13j6hqk" path="res://items/bullet.tres" id="33_40cxd"]
+[ext_resource type="Resource" uid="uid://d25dr5tul4dkp" path="res://items/rocket_launcher.tres" id="33_hn60t"]
+[ext_resource type="PackedScene" uid="uid://vga70f3k4mc" path="res://scenes/interactable/chest.tscn" id="34_rf0gt"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6yu1f"]
 panorama = ExtResource("1_2cbns")
@@ -136,6 +138,11 @@ amount = 10
 script = ExtResource("25_xwnvv")
 item = ExtResource("33_40cxd")
 amount = 16
+
+[sub_resource type="Resource" id="Resource_kfcqa"]
+script = ExtResource("25_xwnvv")
+item = ExtResource("33_hn60t")
+amount = 1
 
 [node name="TestLevel" type="Node3D"]
 
@@ -1462,9 +1469,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.7547, -20.5927, 1.4434)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 37.8395, -20.5738, 0.176558)
 collision_layer = 1
 
-[node name="RotatingDoor" parent="Door14" index="0"]
-rotation_direction = "Counterclockwise"
-
 [node name="MeshInstance3D" parent="Door14" index="1"]
 mesh = SubResource("BoxMesh_1khcu")
 
@@ -1717,6 +1721,13 @@ slot = SubResource("Resource_bitrs")
 [node name="DroppedItem4" parent="." instance=ExtResource("23_ryq8j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.462, -20.7939, -1.25737)
 slot = SubResource("Resource_1udex")
+
+[node name="DroppedItem6" parent="." instance=ExtResource("23_ryq8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3524, -20.7939, -1.25737)
+slot = SubResource("Resource_kfcqa")
+
+[node name="Chest" parent="." instance=ExtResource("34_rf0gt")]
+transform = Transform3D(-0.905532, 0, -0.424278, 0, 1, 0, 0.424278, 0, -0.905532, 9.17234, -21, -5.33672)
 
 [editable path="Door2"]
 [editable path="Door14"]

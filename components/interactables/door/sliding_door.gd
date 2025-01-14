@@ -25,5 +25,5 @@ func interact(interactor: Interactor):
 	else:
 		target_pos += target.basis * closed_offset
 	
-	var tween = create_tween().bind_node(target).set_trans(get_interpolation()).set_ease(get_easing())
+	var tween = create_tween().bind_node(target).set_trans(transition).set_ease(easing)
 	tween.tween_property(target, "position", target_pos, get_duration())

@@ -14,4 +14,4 @@ stack_size = 1
 is_use_persistent = true
 is_droppable = true
 rarity = "Common"
-icon_orientation = "Front"
+icon_orientation = "Angled"

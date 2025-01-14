@@ -7,6 +7,14 @@ extends ItemBehavior
 
 @export var shoot_sound: AudioStream
 @export var reload_sound: AudioStream
+
+func holster(user: Entity):
+	super(user)
+	%AmmoCounter.show()
+
+func unholster():
+	super()
+	%AmmoCounter.hide()
 		
 func _unhandled_input(event):
 	if event is InputEventMouseMotion or event.is_echo():

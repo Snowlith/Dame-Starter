@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://d25dr5tul4dkp"]
+
+[ext_resource type="Texture2D" uid="uid://clys5xppakh54" path="res://items/icons/rocket_launcher.tres.png" id="1_oggn2"]
+[ext_resource type="Script" path="res://systems/inventory/item/item.gd" id="1_pxlj6"]
+[ext_resource type="PackedScene" uid="uid://bb5m1ei26d2kk" path="res://items/viewmodels/rocket_launcher.tscn" id="2_bdkf0"]
+
+[resource]
+script = ExtResource("1_pxlj6")
+name = "Rocket Launcher"
+description = ""
+viewmodel = ExtResource("2_bdkf0")
+icon = ExtResource("1_oggn2")
+stack_size = 1
+is_use_persistent = true
+is_droppable = true
+rarity = "Common"
+icon_orientation = "Angled"
