@@ -1,4 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8q5p52sngyca"]
+[gd_scene load_steps=5 format=3 uid="uid://b8q5p52sngyca"]
+
+[ext_resource type="Script" path="res://scenes/rocket_bullet.gd" id="1_wdhn4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_voibf"]
+friction = 0.75
+bounce = 0.57
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_v8l26"]
 top_radius = 0.1
@@ -7,10 +13,13 @@ height = 0.3
 radial_segments = 10
 rings = 1
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1giux"]
-points = PackedVector3Array(7.45058e-09, 0.15, 0.1, 0.0587614, 0.15, 0.0808927, -0.0587801, 0.15, 0.0808927, 7.45058e-09, -0.15, 0.1, 0.0951057, 0.15, 0.0308927, 0.0587614, -0.15, 0.0808927, -0.0951056, 0.15, 0.0308927, -0.0587801, -0.15, 0.0808927, 0.0951057, 0.15, -0.0309123, 0.0951057, -0.15, 0.0308927, -0.0951056, 0.15, -0.0309123, -0.0951056, -0.15, 0.0308927, 0.0587614, 0.15, -0.0809123, 0.0951057, -0.15, -0.0309123, -0.0587801, 0.15, -0.0809123, -0.0951056, -0.15, -0.0309123, 7.45058e-09, 0.15, -0.1, 0.0587614, -0.15, -0.0809123, -0.0587801, -0.15, -0.0809123, 7.45058e-09, -0.15, -0.1)
+[sub_resource type="SphereShape3D" id="SphereShape3D_ct2e8"]
+radius = 0.204855
 
 [node name="RocketBullet" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_voibf")
+continuous_cd = true
+script = ExtResource("1_wdhn4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -18,4 +27,9 @@ mesh = SubResource("CylinderMesh_v8l26")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_1giux")
+shape = SubResource("SphereShape3D_ct2e8")
+
+[node name="ProjectileHurtbox" type="Node" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false

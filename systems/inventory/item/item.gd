@@ -8,14 +8,22 @@ class_name Item
 
 # TODO: make an inheritance hierarchy for different types of items
 
-# TODO: add an icon for item resources
+# TODO: add an editor icon for item resources
 
 # ViewModel scale should always be same as the scene
 # add a separate variable for dropped scale
 
-@export var item_category: ItemCategories.ItemCategoryTypes
+# TODO: add to own class, allow defining color for each category
+enum ItemCategories { 
+	Misc, Melee, Ranged, Ammo,
+	Armor, Special, Currency,
+	Resource
+}
+
+
 @export var name: String
 @export_multiline var description: String
+@export var item_category: ItemCategories
 
 @export var viewmodel: PackedScene
 @export var icon: Texture2D

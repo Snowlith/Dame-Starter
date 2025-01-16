@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://ddffxn803psxt"]
 
-[ext_resource type="Script" path="res://items/item_behavior/handgun.gd" id="1_tnrp6"]
+[ext_resource type="Script" path="res://items/item_behaviors/handgun.gd" id="1_tnrp6"]
 [ext_resource type="Resource" uid="uid://c8cncf13j6hqk" path="res://items/bullet.tres" id="2_g5qwj"]
 [ext_resource type="AudioStream" uid="uid://h0w3ja0ywol1" path="res://addons/kenney_interface_sounds/click_001.wav" id="3_ar472"]
 [ext_resource type="AudioStream" uid="uid://c3gu5g8u0j4qa" path="res://addons/kenney_interface_sounds/switch_002.wav" id="4_ikmx0"]

@@ -17,8 +17,9 @@ func create_slots(inventory: Inventory):
 		var slot_ui: StandardSlotUI = STANDARD_SLOT_UI.instantiate()
 		add_child(slot_ui)
 		slot_ui.slot = inventory.slots[i]
-		slot_ui.hover_started.connect(func(): _hovered_standard_slot_ui = slot_ui)
-		slot_ui.hover_ended.connect(func(): _hovered_standard_slot_ui = null)
+		# TODO: test this
+		slot_ui.mouse_entered.connect(func(): _hovered_standard_slot_ui = slot_ui)
+		slot_ui.mouse_exited.connect(func(): _hovered_standard_slot_ui = null)
 		if context_menu:
 			slot_ui.context_action_registered.connect(context_menu.register_action.bind(slot_ui))
 			slot_ui.context_menu_requested.connect(context_menu.open.bind(slot_ui))

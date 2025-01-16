@@ -59,10 +59,10 @@ func shoot():
 	var projectile = projectile_scene.instantiate()
 	get_tree().current_scene.add_child(projectile)
 	var cam = get_viewport().get_camera_3d()
-	projectile.global_position = cam.global_position - cam.global_basis.z * 2
+	projectile.global_position = cam.global_position - cam.global_basis.z * 1.5
 	projectile.global_basis = cam.global_basis
-	var rigid_body = projectile as RigidBody3D
-	if not rigid_body:
+	var projectile_behavior = projectile as ProjectileBehavior
+	if not projectile_behavior:
 		return
-	rigid_body.apply_central_impulse(-cam.global_basis.z * projectile_speed)
+	projectile_behavior.shoot(-cam.global_basis.z)
 	

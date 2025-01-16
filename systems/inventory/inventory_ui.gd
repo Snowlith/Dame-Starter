@@ -13,6 +13,8 @@ class_name InventoryUI
 
 # TODO: click instead of drag to move items 
 
+# TODO: make into own scene
+
 var _is_external_loaded: bool = false
 
 var _close_callable: Callable
