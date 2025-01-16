@@ -14,8 +14,7 @@ enum RotationDirection {
 
 @export var rotation_direction: RotationDirection = RotationDirection.Bidirectional
 
-var _init_rotation: Vector3
-
+var _init_basis: Basis
 var _last_tween: Tween
 
 # TODO: sounds
@@ -27,7 +26,7 @@ func _ready():
 		return
 	if not target.is_node_ready():
 		await target.ready
-	_init_rotation = target.rotation
+	_init_basis = target.basis
 
 func interact(interactor: Interactor):
 	super(interactor)
@@ -39,11 +38,14 @@ func interact(interactor: Interactor):
 	else:
 		target_angle = deg_to_rad(closed_angle)
 	
-	var shit = _init_rotation * target.global_basis
-	var target_rotation = set_angle_along_axis(shit, target_angle, rotation_axis)
-	print(target_rotation)
+	#var shit = target.global_basis * _init_rotation
+	DebugDraw3D.draw_arrow(target.global_position, target.global_position + rotation_axis, Color.RED, 0.5, true, 2)
+	#var target_rotation = set_angle_along_axis(_init_rotation, target_angle, rotation_axis)
+	var target_transform = target.transform
+	target_transform.basis = _init_basis.rotated(rotation_axis.normalized(), target_angle)
+	#print(target_rotation)
 	_last_tween = create_tween().bind_node(target).set_trans(transition).set_ease(easing)
-	_last_tween.tween_property(target, "rotation", target_rotation, get_duration())
+	_last_tween.tween_property(target, "transform", target_transform, get_duration())
 
 func _get_entity_side(entity_position: Vector3) -> int:
 	match rotation_direction:

@@ -21,7 +21,6 @@ script = ExtResource("1_yg32h")
 script = ExtResource("2_oojrg")
 open_offset = Vector3(0, 0, 0)
 closed_offset = Vector3(-0.5, 0, 0)
-is_open = true
 target = NodePath("..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

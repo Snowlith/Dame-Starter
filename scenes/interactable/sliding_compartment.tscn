@@ -35,7 +35,10 @@ script = ExtResource("1_ajmcl")
 [node name="SlidingDoor" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("2_3bdvl")
 target = NodePath("..")
-interpolation = "Bounce"
+opening_duration = 0.3
+closing_duration = 0.3
+transition = 3
+easing = 1
 enable_prompt = "Open"
 disable_prompt = "Close"
 

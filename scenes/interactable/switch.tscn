@@ -45,3 +45,7 @@ disable_prompt = "Turn off"
 script = ExtResource("3_idfct")
 open_offset = Vector3(0, 0, -0.05)
 target = NodePath("../MeshInstance3D2")
+opening_duration = 0.25
+closing_duration = 0.25
+transition = 3
+easing = 1

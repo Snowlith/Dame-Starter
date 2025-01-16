@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8q5p52sngyca"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v8l26"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.3
+radial_segments = 10
+rings = 1
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1giux"]
+points = PackedVector3Array(7.45058e-09, 0.15, 0.1, 0.0587614, 0.15, 0.0808927, -0.0587801, 0.15, 0.0808927, 7.45058e-09, -0.15, 0.1, 0.0951057, 0.15, 0.0308927, 0.0587614, -0.15, 0.0808927, -0.0951056, 0.15, 0.0308927, -0.0587801, -0.15, 0.0808927, 0.0951057, 0.15, -0.0309123, 0.0951057, -0.15, 0.0308927, -0.0951056, 0.15, -0.0309123, -0.0951056, -0.15, 0.0308927, 0.0587614, 0.15, -0.0809123, 0.0951057, -0.15, -0.0309123, -0.0587801, 0.15, -0.0809123, -0.0951056, -0.15, -0.0309123, 7.45058e-09, 0.15, -0.1, 0.0587614, -0.15, -0.0809123, -0.0587801, -0.15, -0.0809123, 7.45058e-09, -0.15, -0.1)
+
+[node name="RocketBullet" type="RigidBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_v8l26")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_1giux")

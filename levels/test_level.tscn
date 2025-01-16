@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=67 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Texture2D" uid="uid://cnn7bor6s1hf0" path="res://assets/sky/autumn_field_puresky_4k.exr" id="1_2cbns"]
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
@@ -140,6 +140,26 @@ item = ExtResource("33_40cxd")
 amount = 16
 
 [sub_resource type="Resource" id="Resource_kfcqa"]
+script = ExtResource("25_xwnvv")
+item = ExtResource("33_hn60t")
+amount = 1
+
+[sub_resource type="Resource" id="Resource_tk1un"]
+script = ExtResource("25_xwnvv")
+item = ExtResource("32_6tyeb")
+amount = 1
+
+[sub_resource type="Resource" id="Resource_vs1qg"]
+script = ExtResource("25_xwnvv")
+item = ExtResource("33_40cxd")
+amount = 16
+
+[sub_resource type="Resource" id="Resource_tgr40"]
+script = ExtResource("25_xwnvv")
+item = ExtResource("33_40cxd")
+amount = 16
+
+[sub_resource type="Resource" id="Resource_mwr3g"]
 script = ExtResource("25_xwnvv")
 item = ExtResource("33_hn60t")
 amount = 1
@@ -1729,6 +1749,15 @@ slot = SubResource("Resource_kfcqa")
 [node name="Chest" parent="." instance=ExtResource("34_rf0gt")]
 transform = Transform3D(-0.905532, 0, -0.424278, 0, 1, 0, 0.424278, 0, -0.905532, 9.17234, -21, -5.33672)
 
+[node name="Inventory" parent="Chest" index="3"]
+slots = Array[ExtResource("25_xwnvv")]([SubResource("Resource_tk1un"), SubResource("Resource_vs1qg"), SubResource("Resource_tgr40")])
+
+[node name="Chest2" parent="." instance=ExtResource("34_rf0gt")]
+transform = Transform3D(-0.656217, 0, 0.754573, 0, 1, 0, -0.754573, 0, -0.656217, 14.4661, -21, -5.33672)
+
+[node name="Inventory" parent="Chest2" index="3"]
+slots = Array[ExtResource("25_xwnvv")]([SubResource("Resource_mwr3g")])
+
 [editable path="Door2"]
 [editable path="Door14"]
 [editable path="Drawer"]
@@ -1738,3 +1767,5 @@ transform = Transform3D(-0.905532, 0, -0.424278, 0, 1, 0, 0.424278, 0, -0.905532
 [editable path="Switch2"]
 [editable path="Elevator/Switch4"]
 [editable path="Switch5"]
+[editable path="Chest"]
+[editable path="Chest2"]

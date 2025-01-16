@@ -19,8 +19,11 @@ script = ExtResource("1_jrptt")
 
 [node name="RotatingDoor" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("2_1fyen")
-rotation_direction = 1
 target = NodePath("..")
+opening_duration = 0.4
+closing_duration = 0.4
+transition = 9
+easing = 1
 enable_prompt = "Open"
 disable_prompt = "Close"
 

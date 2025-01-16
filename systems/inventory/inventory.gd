@@ -5,8 +5,7 @@ class_name Inventory
 @export var slots: Array[Slot]
 
 signal inventory_loaded
-signal external_inventory_loaded(inventory: Inventory)
-signal external_inventory_closed
+signal external_inventory_loaded(inventory: Inventory, close_callable: Callable)
 
 func _ready():
 	slots.resize(max(size, slots.size()))
@@ -34,11 +33,9 @@ func insert(source_slot: Slot, amount: int = 1) -> int:
 			return 0
 	return source_slot.amount
 
-func open_external(inventory: Inventory):
-	external_inventory_loaded.emit(inventory)
+func open_external(inventory: Inventory, close_callable: Callable):
+	external_inventory_loaded.emit(inventory, close_callable)
 
-func close_external():
-	external_inventory_closed.emit()
 
 # TODO: write similarly to insert
 func remove(item: Item, amount: int = 1) -> int:

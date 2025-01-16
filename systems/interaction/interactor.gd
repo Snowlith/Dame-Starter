@@ -84,7 +84,16 @@ func end_entity_lock():
 
 func is_entity_locked():
 	return _locked
-#
+
+func emulate_interaction(target_entity: Entity):
+	var interactables = target_entity.get_components(Interactable)
+	if interactables.is_empty():
+		return
+	for interactable: Interactable in interactables:
+		if not interactable or not interactable.is_active:
+			continue
+		interactable.interact(self)
+
 #func enable():
 	#_enabled = true
 	#ray_cast.enabled = true

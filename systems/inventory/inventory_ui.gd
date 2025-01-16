@@ -15,11 +15,12 @@ class_name InventoryUI
 
 var _is_external_loaded: bool = false
 
+var _close_callable: Callable
+
 func _ready():
 	super()
 	inventory.inventory_loaded.connect(_on_inventory_loaded)
 	inventory.external_inventory_loaded.connect(_on_external_inventory_loaded)
-	inventory.external_inventory_closed.connect(_on_external_inventory_closed)
 
 func _input(event):
 	super(event)
@@ -43,15 +44,17 @@ func _on_inventory_loaded():
 	backpack_grid_ui.create_slots(inventory)
 	hotbar_ui.create_slots(inventory)
 
-func _on_external_inventory_loaded(external_inventory: Inventory):
+func _on_external_inventory_loaded(external_inventory: Inventory, close_callable: Callable):
+	_close_callable = close_callable
 	external_grid_ui.create_slots(external_inventory)
 	open()
 	_is_external_loaded = true
 
-func _on_external_inventory_closed():
-	close()
-
 func close():
 	super()
+	
 	if _is_external_loaded:
+		_close_callable.call()
+		_close_callable = Callable()
 		external_grid_ui.clear_slots()
+		_is_external_loaded = false

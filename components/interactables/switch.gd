@@ -21,9 +21,10 @@ func _toggle_visible(nodes: Array, toggled: bool, stagger: float):
 
 func _interact_nodes(nodes: Array, interactor: Interactor, stagger: float):
 	for entity in nodes:
-		var interactables = entity.get_components(Interactable)
-		for interactable: Interactable in interactables:
-			interactable.interact(interactor)
+		interactor.emulate_interaction(entity)
+		#var interactables = entity.get_components(Interactable)
+		#for interactable: Interactable in interactables:
+			#interactable.interact(interactor)
 		if stagger:
 			await get_tree().create_timer(stagger).timeout
 
