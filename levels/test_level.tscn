@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://canggbxmj5swo"]
+[gd_scene load_steps=64 format=3 uid="uid://canggbxmj5swo"]
 
 [ext_resource type="Texture2D" uid="uid://cnn7bor6s1hf0" path="res://assets/sky/autumn_field_puresky_4k.exr" id="1_2cbns"]
 [ext_resource type="Material" uid="uid://uwug5ujfsq0q" path="res://assets/materials/prototype/prototype_green.tres" id="1_8ak7p"]
@@ -27,7 +27,6 @@
 [ext_resource type="Resource" uid="uid://b1l0pf5a63rim" path="res://items/box.tres" id="24_lexb4"]
 [ext_resource type="Script" path="res://components/interactables/door/sliding_door.gd" id="25_fyb0d"]
 [ext_resource type="Script" path="res://systems/inventory/slot/slot.gd" id="25_xwnvv"]
-[ext_resource type="Script" path="res://scripts/inheritance_test.gd" id="30_5cd4i"]
 [ext_resource type="Script" path="res://systems/scene_manager/loading_zone/loading_zone.gd" id="30_6rwtq"]
 [ext_resource type="PackedScene" uid="uid://d0ukggfx40yvy" path="res://scenes/player.tscn" id="31_bgij8"]
 [ext_resource type="Resource" uid="uid://o0a4wr3iaoyr" path="res://items/handgun.tres" id="32_6tyeb"]
@@ -119,10 +118,6 @@ item = ExtResource("33_40cxd")
 amount = 16
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fjbx1"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_yvm0q"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_spurr"]
 
 [sub_resource type="Resource" id="Resource_57810"]
 script = ExtResource("25_xwnvv")
@@ -1745,17 +1740,6 @@ target_id = "spawn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2119, -22.5096, -82)
 shape = SubResource("BoxShape3D_fjbx1")
 disabled = true
-
-[node name="RigidBody3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -20.227, 31)
-script = ExtResource("30_5cd4i")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_yvm0q")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("SphereMesh_spurr")
-skeleton = NodePath("../CollisionShape3D")
 
 [node name="Player" parent="." instance=ExtResource("31_bgij8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7934, -21, 8.6748)

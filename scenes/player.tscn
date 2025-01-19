@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d0ukggfx40yvy"]
+[gd_scene load_steps=37 format=3 uid="uid://d0ukggfx40yvy"]
 
 [ext_resource type="Script" path="res://systems/ecs/entity.gd" id="1_60qo2"]
 [ext_resource type="Script" path="res://components/camera/camera_manager.gd" id="2_a330s"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://components/state_machine/states/slide_state.gd" id="9_aa3x5"]
 [ext_resource type="Script" path="res://components/camera/camera_crouch_manager.gd" id="14_eheid"]
 [ext_resource type="Script" path="res://components/state_machine/states/water_state.gd" id="14_kihxp"]
+[ext_resource type="Script" path="res://components/state_machine/states/explosion_state.gd" id="17_jh1qa"]
 [ext_resource type="Script" path="res://components/state_machine/state_machine.gd" id="17_mu2cs"]
 [ext_resource type="Script" path="res://components/state_machine/states/walk_state.gd" id="18_ql2pa"]
 [ext_resource type="Script" path="res://components/state_machine/states/air_state.gd" id="19_d37tt"]
@@ -180,8 +181,10 @@ script = ExtResource("14_kihxp")
 max_speed = 12.0
 friction = 2.0
 
+[node name="ExplosionState" type="Node" parent="StateMachine"]
+script = ExtResource("17_jh1qa")
+
 [node name="PanelContainer" type="PanelContainer" parent="StateMachine"]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -400,3 +403,5 @@ text = "Do nothing"
 [node name="Button3" type="Button" parent="PauseMenuUI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Do nothing"
+
+[node name="ImpulseReceiver" type="Node" parent="."]

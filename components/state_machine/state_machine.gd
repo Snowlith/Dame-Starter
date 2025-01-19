@@ -15,8 +15,6 @@ func _init():
 	process_priority = -1
 
 func _ready():
-	if not get_parent_entity().is_node_ready():
-		await get_parent_entity().ready
 	states = get_parent_entity().get_components(State)
 	if state_priority_order:
 		states.reverse()
