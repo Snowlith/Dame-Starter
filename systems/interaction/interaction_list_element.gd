@@ -5,5 +5,5 @@ extends Control
 
 func set_input_action(input_action: String):
 	input_icon.input_action = input_action
-	
+
 # TODO: When prompt container empty, hide

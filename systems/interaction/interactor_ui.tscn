@@ -4,13 +4,16 @@
 [ext_resource type="Script" path="res://systems/interaction/interactor_ui.gd" id="2_5twym"]
 
 [node name="InteractorUI" type="PanelContainer"]
-anchors_preset = 4
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 605.0
+offset_left = 55.0
 offset_top = -20.0
-offset_right = 645.0
+offset_right = 95.0
 offset_bottom = 20.0
+grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 theme = ExtResource("1_2b66x")
