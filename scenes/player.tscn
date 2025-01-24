@@ -193,7 +193,8 @@ layout_mode = 2
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_1205x")
-value = 30
+max_value = 1000
+value = 1000
 
 [node name="HealthBar" type="ProgressBar" parent="Health"]
 modulate = Color(0.15, 1, 0.220833, 1)
