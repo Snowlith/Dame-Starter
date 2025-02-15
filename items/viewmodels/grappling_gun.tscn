@@ -1,0 +1,233 @@
+[gd_scene load_steps=15 format=3 uid="uid://badun4hpenh3q"]
+
+[ext_resource type="Script" path="res://items/item_behaviors/grappling_gun.gd" id="1_3sng4"]
+[ext_resource type="Material" uid="uid://bdiokccwj2i2d" path="res://assets/materials/prototype/prototype_gray.tres" id="5_qqwdl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vwgm3"]
+material = ExtResource("5_qqwdl")
+size = Vector3(0.15, 0.13, 0.67)
+
+[sub_resource type="BoxMesh" id="BoxMesh_342vt"]
+material = ExtResource("5_qqwdl")
+size = Vector3(0.085, 0.1, 0.58)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ajdd"]
+material = ExtResource("5_qqwdl")
+size = Vector3(0.055, 0.025, 0.18)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v1cee"]
+material = ExtResource("5_qqwdl")
+size = Vector3(0.055, 0.025, 0.18)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u13e7"]
+material = ExtResource("5_qqwdl")
+size = Vector3(0.115, 0.215, 0.45)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6heda"]
+material = ExtResource("5_qqwdl")
+size = Vector3(0.095, 0.185, 0.255)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm0ao"]
+albedo_color = Color(0.371721, 0.426912, 0.542304, 1)
+emission_enabled = true
+emission = Color(0.56, 0.56, 0.56, 1)
+emission_energy_multiplier = 0.14
+
+[sub_resource type="SphereMesh" id="SphereMesh_2snyt"]
+material = SubResource("StandardMaterial3D_rm0ao")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="Animation" id="Animation_amgni"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.279227, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meshes/MeshInstance3D3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.300151, 0.0254957)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Meshes/MuzzleFlash:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_baaxg"]
+resource_name = "primary"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0206434, 0.0299119, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.349066, 0, 0), Vector3(0.349066, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0253798, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.279227, 0), Vector3(0, -0.279227, 0.0656401), Vector3(0, -0.279, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meshes/MuzzleFlash:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2ni6l"]
+resource_name = "reload"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes/MeshInstance3D3:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.433333, 1.33333, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.300151, 0.0254957), Vector3(0, 0.0213519, 0.123384), Vector3(-0.975674, -0.343054, 0.574281), Vector3(0, 0.0213519, 0.123384), Vector3(0, 0.300151, 0.0254957)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.433333, 1.6, 1.66667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.279227, 0), Vector3(0, 0.136, 0), Vector3(0, 0.136, 0), Vector3(0, 0.136, 0), Vector3(0, -0.279227, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meshes:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.433333, 1.6, 1.66667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.144496, -1.98372e-09, -0.420485), Vector3(0.144496, -1.98372e-09, -0.420485), Vector3(0.144496, -1.98372e-09, -0.420485), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vt4qd"]
+_data = {
+"RESET": SubResource("Animation_amgni"),
+"primary": SubResource("Animation_baaxg"),
+"reload": SubResource("Animation_2ni6l")
+}
+
+[node name="GrapplingGun" type="Node3D"]
+script = ExtResource("1_3sng4")
+
+[node name="Meshes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.279227, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64753, -0.30897)
+mesh = SubResource("BoxMesh_vwgm3")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.558415, -0.293105)
+mesh = SubResource("BoxMesh_342vt")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.422769, -0.196489)
+mesh = SubResource("BoxMesh_3ajdd")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.347852, -0.937549, 0, 0.937549, 0.347852, 0, 0.503764, -0.306862)
+mesh = SubResource("BoxMesh_v1cee")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -0.336011, 0.941858, 0, -0.941858, -0.336011, 0, 0.387697, -0.00836125)
+mesh = SubResource("BoxMesh_u13e7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, -7.45058e-09, -1.30385e-08, -1.11759e-08, -0.336011, 0.941858, 0, -0.941858, -0.336011, 0, 0.300151, 0.0254957)
+mesh = SubResource("BoxMesh_6heda")
+skeleton = NodePath("../..")
+
+[node name="MuzzleFlash" type="CPUParticles3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00403033, 0.651988, -0.663119)
+emitting = false
+lifetime = 0.2
+one_shot = true
+mesh = SubResource("SphereMesh_2snyt")
+emission_shape = 3
+emission_box_extents = Vector3(0.06, 0.15, 0.195)
+direction = Vector3(0, 0, -1)
+spread = 17.83
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.95
+initial_velocity_max = 1.95
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_vt4qd")
+}

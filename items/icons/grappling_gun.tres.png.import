@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3gi610jfdfvb"
-path="res://.godot/imported/stupid_item.tscn.png-afca7185e8a045540a431e25faac32c0.ctex"
+uid="uid://bbcdj5qb3id6j"
+path="res://.godot/imported/grappling_gun.tres.png-7f5b36096c9e06ebec728e0f35b666e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/old_shit/icons/stupid_item.tscn.png"
-dest_files=["res://.godot/imported/stupid_item.tscn.png-afca7185e8a045540a431e25faac32c0.ctex"]
+source_file="res://items/icons/grappling_gun.tres.png"
+dest_files=["res://.godot/imported/grappling_gun.tres.png-7f5b36096c9e06ebec728e0f35b666e9.ctex"]
 
 [params]
 

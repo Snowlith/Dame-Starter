@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://h78boxgjnssp"]
+
+[ext_resource type="Texture2D" uid="uid://bbcdj5qb3id6j" path="res://items/icons/grappling_gun.tres.png" id="1_gqebn"]
+[ext_resource type="Script" path="res://systems/inventory/item/item.gd" id="1_ttuee"]
+[ext_resource type="PackedScene" uid="uid://badun4hpenh3q" path="res://items/viewmodels/grappling_gun.tscn" id="2_4is0o"]
+
+[resource]
+script = ExtResource("1_ttuee")
+name = "Grappling Gun"
+description = ""
+item_category = 5
+viewmodel = ExtResource("2_4is0o")
+icon = ExtResource("1_gqebn")
+stack_size = 1
+is_use_persistent = false
+is_droppable = true
+rarity = "Common"
+icon_orientation = "Front"

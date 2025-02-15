@@ -23,7 +23,7 @@ func _ready():
 		return
 	for filename in DirAccess.get_files_at(item_dir):
 		var item: Item = load(item_dir + "/" + filename)
-		if not is_instance_valid(item):
+		if not is_instance_valid(item) or not item.viewmodel:
 			continue
 		var view_model = item.viewmodel.instantiate()
 		view_model.process_mode = PROCESS_MODE_DISABLED
